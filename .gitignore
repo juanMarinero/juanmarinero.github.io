@@ -1,0 +1,11 @@
+# VIM temporary files
+*~
+*.swp
+*.swo
+*.sw*
+
+# nested git files (cloned repos)
+**/.git/
+
+# files & folders with string "_noGit"
+*_noGit*
