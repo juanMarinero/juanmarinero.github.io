@@ -105,3 +105,8 @@ enableEmoji = true
     weight = 10
     languageName = "Espaniol"
     contentDir = "content/es"
+
+# https://gohugo.io/host-and-deploy/host-on-github-pages/#step-5
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
