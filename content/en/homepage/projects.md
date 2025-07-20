@@ -163,7 +163,7 @@ Check also quick summaries of
   - Easy to follow and customize.
   - In less than 10 minutes.
   - With most popular plugins.
-  - And demo-videos to teaching how to use the debugger:
+  - And demo-videos teaching how to use the debugger:
 
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
