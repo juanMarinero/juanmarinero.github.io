@@ -23,6 +23,7 @@
    * [Create a GitHub repository](#create-a-github-repository)
    * [Host on GitHub](#host-on-github)
    * [Wait for Github pages to be ready](#wait-for-github-pages-to-be-ready)
+   * [Rebuild before pushing](#rebuild-before-pushing)
 6. [Set up a custom domain](#set-up-a-custom-domain)
    * [Buy a domain](#buy-a-domain)
    * [Manage the DNS records for your domain](#manage-the-dns-records-for-your-domain)
@@ -739,6 +740,29 @@ git push
 Go to `Actions` tab, for [example](https://github.com/mdcruz/mdcruz.github.io/actions), and check the status of the deployment, wait until `Build and deploy job` is green.
 
 Now click on the link with same content as last commit message, `Create hugo.yaml` for example, this will show the link to your live site, like [https://github.com/mdcruz/mdcruz.github.io](https://github.com/mdcruz/mdcruz.github.io).
+
+
+### Rebuild before pushing
+
+After every change remember to rebuild the site by running the following command: `hugo server --disableFastRender`
+
+For example, if I modify `projects.md` then `git status --short` just shows:
+
+```
+M content/en/homepage/projects.md
+```
+
+instead of the neccesary:
+
+```
+M content/en/homepage/projects.md
+M public/index.html
+```
+
+Therefore, if I just commit and push it then I will see no changes in the live site, **instead** one must:
+1. Rebuild the website (`public/index.html`) with `hugo server --disableFastRender`,
+2. Check locally the changes on [http://localhost:1313/](http://localhost:1313/),
+3. And if the result is satisfactory proceed to stage, commit and push.
 
 
 ## Set up a custom domain
