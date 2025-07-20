@@ -1,0 +1,146 @@
+baseURL = "https://juanmarinero.github.io"
+
+# This is a "one page"-website, so we do not need these kinds of pages...
+disableKinds = ["section", "taxonomy", "term", "RSS", "robotsTXT"]
+
+defaultContentLanguage = "en"
+
+# The name of this wonderful theme ;-).
+theme = "hugo-scroll"
+
+# The browser tab name
+title = "J. Marinero - Data Scientist & AI Engineer"
+
+# In order to add version information in the page's footer set to true.
+# enableGitInfo = true
+
+# enable emoji processing in Markdown (valid only for pure markdown content)
+enableEmoji = true
+
+# Theme-specific variables `.Site.Params.myParamName`
+[params]
+
+    # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
+    favicon = "images/favicon.png"
+
+    # These "images" are used for the structured data templates. This will show up, when
+    # services like Twitter or Slack want to generate a preview of a link to your site.
+    # See https://gohugo.io/templates/internal#twitter-cards and https://gohugo.io/templates/internal#open-graph.
+    # NOT the actual header background image, go to _index.md instead
+    images = ["images/cover-image.jpg"]
+
+    # When set true, it creates a visual guard (partially transparent rounded box), preventing non-ideal background images from interfering with title/description headings
+    # Ideal images are homogenous around the centre and contrasting to the text.
+    # see CSS classes: .title-and-description-guard, .blog-title, .blog-description
+    # see _index.md header_headline and header_subheadline
+    title_guard = true
+
+    # Another "title" :-). This one is used as the site_name on the Hugo's internal
+    # opengraph structured data template.
+    # See https://ogp.me/ and https://gohugo.io/templates/internal#open-graph.
+    title = "Juan Marinero - Data Scientist"
+
+    # The "description" of your website. This is used in the meta data of your generated html.
+    description = "Juan Marinero - Data Scientist"
+
+    # Show a menu of languages available
+    language_menu = false
+
+    # Show also a language menu item for the current language, if false only
+    # show the remaining languages
+    show_current_lang = false
+
+    # A "copyright"-line to be added at the bottom of the page.
+    # Hint: Plain HTML is supported in here as well. So you may e.g. add a link to your legal imprint-page.
+    copyright = "Juan Gabriel Marinero Tarazona"
+
+    # This theme will, by default, inject a design-by-line at the bottom of the page.
+    # You can turn it off, but we would really appreciate if you don’t :-)
+    hidedesignbyline = true
+
+    # The sections of the home page alternate styling. Mark invert as true to swap the styling of the sections
+    invertSectionColors = false
+
+    # Options used for automatic image generation. see: https://gohugo.io/content-management/image-processing/
+    image_options = "webp q90 lanczos photo"
+
+    # Use "page_title | site_title" for <title> tags
+    # e.g. <title>Legal | Jane Doe - Nutrition Coach & Chef Consultant</title>
+    combine_page_and_site_title = false
+
+    [params.footer]
+    # Show contact icons for email/phone (if specified) in the footer of the page
+    showContactIcons = true
+
+    # Show links indicated with footer_menu and footer_menu_title in the footer of the page
+    showFooterLinks = true
+
+    [params.meta]
+        keywords = """
+          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        """
+
+    [[params.contacts]]
+        label = "phone"
+        value = "+34 616 42 36 34"
+        url = "tel:++34 616 42 36 34"
+        icon = "fa fa-phone"
+
+    [[params.contacts]]
+        label = "email"
+        value = "juan.g.marinero@gmail.com"
+        url = "mailto:juan.g.marinero@gmail.com"
+        icon = "fa fa-envelope"
+
+    [[params.contacts]]
+        label = "GitHub"
+        value = "github.com/juanMarinero"
+        url = "https://github.com/juanMarinero"
+        icon = "fa-brands fa-github"
+
+    [[params.contacts]]
+        label = "LinkedIn"
+        value = "linkedin.com/juanmarinero"
+        url = "https://www.linkedin.com/in/juanmarinero/"
+        icon = "fa-brands fa-linkedin"
+
+    [[params.contacts]]
+        label = "website"
+        value = "juan-marinero.info"
+        url = "https://juan-marinero.info/"
+        icon = "fa fa-globe"
+
+# Define additional languages
+[languages]
+  [languages.en]
+    weight = 10
+    languageName = "English"
+    contentDir = "content/en"
+
+  [languages.de]
+    title = "J. Marinero - Datenwissenschaftler & KI-Ingenieur"
+    weight = 20
+    contentDir = "content/de"
+    languageName = "Deutsch"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
