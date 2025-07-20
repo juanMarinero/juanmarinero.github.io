@@ -18,7 +18,7 @@ Since 12/22,  **IT** Support & **Fullstack**
 
 1/20 - 4/20, **Backend** developer by *Pionierkraft GmbH.*, **Munich**
 
-Electrical Eng. positions summarized [here](#electrical-engineering-jobs).
+Electrical Engineer positions summarized [here](#-electrical-engineer).
 
 ### 🎓 Studies
 
