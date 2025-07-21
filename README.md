@@ -29,7 +29,10 @@
    * [Manage the DNS records for your domain](#manage-the-dns-records-for-your-domain)
      * [The A records](#the-a-records)
      * [The CNAME records](#the-cname-records)
-   * [Set domain on Github](#set-domain-on-github)
+   * [Set your domain on Github](#set-your-domain-on-github)
+     * [Add your domain to GitHub Pages settings](#add-your-domain-to-github-pages-settings)
+     * [Add your domain to a CNAME file](#add-your-domain-to-a-cname-file)
+     * [Enforce HTTPS](#enforce-https)
 
 
 ## Install Hugo
@@ -838,13 +841,52 @@ The more you know. Why `CNAME` at Apex (Root) Domains is a Problem ??
      2. For apex domains, it checks for `A` records pointing to GitHub’s IPs.
    - If GitHub finds a `CNAME` at the apex (which violates DNS rules), verification **fails**.
 
+##### GitHub Pages sites can be stored in any repository
 
-### Set domain on Github
+Read [Types of GitHub Pages sites](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#types-of-github-pages-sites).
+
+In this guide we worked with the `<username>.github.io` repository, which has the apex domain `<username>.github.io` (accesible via `http(s)://<username>.github.io`).
+
+But GitHub Pages also supports storing sites in other repositories, like `<username>.github.io/<repo-name>`, which have the apex domain `<username>.github.io/<repo-name>` (accesible via `http(s)://<username>.github.io/<repo-name>`).
+
+### Set your domain on Github
 
 Read https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain
 
+#### Add your domain to GitHub Pages settings
+
 In the Github repo, go to `Settings > Pages` and add your domain under the `Custom domain` field.
+For example add `juan-marinero.info`, or `www.juan-marinero.info`.
 
 Wait for up to 24 hours to see the site to your custom domain.
+So, from now on, you can either:
+- Visit the `github.io` Gihtub Page, for example https://juanmarinero.github.io
+- Visit your custom domain, like https://juan-marinero.info or with the `www` subdomain like https://www.juan-marinero.info
 
-Also recommended to [enforce HTTPS for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https#enforcing-https-for-your-github-pages-site).
+All these URLs will:
+- serve the site from your repository, the `<username>.github.io` Github repo, namely https://github.com/juanMarinero/juanmarinero.github.io.
+- redirect and serve at the non-`www` domain, like https://juan-marinero.info. To serve at the `www` subdomain, like https://www.juan-marinero.info, read next section.
+
+
+#### Add your domain to a CNAME file
+
+To serve your site at the `wwww` subdomain (e.g. `http(s)://www.juan-marinero.info`) and redirect the root domain (`juan-marinero.info`) to this `www` address:
+
+- Make sure your **DNS** is **configured** properly, as described earlier.
+- Add a **`CNAME` file** to your `<username>.github.io` repo,
+as [Marie's page](https://www.testingwithmarie.com/) did [here](https://github.com/mdcruz/mdcruz.github.io/blob/main/CNAME).
+You can do this with the following commands:
+
+```
+cd <repo-path>
+echo "www.juan-marinero.info" > CNAME # edit !!
+git add CNAME
+git commit -m "add CNAME with www.juan-marinero.info"
+git push
+```
+
+
+#### Enforce HTTPS
+
+Previous links follow the <code>HTTP<strong>S</strong></code> protocol because I [enforced HTTPS for my GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https#enforcing-https-for-your-github-pages-site).
+This is not mandatory, but recommended.
