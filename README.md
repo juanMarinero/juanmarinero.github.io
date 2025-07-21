@@ -33,6 +33,13 @@
      * [Add your domain to GitHub Pages settings](#add-your-domain-to-github-pages-settings)
      * [Add your domain to a CNAME file](#add-your-domain-to-a-cname-file)
      * [Enforce HTTPS](#enforce-https)
+7. [Bonus. The More You Know](#bonus-the-more-you-know)
+   * [Apex Domains and the www subdomain](#apex-domains-and-the-www-subdomain)
+   * [Understanding CNAME Restrictions on Apex Domains](#understanding-cname-restrictions-on-apex-domains)
+   * [GitHub Pages sites can be stored in any repository](#github-pages-sites-can-be-stored-in-any-repository)
+   * [Hugo is not the only solution](#hugo-is-not-the-only-solution)
+     * [Publishing from a branch](#publishing-from-a-branch)
+     * [Publishing with a custom GitHub Actions workflow](#publishing-with-a-custom-github-actions-workflow)
 
 
 ## Install Hugo
@@ -779,7 +786,9 @@ Therefore, if I just commit and push it then I will see no changes in the live s
 
 ### Manage the DNS records for your domain
 
-Read  [testingwithmarie.com post](https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain).
+Read
+- [testingwithmarie.com post](https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain).
+- [Managing a custom domain for your GitHub Pages site](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
 
 Remove both the `ALIAS` and `CNAME` records you currently have set.
 
@@ -831,23 +840,8 @@ This is because Porkbun-alike domain providers let you set an `ALIAS` (not true 
 This is confirmed in the [testingwithmarie.com post](https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain),
 where the screenshot shows `CNAME (Aliases)` instead of plain `CNAME`.
 
-The more you know. Why `CNAME` at Apex (Root) Domains is a Problem ??
-1. **DNS Standards (RFC 1034)**:
-   - The **apex/root domain** (e.g., `example.com`) **cannot** have a `CNAME` record if other records (like `MX`, `TXT`, `NS`) exist for the same domain.
-   - This is because `CNAME` conflicts with other record types. GitHub Pages requires a `CNAME` for verification, but apex domains need `A`/`AAAA` records instead.
-2. **How GitHub Pages Checks Domains**:
-   - When you add `example.com` in GitHub Pages settings, GitHub:
-     1. Looks for a `CNAME` file in your repo (for subdomains like `www.example.com`).
-     2. For apex domains, it checks for `A` records pointing to GitHub’s IPs.
-   - If GitHub finds a `CNAME` at the apex (which violates DNS rules), verification **fails**.
 
-##### GitHub Pages sites can be stored in any repository
 
-Read [Types of GitHub Pages sites](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#types-of-github-pages-sites).
-
-In this guide we worked with the `<username>.github.io` repository, which has the apex domain `<username>.github.io` (accesible via `http(s)://<username>.github.io`).
-
-But GitHub Pages also supports storing sites in other repositories, like `<username>.github.io/<repo-name>`, which have the apex domain `<username>.github.io/<repo-name>` (accesible via `http(s)://<username>.github.io/<repo-name>`).
 
 ### Set your domain on Github
 
@@ -890,3 +884,120 @@ git push
 
 Previous links follow the <code>HTTP<strong>S</strong></code> protocol because I [enforced HTTPS for my GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https#enforcing-https-for-your-github-pages-site).
 This is not mandatory, but recommended.
+
+
+## Bonus. The More You Know
+
+### Apex Domains and the www subdomain
+
+[Github Pages docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages#using-an-apex-domain-for-your-github-pages-site) states
+
+> - An **apex** domain is a custom domain that does not contain a subdomain, such as example.com.
+> - Apex domains are also known as base, bare, naked, root apex, or zone apex domains.
+> - If you are using an apex domain as your custom domain, we recommend also setting up a `www` subdomain.
+
+Notice we followed this advice in previous sections, where the `CNAME` record has `www` as *host*.
+
+### Understanding CNAME Restrictions on Apex Domains
+
+1. **DNS Standards (RFC 1034)**:
+   - The **apex/root domain** (e.g., `example.com`) **cannot** have a `CNAME` record if other records (like `MX`, `TXT`, `NS`) exist for the same domain.
+   - This is because `CNAME` conflicts with other record types. GitHub Pages requires a `CNAME` for verification, but apex domains need `A`/`AAAA` records instead.
+2. **How GitHub Pages Checks Domains**:
+   - When you add `example.com` in GitHub Pages settings, GitHub:
+     1. Looks for a `CNAME` file in your repo (for subdomains like `www.example.com`).
+     2. For apex domains, it checks for `A` records pointing to GitHub’s IPs.
+   - If GitHub finds a `CNAME` at the apex (which violates DNS rules), verification **fails**.
+
+### GitHub Pages sites can be stored in any repository
+
+Read [Types of GitHub Pages sites](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#types-of-github-pages-sites).
+
+In this guide we worked with the `<username>.github.io` repository, which has the apex domain `<username>.github.io` (accesible via `http(s)://<username>.github.io`).
+
+But GitHub Pages also support storing sites in other repositories, like `<project-name>.github.io/<repo-name>`, which have the apex domain `<project-name>.github.io/<repo-name>` (displayed via `http(s)://<project-name>.github.io/<repo-name>`). For these you must have a **project** account. Read next section.
+
+### Hugo is not the only solution
+
+To deploy our local website on GitHub Pages is very recommended to use a static site generator like [Hugo](https://gohugo.io/).
+
+With Hugo we followed its [Host on GitHub Pages docs](https://gohugo.io/host-and-deploy/host-on-github-pages/),
+which, in summary, apply [Github actions](https://github.com/features/actions)
+adding the config file [.github/workflows/hugo.yaml](https://gohugo.io/host-and-deploy/host-on-github-pages/#step-7).
+This workflow install Hugo's dependencies, Hugo itself, node.js, configure git,... and then builds the site using Hugo.
+For example, the build step depends on these few lines
+
+```yaml
+      - name: Build with Hugo
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            --cacheDir "${{ runner.temp }}/hugo_cache"
+```
+
+[Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll)
+is other static site generator solution with built-in support for GitHub Pages, i.e. an alternative to [Hugo](https://gohugo.io/).
+
+Next I exemplify how to create a Github Pages site **without** any of those static site generators. 
+It's exaplained for a *user or organization site*, but it's analogous for a *project site* case.
+
+#### Publishing from a branch
+
+Create a site for your `<username>.github.io` repository, screenshots in https://pages.github.com/ (click on *User or organization site*).
+1. Create a new Github repository called `<username>.github.io` (unless you already have one, if you do, you can skip these steps or create a new repo with other name)
+2. Push an `index.html` file to it
+```bash
+cd <repo-path>
+echo '<h1>Hello!</h1>' > index.html
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/<username>.github.io.git
+git push -u origin main
+```
+3. In a browser go to `http://<user-name>.github.io`.
+
+Note. The [Github Pages docs](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site)
+is not limited to `index.html`:
+> Create the entry file for your site. GitHub Pages will look for an `index.html`, `index.md`, or `README.md` file as the entry file for your site.
+
+Now let's create another repo, for example `test-publishing-from-a-branch`, with that same `index.html`. Then follow steps of
+[Publishing from a branch](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch)
+(TL;DR *Settings/Pages*, under *Source* select *Deploy from a branch*, select the `main` branch, and click *Save*)
+
+Also check the step-by-step screenshots in https://pages.github.com/ (click on *Project site* and *Start from scratch*).
+Though initial steps are meant for a *project site*.
+
+For the repo [juanMarinero/test-publishing-from-a-branch](https://github.com/juanMarinero/test-publishing-from-a-branch)
+that configuration triggers next workflow:
+[pages build and deployment #1](https://github.com/juanMarinero/test-publishing-from-a-branch/actions/runs/16418527057)
+
+Thus, I can see that [index.html](https://github.com/juanMarinero/test-publishing-from-a-branch/blob/main/index.html) is the entry file for my site.
+Any of next links would work:
+- https://juanmarinero.github.io/test-publishing-from-a-branch/
+- https://juan-marinero.info/test-publishing-from-a-branch/
+- https://www.juan-marinero.info/test-publishing-from-a-branch/
+
+Once the `index.html` file is edited the site is auto-updated.
+```sh
+cd <repo-path>
+echo '<h2>Welcome!</h2>' >> index.html
+git add index.html
+git commit -m "Edit index.html"
+git push
+```
+Check the previous URLs again and the new workflow execution [pages build and deployment #2](https://github.com/juanMarinero/test-publishing-from-a-branch/actions/runs/16418750101)
+
+#### Publishing with a custom GitHub Actions workflow
+
+Alternative to
+[Publishing from a branch](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch)
+is
+[Publishing with a custom GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow).
+This way one sets *GitHub Actions*, and then, quoting in cursive the docs:
+
+- *GitHub will suggest several workflow templates. If you already have a workflow to publish your site, you can skip this step.* Actually this is how we already did it before ([here](#host-on-github)) in our Hugo example, via the workflow template `.github/workflows/hugo.yaml`. 
+- *Otherwise, choose one of the options to create a GitHub Actions workflow.* This is the challenge! To create a custom workflow for your site's needs.
