@@ -739,7 +739,7 @@ git push
 
 Go to `Actions` tab, for [example](https://github.com/mdcruz/mdcruz.github.io/actions), and check the status of the deployment, wait until `Build and deploy job` is green.
 
-Now click on the link with same content as last commit message, `Create hugo.yaml` for example, this will show the link to your live site, like [https://github.com/mdcruz/mdcruz.github.io](https://github.com/mdcruz/mdcruz.github.io).
+Now click on the link with same content as last commit message, `Create hugo.yaml` for example, this will show the link to your live site, like https://mdcruz.github.io (for this [repo](https://github.com/mdcruz/mdcruz.github.io)).
 
 
 ### Rebuild before pushing
