@@ -9,14 +9,14 @@
      * [Install Hugo](#install-hugo)
      * [Test a Hugo repo](#test-a-hugo-repo)
 2. [Create a Hugo site with the hugo-scroll theme](#create-a-hugo-site-with-the-hugo-scroll-theme)
-3. [Get the zjedi/hugo-scroll website](#get-the-zjedi/hugo-scroll-website)
+3. [Get the zjedi/hugo-scroll website](#get-the-zjedihugo-scroll-website)
 4. [Customize](#customize)
    * [Remove git dirs](#remove-git-dirs)
    * [Order of markdowns](#order-of-markdowns)
-   * [hugo.toml](#hugo.toml)
-   * [Favicons, header-logo and cover-image](#favicons,-header-logo-and-cover-image)
-   * [Edit a mainpage section. For example `content/en/homepage/services.md`](#edit-a-mainpage-section.-for-example-`content/en/homepage/services.md`)
-   * [Edit a not mainpage.](#edit-a-not-mainpage.)
+   * [hugo.toml](#hugotoml)
+   * [Favicons, header-logo and cover-image](#favicons-header-logo-and-cover-image)
+   * [Edit a mainpage section](#edit-a-mainpage-section)
+   * [Edit a not mainpage](#edit-a-not-mainpage)
    * [CSS](#css)
    * [Raw HTML](#raw-html)
 5. [Deploy](#deploy)
@@ -512,7 +512,9 @@ Tip, set video speed there directly in that `html` file with:
 </script>
 ```
 
-### Edit a mainpage section. For example `content/en/homepage/services.md`
+### Edit a mainpage section
+
+For example edit `content/en/homepage/services.md`
 
 - `title: "The Services I Offer"` is the title of that section of the website.
 - `header_menu_title: "Services"` is text of a link to this website section, this link is displayed in the *cover section* or *hero section.*, i.e. [`content/en/_index.md`](https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/_index.md?plain=1) section, i.e. in at start of the mainpage.
@@ -524,7 +526,7 @@ In contrast `content/en/homepage/opener.md` has no `header_menu_title` nor `navi
 
 
 
-### Edit a not mainpage. 
+### Edit a not mainpage
 
 For example `https://zjedi.github.io/hugo-scroll/services/` has the content of https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md (not to confuse with https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md)
 
