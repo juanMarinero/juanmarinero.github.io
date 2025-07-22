@@ -14,6 +14,8 @@
                 href="http://localhost:1313/"
                 />
   </url><url>
+    <loc>http://localhost:1313/blogs/color_picker/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs_index/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/create_hugo_website/</loc>

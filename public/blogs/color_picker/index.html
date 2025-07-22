@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>JM - 🎨🧪 Color Picker and Pastel</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Juan Marinero - Data Scientist"
+/>
+
+  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        "
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.acfb11d1ee359d76dadef3e47b511d19cc09eb0e9867262ef74f0b6ca337f7cc.css" type="text/css" integrity="sha256-rPsR0e41nXba3vPke1EdGcwJ6w6YZyYu908LbKM398w=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/color_picker/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta property="og:description" content="Enhance your color picker to:
+Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
+Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
+Quickstart Showcasting, specially the color picker Zenity is usually pre-installed in standard Ubuntu installations (especially those with GNOME desktop). If missing run sudo apt install zenity">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta name="twitter:description" content="Enhance your color picker to:
+Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
+Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
+Quickstart Showcasting, specially the color picker Zenity is usually pre-installed in standard Ubuntu installations (especially those with GNOME desktop). If missing run sudo apt install zenity">
+
+
+  <meta itemprop="name" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta itemprop="description" content="Enhance your color picker to:
+Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
+Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
+Quickstart Showcasting, specially the color picker Zenity is usually pre-installed in standard Ubuntu installations (especially those with GNOME desktop). If missing run sudo apt install zenity">
+  <meta itemprop="wordCount" content="435">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">JM - 🎨🧪 Color Picker and Pastel</h1>
+      <section class="post-content">
+        <p>Enhance your color picker to:</p>
+<ul>
+<li>Convert to multiple <strong>color formats</strong> (hex, rgb(a), hsl(a))</li>
+<li>Display the terminal <strong>color preview</strong></li>
+<li>Get a list of <strong>standard color names</strong> (e.g. <em>Cornflower Blue</em>, <em>Crimson</em>) that are visually close</li>
+</ul>
+<p>For all these we just need next <strong>two tools</strong> and a little of shell <strong>script</strong>ing.</p>
+<h4 id="zenity">Zenity</h4>
+<p><a href="https://gitlab.gnome.org/GNOME/zenity">Zenity</a> enables you to create the following types of simple dialog: calendar, notification icon, color selection,&hellip;</p>
+<ul>
+<li><a href="https://help.gnome.org/users/zenity/stable/index.html.en">Quickstart</a></li>
+<li><a href="https://devopslite.com/series/gui-for-bash-script-using-zenity/">Showcasting</a>, specially the <a href="https://devopslite.com/zenity-create-a-color-selection-dialog/">color picker</a></li>
+</ul>
+<p><em>Zenity</em> is usually <strong>pre-installed</strong> in standard <strong>Ubuntu</strong> installations (especially those with GNOME desktop).
+If missing run
+<code>sudo apt install zenity</code></p>
+<h4 id="pastel">Pastel</h4>
+<p><a href="https://github.com/sharkdp/pastel">Pastel</a> is a command-line tool to generate, analyze, convert and manipulate colors.</p>
+<p>To install <em>Pastel</em> just update <a href="https://www.rust-lang.org">Rust</a> (<code>rustup update stable</code>) and run <code>cargo install pastel</code>.
+For details read the <a href="https://github.com/sharkdp/pastel#via-cargo-source">docs</a>.</p>
+<h2 id="color-picker-enhancement">Color picker enhancement</h2>
+<p>Steps:</p>
+<ul>
+<li>Paste the code below in <code>~/.bashrc</code> and run in terminal <code>color_picker</code></li>
+<li><em>Zenit color selection</em> GUI will open</li>
+<li>Pick a color and click &ldquo;Select&rdquo;</li>
+<li>The therminal will show awesome!</li>
+</ul>
+
+
+<div class="html-content">
+  <table class="data-table">
+    <tr>
+      <td class="data-cell image-cell">
+        <img src="/images/blogs/color_picker/Zenit_color_selection.png" alt="Zenit_color_selection.PNG" class="table-image">
+      </td>
+      <td class="data-cell">
+        <img src="/images/blogs/color_picker/color_picker__output.png" alt="color_picker__output.PNG" class="table-image" style="width:100%;" >
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_valid_format<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example usage: color_check_valid_format &#34;#FF0000&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if any argument was supplied</span>
+</span></span><span style="display:flex;"><span>  local color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;No argument supplied&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if it&#39;s a valid color code</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> pastel color <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> &gt;/dev/null 2&gt;&amp;1; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;This is NOT a valid color format: </span>$color<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>color_picker<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Open zenity color picker, then pick a color and click &#34;Select&#34;</span>
+</span></span><span style="display:flex;"><span>  color<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>zenity --color-selection --title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pick a Color&#34;</span> --color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span> 2&gt;/dev/null<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if user clicked &#34;Cancel&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>      echo <span style="color:#e6db74">&#34;No color selected.&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if a valid color is provided</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ! color_check_valid_format <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Convert HEX to RGB, etc.</span>
+</span></span><span style="display:flex;"><span>  pastel color <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="bonus">Bonus</h3>
+<p>Check the color format. Screenshot:</p>
+
+
+<div class="html-content">
+  <img
+    src="/images/blogs/color_picker/color_check_format__outputs.png"
+    alt="ExerciseValidationWorkflow"
+    style="width:90%;"
+    alt="color_check_format__outputs.png"
+    >
+</div>
+
+
+<p>Did you notice that the <strong>hex</strong> color is previewed in the terminal? Just use a Syntax Highlighting tool, for example:</p>
+<ul>
+<li><a href="https://github.com/z-shell/F-Sy-H">z-shell/F-Sy-H</a></li>
+<li><a href="https://github.com/zdharma-continuum/fast-syntax-highlighting">zdharma-continuum/fast-syntax-highlighting</a></li>
+</ul>
+<p>Code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_format<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example usage: </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;rgba(207, 196, 26, 0.737)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;rgb(207, 196, 26)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;hsla(56, 77.7%, 45.7%, 0.737)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;hsl(56, 77.7%, 45.7%)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;#FF0000&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;Invalid-format&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if a valid color format is provided</span>
+</span></span><span style="display:flex;"><span>  local color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ! color_check_valid_format <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check the format</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^rgba <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;RGBA format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^rgb <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;RGB format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^hsla <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HSLA format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^hsl <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HSL format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^# <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HEX format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> echo <span style="color:#e6db74">&#34;Other [valid] format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div>
+
+<div class="html-content">
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+</div>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>
