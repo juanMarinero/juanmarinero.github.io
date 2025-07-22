@@ -7,6 +7,20 @@ Enhance your color picker to:
 - Display the terminal **color preview**
 - Get a list of **standard color names** (e.g. *Cornflower Blue*, *Crimson*) that are visually close
 
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <img
+    src="/images/blogs/color_picker/color_picker_and_pastel_with_notes.png"
+    alt="ExerciseValidationWorkflow"
+    style="width:90%;"
+    alt="color_picker_and_pastel_with_notes.png"
+    >
+</div>
+{{< /rawhtml >}}
+
+
 For all these we just need next **two tools** and a little of shell **script**ing.
 
 #### Zenity
