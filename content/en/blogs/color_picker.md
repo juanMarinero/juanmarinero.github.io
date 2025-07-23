@@ -13,7 +13,6 @@ Enhance your color picker to:
 <div class="html-content">
   <img
     src="/images/blogs/color_picker/color_picker_and_pastel_with_notes.png"
-    alt="ExerciseValidationWorkflow"
     style="width:90%;"
     alt="color_picker_and_pastel_with_notes.png"
     >
@@ -115,7 +114,6 @@ Check the color format. Screenshot:
 <div class="html-content">
   <img
     src="/images/blogs/color_picker/color_check_format__outputs.png"
-    alt="ExerciseValidationWorkflow"
     style="width:90%;"
     alt="color_check_format__outputs.png"
     >
