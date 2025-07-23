@@ -777,6 +777,24 @@ Therefore, if I just commit and push it then I will see no changes in the live s
 3. And if the result is satisfactory proceed to stage, commit and push.
 
 
+Removing `public` related files is also a good idea. This way Hugo will re-build just the neccesary files, and the no longer needed files can be commited.
+For example, for my blogs (`content/en/blogs`) I run:
+
+```sh
+rm -rf public/blogs
+hugo server --disableFastRender
+```
+
+Then I check it in the browser.
+
+Finally I make sure that all needed is rebuilt previous to push:
+
+```sh
+tree -L 2 public/blogs
+hugo list all
+```
+
+
 ## Set up a custom domain
 
 ### Buy a domain
