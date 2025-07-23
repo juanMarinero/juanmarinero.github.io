@@ -1,5 +1,5 @@
 ---
-title: "JM - How to create a Hugo-scroll website"
+title: "Create your own Hugo-scroll website"
 ---
 
 

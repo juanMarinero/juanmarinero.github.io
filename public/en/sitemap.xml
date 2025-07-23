@@ -16,9 +16,11 @@
   </url><url>
     <loc>http://localhost:1313/blogs/color_picker/</loc>
   </url><url>
-    <loc>http://localhost:1313/blogs_index/</loc>
+    <loc>http://localhost:1313/blogs/nerd_fonts_and_more/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/create_hugo_website/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blogs_index/</loc>
   </url><url>
     <loc>http://localhost:1313/license/</loc>
   </url>

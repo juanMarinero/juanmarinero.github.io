@@ -1,5 +1,5 @@
 ---
-title: "JM - 🎨🧪 Color Picker and Pastel"
+title: "🎨🧪 Color Picker and Pastel"
 ---
 
 Enhance your color picker to:

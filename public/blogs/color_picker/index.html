@@ -5,7 +5,7 @@
 
 
 
-<title>JM - 🎨🧪 Color Picker and Pastel</title>
+<title>🎨🧪 Color Picker and Pastel</title>
 
 
 
@@ -53,11 +53,11 @@
 
 
 
-<link rel="stylesheet" href="/css/style.min.acfb11d1ee359d76dadef3e47b511d19cc09eb0e9867262ef74f0b6ca337f7cc.css" type="text/css" integrity="sha256-rPsR0e41nXba3vPke1EdGcwJ6w6YZyYu908LbKM398w=" />
+<link rel="stylesheet" href="/css/style.min.2fdaf308e74c57b107874b6329c422e34f131bb696dcfcc44989e7dc1aa6e497.css" type="text/css" integrity="sha256-L9rzCOdMV7EHh0tjKcQi408TG7aW3PzESYnn3Bqm5Jc=" />
 
 <meta property="og:url" content="http://localhost:1313/blogs/color_picker/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
-  <meta property="og:title" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta property="og:title" content="🎨🧪 Color Picker and Pastel">
   <meta property="og:description" content="Enhance your color picker to:
 Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
 Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
@@ -70,14 +70,14 @@ Quickstart Showcasting, specially the color picker Zenity is usually pre-install
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
-  <meta name="twitter:title" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta name="twitter:title" content="🎨🧪 Color Picker and Pastel">
   <meta name="twitter:description" content="Enhance your color picker to:
 Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
 Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
 Quickstart Showcasting, specially the color picker Zenity is usually pre-installed in standard Ubuntu installations (especially those with GNOME desktop). If missing run sudo apt install zenity">
 
 
-  <meta itemprop="name" content="JM - 🎨🧪 Color Picker and Pastel">
+  <meta itemprop="name" content="🎨🧪 Color Picker and Pastel">
   <meta itemprop="description" content="Enhance your color picker to:
 Convert to multiple color formats (hex, rgb(a), hsl(a)) Display the terminal color preview Get a list of standard color names (e.g. Cornflower Blue, Crimson) that are visually close For all these we just need next two tools and a little of shell scripting.
 Zenity Zenity enables you to create the following types of simple dialog: calendar, notification icon, color selection,…
@@ -126,6 +126,34 @@ Quickstart Showcasting, specially the color picker Zenity is usually pre-install
   width: 100%; 
   display: block;
 }
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 2.2em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
 </style>
 
 
@@ -141,6 +169,20 @@ Quickstart Showcasting, specially the color picker Zenity is usually pre-install
 
 
 
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
 </head>
   <body>
   <main class="content page-template page-">
@@ -152,7 +194,7 @@ Quickstart Showcasting, specially the color picker Zenity is usually pre-install
           
         
       </header>
-      <h1 class="post-title">JM - 🎨🧪 Color Picker and Pastel</h1>
+      <h1 class="post-title">🎨🧪 Color Picker and Pastel</h1>
       <section class="post-content">
         <p>Enhance your color picker to:</p>
 <ul>

@@ -58,6 +58,34 @@
   width: 100%; 
   display: block;
 }
+/* circular mask or clip-path around the image */
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%); /* Creates a circular clipping path */
+  aspect-ratio: 1; /* Ensures the container is square (for perfect circle) */
+  display: block; /* Ensures the image is treated as a block element */
+  margin: 0 auto; /* Centers the image if needed */
+}
+
+/** ======== Links ========= */
+/* <a> style defined in themes/hugo-scroll/assets/css/content.scss */
+/* Hide underline except on hover */
+.no-underline-except-hover {
+  text-decoration: none;    /* No underline normally */
+  line-height: 2.2em; /* Controls spacing between lines */
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;  /* Underline on hover */
+}
+
+/* Fonts */
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
 </style>
 
 
@@ -80,4 +108,11 @@
 {{ with resources.Get "images/favicon.svg" }}<link rel="icon" type="image/svg+xml" href="{{ .RelPermalink }}" />{{ end }}
 {{ range seq 9 4 }}{{ $size := pow 2 . }}{{ $file := replace "images/favicon-##x##.png" "##" $size }}{{ with resources.Get $file }}
 <link rel="icon" type="{{ .MediaType.Type }}" sizes="{{- $size -}}x{{- $size -}}" href="{{ .RelPermalink }}" />{{ end }}{{ end }}
+
+
+<!-- Great Vibes Font (Hugo-friendly version) -->
+{{ $fontCSS := resources.GetRemote "https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" }}
+{{ with $fontCSS }}
+  <style>{{ .Content | safeCSS }}</style>
+{{ end }}
 

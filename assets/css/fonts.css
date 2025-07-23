@@ -326,3 +326,13 @@
        url('../webfonts/roboto-slab-v16-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../webfonts/roboto-slab-v16-latin-700.svg#RobotoSlab') format('svg'); /* Legacy iOS */
 }
+
+/* Iosevka-BoldItalic - latin */
+@font-face {
+  font-family: 'Iosevka BoldItalic';
+  src: local(''),
+       url('../webfonts/Iosevka-BoldItalic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../webfonts/Iosevka-BoldItalic.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-weight: bold;
+  font-style: italic;
+}
