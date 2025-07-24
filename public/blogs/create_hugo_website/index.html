@@ -58,8 +58,7 @@
 <meta property="og:url" content="http://localhost:1313/blogs/create_hugo_website/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
   <meta property="og:title" content="Create your own Hugo-scroll website">
-  <meta property="og:description" content="Read this.
-Blogs">
+  <meta property="og:description" content="Install Hugo Linux Windows Install Git Install Go Install Dash Install Hugo Test a Hugo repo Create a Hugo site with the hugo-scroll theme Get the zjedi/hugo-scroll website Customize Remove git dirs Order of markdowns hugo.toml Favicons, header-logo and cover-image Edit a mainpage section Edit a not mainpage CSS Raw HTML Deploy Create a GitHub repository Host on GitHub Wait for Github pages to be ready Rebuild before pushing Set up a custom domain Buy a domain Manage the DNS records for your domain The A records The CNAME records Set your domain on Github Add your domain to GitHub Pages settings Add your domain to a CNAME file Enforce HTTPS Bonus. The More You Know Apex Domains and the www subdomain Understanding CNAME Restrictions on Apex Domains GitHub Pages sites can be stored in any repository Hugo is not the only solution Publishing from a branch Publishing with a custom GitHub Actions workflow Install Hugo https://gohugo.io/getting-started/quick-start/#prerequisites">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blogs">
@@ -69,14 +68,12 @@ Blogs">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
   <meta name="twitter:title" content="Create your own Hugo-scroll website">
-  <meta name="twitter:description" content="Read this.
-Blogs">
+  <meta name="twitter:description" content="Install Hugo Linux Windows Install Git Install Go Install Dash Install Hugo Test a Hugo repo Create a Hugo site with the hugo-scroll theme Get the zjedi/hugo-scroll website Customize Remove git dirs Order of markdowns hugo.toml Favicons, header-logo and cover-image Edit a mainpage section Edit a not mainpage CSS Raw HTML Deploy Create a GitHub repository Host on GitHub Wait for Github pages to be ready Rebuild before pushing Set up a custom domain Buy a domain Manage the DNS records for your domain The A records The CNAME records Set your domain on Github Add your domain to GitHub Pages settings Add your domain to a CNAME file Enforce HTTPS Bonus. The More You Know Apex Domains and the www subdomain Understanding CNAME Restrictions on Apex Domains GitHub Pages sites can be stored in any repository Hugo is not the only solution Publishing from a branch Publishing with a custom GitHub Actions workflow Install Hugo https://gohugo.io/getting-started/quick-start/#prerequisites">
 
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
-  <meta itemprop="description" content="Read this.
-Blogs">
-  <meta itemprop="wordCount" content="3">
+  <meta itemprop="description" content="Install Hugo Linux Windows Install Git Install Go Install Dash Install Hugo Test a Hugo repo Create a Hugo site with the hugo-scroll theme Get the zjedi/hugo-scroll website Customize Remove git dirs Order of markdowns hugo.toml Favicons, header-logo and cover-image Edit a mainpage section Edit a not mainpage CSS Raw HTML Deploy Create a GitHub repository Host on GitHub Wait for Github pages to be ready Rebuild before pushing Set up a custom domain Buy a domain Manage the DNS records for your domain The A records The CNAME records Set your domain on Github Add your domain to GitHub Pages settings Add your domain to a CNAME file Enforce HTTPS Bonus. The More You Know Apex Domains and the www subdomain Understanding CNAME Restrictions on Apex Domains GitHub Pages sites can be stored in any repository Hugo is not the only solution Publishing from a branch Publishing with a custom GitHub Actions workflow Install Hugo https://gohugo.io/getting-started/quick-start/#prerequisites">
+  <meta itemprop="wordCount" content="4003">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -190,12 +187,908 @@ h1 {
       </header>
       <h1 class="post-title">Create your own Hugo-scroll website</h1>
       <section class="post-content">
-        <p>Read <a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/README.md">this</a>.</p>
+        <ol>
+<li><a href="/blogs/create_hugo_website/#install-hugo">Install Hugo</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#linux">Linux</a></li>
+<li><a href="/blogs/create_hugo_website/#windows">Windows</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#install-git">Install Git</a></li>
+<li><a href="/blogs/create_hugo_website/#install-go">Install Go</a></li>
+<li><a href="/blogs/create_hugo_website/#install-dash">Install Dash</a></li>
+<li><a href="/blogs/create_hugo_website/#install-hugo">Install Hugo</a></li>
+<li><a href="/blogs/create_hugo_website/#test-a-hugo-repo">Test a Hugo repo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/blogs/create_hugo_website/#create-a-hugo-site-with-the-hugo-scroll-theme">Create a Hugo site with the hugo-scroll theme</a></li>
+<li><a href="/blogs/create_hugo_website/#get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</a></li>
+<li><a href="/blogs/create_hugo_website/#customize">Customize</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#remove-git-dirs">Remove git dirs</a></li>
+<li><a href="/blogs/create_hugo_website/#order-of-markdowns">Order of markdowns</a></li>
+<li><a href="/blogs/create_hugo_website/#hugotoml">hugo.toml</a></li>
+<li><a href="/blogs/create_hugo_website/#favicons-header-logo-and-cover-image">Favicons, header-logo and cover-image</a></li>
+<li><a href="/blogs/create_hugo_website/#edit-a-mainpage-section">Edit a mainpage section</a></li>
+<li><a href="/blogs/create_hugo_website/#edit-a-not-mainpage">Edit a not mainpage</a></li>
+<li><a href="/blogs/create_hugo_website/#css">CSS</a></li>
+<li><a href="/blogs/create_hugo_website/#raw-html">Raw HTML</a></li>
+</ul>
+</li>
+<li><a href="/blogs/create_hugo_website/#deploy">Deploy</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#create-a-github-repository">Create a GitHub repository</a></li>
+<li><a href="/blogs/create_hugo_website/#host-on-github">Host on GitHub</a></li>
+<li><a href="/blogs/create_hugo_website/#wait-for-github-pages-to-be-ready">Wait for Github pages to be ready</a></li>
+<li><a href="/blogs/create_hugo_website/#rebuild-before-pushing">Rebuild before pushing</a></li>
+</ul>
+</li>
+<li><a href="/blogs/create_hugo_website/#set-up-a-custom-domain">Set up a custom domain</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#buy-a-domain">Buy a domain</a></li>
+<li><a href="/blogs/create_hugo_website/#manage-the-dns-records-for-your-domain">Manage the DNS records for your domain</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#the-a-records">The A records</a></li>
+<li><a href="/blogs/create_hugo_website/#the-cname-records">The CNAME records</a></li>
+</ul>
+</li>
+<li><a href="/blogs/create_hugo_website/#set-your-domain-on-github">Set your domain on Github</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#add-your-domain-to-github-pages-settings">Add your domain to GitHub Pages settings</a></li>
+<li><a href="/blogs/create_hugo_website/#add-your-domain-to-a-cname-file">Add your domain to a CNAME file</a></li>
+<li><a href="/blogs/create_hugo_website/#enforce-https">Enforce HTTPS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/blogs/create_hugo_website/#bonus-the-more-you-know">Bonus. The More You Know</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#apex-domains-and-the-www-subdomain">Apex Domains and the www subdomain</a></li>
+<li><a href="/blogs/create_hugo_website/#understanding-cname-restrictions-on-apex-domains">Understanding CNAME Restrictions on Apex Domains</a></li>
+<li><a href="/blogs/create_hugo_website/#github-pages-sites-can-be-stored-in-any-repository">GitHub Pages sites can be stored in any repository</a></li>
+<li><a href="/blogs/create_hugo_website/#hugo-is-not-the-only-solution">Hugo is not the only solution</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#publishing-from-a-branch">Publishing from a branch</a></li>
+<li><a href="/blogs/create_hugo_website/#publishing-with-a-custom-github-actions-workflow">Publishing with a custom GitHub Actions workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="install-hugo">Install Hugo</h2>
+<p><a href="https://gohugo.io/getting-started/quick-start/#prerequisites">https://gohugo.io/getting-started/quick-start/#prerequisites</a></p>
+<h3 id="linux">Linux</h3>
+<p><a href="https://gohugo.io/installation/linux/">https://gohugo.io/installation/linux/</a></p>
+<p>Download the latest <code>.deb</code> package from <a href="https://github.com/gohugoio/hugo/releases/latest">Hugo&rsquo;s GitHub releases</a>, then
+install it and check version.</p>
+<p>Edit <code>vers</code> below to the version you want to install.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vers<span style="color:#f92672">=</span>0.148.0
+</span></span><span style="display:flex;"><span>package<span style="color:#f92672">=</span>hugo_extended_<span style="color:#e6db74">&#34;</span>$vers<span style="color:#e6db74">&#34;</span>_linux-amd64.deb
+</span></span><span style="display:flex;"><span>URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/gohugoio/hugo/releases/download/v</span>$vers<span style="color:#e6db74">/</span>$package<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>cd ~/Downloads <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  wget <span style="color:#e6db74">&#34;</span>$URL<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  sudo dpkg -i <span style="color:#e6db74">&#34;</span>$package<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  rm -v <span style="color:#e6db74">&#34;</span>$package<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  hugo version
+</span></span></code></pre></div><p>To remove run <code>sudo apt-get purge hugo</code>.</p>
+<h3 id="windows">Windows</h3>
+<h4 id="install-git">Install Git</h4>
+<p><a href="https://git-scm.com/downloads/win">https://git-scm.com/downloads/win</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Open Powershell as admin, run:</span>
+</span></span><span style="display:flex;"><span>winget install --id Git.Git -e --source winget
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Show installed files</span>
+</span></span><span style="display:flex;"><span>dir <span style="color:#e6db74">&#34;C:\Program Files\Git\cmd&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check version</span>
+</span></span><span style="display:flex;"><span>&amp; <span style="color:#e6db74">&#34;C:\Program Files\Git\cmd\git.exe&#34;</span> --version <span style="color:#75715e"># outputs for example: git version 2.50.1.windows.1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check path</span>
+</span></span><span style="display:flex;"><span>echo $env:Path
+</span></span><span style="display:flex;"><span>$env:Path <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;git&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If False (&#34;git&#34; not in $PATH), add it</span>
+</span></span><span style="display:flex;"><span>$env:Path += <span style="color:#e6db74">&#34;;C:\Program Files\Git\cmd&#34;</span> <span style="color:#75715e"># temporal</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Environment</span>]::SetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, ([<span style="color:#66d9ef">Environment</span>]::GetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, <span style="color:#e6db74">&#34;User&#34;</span>) + <span style="color:#e6db74">&#34;;C:\Program Files\Git\cmd&#34;</span>), <span style="color:#e6db74">&#34;User&#34;</span>) <span style="color:#75715e"># persistent</span>
+</span></span><span style="display:flex;"><span>git --version <span style="color:#75715e"># outputs for example: git version 2.50.1.windows.1</span>
+</span></span></code></pre></div><h4 id="install-go">Install Go</h4>
+<p><a href="https://go.dev/dl/">https://go.dev/dl/</a></p>
+<p>Windows 10 or later, Intel 64-bit processor download for example <code>go1.24.5.windows-amd64.msi</code>.</p>
+<p>Either</p>
+<ul>
+<li>Double-click the downloaded <code>.msi</code> file and follow the on-screen instructions to complete the installation. The default settings are suitable for most users.</li>
+<li>Or</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd $HOME/Downloads
+</span></span><span style="display:flex;"><span>Get-ChildItem | Where-Object { $_.Name <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;msi&#34;</span> } <span style="color:#75715e"># shows go1.24.5.windows-amd64.msi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Install</span>
+</span></span><span style="display:flex;"><span>Start-Process <span style="color:#e6db74">&#39;msiexec.exe&#39;</span> -ArgumentList <span style="color:#e6db74">&#39;/i&#39;</span>, <span style="color:#e6db74">&#39;go1.24.5.windows-amd64.msi&#39;</span>, <span style="color:#e6db74">&#39;/qn&#39;</span>, <span style="color:#e6db74">&#39;/norestart&#39;</span>, <span style="color:#e6db74">&#39;/l*v&#39;</span>, <span style="color:#e6db74">&#39;go_install.log&#39;</span> -Wait
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check version</span>
+</span></span><span style="display:flex;"><span>&amp; <span style="color:#e6db74">&#34;C:\Program Files\Go\bin\go.exe&#34;</span> version <span style="color:#75715e"># outputs for example: go version go1.24.5 windows/amd64</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check path</span>
+</span></span><span style="display:flex;"><span>echo $env:Path
+</span></span><span style="display:flex;"><span>$env:Path <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;go&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If False (&#34;go&#34; not in $PATH), add it</span>
+</span></span><span style="display:flex;"><span>$env:Path += <span style="color:#e6db74">&#34;;C:\Program Files\Go\bin&#34;</span> <span style="color:#75715e"># temporal</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Environment</span>]::SetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, ([<span style="color:#66d9ef">Environment</span>]::GetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, <span style="color:#e6db74">&#34;User&#34;</span>) + <span style="color:#e6db74">&#34;;C:\Program Files\Go\bin&#34;</span>), <span style="color:#e6db74">&#34;User&#34;</span>) <span style="color:#75715e"># persistent</span>
+</span></span><span style="display:flex;"><span>go version <span style="color:#75715e"># outputs for example: go version go1.24.5 windows/amd64</span>
+</span></span></code></pre></div><h4 id="install-dash">Install Dash</h4>
+<p>Download the <code>dart-sass-1.89.2-windows-x64.zip</code> or alike of <a href="https://github.com/sass/dart-sass/releases">https://github.com/sass/dart-sass/releases</a></p>
+<p>Either</p>
+<ul>
+<li>Double-click the downloaded <code>.zip</code> file and extract it into <code>C:\dart-ass</code></li>
+<li>Or</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd $HOME/Downloads
+</span></span><span style="display:flex;"><span>Get-ChildItem | Where-Object { $_.Name <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;zip&#34;</span> } <span style="color:#75715e"># shows dart-sass-1.89.2-windows-x64.zip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Unzip</span>
+</span></span><span style="display:flex;"><span>Expand-Archive -LiteralPath .\dart-sass-<span style="color:#ae81ff">1.89</span>.<span style="color:#ae81ff">2</span>-windows-x64.zip -DestinationPath .\dart-sass
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Move the extracted folder</span>
+</span></span><span style="display:flex;"><span>Move-Item .\dart-sass\* C:\dart-sass
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check path</span>
+</span></span><span style="display:flex;"><span>echo $env:Path
+</span></span><span style="display:flex;"><span>$env:Path <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;dart&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If False (&#34;dart-sass&#34; not in $PATH), add it</span>
+</span></span><span style="display:flex;"><span>$env:Path += <span style="color:#e6db74">&#34;;C:\dart-sass&#34;</span> <span style="color:#75715e"># temporal</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Environment</span>]::SetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, ([<span style="color:#66d9ef">Environment</span>]::GetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, <span style="color:#e6db74">&#34;User&#34;</span>) + <span style="color:#e6db74">&#34;;C:\dart-sass&#34;</span>), <span style="color:#e6db74">&#34;User&#34;</span>) <span style="color:#75715e"># persistent</span>
+</span></span><span style="display:flex;"><span>sass --version <span style="color:#75715e"># 1.89.2</span>
+</span></span></code></pre></div><h4 id="install-hugo-1">Install Hugo</h4>
+<p><a href="https://gohugo.io/installation/windows/#prebuilt-binaries">https://gohugo.io/installation/windows/#prebuilt-binaries</a></p>
+<p>Download the <strong>extended</strong> edition, for example <code>hugo_extended_0.148.1_windows-amd64.zip</code> from <a href="https://github.com/gohugoio/hugo/releases/latest">Hugo&rsquo;s GitHub releases</a>, then</p>
+<p>Either</p>
+<ul>
+<li>Double-click the downloaded <code>.zip</code> file and extract it into <code>C:\hugo</code></li>
+<li>Or</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd $HOME/Downloads
+</span></span><span style="display:flex;"><span>Get-ChildItem | Where-Object { $_.Name <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;zip&#34;</span> } <span style="color:#75715e"># shows hugo_extended_0.148.1_windows-amd64.zip</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Unzip</span>
+</span></span><span style="display:flex;"><span>Expand-Archive -LiteralPath .\hugo_extended_0.148.1_windows-amd64.zip -DestinationPath .\hugo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Move the extracted folder</span>
+</span></span><span style="display:flex;"><span>Move-Item .\hugo C:\hugo
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Check path</span>
+</span></span><span style="display:flex;"><span>echo $env:Path
+</span></span><span style="display:flex;"><span>$env:Path <span style="color:#f92672">-match</span> <span style="color:#e6db74">&#34;hugo&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If False (&#34;hugo&#34; not in $PATH), add it</span>
+</span></span><span style="display:flex;"><span>$env:Path += <span style="color:#e6db74">&#34;;C:\hugo&#34;</span> <span style="color:#75715e"># temporal</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Environment</span>]::SetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, ([<span style="color:#66d9ef">Environment</span>]::GetEnvironmentVariable(<span style="color:#e6db74">&#34;Path&#34;</span>, <span style="color:#e6db74">&#34;User&#34;</span>) + <span style="color:#e6db74">&#34;;C:\hugo&#34;</span>), <span style="color:#e6db74">&#34;User&#34;</span>) <span style="color:#75715e"># persistent</span>
+</span></span><span style="display:flex;"><span>hugo version <span style="color:#75715e"># hugo v0.148.1-...+extended windows/amd64 BuildDate=2025-07-11T12:56:21Z VendorInfo=gohugoio</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># make sure its EXTENDED !</span>
+</span></span></code></pre></div><h4 id="test-a-hugo-repo">Test a Hugo repo</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd $HOME/Downloads
+</span></span><span style="display:flex;"><span>git clone https://github.com/juanMarinero/juanmarinero.github.io
+</span></span><span style="display:flex;"><span>cd juanmarinero.github.io
+</span></span><span style="display:flex;"><span>git submodule update --init --recursive <span style="color:#75715e"># Important!</span>
+</span></span><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>&hellip;which outputs:</p>
+<pre tabindex="0"><code>Watching for changes in C:\Users\UserName\Downloads\juanmarinero.github.io\{archetypes,assets,content,layouts,static,themes}
+Watching for config changes in C:\Users\UserName\Downloads\juanmarinero.github.io\hugo.toml
+Start building sites …
+hugo v0.148.1-98ba786f2f5dca0866f47ab79f394370bcb77d2f+extended windows/amd64 BuildDate=2025-07-11T12:56:21Z VendorInfo=gohugoio
+
+                  │ ES
+──────────────────┼─────
+ Pages            │   7
+ Paginator pages  │   0
+ Non-page files   │   0
+ Static files     │ 110
+ Processed images │   8
+ Aliases          │   0
+ Cleaned          │   0
+
+Built in 23132 ms
+Environment: &#34;development&#34;
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+Current date: Monday, July 14, 2025, 11:50 AM CEST
+</code></pre><p>Open in browser <a href="http://localhost:1313/">http://localhost:1313/</a></p>
+<p>In future just run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd $HOME/Downloads/juanmarinero.github.io
+</span></span><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><h2 id="create-a-hugo-site-with-the-hugo-scroll-theme">Create a Hugo site with the hugo-scroll theme</h2>
+<p>Follow <a href="https://gohugo.io/getting-started/quick-start/#commands">quickstart - commands</a>
+applaying <a href="https://github.com/zjedi/hugo-scroll#-installation">hugo-scroll theme</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd ~/Downloads
+</span></span><span style="display:flex;"><span>hugo new site quickstart
+</span></span><span style="display:flex;"><span>cd quickstart
+</span></span><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>git submodule add https://github.com/zjedi/hugo-scroll.git themes/hugo-scroll
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;theme = &#39;hugo-scroll&#39;&#34;</span> &gt;&gt; hugo.toml
+</span></span><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>This should output like</p>
+<pre tabindex="0"><code>&gt; hugo server
+Watching for changes in &lt;path&gt;/quickstart/{archetypes,assets,content,data,i18n,layouts,static,themes}
+Watching for config changes in &lt;path&gt;/quickstart/hugo.toml
+Start building sites … 
+hugo v0.148.0-c0d9bebacc6bf42a91a74d8bb0de7bc775c8e573+extended linux/amd64 BuildDate=2025-07-08T13:34:49Z VendorInfo=gohugoio
+
+
+                  │ EN  
+──────────────────┼─────
+ Pages            │   6 
+ Paginator pages  │   0 
+ Non-page files   │   0 
+ Static files     │ 108 
+ Processed images │   0 
+ Aliases          │   0 
+ Cleaned          │   0 
+
+Built in 25 ms
+Environment: &#34;development&#34;
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) 
+Press Ctrl+C to stop
+</code></pre><p>Now, open in browser <a href="http://localhost:1313/">http://localhost:1313/</a></p>
+<p>Notice the browser tab name <em>My New Hugo Site</em> but the site is empty.</p>
+<p>Let&rsquo;s stop the server <code>Ctrl+C</code> and add some content.</p>
+<h2 id="get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</h2>
+<p><a href="https://github.com/zjedi/hugo-scroll#-installation">https://github.com/zjedi/hugo-scroll#-installation</a> says:</p>
+<blockquote>
+<p>If you are starting fresh, simply copy over the contents of the <code>exampleSite</code>-directory included in this theme to your source directory. That should give you a good idea about how things work, and then you can go on from there to make the site your own.</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd ~/Downloads/quickstart
+</span></span><span style="display:flex;"><span>hugo_scroll_dir<span style="color:#f92672">=</span>$HOME/Downloads/hugo-scroll
+</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#ae81ff">1</span> https://github.com/zjedi/hugo-scroll.git <span style="color:#e6db74">&#34;</span>$hugo_scroll_dir<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>cp -r <span style="color:#e6db74">&#34;</span>$hugo_scroll_dir<span style="color:#e6db74">&#34;</span>/exampleSite/* .
+</span></span><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>This should output like</p>
+<pre tabindex="0"><code>Watching for changes in &lt;path&gt;/quickstart/{archetypes,assets,content,data,i18n,layouts,static,themes}
+Watching for config changes in &lt;path&gt;/quickstart/hugo.toml
+Start building sites … 
+hugo v0.148.0-c0d9bebacc6bf42a91a74d8bb0de7bc775c8e573+extended linux/amd64 BuildDate=2025-07-08T13:34:49Z VendorInfo=gohugoio
+
+
+                  │ EN  │ DE  
+──────────────────┼─────┼─────
+ Pages            │  15 │  14 
+ Paginator pages  │   0 │   0 
+ Non-page files   │   1 │   0 
+ Static files     │ 114 │ 114 
+ Processed images │   8 │   0 
+ Aliases          │   1 │   0 
+ Cleaned          │   0 │   0 
+
+Built in 4793 ms
+Environment: &#34;development&#34;
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) 
+Press Ctrl+C to stop
+</code></pre><p>And the local website <a href="http://localhost:1313/">http://localhost:1313/</a> should be like <a href="https://zjedi.github.io/hugo-scroll/">this</a>.</p>
+<h2 id="customize">Customize</h2>
+<h3 id="remove-git-dirs">Remove git dirs</h3>
+<p>The easiest way is to edit little by little the content of the <a href="https://github.com/zjedi/hugo-scroll">zjedi/hugo-scroll</a> repo to your needs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rm -rf .git .github exampleSite images CHANGELOG.md contributing.md LICENSE package.json package-lock.json README.md .prettierignore .prettierrc.json theme.toml netlify.toml
+</span></span><span style="display:flex;"><span>git init
+</span></span></code></pre></div><p>And check that <code>hugo server</code> still works.</p>
+<h3 id="order-of-markdowns">Order of markdowns</h3>
+<p>The website sections are sorted by the <code>weight</code> metadata.</p>
+<ul>
+<li>E.g. next has weight 99 to appear last <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/credits.md?plain=1#L3">exampleSite/content/en/homepage/credits.md</a></li>
+<li>Next weight 3 to appear the 3rd at top <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/about-me.md?plain=1#L3">exampleSite/content/en/homepage/about-me.md</a></li>
+</ul>
+<p>Lets check them all!</p>
+<ol>
+<li>Create a script like <a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/cat_by_weight.sh">cat_by_weight.sh</a></li>
+<li>Run it on the content directory</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x cat_by_weight.sh
+</span></span><span style="display:flex;"><span>./cat_by_weight.sh content/en/homepage head -n <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><p>Note. You can pass another catter like <code>cat</code> or <code>tail</code>. The default is <code>bat --line-range=1:10</code></p>
+<p>to get:</p>
+<table>
+  <thead>
+      <tr>
+          <th>weight</th>
+          <th>file</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>content/en/homepage/opener.md</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>content/en/homepage/about-me.de.md</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>content/en/homepage/about-me.md</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>content/en/homepage/contact.md</td>
+      </tr>
+      <tr>
+          <td>98</td>
+          <td>content/en/homepage/legal-brief.md</td>
+      </tr>
+      <tr>
+          <td>99</td>
+          <td>content/en/homepage/credits.md</td>
+      </tr>
+      <tr>
+          <td>99</td>
+          <td>content/en/homepage/external.md</td>
+      </tr>
+  </tbody>
+</table>
+<pre tabindex="0"><code>--- content/en/homepage/opener.md (weight: 1) ---
+---
+title: &#34;Welcome&#34;
+weight: 1
+---
+
+
+--- content/en/homepage/about-me.de.md (weight: 3) ---
+---
+title: &#34;Über mich (shared folder)&#34;
+weight: 3
+header_menu: true
+---
+
+--- content/en/homepage/about-me.md (weight: 3) ---
+---
+title: &#34;About Me&#34;
+weight: 3
+header_menu: true
+---
+
+--- content/en/homepage/contact.md (weight: 4) ---
+---
+title: &#34;Contact&#34;
+weight: 4
+header_menu: true
+---
+
+--- content/en/homepage/legal-brief.md (weight: 98) ---
+---
+title: &#34;Brief Legal Information&#34;
+weight: 98
+header_menu_title: &#34;Legal&#34;
+navigation_menu_title: &#34;Legal stuff&#34;
+
+--- content/en/homepage/credits.md (weight: 99) ---
+---
+title: &#34;Credits&#34;
+weight: 99
+header_menu: true
+---
+
+--- content/en/homepage/external.md (weight: 99) ---
+---
+title: &#34;GitHub&#34;
+weight: 99
+header_menu: true
+external: https://github.com/zjedi/hugo-scroll
+
+--- content/en/homepage/index.md (no weight) ---
+---
+headless: true
+---
+
+--- content/en/homepage/license.md (no weight) ---
+---
+footer_menu_title: License
+footer_menu: true
+detailed_page_path: /license/
+detailed_page_homepage_content: false
+
+--- content/en/homepage/services.md (no weight) ---
+---
+title: &#34;The Services I Offer&#34;
+header_menu_title: &#34;Services&#34;
+navigation_menu_title: &#34;My Services&#34;
+weight: 2
+</code></pre><h3 id="hugotoml">hugo.toml</h3>
+<p>Open with your favorit editor <code>&quot;$EDITOR&quot; hugo.toml</code> and edit, among other:</p>
+<ul>
+<li><code>baseURL</code> replace with your domain, or with <code>https://&lt;username&gt;.github.io</code>, for example <code>https://juanmarinero.github.io</code></li>
+<li><code>defaultContentLanguage = &quot;en&quot;</code> edit if needed, but this requires to, if not <code>en</code> nor <code>de</code> to
+<ul>
+<li>edit end of page <code>[languages]</code></li>
+<li>and add a directory like <code>contentDir = &quot;content/es&quot;</code> for <em>español</em> (Spanish)</li>
+</ul>
+</li>
+<li>The browser tab name <code>title = &quot;...&quot;</code></li>
+<li>set <code>title_guard</code> to <code>true</code> if title not legible because color contrast</li>
+<li>set <code>language_menu</code> and <code>show_current_lang</code> to <code>false</code> if just one language website</li>
+<li><code>invertSectionColors = false</code> set to true and check if it likes you more</li>
+<li>set <code>showContactIcons</code> to <code>true</code> to share email/phone in footnote</li>
+<li>edit <code>params.meta</code> and <code>params.contacts</code></li>
+</ul>
+<h3 id="favicons-header-logo-and-cover-image">Favicons, header-logo and cover-image</h3>
+<p>Replace</p>
+<ul>
+<li><code>assets/images/cover-image.jpg</code> with for example <a href="https://www.freepik.com/search?format=search&amp;last_filter=selection&amp;last_value=1&amp;query=Zen&#43;Background&amp;selection=1">https://www.freepik.com/search?format=search&last_filter=selection&last_value=1&query=Zen+Background&selection=1</a>.</li>
+<li><code>assets/images/favicon.png</code> with for example <a href="https://www.flaticon.com/free-icons/zen">https://www.flaticon.com/free-icons/zen</a>. Convert it to and <code>assets/images/apple-touch-icon.png</code>of 180x180px via:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd assets/images/
+</span></span><span style="display:flex;"><span>sudo apt update <span style="color:#f92672">&amp;&amp;</span> sudo apt install imagemagick optipng -y
+</span></span><span style="display:flex;"><span>convert favicon.png -resize 180x180 apple-touch-icon.png
+</span></span></code></pre></div><ul>
+<li>Same for <code>public/images/favicon-16x16.png</code> and <code>public/images/favicon-32x32.png</code>. Also for <code>static/images/</code> and <code>assets/favicon.ico</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd &lt;repo-path&gt;
+</span></span><span style="display:flex;"><span>convert assets/images/favicon.png -resize 16x16 public/images/favicon-16x16.png
+</span></span><span style="display:flex;"><span>convert assets/images/favicon.png -resize 32x32 public/images/favicon-32x32.png
+</span></span><span style="display:flex;"><span>convert assets/images/favicon.png -resize 16x16 static/images/favicon-16x16.png
+</span></span><span style="display:flex;"><span>convert assets/images/favicon.png -resize 32x32 static/images/favicon-32x32.png
+</span></span><span style="display:flex;"><span>convert assets/images/favicon.png -define icon:auto-resize<span style="color:#f92672">=</span>64,48,32,16 assets/favicon.ico
+</span></span></code></pre></div><ul>
+<li><code>assets/images/chef-hat.png</code> renamed to <code>header-logo.png</code> with for example <a href="https://www.flaticon.com/search?word=massage">https://www.flaticon.com/search?word=massage</a>. Also rename that file in <code>content/en/_index.md</code> with your favorit editor:
+<code>&quot;$EDITOR&quot; content/en/_index.md</code></li>
+</ul>
+<p>To change the background image to a video <code>hugo.toml</code> says</p>
+<pre tabindex="0"><code>    # These &#34;images&#34; are used for the structured data templates. This will show up, when
+    # ...
+    # NOT the actual header background image, go to _index.md instead
+    images = [&#34;images/cover-image.jpg&#34;]
+</code></pre><p>Thus, check if <code>content/en/_index.md</code> sets a fixed image:</p>
+<pre tabindex="0"><code># When set true, uses video from custom_header_video.html partial, instead of header_image
+header_use_video: false
+</code></pre><p>Toggle it to <code>true</code>, add the video (for example from <a href="https://www.pexels.com/search/videos/">pexels</a>) to <code>assets/cover/</code>, and edit the video name in <code>layouts/partials/custom_header_video.html</code>.</p>
+<p>Tip, set video speed there directly in that <code>html</code> file with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">video</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;portfolioVideo&#34;</span> <span style="color:#960050;background-color:#1e0010">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">videoResource</span> <span style="color:#a6e22e">:</span><span style="color:#f92672">=</span> <span style="color:#e6db74">resources.Get</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">cover</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">video_name</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">mp4</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">}}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">source</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ $videoResource.RelPermalink }}&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;video/mp4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">video</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Slow down video to 50% speed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;portfolioVideo&#39;</span>).<span style="color:#a6e22e">playbackRate</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><h3 id="edit-a-mainpage-section">Edit a mainpage section</h3>
+<p>For example edit <code>content/en/homepage/services.md</code></p>
+<ul>
+<li><code>title: &quot;The Services I Offer&quot;</code> is the title of that section of the website.</li>
+<li><code>header_menu_title: &quot;Services&quot;</code> is text of a link to this website section, this link is displayed in the <em>cover section</em> or <em>hero section.</em>, i.e. <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/_index.md?plain=1"><code>content/en/_index.md</code></a> section, i.e. in at start of the mainpage.</li>
+<li><code>navigation_menu_title: &quot;My Services&quot;</code> is the text of a link to this website section, this link is displayed at the cover menu (the navigation bar at the top showing links to sections of the main page, it keeps there even while one scrolls)&hellip; as long as <code>header_menu</code> is <code>true</code> in the webseite section.</li>
+</ul>
+<p>In contrast <code>content/en/homepage/opener.md</code> has no <code>header_menu_title</code> nor <code>navigation_menu_title</code>. And therefore this website section does not appear in the cover section nor in the cover menu. As its content stated
+<a href="https://zjedi.github.io/hugo-scroll/#:~:text=By%20the%20way%20this%20welcome%20section%20won%E2%80%99t%20show%20in%20the%20cover%20menu.">here</a>:</p>
+<blockquote>
+<p>By the way this welcome section won&rsquo;t show in the cover menu.</p></blockquote>
+<h3 id="edit-a-not-mainpage">Edit a not mainpage</h3>
+<p>For example <code>https://zjedi.github.io/hugo-scroll/services/</code> has the content of <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md</a> (not to confuse with <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md</a>)</p>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/opener.md?plain=1">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/opener.md?plain=1</a>, i.e. the mainpage, links to this not-mainpage via <code>[dedicated pages](services)</code> of:</p>
+<blockquote>
+<p><code>You can also delegate lengthier, less important or more sizeable content to [dedicated pages](services).</code></p></blockquote>
+<p>In the language directory, for example <code>public/en/</code> edit the <code>sitemap.xml</code> file.</p>
+<h3 id="css">CSS</h3>
+<p><code>layouts/partials/custom_head.html</code> shows how to add CSS code:</p>
+<ul>
+<li>directly in that file, just below comment line <code>Custom CSS via inline styles</code> add an <code>style</code> tag not commented (not wrapped inside <code>&lt;!--</code> - <code>--&gt;</code>) for example <code>&lt;style&gt;fontsize=1.2&lt;/style&gt;</code> to increase every text size a 20%</li>
+<li>and/or via a <em>css</em> file, read commentes in the file</li>
+</ul>
+<p>Check original CSS style in <code>themes/hugo-scroll/assets/css/</code>.
+For example to change background colors of odd sections edit <code>themes/hugo-scroll/assets/css/variables.scss</code>, its <code>--section-dark-bg-color</code>.
+Note, I should <strong>not</strong> directly edit <code>themes/hugo-scroll</code> since its a submodule not of my property, thus I cannot push it.
+Instead in <code>layouts/partials/custom_head.html</code> write:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">style</span>&gt;
+</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">root</span> {
+</span></span><span style="display:flex;"><span>    --section-dark-bg-color: <span style="color:#ae81ff">#c1cdaa</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">style</span>&gt;
+</span></span></code></pre></div><h3 id="raw-html">Raw HTML</h3>
+
+
+<div class="html-content">
+  To use raw HTML content wrap the HTML lines inside
+  <code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;&#60;div class="html-content"&#62;</code>
+  and 
+  <code>&#60;/div&#62;&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code>.
+  For more info read
+  <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html">layouts/shortcodes/rawhtml.html</a>
+  from the official Hugo-scroll repo.
+  Example usage in the <strong>TL;DR</strong> of my <a href="/blogs/nerd_fonts_and_more/#great-vibes">Nerd Fonts and more</a> blog.
+</div>
+
+
+<p>Alternative <strong>but NOT</strong> recommended. Add this to your <code>config.toml</code> (or equivalent in YAML/JSON)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">goldmark</span>.<span style="color:#a6e22e">renderer</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">unsafe</span> = <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>Read</p>
+<ul>
+<li><a href="https://discourse.gohugo.io/t/do-you-set-unsafe-true-in-markup-goldmark-renderer/37555">Do you set <code>unsafe = true</code> in <code>[markup.goldmark.renderer]</code>?</a></li>
+<li><a href="https://gohugo.io/configuration/markup/">https://gohugo.io/configuration/markup/</a></li>
+</ul>
+<h2 id="deploy">Deploy</h2>
+<p>References</p>
+<ul>
+<li><a href="https://gohugo.io/host-and-deploy/host-on-github-pages/">https://gohugo.io/host-and-deploy/host-on-github-pages/</a></li>
+<li><a href="https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/">https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/</a></li>
+</ul>
+<h3 id="create-a-github-repository">Create a GitHub repository</h3>
+<p>Create a new public repository named <code>username.github.io</code>, where <code>username</code> is your GitHub username.
+But use lowercase letters even if your username has capitals.
+For example, for <a href="https://github.com/mdcruz">mdcruz</a> it is <a href="https://github.com/mdcruz/mdcruz.github.io">mdcruz.github.io</a>.</p>
+<p>And push your local repository to GitHub.</p>
+<p>Note, content from submodules of third people must not be edited. I.e. do not edit <code>themes/hugo-scroll/</code> submodule.</p>
+<h3 id="host-on-github">Host on GitHub</h3>
+<p>Follow steps of <a href="https://gohugo.io/host-and-deploy/host-on-github-pages/">https://gohugo.io/host-and-deploy/host-on-github-pages/</a></p>
+<ul>
+<li>
+<p>Under <code>Settings/Pages/Source</code> change <code>Deploy from a branch</code> to <code>Github Actions</code>.</p>
+</li>
+<li>
+<p><code>$EDITOR hugo.toml</code> and add</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">caches</span>]
+</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">caches</span>.<span style="color:#a6e22e">images</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dir</span> = <span style="color:#e6db74">&#39;:cacheDir/images&#39;</span>
+</span></span></code></pre></div><ul>
+<li>Create a file named <code>hugo.yaml</code> in a directory named <code>.github/workflows</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir -p .github/workflows
+</span></span><span style="display:flex;"><span>touch .github/workflows/hugo.yaml
+</span></span></code></pre></div><ul>
+<li><code>$EDITOR .github/workflows/hugo.yaml</code>  and copy and paste the YAML below into the file you created. Change the branch name and Hugo version as needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Sample workflow for building and deploying a Hugo site to GitHub Pages</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Hugo site to Pages</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Runs on pushes targeting the default branch</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Allows you to run this workflow manually from the Actions tab</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">workflow_dispatch</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">permissions</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">contents</span>: <span style="color:#ae81ff">read</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pages</span>: <span style="color:#ae81ff">write</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">id-token</span>: <span style="color:#ae81ff">write</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">concurrency</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">group</span>: <span style="color:#e6db74">&#34;pages&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cancel-in-progress</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default to bash</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">defaults</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># GitHub-hosted runners automatically enable `set -eo pipefail` for Bash shells.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">shell</span>: <span style="color:#ae81ff">bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Build job</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">build</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">DART_SASS_VERSION</span>: <span style="color:#ae81ff">1.89.2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">HUGO_VERSION</span>: <span style="color:#ae81ff">0.148.0</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">HUGO_ENVIRONMENT</span>: <span style="color:#ae81ff">production</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TZ</span>: <span style="color:#ae81ff">America/Los_Angeles</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Hugo CLI</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          sudo dpkg -i ${{ runner.temp }}/hugo.deb</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Dart Sass</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          wget -O ${{ runner.temp }}/dart-sass.tar.gz https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          tar -xf ${{ runner.temp }}/dart-sass.tar.gz --directory ${{ runner.temp }}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          mv ${{ runner.temp }}/dart-sass/ /usr/local/bin
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          echo &#34;/usr/local/bin/dart-sass&#34; &gt;&gt; $GITHUB_PATH</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">submodules</span>: <span style="color:#ae81ff">recursive</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Setup Pages</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">pages</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/configure-pages@v5</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Node.js dependencies</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#e6db74">&#34;[[ -f package-lock.json || -f npm-shrinkwrap.json ]] &amp;&amp; npm ci || true&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Cache Restore</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">cache-restore</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/cache/restore@v4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ runner.temp }}/hugo_cache</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">hugo-${{ github.run_id }}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">restore-keys</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">hugo-</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Configure Git</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">git config core.quotepath false</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build with Hugo</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          hugo \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --gc \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --minify \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --baseURL &#34;${{ steps.pages.outputs.base_url }}/&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --cacheDir &#34;${{ runner.temp }}/hugo_cache&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Cache Save</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">cache-save</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/cache/save@v4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ${{ runner.temp }}/hugo_cache</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">${{ steps.cache-restore.outputs.cache-primary-key }}</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Upload artifact</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-pages-artifact@v3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">./public</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Deployment job</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">github-pages</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#ae81ff">${{ steps.deployment.outputs.page_url }}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">needs</span>: <span style="color:#ae81ff">build</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy to GitHub Pages</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">deployment</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/deploy-pages@v4</span>
+</span></span></code></pre></div><p>For example check and edit if needed:</p>
+<ul>
+<li>
+<p><code>DART_SASS_VERSION: 1.89.2</code></p>
+</li>
+<li>
+<p><code>HUGO_VERSION: 0.148.0</code></p>
+</li>
+<li>
+<p><code>TZ: America/Los_Angeles</code></p>
+</li>
+<li>
+<p>Commit and push the change to your GitHub repository.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add -A
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Create hugo.yaml&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div><h3 id="wait-for-github-pages-to-be-ready">Wait for Github pages to be ready</h3>
+<p>Go to <code>Actions</code> tab, for <a href="https://github.com/mdcruz/mdcruz.github.io/actions">example</a>, and check the status of the deployment, wait until <code>Build and deploy job</code> is green.</p>
+<p>Now click on the link with same content as last commit message, <code>Create hugo.yaml</code> for example, this will show the link to your live site, like <a href="https://mdcruz.github.io">https://mdcruz.github.io</a> (for this <a href="https://github.com/mdcruz/mdcruz.github.io">repo</a>).</p>
+<h3 id="rebuild-before-pushing">Rebuild before pushing</h3>
+<p>After every change remember to rebuild the site by running the following command: <code>hugo server --disableFastRender</code></p>
+<p>For example, if I modify <code>projects.md</code> then <code>git status --short</code> just shows:</p>
+<pre tabindex="0"><code>M content/en/homepage/projects.md
+</code></pre><p>instead of the neccesary:</p>
+<pre tabindex="0"><code>M content/en/homepage/projects.md
+M public/index.html
+</code></pre><p>Therefore, if I just commit and push it then I will see no changes in the live site, <strong>instead</strong> one must:</p>
+<ol>
+<li>Rebuild the website (<code>public/index.html</code>) with <code>hugo server --disableFastRender</code>,</li>
+<li>Check locally the changes on <a href="http://localhost:1313/">http://localhost:1313/</a>,</li>
+<li>And if the result is satisfactory proceed to stage, commit and push.</li>
+</ol>
+<p>Removing <code>public</code> related files is also a good idea. This way Hugo will re-build just the neccesary files, and the no longer needed files can be commited.
+For example, for my blogs (<code>content/en/blogs</code>) I run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rm -rf public/blogs
+</span></span><span style="display:flex;"><span>hugo server --disableFastRender
+</span></span></code></pre></div><p>Then I check it in the browser.</p>
+<p>Finally I make sure that all needed is rebuilt previous to push:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>tree -L <span style="color:#ae81ff">2</span> public/blogs
+</span></span><span style="display:flex;"><span>hugo list all
+</span></span></code></pre></div><h2 id="set-up-a-custom-domain">Set up a custom domain</h2>
+<h3 id="buy-a-domain">Buy a domain</h3>
+<ul>
+<li>Check if available at <a href="https://lookup.icann.org/whois/">https://lookup.icann.org/whois/</a></li>
+<li>Buy it at <a href="https://www.namecheap.com/domains/">https://www.namecheap.com/domains/</a> for example. Note, you do <strong>not</strong> need <em>Additional Hosting</em> since GitHub Pages offers free static hosting.</li>
+</ul>
+<h3 id="manage-the-dns-records-for-your-domain">Manage the DNS records for your domain</h3>
+<p>Read</p>
+<ul>
+<li><a href="https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain">testingwithmarie.com post</a>.</li>
+<li><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Managing a custom domain for your GitHub Pages site</a></li>
+</ul>
+<p>Remove both the <code>ALIAS</code> and <code>CNAME</code> records you currently have set.</p>
+<h4 id="the-a-records">The A records</h4>
+<p>For the <code>A</code> record, set the following values:</p>
+<pre tabindex="0"><code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+</code></pre><p>For example in Porkbun&rsquo;s DNS management add these four <code>A</code> records (one for each GitHub IP). Like this:</p>
+<pre tabindex="0"><code>Type: A
+Host: @ (or leave empty)
+Answer/Value: 185.199.108.153
+TTL: 600
+</code></pre><h4 id="the-cname-records">The CNAME records</h4>
+<ul>
+<li>The DNS-CNAME-record tells the internet where to find your site.</li>
+<li>The GitHub-CNAME-file tells GitHub which domain(s) are allowed to show your site.</li>
+</ul>
+<p>Next steps varies in each domain provider.</p>
+<ul>
+<li><strong>Flexible Providers</strong> (e.g., Porkbun, Cloudflare):
+<ul>
+<li>Use <strong>synthetic records</strong> (<code>ALIAS</code>, <code>ANAME</code>) that mimic <code>CNAME</code> behavior at the root but technically resolve to <code>A</code> records.</li>
+<li>These bypass DNS standards, making GitHub verification &ldquo;work&rdquo; even though it’s not a true <code>CNAME</code>.</li>
+</ul>
+</li>
+<li><strong>Strict Providers</strong> (e.g., EuroDNS, AWS Route 53):
+<ul>
+<li>Enforce pure RFC compliance.</li>
+<li>Block <code>CNAME</code> at the apex entirely → GitHub can’t verify the domain unless you use <code>A</code> records.</li>
+</ul>
+</li>
+</ul>
+<p>For example, for <a href="https://my.eurodns.com/">my.euroDNS.com</a> just remove every <code>CNAME</code> and that&rsquo;s it. You can jump to the next step.</p>
+<p>For Porkbun&rsquo;s DNS management and alike, add a <code>CNAME</code> with the value <code>&lt;username&gt;.github.io</code>.</p>
+<pre tabindex="0"><code>Type: CNAME
+Host: www
+Answer/Value: juanmarinero.github.io
+TTL: 600
+</code></pre><p>This is because Porkbun-alike domain providers let you set an <code>ALIAS</code> (not true <code>CNAME</code>) for root, this works like <code>A</code> records.
+This is confirmed in the <a href="https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain">testingwithmarie.com post</a>,
+where the screenshot shows <code>CNAME (Aliases)</code> instead of plain <code>CNAME</code>.</p>
+<h3 id="set-your-domain-on-github">Set your domain on Github</h3>
+<p>Read <a href="https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain">https://www.testingwithmarie.com/posts/20241126-create-a-static-blog-with-hugo/#set-up-custom-domain</a></p>
+<h4 id="add-your-domain-to-github-pages-settings">Add your domain to GitHub Pages settings</h4>
+<p>In the Github repo, go to <code>Settings &gt; Pages</code> and add your domain under the <code>Custom domain</code> field.
+For example add <code>juan-marinero.info</code>, or <code>www.juan-marinero.info</code>.</p>
+<p>Wait for up to 24 hours to see the site to your custom domain.
+So, from now on, you can either:</p>
+<ul>
+<li>Visit the <code>github.io</code> Gihtub Page, for example <a href="https://juanmarinero.github.io">https://juanmarinero.github.io</a></li>
+<li>Visit your custom domain, like <a href="https://juan-marinero.info">https://juan-marinero.info</a> or with the <code>www</code> subdomain like <a href="https://www.juan-marinero.info">https://www.juan-marinero.info</a></li>
+</ul>
+<p>All these URLs will:</p>
+<ul>
+<li>serve the site from your repository, the <code>&lt;username&gt;.github.io</code> Github repo, namely <a href="https://github.com/juanMarinero/juanmarinero.github.io">https://github.com/juanMarinero/juanmarinero.github.io</a>.</li>
+<li>redirect and serve at the non-<code>www</code> domain, like <a href="https://juan-marinero.info">https://juan-marinero.info</a>. To serve at the <code>www</code> subdomain, like <a href="https://www.juan-marinero.info">https://www.juan-marinero.info</a>, read next section.</li>
+</ul>
+<h4 id="add-your-domain-to-a-cname-file">Add your domain to a CNAME file</h4>
+<p>To serve your site at the <code>wwww</code> subdomain (e.g. <code>http(s)://www.juan-marinero.info</code>) and redirect the root domain (<code>juan-marinero.info</code>) to this <code>www</code> address:</p>
+<ul>
+<li>Make sure your <strong>DNS</strong> is <strong>configured</strong> properly, as described earlier.</li>
+<li>Add a <strong><code>CNAME</code> file</strong> to your <code>&lt;username&gt;.github.io</code> repo,
+as <a href="https://www.testingwithmarie.com/">Marie&rsquo;s page</a> did <a href="https://github.com/mdcruz/mdcruz.github.io/blob/main/CNAME">here</a>.
+You can do this with the following commands:</li>
+</ul>
+<pre tabindex="0"><code>cd &lt;repo-path&gt;
+echo &#34;www.juan-marinero.info&#34; &gt; CNAME # edit !!
+git add CNAME
+git commit -m &#34;add CNAME with www.juan-marinero.info&#34;
+git push
+</code></pre><h4 id="enforce-https">Enforce HTTPS</h4>
+
+
+<div class="html-content">
+  Previous links follow the
+  <code>HTTP<strong>S</strong></code>
+  protocol because I 
+  <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https#enforcing-https-for-your-github-pages-site">
+enforced HTTPS for my GitHub Pages site
+  </a>.
+</div>
+
+
+<p>This is not mandatory, but recommended.</p>
+<h2 id="bonus-the-more-you-know">Bonus. The More You Know</h2>
+<h3 id="apex-domains-and-the-www-subdomain">Apex Domains and the www subdomain</h3>
+<p><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages#using-an-apex-domain-for-your-github-pages-site">Github Pages docs</a> states</p>
+<ul>
+<li>An <strong>apex</strong> domain is a custom domain that does not contain a subdomain, such as example.com.</li>
+<li>Apex domains are also known as base, bare, naked, root apex, or zone apex domains.</li>
+<li>If you are using an apex domain as your custom domain, we recommend also setting up a <code>www</code> subdomain.</li>
+</ul>
+<p>Notice we followed this advice in previous sections, where the <code>CNAME</code> record has <code>www</code> as <em>host</em>.</p>
+<h3 id="understanding-cname-restrictions-on-apex-domains">Understanding CNAME Restrictions on Apex Domains</h3>
+<ol>
+<li><strong>DNS Standards (RFC 1034)</strong>:
+<ul>
+<li>The <strong>apex/root domain</strong> (e.g., <code>example.com</code>) <strong>cannot</strong> have a <code>CNAME</code> record if other records (like <code>MX</code>, <code>TXT</code>, <code>NS</code>) exist for the same domain.</li>
+<li>This is because <code>CNAME</code> conflicts with other record types. GitHub Pages requires a <code>CNAME</code> for verification, but apex domains need <code>A</code>/<code>AAAA</code> records instead.</li>
+</ul>
+</li>
+<li><strong>How GitHub Pages Checks Domains</strong>:
+<ul>
+<li>When you add <code>example.com</code> in GitHub Pages settings, GitHub:
+<ul>
+<li>Looks for a <code>CNAME</code> file in your repo (for subdomains like <code>www.example.com</code>).</li>
+<li>For apex domains, it checks for <code>A</code> records pointing to GitHub’s IPs.</li>
+</ul>
+</li>
+<li>If GitHub finds a <code>CNAME</code> at the apex (which violates DNS rules), verification <strong>fails</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="github-pages-sites-can-be-stored-in-any-repository">GitHub Pages sites can be stored in any repository</h3>
+<p>Read <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#types-of-github-pages-sites">Types of GitHub Pages sites</a>.</p>
+<p>In this guide we worked with the <code>&lt;username&gt;.github.io</code> repository, which has the apex domain <code>&lt;username&gt;.github.io</code> (accesible via <code>http(s)://&lt;username&gt;.github.io</code>).</p>
+<p>But GitHub Pages also support storing sites in other repositories, like <code>&lt;project-name&gt;.github.io/&lt;repo-name&gt;</code>, which have the apex domain <code>&lt;project-name&gt;.github.io/&lt;repo-name&gt;</code> (displayed via <code>http(s)://&lt;project-name&gt;.github.io/&lt;repo-name&gt;</code>). For these you must have a <strong>project</strong> account. Read next section.</p>
+<h3 id="hugo-is-not-the-only-solution">Hugo is not the only solution</h3>
+<p>To deploy our local website on GitHub Pages is very recommended to use a static site generator like <a href="https://gohugo.io/">Hugo</a>.</p>
+<p>With Hugo we followed its <a href="https://gohugo.io/host-and-deploy/host-on-github-pages/">Host on GitHub Pages docs</a>,
+which, in summary, apply <a href="https://github.com/features/actions">Github actions</a>
+adding the config file <a href="https://gohugo.io/host-and-deploy/host-on-github-pages/#step-7">.github/workflows/hugo.yaml</a>.
+This workflow install Hugo&rsquo;s dependencies, Hugo itself, node.js, configure git,&hellip; and then builds the site using Hugo.
+For example, the build step depends on these few lines</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build with Hugo</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          hugo \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --gc \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --minify \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --baseURL &#34;${{ steps.pages.outputs.base_url }}/&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --cacheDir &#34;${{ runner.temp }}/hugo_cache&#34;</span>
+</span></span></code></pre></div><p><a href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll">Jekyll</a>
+is other static site generator solution with built-in support for GitHub Pages, i.e. an alternative to <a href="https://gohugo.io/">Hugo</a>.</p>
+<p>Next I exemplify how to create a Github Pages site <strong>without</strong> any of those static site generators.
+It&rsquo;s exaplained for a <em>user or organization site</em>, but it&rsquo;s analogous for a <em>project site</em> case.</p>
+<h4 id="publishing-from-a-branch">Publishing from a branch</h4>
+<p>Create a site for your <code>&lt;username&gt;.github.io</code> repository, screenshots in <a href="https://pages.github.com/">https://pages.github.com/</a> (click on <em>User or organization site</em>).</p>
+<ol>
+<li>Create a new Github repository called <code>&lt;username&gt;.github.io</code> (unless you already have one, if you do, you can skip these steps or create a new repo with other name)</li>
+<li>Push an <code>index.html</code> file to it</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd &lt;repo-path&gt;
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&lt;h1&gt;Hello!&lt;/h1&gt;&#39;</span> &gt; index.html
+</span></span><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Initial commit&#34;</span>
+</span></span><span style="display:flex;"><span>git branch -M main
+</span></span><span style="display:flex;"><span>git remote add origin https://github.com/&lt;username&gt;.github.io.git
+</span></span><span style="display:flex;"><span>git push -u origin main
+</span></span></code></pre></div><ol start="3">
+<li>In a browser go to <code>http://&lt;user-name&gt;.github.io</code>.</li>
+</ol>
+<p>Note. The <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site">Github Pages docs</a>
+is not limited to <code>index.html</code>:</p>
+<blockquote>
+<p>Create the entry file for your site. GitHub Pages will look for an <code>index.html</code>, <code>index.md</code>, or <code>README.md</code> file as the entry file for your site.</p></blockquote>
+<p>Now let&rsquo;s create another repo, for example <code>test-publishing-from-a-branch</code>, with that same <code>index.html</code>. Then follow steps of
+<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch">Publishing from a branch</a>
+(TL;DR <em>Settings/Pages</em>, under <em>Source</em> select <em>Deploy from a branch</em>, select the <code>main</code> branch, and click <em>Save</em>)</p>
+<p>Also check the step-by-step screenshots in <a href="https://pages.github.com/">https://pages.github.com/</a> (click on <em>Project site</em> and <em>Start from scratch</em>).
+Though initial steps are meant for a <em>project site</em>.</p>
+<p>For the repo <a href="https://github.com/juanMarinero/test-publishing-from-a-branch">juanMarinero/test-publishing-from-a-branch</a>
+that configuration triggers next workflow:
+<a href="https://github.com/juanMarinero/test-publishing-from-a-branch/actions/runs/16418527057">pages build and deployment #1</a></p>
+<p>Thus, I can see that <a href="https://github.com/juanMarinero/test-publishing-from-a-branch/blob/main/index.html">index.html</a> is the entry file for my site.
+Any of next links would work:</p>
+<ul>
+<li><a href="https://juanmarinero.github.io/test-publishing-from-a-branch/">https://juanmarinero.github.io/test-publishing-from-a-branch/</a></li>
+<li><a href="https://juan-marinero.info/test-publishing-from-a-branch/">https://juan-marinero.info/test-publishing-from-a-branch/</a></li>
+<li><a href="https://www.juan-marinero.info/test-publishing-from-a-branch/">https://www.juan-marinero.info/test-publishing-from-a-branch/</a></li>
+</ul>
+<p>Once the <code>index.html</code> file is edited the site is auto-updated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd &lt;repo-path&gt;
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&lt;h2&gt;Welcome!&lt;/h2&gt;&#39;</span> &gt;&gt; index.html
+</span></span><span style="display:flex;"><span>git add index.html
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Edit index.html&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div><p>Check the previous URLs again and the new workflow execution <a href="https://github.com/juanMarinero/test-publishing-from-a-branch/actions/runs/16418750101">pages build and deployment #2</a></p>
+<h4 id="publishing-with-a-custom-github-actions-workflow">Publishing with a custom GitHub Actions workflow</h4>
+<p>Alternative to
+<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch">Publishing from a branch</a>
+is
+<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow">Publishing with a custom GitHub Actions workflow</a>.
+This way one sets <em>GitHub Actions</em>, and then, quoting in cursive the docs:</p>
+<ul>
+<li><em>GitHub will suggest several workflow templates. If you already have a workflow to publish your site, you can skip this step.</em> Actually this is how we already did it before (<a href="/blogs/create_hugo_website/#host-on-github">here</a>) in our Hugo example, via the workflow template <code>.github/workflows/hugo.yaml</code>.</li>
+<li><em>Otherwise, choose one of the options to create a GitHub Actions workflow.</em> This is the challenge! To create a custom workflow for your site&rsquo;s needs.</li>
+</ul>
 
 
 <div class="html-content">
   <br>
   <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
   <br>
 </div>
 
