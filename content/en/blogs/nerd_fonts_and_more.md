@@ -206,6 +206,27 @@ And finally apply it in a *mardown* script of your project, e.g. `content/en/blo
 </div>
 {{< /rawhtml >}}
 
+Furthermore,
+- Visit [Google Web Fonts Helper](https://gwfh.mranftl.com/fonts/) to preview Google Web Fonts
+- ...and even to download the fonts you need. This approach is explained later in section [Iosevka local installed](#iosevka-local-installed)
+
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <img
+    src="/images/blogs/nerd_fonts_and_more/google_web_fonts_helper__great_vibes.png"
+    style="width:90%;"
+    alt="color_picker_and_pastel_with_notes.png"
+    >
+</div>
+{{< /rawhtml >}}
+
+Rememeber to
+- Pick `Legacy Support`
+- Set under `Customize folder prefix` the dir `../webfonts/`
+
+
 ### Oswald
 
 Actually there was no need to install any font if a pre-installed was enough, check [static/webfonts](https://github.com/zjedi/hugo-scroll/tree/master/static/webfonts).
@@ -282,7 +303,7 @@ If you don't trust me, I like your scepticism btw., then inspect it with your fa
 
 ### Iosevka local installed
 
-One must install this too font. Now we will **install** the font **local**ly, instead of providing a link as done with *Great Vibes*. Steps:
+Now we will **install** the font **local**ly, instead of providing a link as done with [Great Vibes](#great-vibes). Steps:
 1. Go to [Iosevka releases](https://github.com/be5invis/Iosevka/releases/latest) and download for example [PkgWebFont-Iosevka-33.2.7.zip](https://github.com/be5invis/Iosevka/releases/download/v33.2.7/PkgWebFont-Iosevka-33.2.7.zip)
 2. Unzip the `.zip` file
 3. Pick the desired `.ttf` and `.woff2` files, e.g. `Iosevka-BoldItalic.ttf/.woff2`
