@@ -206,6 +206,29 @@ And finally apply it in a *mardown* script of your project, e.g. `content/en/blo
 </div>
 {{< /rawhtml >}}
 
+Where did I get that `googleapis` link from? I give credit to this [guide](https://bootstrap.hugoblox.com/getting-started/customization/#custom-theme). Summary adding screenshots:
+- Visit [Google Fonts](https://fonts.google.com/), select a font
+- Click on `Get Font` (upper right)
+- Click on `< > Get embed code`
+- Copy the `href` URL of the third `<link>`
+
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <table class="data-table">
+    <tr>
+      <td class="data-cell image-cell">
+        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts__get_font.png" alt="google_web_fonts__get_font" class="table-image">
+      </td>
+      <td class="data-cell image-cell">
+        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts_get_embed_code.png" alt="google_web_fonts_get_embed_code" class="table-image">
+      </td>
+    </tr>
+  </table>
+</div>
+{{< /rawhtml >}}
+
 Furthermore,
 - Visit [Google Web Fonts Helper](https://gwfh.mranftl.com/fonts/) to preview Google Web Fonts
 - ...and even to download the fonts you need. This approach is explained later in section [Iosevka local installed](#iosevka-local-installed)
