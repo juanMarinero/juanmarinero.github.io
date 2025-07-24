@@ -143,7 +143,16 @@ fc-cache -fv  # Refresh font cache
 ## Hugo-scroll
 
 First of all take a look at my guide about how to deploy your own *Hugo Scroll* site [here](/blogs/create_hugo_website/).
-The *CSS* section is the one you need read, [this](https://github.com/juanMarinero/juanmarinero.github.io#css).
+The *CSS* section is the one you need read.
+
+The *Hugo Scroll* theme have a modest documentation:
+- Its [README](https://github.com/zjedi/hugo-scroll/blob/master/README.md)
+- Its [issues](https://github.com/zjedi/hugo-scroll/issues)
+- And of course the general [Hugo docs](https://gohugo.io/documentation/), since not everything is theme-specific
+
+Concerning fonts, basically:
+- [How to customize CSS](https://github.com/zjedi/hugo-scroll#customizing-css)
+- And this [PR](https://github.com/zjedi/hugo-scroll/pull/48) about how to local install fonts, later explained in the [Iosevka](#iosevka-local-installed) section
 
 Let's first apply the font to a HTML-class, then multiple times inline, and finally to a HTML-tag, like `<h1>`.
 Though this is not about CSS code, but about different approachs to add fonts to your Hugo website.
