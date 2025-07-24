@@ -397,6 +397,18 @@ h1 {
 Notice the fall-back to `Open Sans` font if `Great Vibes` is not available, and to `san-serif` if `Open Sans` is not available.
 
 
+## Beyond Hugo Scroll
+
+For each Hugo theme there is a way, for example:
+
+- [Hugo Book](https://discourse.gohugo.io/t/what-is-the-preferred-way-to-change-the-default-font-in-the-hugo-book-theme/36130)
+- [Hugo Wowchemy](https://stackoverflow.com/questions/74574784)
+- [Hugo Papermod](https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets)
+- [Hugo Academic](https://www.chrislockard.net/posts/using-local-fonts-hugo-academic-theme/)
+- [Hugo Blox](https://bootstrap.hugoblox.com/getting-started/customization/#fonts) and the [new version](https://docs.hugoblox.com/getting-started/customize/#fonts)
+
+Or even without a pre-made theme, check [this](https://robinvanderknaap.dev/blog/building-robinvanderknaap-dev/#17-add-tailwind-css:~:text=add%20a%20font%20for%20headers).
+
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}

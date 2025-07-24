@@ -79,7 +79,7 @@ Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add t
   <meta itemprop="description" content="Next fonts look great. Follow this guide to install them globally and even in your Hugo website.
 Global Nerd Fonts Install steps:
 Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add the code below to your ~/.bashrc Preview fonts here Install the selected, e.g. nerd_fonts_install &#34;Iosevka&#34; for the Iosevka font Use the picked font in programs like LibreOffice! nerd_fonts_install() { # Install Nerd Fonts from release archives # Example usage: nerd_fonts_install &#34;Iosevka&#34; # Default font: JetBrainsMono # Check if any argument was supplied or use default font local font_to_install=&#34;${1:-JetBrainsMono}&#34; # Download files/dirs and fonts directory local DOWNLOAD_DIR=$HOME/Downloads local FONT_FILE=&#34;$DOWNLOAD_DIR/$font_to_install.tar.xz&#34; local TEMP_EXTRACT_DIR=&#34;$DOWNLOAD_DIR/${font_to_install}_nerd_fonts_temp&#34; local FONT_DIR=$HOME/.local/share/fonts # Check if the font files already exist in the font directory if [ -d &#34;$FONT_DIR&#34; ] &amp;&amp; [ -n &#34;$(find &#34;$FONT_DIR&#34; -name &#34;*$font_to_install*&#34; -print -quit)&#34; ]; then echo &#34;$font_to_install fonts are already installed.&#34; return 0 fi # Download if needed if [ ! -f &#34;$FONT_FILE&#34; ]; then echo &#34;Downloading $font_to_install fonts...&#34; if ! curl -L &#34;https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_to_install.tar.xz&#34; -o &#34;$FONT_FILE&#34;; then echo &#34;Error: Failed to download font&#34; &gt;&amp;2 return 1 fi else echo &#34;$FONT_FILE already exists.&#34; fi # Create and extract to temp directory mkdir -p &#34;$TEMP_EXTRACT_DIR&#34; echo &#34;Extracting fonts to temporary directory...&#34; if ! tar -xvf &#34;$FONT_FILE&#34; -C &#34;$TEMP_EXTRACT_DIR&#34;; then echo &#34;Error: Failed to extract archive&#34; &gt;&amp;2 rm -rf &#34;$TEMP_EXTRACT_DIR&#34; return 1 fi # Install mkdir -p &#34;$FONT_DIR&#34; find &#34;$TEMP_EXTRACT_DIR&#34; -type f \ \( -iname &#34;*$font_to_install*.ttf&#34; -o -iname &#34;*$font_to_install*.otf&#34; \) \ -exec mv -n {} &#34;$FONT_DIR/&#34; \; # Cleanup rm -f &#34;$FONT_FILE&#34; rm -rf &#34;$TEMP_EXTRACT_DIR&#34; # Update the font cache echo &#34;Updating font cache...&#34; fc-cache -f -v # Verify installation echo &#34;Verifying installation...&#34; fc-list | grep &#34;$font_to_install&#34; echo -e &#34;\nSuccessfully installed $font_to_install Nerd Font&#34; } The function structure is:">
-  <meta itemprop="wordCount" content="1186">
+  <meta itemprop="wordCount" content="1221">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -529,6 +529,16 @@ E.g.</p>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">style</span>&gt;
 </span></span></code></pre></div><p>Notice the fall-back to <code>Open Sans</code> font if <code>Great Vibes</code> is not available, and to <code>san-serif</code> if <code>Open Sans</code> is not available.</p>
+<h2 id="beyond-hugo-scroll">Beyond Hugo Scroll</h2>
+<p>For each Hugo theme there is a way, for example:</p>
+<ul>
+<li><a href="https://discourse.gohugo.io/t/what-is-the-preferred-way-to-change-the-default-font-in-the-hugo-book-theme/36130">Hugo Book</a></li>
+<li><a href="https://stackoverflow.com/questions/74574784">Hugo Wowchemy</a></li>
+<li><a href="https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets">Hugo Papermod</a></li>
+<li><a href="https://www.chrislockard.net/posts/using-local-fonts-hugo-academic-theme/">Hugo Academic</a></li>
+<li><a href="https://bootstrap.hugoblox.com/getting-started/customization/#fonts">Hugo Blox</a> and the <a href="https://docs.hugoblox.com/getting-started/customize/#fonts">new version</a></li>
+</ul>
+<p>Or even without a pre-made theme, check <a href="https://robinvanderknaap.dev/blog/building-robinvanderknaap-dev/#17-add-tailwind-css:~:text=add%20a%20font%20for%20headers">this</a>.</p>
 
 
 <div class="html-content">
