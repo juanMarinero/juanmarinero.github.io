@@ -17,6 +17,22 @@ Next **fonts** look **great**. Follow this guide to install them **global**ly an
 {{< /rawhtml >}}
 
 
+Table of Contents
+
+* [Global Nerd Fonts](#global-nerd-fonts)
+  * [More fonts](#more-fonts)
+* [Hugo-scroll](#hugo-scroll)
+  * [Great Vibes](#great-vibes)
+  * [Oswald](#oswald)
+  * [Awesome Font](#awesome-font)
+  * [Global installed fail](#global-installed-fail)
+  * [Iosevka local installed](#iosevka-local-installed)
+  * [Summary](#summary)
+  * [HTML-tag `<h1>`](#html-tag-h1)
+* [Beyond Hugo Scroll](#beyond-hugo-scroll)
+
+
+
 ## Global Nerd Fonts
 
 **Install** steps:
