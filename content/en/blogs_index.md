@@ -25,5 +25,19 @@ Coding, travel, hobbies, books and more...
   <br>
   <a href="/blogs/create_hugo_website/" class="no-underline-except-hover">
   How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>
+  <br>
+  <br>
+</div>
+{{< /rawhtml >}}
+
+### 📚 Books
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <br>
+  <a href="/blogs/tolkien/" class="no-underline-except-hover">
+  <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 3.1rem;">Tolkien</span>:
+  books, podcasts and much more!
 </div>
 {{< /rawhtml >}}
