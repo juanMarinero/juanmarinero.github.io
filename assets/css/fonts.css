@@ -336,3 +336,13 @@
   font-weight: bold;
   font-style: italic;
 }
+
+/* MiddleEarth JoannaVu - latin */
+/* https://www.makerstype.com/fonts/middle-earth/ private use */
+@font-face {
+  font-family: 'MiddleEarth JoannaVu';
+  src: local(''),
+       url('../webfonts/Middleearth-ao6m.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-weight: normal;
+  font-style: normal;
+}
