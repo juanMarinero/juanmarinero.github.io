@@ -275,9 +275,17 @@ shall *restore light to forgotten glories* in years to come.
 
 As mithril threads through mountain stone, Tolkien's world gleams in unexpected places, these are some:
 
-- **Artwork** and Illustrations. Including original Tolkien artwork, fan art, and official illustrations.
-- **Maps** and Geography. Exploring the detailed maps of Middle Earth and discussions about the geography, regions, and journeys in Tolkien's lore.
-- **Languages** and Linguistics. Delving into Professor Tolkien's constructed languages like Quenya and Sindarin, with resources for even learning them.
+### Artwork
+
+Including original Tolkien artwork, fan art, and official illustrations.
+
+### Maps & Geography
+
+Exploring the detailed maps of Middle Earth and discussions about the geography, regions, and journeys in Tolkien's lore.
+
+### Languages & Linguistics
+
+Delving into Professor Tolkien's constructed languages like Quenya and Sindarin, with resources for even learning them.
 
 
 ## Bonus. Tolkien fonts
