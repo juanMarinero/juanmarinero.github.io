@@ -369,8 +369,8 @@ And a little off topic. [Joanna Vu](https://ioannaladopoulou.design/) also creat
 
 ## Hidden extra
 
-Did you read this far my fellow friend? You have earned a *precious* treasure!
-Have fun with the last meme!
+Did you read this far my fellow friend? You have earned a *precious* treasure,
+the last meme!
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
@@ -379,13 +379,17 @@ Have fun with the last meme!
     <img
     src="https://preview.redd.it/hush-now-v0-iv5oibgfb7re1.png?width=320&crop=smart&auto=webp&s=98dc5c7d0e8f58ba7529f7b44257ea12104df989"
     alt="group chat meme lord of the rings saruman. "
-     style="float:center; width:50%;"
+    style="float:center; width:70%; border-radius: 15%;"
     >
   </a>
+  <br>
 </div>
 {{< /rawhtml >}}
 
-Finally, before we say farewell, let us warmly thank Christopher Tolkien and Professor Tolkien for creating this magical world.
+
+## Farewell
+
+Finally, let us warmly thank Christopher Tolkien and Professor Tolkien for creating this magical world.
 
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
