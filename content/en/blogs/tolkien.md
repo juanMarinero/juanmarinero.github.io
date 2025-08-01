@@ -283,6 +283,17 @@ Including original Tolkien artwork, fan art, and official illustrations.
 
 Exploring the detailed maps of Middle Earth and discussions about the geography, regions, and journeys in Tolkien's lore.
 
+Journey with the Fellowship and Thorin's Company across
+[Middle-earth **interactive map**](http://lotrproject.com/map/) (or explore [this alternative](https://middleearthmap.app/))
+and [Beleriand](http://lotrproject.com/map/beleriand/).
+[E.g.](https://www.reddit.com/r/lotr/comments/1870r9/map_of_characters_paths_through_the_books_my/)
+
+Are you as satisfied as a Hobbit with a single bite of lembas?
+Then... Second breakfast is ready!
+[Wikipedia](https://en.wikipedia.org/wiki/Tolkien%27s_maps),
+[lotr.fandom](https://lotr.fandom.com/wiki/Maps),
+[theonering.com](https://www.theonering.com/maps-of-middle-earth/),...
+
 ### Languages & Linguistics
 
 Delving into Professor Tolkien's constructed languages like Quenya and Sindarin, with resources for even learning them.
