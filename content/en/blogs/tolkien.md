@@ -279,6 +279,20 @@ As mithril threads through mountain stone, Tolkien's world gleams in unexpected 
 
 Including original Tolkien artwork, fan art, and official illustrations.
 
+The most famous artist associated with [Middle Earth illustrations](https://en.wikipedia.org/wiki/Illustrating_Middle-earth)
+is widely regarded as [Alan Lee](https://en.wikipedia.org/wiki/Alan_Lee_(illustrator)).
+My first *lotr* book had his [this](https://tolkiengateway.net/wiki/File:Alan_Lee_-_The_Black_Gate_is_Closed.jpg)
+as cover. More [here](https://tolkiengateway.net/wiki/Category:Images_by_Alan_Lee).
+
+Ted Nasmith [illustrations](https://www.tednasmith.com/site-map/j-r-r-tolkien/) are also well-known.
+The [interviews](https://www.tednasmith.com/videos/) are also worth listening to.
+
+Not to mention Tolkien's own artwork:
+[Wikipedia](https://en.wikipedia.org/wiki/Tolkien%27s_artwork),
+[tolkienestate.com](https://www.tolkienestate.com/painting/#illustration)
+and [tolkiengateway.net](https://tolkiengateway.net/wiki/Category:Images_by_J.R.R._Tolkien).
+
+
 ### Maps & Geography
 
 Exploring the detailed maps of Middle Earth and discussions about the geography, regions, and journeys in Tolkien's lore.
