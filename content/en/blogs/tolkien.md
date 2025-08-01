@@ -31,19 +31,6 @@ But for those who appreciate all these things... beware! Once Professor Tolkien 
 
 In this **quick post** I'm sure you will discover a book, podcast, film or even a video game that will make you fall deeper in **love** with **Tolkien's world**. 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
-{{< rawhtml >}}
-<div class="html-content">
-  <a href="https://www.tumblr.com/omghotmemes/643881678908129280/lady-galadriels-gifts">
-    <img
-      src="https://64.media.tumblr.com/9fa0942567bb06930d8f76bf654177ff/67a9bbac35837998-50/s640x960/10b327b5b73a1df2d553979555d8229c67704551.jpg"
-      alt="lotr meme - Galadriel does not gift stick to Sam"
-      style="float:right; width:35%; border-radius: 15%;"
-      >
-  </a>
-</div>
-{{< /rawhtml >}}
-
 Contents:
 * [Books](#books)
 * [Audio books](#audio-books)
@@ -56,7 +43,21 @@ Contents:
 * [Miscellaneous](#miscellaneous)
 * [Bonus. Tolkien fonts](#bonus-tolkien-fonts)
 
-Even memes! I will show my [poor] humor taste hehe.
+I'll even share some memes - though they may be more Orc-work than Elven craft!
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <a href="https://www.tumblr.com/omghotmemes/643881678908129280/lady-galadriels-gifts">
+    <img
+      src="https://64.media.tumblr.com/9fa0942567bb06930d8f76bf654177ff/67a9bbac35837998-50/s640x960/10b327b5b73a1df2d553979555d8229c67704551.jpg"
+      alt="lotr meme - Galadriel does not gift stick to Sam"
+      style="width:50%; border-radius: 15%;"
+      >
+  </a>
+</div>
+{{< /rawhtml >}}
+
 
 ## Books
 
