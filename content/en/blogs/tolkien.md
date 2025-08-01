@@ -312,6 +312,8 @@ Then... Second breakfast is ready!
 
 Delving into Professor Tolkien's constructed languages like Quenya and Sindarin, with resources for even learning them.
 
+Let us not overlook Tolkien's elegant [calligraphy](https://www.tolkienestate.com/painting/calligraphy/).
+
 
 ## Bonus. Tolkien fonts
 
