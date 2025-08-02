@@ -103,18 +103,38 @@ They may not be commercial hits, but they are worth reading.
 
 ## Audio books
 
+### English
+
 [A **Guide** to Tolkien Audiobooks](https://www.youtube.com/watch?v=4uq6vlrfZPY) by 
 [Nerd of the Rings](https://www.youtube.com/c/NerdoftheRings).
 That's it. Those 12 minutes are gold!
 This recommends *enhanced* audio books too, like:
-- The [Hobbit](https://archive.org/details/roast-moose) by [Bluefax](https://www.youtube.com/@Bluefax), which is free! Also enjoy its [making-of](https://www.youtube.com/watch?v=30yW7a9g0vs&list=PLHuqOGq8HdsKf6OcP-cCD6_mOODvMf0aT),
+- The [Hobbit](https://archive.org/details/roast-moose) by [Bluefax](https://www.youtube.com/@Bluefax), which is free! Also enjoy its [making-of](https://www.youtube.com/watch?v=30yW7a9g0vs&list=PLHuqOGq8HdsKf6OcP-cCD6_mOODvMf0aT)
 - The [lotr](https://archive.org/details/the-fellowship-of-the-ring_soundscape-by-phil-dragash) by [Phil Dragash](https://www.phildragash.com/index.html)
 
-*lotr* in **German**:
-- German readers have no legal free [Margaret Carroux](https://tolkiengateway.net/wiki/Margaret_Carroux) *Hörbücher*, but if you have a deaf friend, then they can order a free version. [Info](https://www.reddit.com/r/buecher/comments/1gyvemr/comment/lysam6r) and [provider](https://wbh-online.com/hoerbuecher/suchergebnisse/?suchbegriff=Herr+der+Ringe+tolkien).
-- Man can listen the commercial [Gert Heidenreich](https://de.wikipedia.org/wiki/Gert_Heidenreich) ones. Search it. [Hörprobe](https://www.youtube.com/watch?v=HQsMPXnBt7s).
-- [Haskildor](https://www.youtube.com/@Haskildor) free version [here](https://www.youtube.com/watch?v=2hmv1y5Cr0I&list=PLQKCnps2Ck5jGtVm6wAhMh358j0aiAL1h)!
+### German
 
+The Hobbit
+- By [Haskildor](https://m.youtube.com/playlist?list=PLQKCnps2Ck5gajKmVvx9I8yCmPYjiqnsF)
+- By [NatureCheck](https://m.youtube.com/watch?v=yxDXrf1pfLU&list=PLfVz6qIR5LagD7g-vVz-_x2szJkfx4v5I)
+- By [Westdeutschen Rundfunks (WDR)](https://www.ardapedia.org/wiki/Der_Hobbit_(H%C3%B6rspiel)): Teil [1](https://m.youtube.com/watch?v=waOChlhT2Ek), [2](https://m.youtube.com/watch?v=4YgcTMebO2A), [3](https://m.youtube.com/watch?v=0MqX_Nm0OEk) und [4](https://m.youtube.com/watch?v=E3rnI-KGpnc&pp=0gcJCccJAYcqIYzv)
+- By [Barbara Netscher](https://www.youtube.com/watch?v=bjT5s54Cywg&list=PLEt183gPetNA6wnM1no4hP9_QM5_5yGM8&index=12). This is the most *gemütlich* version! Caution: playlist is unsorted.
+
+Der Herr der Ringe
+- German readers have no legal free [Margaret Carroux](https://tolkiengateway.net/wiki/Margaret_Carroux) *Hörbücher*, but if you have a deaf friend, then they can order a free version. [Info](https://www.reddit.com/r/buecher/comments/1gyvemr/comment/lysam6r) and [provider](https://wbh-online.com/hoerbuecher/suchergebnisse/?suchbegriff=Herr+der+Ringe+tolkien).
+- *Die Gefährten* by Achim Höppner, [sample](https://www.youtube.com/watch?v=9af5Ixofvlo).
+Rest of books by Gert Heidenreich, [Hörprobe](https://www.youtube.com/watch?v=HQsMPXnBt7s)
+- [Haskildor](https://www.youtube.com/@Haskildor) free version [here](https://www.youtube.com/watch?v=2hmv1y5Cr0I&list=PLQKCnps2Ck5jGtVm6wAhMh358j0aiAL1h)!
+- By [Storyline](https://www.youtube.com/watch?v=vwGRGq-6XdM&list=PLpUlCfppce9dEPfwh1DLoO1tl2vugVW4R&index=2)
+
+The Silmarillion
+- By Achim Höppner there is a [sample](https://www.youtube.com/watch?v=11RqCIHYuog), though years ago it could be found via [hoerspiele.cc](https://web.archive.org/web/20180701000000*/hoerspiele.cc)
+- By [Haskildor](https://m.youtube.com/playlist?list=PLQKCnps2Ck5jXI3sktn2eG2V2mqhJ0tnh) under construction
+- By [Deutsche Tolkien Gesellschaft e.V.](https://www.youtube.com/watch?v=fyX7iYVCw34&list=PLN8efo1rte2IBLQZXFiNDd9n6CO8zhqzQ&index=42), actually a podcast.
+They even share [tips](https://www.tolkiengesellschaft.de/44866/5-tipps-fuer-euch-wenn-ihr-das-silmarillion-lesen-moechtet/) for reading!
+
+
+### Create your own
 
 If you want to **contribute**, in any language, please share your reading recordings in [LibriVox](https://librivox.org).
 This platform holds many public domain audio books (and more).
@@ -205,6 +225,10 @@ Meet fellow fans, further disscuss Tolkien's writting, celebre events and much m
 > The Tolkien Society publishes a bulletin and a journal at regular intervals, and organises various events throughout the year. 
 
 Find your local branch [here](https://www.tolkiensociety.org/society/smials/) and join!
+
+**German** speakers visit [Deutschen Tolkien Gesellschaft e.V.](https://www.tolkiengesellschaft.de/) bitteschön.
+Notice this is not an official *Smial* - these organizations are independent.
+
 
 ## Memes
 
