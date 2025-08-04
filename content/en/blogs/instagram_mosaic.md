@@ -23,7 +23,7 @@ But we are lazy, we achieve this **on the terminal**.
 2. Rename it as `img_original.jpg`
 3. Open the terminal. Change to the image directory (e.g. `cd ~/Downloads`)
 4. Copy the [CODE](#code) at the end of this post
-5. Paste it on a script via `$EDITOR create_ig_mosaic.sh`, or in your `~/.zshrc` file
+5. Paste it on a script via `$EDITOR create_ig_mosaic.sh` (`CWD` is still `~/Downloads`), or in your `~/.zshrc` file
 6. Make it executable `chmod +x create_ig_mosaic.sh`
 7. Run 
 
@@ -48,9 +48,11 @@ And you can also specify more params, read `Example usage` in the [CODE](#code).
 3. Open a terminal, move where `create_ig_mosaic.sh` is located and run 
 
 ```sh
-source ./create_ig_mosaic.sh && create_ig_mosaic pexels-blue-bird-7210754.jpg
+chmod +x create_ig_mosaic.sh \
+ && source ./create_ig_mosaic.sh \
+ && create_ig_mosaic  "$HOME/Downloads/pexels-blue-bird-7210754.jpg"
 ```
-...which outputs:
+...which echoes:
 ```
 Image width:  5040
 Image height: 3360
@@ -77,7 +79,7 @@ So, if we are not satisfied,
 we shall repeat previous steps.
 
 In this example the selected image was too tall, or not wide enough.
-Anyway, it had a low aspect_ratio (`width:height = 5040:3360 = 1.5`).
+Anyway, it had a low aspect ratio (`width:height = 5040:3360 = 1.5`).
 The local preview and [Instagram](https://www.instagram.com/juanmarinerotarazona/) results are:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
@@ -111,6 +113,8 @@ Image height: 2472
 Aspect ratio: 2.038
 ```
 
+Save it (just overwrite the file). And then run the same command: `create_ig_mosaic "$HOME/Downloads/pexels-blue-bird-7210754.jpg"`
+
 Next is the result, check it in my [Instagram](https://www.instagram.com/juanmarinerotarazona/):
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
@@ -135,7 +139,7 @@ So lets extend and blur horizontally.
 
 The desired pixels are:
 - Vertically: unchanged
-- Horizontally: we apply basic logic:
+- Horizontally, apply basic maths:
 
 $$
 \frac{width_{desired}}{height_{desired}}
@@ -162,7 +166,7 @@ Which will show `5548 2472`. Almost the desired resize.
 6. Edit the params. The percentage to blur. Pick a background color like something the lateral-borders, a green-ish color in this case (#909581).
 I used the color picker enhanced explained in my [other post](/blogs/color_picker/).
 7. Save the blurred image to e.g. `blur_edges.jpg`
-8. Run `source ./create_ig_mosaic.sh && create_ig_mosaic "$HOME/Downloads/blur_edges.jpg"`
+8. Run `create_ig_mosaic "$HOME/Downloads/blur_edges.jpg"`
 
 Which outputs next. Notice the original image lost many pixels, but maintened the same aspect ratio.
 To avoid this get a non-free image editor to blur the lateral pixels, or even better to generate it with AI.

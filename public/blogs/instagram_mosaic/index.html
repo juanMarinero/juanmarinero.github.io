@@ -60,7 +60,7 @@
   <meta property="og:title" content="Create an Instagram mosaic">
   <meta property="og:description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
 But we are lazy, we achieve this on the terminal.
-Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh (CWD is still ~/Downloads), or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blogs">
@@ -72,14 +72,14 @@ Get the desired image Rename it as img_original.jpg Open the terminal. Change to
   <meta name="twitter:title" content="Create an Instagram mosaic">
   <meta name="twitter:description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
 But we are lazy, we achieve this on the terminal.
-Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh (CWD is still ~/Downloads), or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
 
 
   <meta itemprop="name" content="Create an Instagram mosaic">
   <meta itemprop="description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
 But we are lazy, we achieve this on the terminal.
-Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
-  <meta itemprop="wordCount" content="1408">
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh (CWD is still ~/Downloads), or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+  <meta itemprop="wordCount" content="1429">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -229,7 +229,7 @@ steps to create a <strong>4:5 Instagram mosaic</strong>.</p>
 <li>Rename it as <code>img_original.jpg</code></li>
 <li>Open the terminal. Change to the image directory (e.g. <code>cd ~/Downloads</code>)</li>
 <li>Copy the <a href="/blogs/instagram_mosaic/#code">CODE</a> at the end of this post</li>
-<li>Paste it on a script via <code>$EDITOR create_ig_mosaic.sh</code>, or in your <code>~/.zshrc</code> file</li>
+<li>Paste it on a script via <code>$EDITOR create_ig_mosaic.sh</code> (<code>CWD</code> is still <code>~/Downloads</code>), or in your <code>~/.zshrc</code> file</li>
 <li>Make it executable <code>chmod +x create_ig_mosaic.sh</code></li>
 <li>Run</li>
 </ol>
@@ -247,8 +247,10 @@ steps to create a <strong>4:5 Instagram mosaic</strong>.</p>
 <li>Download one, <a href="https://www.pexels.com/photo/unrecognizable-woman-walking-dogs-on-leashes-in-countryside-7210754/">e.g.</a></li>
 <li>Open a terminal, move where <code>create_ig_mosaic.sh</code> is located and run</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>source ./create_ig_mosaic.sh <span style="color:#f92672">&amp;&amp;</span> create_ig_mosaic pexels-blue-bird-7210754.jpg
-</span></span></code></pre></div><p>&hellip;which outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x create_ig_mosaic.sh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> <span style="color:#f92672">&amp;&amp;</span> source ./create_ig_mosaic.sh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> <span style="color:#f92672">&amp;&amp;</span> create_ig_mosaic  <span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/Downloads/pexels-blue-bird-7210754.jpg&#34;</span>
+</span></span></code></pre></div><p>&hellip;which echoes:</p>
 <pre tabindex="0"><code>Image width:  5040
 Image height: 3360
 Aspect ratio: 1.500
@@ -270,7 +272,7 @@ It will run automatic, if <code>xdotool</code> is installed, when <code>create_i
 <p>So, if we are not satisfied,
 we shall repeat previous steps.</p>
 <p>In this example the selected image was too tall, or not wide enough.
-Anyway, it had a low aspect_ratio (<code>width:height = 5040:3360 = 1.5</code>).
+Anyway, it had a low aspect ratio (<code>width:height = 5040:3360 = 1.5</code>).
 The local preview and <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a> results are:</p>
 
 
@@ -300,7 +302,8 @@ The local preview and <a href="https://www.instagram.com/juanmarinerotarazona/">
 <pre tabindex="0"><code>Image width:  5040 [not changed]
 Image height: 2472
 Aspect ratio: 2.038
-</code></pre><p>Next is the result, check it in my <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a>:</p>
+</code></pre><p>Save it (just overwrite the file). And then run the same command: <code>create_ig_mosaic &quot;$HOME/Downloads/pexels-blue-bird-7210754.jpg&quot;</code></p>
+<p>Next is the result, check it in my <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a>:</p>
 
 
 <div class="html-content">
@@ -319,7 +322,7 @@ Aspect ratio: 2.038
 <p>The desired pixels are:</p>
 <ul>
 <li>Vertically: unchanged</li>
-<li>Horizontally: we apply basic logic:</li>
+<li>Horizontally, apply basic maths:</li>
 </ul>
 <p>$$
 \frac{width_{desired}}{height_{desired}}
@@ -357,7 +360,7 @@ I used the color picker enhanced explained in my <a href="/blogs/color_picker/">
 <p>Save the blurred image to e.g. <code>blur_edges.jpg</code></p>
 </li>
 <li>
-<p>Run <code>source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic &quot;$HOME/Downloads/blur_edges.jpg&quot;</code></p>
+<p>Run <code>create_ig_mosaic &quot;$HOME/Downloads/blur_edges.jpg&quot;</code></p>
 </li>
 </ol>
 <p>Which outputs next. Notice the original image lost many pixels, but maintened the same aspect ratio.
