@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>Create an Instagram mosaic</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Juan Marinero - Data Scientist"
+/>
+
+  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        "
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/instagram_mosaic/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="Create an Instagram mosaic">
+  <meta property="og:description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
+But we are lazy, we achieve this on the terminal.
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="Create an Instagram mosaic">
+  <meta name="twitter:description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
+But we are lazy, we achieve this on the terminal.
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+
+
+  <meta itemprop="name" content="Create an Instagram mosaic">
+  <meta itemprop="description" content="Let’s just follow these steps to create a 4:5 Instagram mosaic.
+But we are lazy, we achieve this on the terminal.
+Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh, or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
+  <meta itemprop="wordCount" content="1408">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 2.2em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">Create an Instagram mosaic</h1>
+      <section class="post-content">
+        <p>Let&rsquo;s just follow <a href="https://www.reddit.com/r/Instagram/comments/1icsc30/creating_a_seamless_45_instagram_mosaic_new/">these</a>
+steps to create a <strong>4:5 Instagram mosaic</strong>.</p>
+<p>But we are lazy, we achieve this <strong>on the terminal</strong>.</p>
+
+
+<div class="html-content">
+  <img
+    src="/images/blogs/instagram_mosaic/screenshot_instagram_02.png"
+    style="width:90%;"
+    alt="screenshot_instagram_02.png"
+    >
+</div>
+
+
+<ol>
+<li>Get the desired image</li>
+<li>Rename it as <code>img_original.jpg</code></li>
+<li>Open the terminal. Change to the image directory (e.g. <code>cd ~/Downloads</code>)</li>
+<li>Copy the <a href="/blogs/instagram_mosaic/#code">CODE</a> at the end of this post</li>
+<li>Paste it on a script via <code>$EDITOR create_ig_mosaic.sh</code>, or in your <code>~/.zshrc</code> file</li>
+<li>Make it executable <code>chmod +x create_ig_mosaic.sh</code></li>
+<li>Run</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>source ./create_ig_mosaic.sh <span style="color:#f92672">&amp;&amp;</span> create_ig_mosaic
+</span></span></code></pre></div><p>Alternative, no need to rename the file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>create_ig_mosaic <span style="color:#e6db74">&#34;dogs_original.jpg&#34;</span>
+</span></span></code></pre></div><p>And you can also specify more params, read <code>Example usage</code> in the <a href="/blogs/instagram_mosaic/#code">CODE</a>.</p>
+<ol start="8">
+<li><strong>Finally</strong> click on <code>4:5</code>-crop when <strong>upload</strong>ing to <strong>Instagram</strong>.</li>
+</ol>
+<h3 id="example">Example</h3>
+<ol>
+<li>Go to Pexels. Search for <code>dogs</code> and filter by size <code>large</code> and orientation <code>landscape</code>:
+<a href="https://www.pexels.com/search/dogs/?size=large&amp;orientation=landscape">link</a></li>
+<li>Download one, <a href="https://www.pexels.com/photo/unrecognizable-woman-walking-dogs-on-leashes-in-countryside-7210754/">e.g.</a></li>
+<li>Open a terminal, move where <code>create_ig_mosaic.sh</code> is located and run</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>source ./create_ig_mosaic.sh <span style="color:#f92672">&amp;&amp;</span> create_ig_mosaic pexels-blue-bird-7210754.jpg
+</span></span></code></pre></div><p>&hellip;which outputs:</p>
+<pre tabindex="0"><code>Image width:  5040
+Image height: 3360
+Aspect ratio: 1.500
+Aimed ratio: 2.244
+Height ratio: 2.488
+Width  ratio: 1.663
+Image width:  5040
+Image height: 3360
+/home/&lt;user&gt;/Downloads/tile_0.jpg dims: 1080 1350
+/home/&lt;user&gt;/Downloads/tile_1.jpg dims: 1080 1350
+/home/&lt;user&gt;/Downloads/tile_2.jpg dims: 1080 1350
+</code></pre><ol start="4">
+<li>Finally. Upload to Instagram, set <code>4:5</code> ratio</li>
+</ol>
+<p>Actually, before uploading the final images it is a good idea to preview them locally.
+To automatically open the result images it&rsquo;s added to the script the <code>open_imgs_side_by_side</code> function.
+It will run automatic, if <code>xdotool</code> is installed, when <code>create_ig_mosaic</code> finishes.</p>
+<p>Note, if closed any image preview by accident, then just close them all and run <code>open_imgs_side_by_side &quot;$HOME/Downloads&quot;/tile_*.jpg</code>.</p>
+<p>So, if we are not satisfied,
+we shall repeat previous steps.</p>
+<p>In this example the selected image was too tall, or not wide enough.
+Anyway, it had a low aspect_ratio (<code>width:height = 5040:3360 = 1.5</code>).
+The local preview and <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a> results are:</p>
+
+
+<div class="html-content">
+  <table class="data-table">
+    <tr>
+      <td class="data-cell image-cell">
+        <img src="/images/blogs/instagram_mosaic/screenshot_preview_final_imgs_01.png" alt="screenshot_preview_final_imgs_01.PNG" class="table-image">
+      </td>
+      <td class="data-cell">
+        <img src="/images/blogs/instagram_mosaic/screenshot_instagram_01.png" alt="screenshot_instagram_01.PNG" class="table-image">
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<p>To fix this there are some simple approaches:</p>
+<ul>
+<li><strong>Pick another</strong> image</li>
+<li>Extend it horizontally with blank space. This is done already by the script. Thus, forget this approach.</li>
+<li><strong>Crop</strong> it <strong>vert</strong>ically.</li>
+<li>Ask an <strong>AI</strong> to extend it horizontally with proper background, i.e. <strong>uncrop</strong>. <a href="https://www.pixelcut.ai/uncrop">Pixelcut</a> is a <strong>free</strong> tool for this.</li>
+<li>Extend and blur horizontally</li>
+</ul>
+<p>I just cropped the image with an <strong>image editor</strong> (Gimp, Pinta, online,&hellip;) to:</p>
+<pre tabindex="0"><code>Image width:  5040 [not changed]
+Image height: 2472
+Aspect ratio: 2.038
+</code></pre><p>Next is the result, check it in my <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a>:</p>
+
+
+<div class="html-content">
+  <img
+    src="/images/blogs/instagram_mosaic/screenshot_instagram_02.png"
+    style="width:90%;"
+    alt="screenshot_instagram_02.png"
+    >
+</div>
+
+
+<p><strong>Done!</strong></p>
+<h3 id="bonus">Bonus</h3>
+<p>Aspect ratio was <code>2.038</code> instead of the desired <code>2.244</code>.</p>
+<p>So lets extend and blur horizontally.</p>
+<p>The desired pixels are:</p>
+<ul>
+<li>Vertically: unchanged</li>
+<li>Horizontally: we apply basic logic:</li>
+</ul>
+<p>$$
+\frac{width_{desired}}{height_{desired}}
+= \frac{x}{height}
+$$</p>
+<p>Since the $height$ is fixed (to 2472), then:</p>
+<p>$$
+x =
+\frac{width_{desired}}{height_{desired}} * height
+= 2.244 * 2472 = 5547
+$$</p>
+<p>To extend with blank space we just need to:</p>
+<ol>
+<li>
+<p>If the edited file is called <code>pexels-blue-bird-7210754_cropped-vert.jpg</code>, then, run <code>source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic &quot;$HOME/Downloads/pexels-blue-bird-7210754_cropped-vert.jpg&quot;</code></p>
+</li>
+<li>
+<p>This command will create many images. Just close all and run <code>get_image_dimensions &quot;$HOME/Downloads/pexels-blue-bird-7210754_cropped-vert_padded.jpg&quot;</code>
+Which will show <code>5548 2472</code>. Almost the desired resize.</p>
+</li>
+<li>
+<p>Open this <em>croped-vert_padded</em> image with an image editor.</p>
+</li>
+<li>
+<p><strong>Manually</strong> select the close to lateral border pixels and paste them over the blank space. No need to be perfect, cause we are going to blur it. Save it.</p>
+</li>
+<li>
+<p>Open that image with a <strong>blur tool</strong>, for example <a href="https://www.quickpicturetools.com/en/blur_edges/">quickpicturetools</a></p>
+</li>
+<li>
+<p>Edit the params. The percentage to blur. Pick a background color like something the lateral-borders, a green-ish color in this case (#909581).
+I used the color picker enhanced explained in my <a href="/blogs/color_picker/">other post</a>.</p>
+</li>
+<li>
+<p>Save the blurred image to e.g. <code>blur_edges.jpg</code></p>
+</li>
+<li>
+<p>Run <code>source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic &quot;$HOME/Downloads/blur_edges.jpg&quot;</code></p>
+</li>
+</ol>
+<p>Which outputs next. Notice the original image lost many pixels, but maintened the same aspect ratio.
+To avoid this get a non-free image editor to blur the lateral pixels, or even better to generate it with AI.</p>
+<pre tabindex="0"><code>Image width:  2000
+Image height: 891
+Aspect ratio: 2.244
+Aimed ratio: 2.244
+Height ratio: .660
+Width  ratio: .660
+Image width:  2000
+Image height: 891
+/home/&lt;user&gt;/Downloads/tile_0.jpg dims: 1080 1350
+/home/&lt;user&gt;/Downloads/tile_1.jpg dims: 1080 1350
+/home/&lt;user&gt;/Downloads/tile_2.jpg dims: 1080 1350
+</code></pre><ol start="9">
+<li>Upload to <a href="https://www.instagram.com/juanmarinerotarazona/">Instagram</a></li>
+</ol>
+
+
+<div class="html-content">
+  <img
+    src="/images/blogs/instagram_mosaic/screenshot_instagram_03.png"
+    style="width:90%;"
+    alt="screenshot_instagram_03.png"
+    >
+</div>
+
+
+<p>Re-<strong>done!</strong></p>
+<h3 id="extra-latex-in-hugo-scroll">Extra: LaTeX in Hugo Scroll</h3>
+<p>How did I enable $LaTeX$ in my <a href="https://gohugo.io/">Hugo</a> website?</p>
+<ol>
+<li>Open a terminal. Go to your project directory: <code>cd &lt;path&gt;</code></li>
+<li>Run <code>$EDITOR layouts/partials/custom_head.html</code></li>
+<li>Append and save</li>
+</ol>
+<pre tabindex="0"><code>&lt;!-- MathJax Support --&gt;
+&lt;script&gt;
+MathJax = {
+  tex: {
+    inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]],
+    displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]]
+  },
+  svg: {
+    fontCache: &#39;global&#39;
+  }
+};
+&lt;/script&gt;
+&lt;script src=&#34;https://polyfill.io/v3/polyfill.min.js?features=es6&#34;&gt;&lt;/script&gt;
+&lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
+</code></pre><ol start="4">
+<li>Edit a markdown file, for example <code>content/en/*.md</code></li>
+<li>Insert $LaTeX$ code inline like <code>$\sqrt{x^2 + y^2} = r$</code> or in <code>$$</code> blocks. Save</li>
+<li>Build it with <code>hugo server --disableFastRender</code>.
+Build details in my post <a href="/blogs/create_hugo_website/">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a></li>
+<li>Check locally the changes on <a href="http://localhost:1313/">http://localhost:1313/</a></li>
+</ol>
+<h3 id="code">Code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env zsh
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># vim: set ts=2 sts=2 sw=2 expandtab tw=0 :</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>create_ig_mosaic<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example usage:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Basic usage with default values (processes img_original.jpg)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create_ig_mosaic</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Typical Instagram mosaic creation:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - Input: your_photo.jpg</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - Output: 3 tiles (1010x1350 each with 35px padding)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - Quality: 85%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - Float preccision: 4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - Output directory: ./mosaic_output</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create_ig_mosaic &#34;your_photo.jpg&#34; 3030 1350 35 3 85 4 &#34;./mosaic_output&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get image</span>
+</span></span><span style="display:flex;"><span>  local image_original<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>img_original.jpg<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if file exists</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -f <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;File not found: </span>$image_original<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get final width and height</span>
+</span></span><span style="display:flex;"><span>  local image_final_w<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>2<span style="color:#66d9ef">:-</span>3030<span style="color:#e6db74">}</span> <span style="color:#75715e"># 1010 * 3</span>
+</span></span><span style="display:flex;"><span>  local image_final_h<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>3<span style="color:#66d9ef">:-</span>1350<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>  local image_final_w_padd<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>4<span style="color:#66d9ef">:-</span>35<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Number of images (same height)</span>
+</span></span><span style="display:flex;"><span>  local n_imgs<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>5<span style="color:#66d9ef">:-</span>3<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Quality percentage to maintain</span>
+</span></span><span style="display:flex;"><span>  local quality<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>6<span style="color:#66d9ef">:-</span>85<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Float preccision</span>
+</span></span><span style="display:flex;"><span>  local scale<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>7<span style="color:#66d9ef">:-</span>3<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Output directory</span>
+</span></span><span style="display:flex;"><span>  local output_dir<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>8<span style="color:#66d9ef">:-$(</span>dirname <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get width and height</span>
+</span></span><span style="display:flex;"><span>  get_image_dimensions <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span> | <span style="color:#f92672">{</span> read image_w image_h; <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Image width:  </span>$image_w<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Image height: </span>$image_h<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Calculate ratios</span>
+</span></span><span style="display:flex;"><span>  local aspect_ratio<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_w<span style="color:#e6db74"> / </span>$image_h<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Aspect ratio: </span>$aspect_ratio<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  local aspect_ratio_desired<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_final_w<span style="color:#e6db74"> / </span>$image_final_h<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Aimed ratio: </span>$aspect_ratio_desired<span style="color:#e6db74">&#34;</span> <span style="color:#75715e"># 2.24</span>
+</span></span><span style="display:flex;"><span>  local h_ratio<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_h<span style="color:#e6db74"> / </span>$image_final_h<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  local w_ratio<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_w<span style="color:#e6db74"> / </span>$image_final_w<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Height ratio: </span>$h_ratio<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Width  ratio: </span>$w_ratio<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># If the aspect ratio is smaller than the desired aspect ratio then add horizontal white borders, otherwise add them vertically</span>
+</span></span><span style="display:flex;"><span>  local image_padded<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$output_dir<span style="color:#e6db74">&#34;</span>/<span style="color:#66d9ef">$(</span>add_suffix_before_ext <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;_padded&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  local dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image_w<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_h<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$aspect_ratio<span style="color:#e6db74"> &lt; </span>$aspect_ratio_desired<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span> -eq <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    image_w_new<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_final_w<span style="color:#e6db74"> * </span>$h_ratio<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image_w_new<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_h<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    image_h_new<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=&#34;</span>$scale<span style="color:#e6db74">&#34;; </span>$image_final_h<span style="color:#e6db74"> * </span>$w_ratio<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image_w<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_h_new<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  convert <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span> -background white -gravity center -extent <span style="color:#e6db74">&#34;</span>$dimensions<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$image_padded<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Resize</span>
+</span></span><span style="display:flex;"><span>  local image_resized<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$output_dir<span style="color:#e6db74">&#34;</span>/<span style="color:#66d9ef">$(</span>add_suffix_before_ext <span style="color:#e6db74">&#34;</span>$image_padded<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;_resized&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image_final_w<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_final_h<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  convert <span style="color:#e6db74">&#34;</span>$image_padded<span style="color:#e6db74">&#34;</span> -resize $dimensions -quality $quality <span style="color:#e6db74">&#34;</span>$image_resized<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check width and height</span>
+</span></span><span style="display:flex;"><span>  get_image_dimensions <span style="color:#e6db74">&#34;</span>$image_original<span style="color:#e6db74">&#34;</span> | <span style="color:#f92672">{</span> read image_w_resized image_h_resized; <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Image width:  </span>$image_w_resized<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Image height: </span>$image_h_resized<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Divide in $n_imgs of equal height</span>
+</span></span><span style="display:flex;"><span>  local dimension_w<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;scale=0; </span>$image_final_w<span style="color:#e6db74"> / </span>$n_imgs<span style="color:#e6db74">&#34;</span> | bc<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>dimension_w<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_final_h<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  convert <span style="color:#e6db74">&#34;</span>$image_resized<span style="color:#e6db74">&#34;</span> -crop <span style="color:#e6db74">&#34;</span>$dimensions<span style="color:#e6db74">&#34;</span> +repage <span style="color:#e6db74">&#34;</span>$output_dir<span style="color:#e6db74">&#34;</span>/tile_%d.jpg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Extend each section to 1080x1350 pixels by adding 35 pixels of extra space to both the left and right sides</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">((</span> dimension_w <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> * image_final_w_padd <span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>  dimensions<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>dimension_w<span style="color:#e6db74">}</span><span style="color:#e6db74">x</span><span style="color:#e6db74">${</span>image_final_h<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> file in <span style="color:#e6db74">&#34;</span>$output_dir<span style="color:#e6db74">&#34;</span>/tile_*.jpg; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    convert <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> -background white -gravity center -extent <span style="color:#e6db74">&#34;</span>$dimensions<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo -n <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74"> dims: &#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#66d9ef">$(</span>get_image_dimensions <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># open imgs side-by-side</span>
+</span></span><span style="display:flex;"><span>  local imgs_to_preview<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;</span>$output_dir<span style="color:#e6db74">&#34;</span>/tile_*.jpg<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  open_imgs_side_by_side $imgs_to_preview
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>open_imgs_side_by_side<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Accept an array of files as input</span>
+</span></span><span style="display:flex;"><span>  local files<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  local n_imgs<span style="color:#f92672">=</span><span style="color:#e6db74">${#</span>files<span style="color:#e6db74">}</span>  <span style="color:#75715e"># Use all files by default</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Optional: Limit to first N images (uncomment if needed)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># local max_imgs=3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># (( n_imgs &gt; max_imgs )) &amp;&amp; n_imgs=$max_imgs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># files=(&#34;${files[@]:1:$n_imgs}&#34;)  # zsh uses 1-based indexing</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Get screen width</span>
+</span></span><span style="display:flex;"><span>  local SCREEN_WIDTH<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>xwininfo -root | awk <span style="color:#e6db74">&#39;/Width:/ {print $2}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  local WIDTH<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span>SCREEN_WIDTH <span style="color:#f92672">/</span> n_imgs<span style="color:#66d9ef">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">((</span> WIDTH *<span style="color:#f92672">=</span> 1.01 <span style="color:#f92672">))</span>  <span style="color:#75715e"># Small overlap adjustment</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Array to store PIDs</span>
+</span></span><span style="display:flex;"><span>  local pids<span style="color:#f92672">=()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Process images</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> <span style="color:#f92672">((</span> i<span style="color:#f92672">=</span>1; i&lt;<span style="color:#f92672">=</span>n_imgs; i++ <span style="color:#f92672">))</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    eog <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>files[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &amp;
+</span></span><span style="display:flex;"><span>    pids<span style="color:#f92672">+=(</span>$!<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sleep 0.5  <span style="color:#75715e"># Wait for window to open</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    local X_POS<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> <span style="color:#f92672">(</span>i-1<span style="color:#f92672">)</span> <span style="color:#f92672">*</span> WIDTH <span style="color:#66d9ef">))</span>  <span style="color:#75715e"># X position starts at 0</span>
+</span></span><span style="display:flex;"><span>    xdotool search --name <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>files[i]##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> windowactivate --sync <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      windowsize %@ <span style="color:#e6db74">&#34;</span>$WIDTH<span style="color:#e6db74">&#34;</span> 100% windowmove %@ <span style="color:#e6db74">&#34;</span>$X_POS<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  wait $pids<span style="color:#f92672">[</span>@<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>get_image_dimensions<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  local image_file<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>  local exif_output<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>exiftool <span style="color:#e6db74">&#34;</span>$image_file<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  local width<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$exif_output<span style="color:#e6db74">&#34;</span> | grep <span style="color:#e6db74">&#34;Image Width&#34;</span> | awk -F<span style="color:#e6db74">&#39;: &#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  local height<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$exif_output<span style="color:#e6db74">&#34;</span> | grep <span style="color:#e6db74">&#34;Image Height&#34;</span> | awk -F<span style="color:#e6db74">&#39;: &#39;</span> <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$width<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">||</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$height<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;</span>$width<span style="color:#e6db74"> </span>$height<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_suffix_before_ext<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  local filename<span style="color:#f92672">=</span>$1      <span style="color:#75715e"># full filename, e.g. img_original.jpg</span>
+</span></span><span style="display:flex;"><span>  local suffix<span style="color:#f92672">=</span>$2        <span style="color:#75715e"># suffix to add, e.g. _padded</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Extract basename without extension and extension using zsh modifiers</span>
+</span></span><span style="display:flex;"><span>  local base<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>filename:t:r<span style="color:#e6db74">}</span>   <span style="color:#75715e"># filename without path and extension</span>
+</span></span><span style="display:flex;"><span>  local ext<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>filename:e<span style="color:#e6db74">}</span>      <span style="color:#75715e"># extension without dot</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Compose new filename with suffix before extension</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -n $ext <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>base<span style="color:#e6db74">}${</span>suffix<span style="color:#e6db74">}</span><span style="color:#e6db74">.</span><span style="color:#e6db74">${</span>ext<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If no extension, just add suffix at end</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>base<span style="color:#e6db74">}${</span>suffix<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div>
+
+<div class="html-content">
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+</div>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>

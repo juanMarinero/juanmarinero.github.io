@@ -39,5 +39,18 @@ Coding, travel, hobbies, books and more...
   <a href="/blogs/tolkien/" class="no-underline-except-hover">
   <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 3.1rem;">Tolkien</span>:
   books, podcasts and much more!
+  <br>
+  <br>
+</div>
+{{< /rawhtml >}}
+
+### 🖼️ Image editing
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <br>
+  <a href="/blogs/instagram_mosaic/" class="no-underline-except-hover">
+  How to create an <strong>Instagram mosaic</strong> on the terminal</a>
 </div>
 {{< /rawhtml >}}
