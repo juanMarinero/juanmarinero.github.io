@@ -14,6 +14,8 @@
                 href="http://localhost:1313/"
                 />
   </url><url>
+    <loc>http://localhost:1313/blogs/latex_for_webdev/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs/tolkien/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/color_picker/</loc>

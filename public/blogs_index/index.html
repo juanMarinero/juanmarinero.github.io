@@ -58,8 +58,7 @@
 <meta property="og:url" content="http://localhost:1313/blogs_index/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
   <meta property="og:title" content="JM - 💭 Blogs">
-  <meta property="og:description" content="Coding, travel, hobbies, books and more…
-&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
+  <meta property="og:description" content="&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
@@ -68,13 +67,11 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
   <meta name="twitter:title" content="JM - 💭 Blogs">
-  <meta name="twitter:description" content="Coding, travel, hobbies, books and more…
-&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
+  <meta name="twitter:description" content="&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
 
 
   <meta itemprop="name" content="JM - 💭 Blogs">
-  <meta itemprop="description" content="Coding, travel, hobbies, books and more…
-&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
+  <meta itemprop="description" content="&lt;/&gt; Web dev 😎 Installing custom fonts: system-wide setup &amp; Hugo integration 🎨🧪 Color picker enhanced How to create a Hugo-scroll website $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing How to create an Instagram mosaic on the terminal">
   <meta itemprop="wordCount" content="48">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
@@ -150,6 +147,15 @@ h1 {
 .font-middle-earth-joanna-vu {
   font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
 }
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
 </style>
 
 
@@ -180,19 +186,45 @@ h1 {
 
 
 
+
 <script>
-MathJax = {
+window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
   },
-  svg: {
-    fontCache: 'global'
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
   }
 };
 </script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="http://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
 </head>
   <body>
   <main class="content page-template page-">
@@ -206,22 +238,42 @@ MathJax = {
       </header>
       <h1 class="post-title">JM - 💭 Blogs</h1>
       <section class="post-content">
-        <p>Coding, travel, hobbies, books and more&hellip;</p>
+        
+
+<div class="html-content">
+  <br>
+  <br>
+</div>
+
+
 <h3 id="-web-dev">&lt;/&gt; Web dev</h3>
 
 
 <div class="html-content">
-  <br>
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+
   <a href="/blogs/nerd_fonts_and_more/" class="no-underline-except-hover">
   😎 Installing 
   <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:
-  <strong>system</strong>-wide setup <strong>& Hugo</strong> integration</a>
+  <strong>system</strong>-wide setup <strong>& Hugo</strong> integration
+  </a>
+
   <br>
   <a href="/blogs/color_picker/" class="no-underline-except-hover">
-  🎨🧪 <strong>Color picker</strong> enhanced</a>
+  🎨🧪 <strong>Color picker</strong> enhanced
+  </a>
+
   <br>
   <a href="/blogs/create_hugo_website/" class="no-underline-except-hover">
-  How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>
+  How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site
+  </a>
+
+  <br>
+  <a href="/blogs/latex_for_webdev/" class="no-underline-except-hover">
+  $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for <strong>web dev</strong>
+  </a>
+
+  <br>
   <br>
   <br>
 </div>
@@ -231,10 +283,14 @@ MathJax = {
 
 
 <div class="html-content">
-  <br>
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+
   <a href="/blogs/tolkien/" class="no-underline-except-hover">
   <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 3.1rem;">Tolkien</span>:
   books, podcasts and much more!
+  </a>
+
+  <br>
   <br>
   <br>
 </div>
@@ -244,9 +300,11 @@ MathJax = {
 
 
 <div class="html-content">
-  <br>
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+
   <a href="/blogs/instagram_mosaic/" class="no-underline-except-hover">
   How to create an <strong>Instagram mosaic</strong> on the terminal</a>
+  <br>
 </div>
 
 

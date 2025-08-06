@@ -19,6 +19,19 @@ But we are lazy, we achieve this **on the terminal**.
 </div>
 {{< /rawhtml >}}
 
+
+Table of Contents
+
+* [Steps](#steps)
+* [Example](#example)
+* [Bonus](#bonus)
+* [Code](#code)
+* [Extra: $\LaTeX$ in Hugo Scroll](#extra-latex-in-hugo-scroll)
+
+
+
+## Steps
+
 1. Get the desired image
 2. Rename it as `img_original.jpg`
 3. Open the terminal. Change to the image directory (e.g. `cd ~/Downloads`)
@@ -40,7 +53,7 @@ And you can also specify more params, read `Example usage` in the [CODE](#code).
 
 8. **Finally** click on `4:5`-crop when **upload**ing to **Instagram**. 
 
-### Example
+## Example
 
 1. Go to Pexels. Search for `dogs` and filter by size `large` and orientation `landscape`:
 [link](https://www.pexels.com/search/dogs/?size=large&orientation=landscape)
@@ -131,7 +144,7 @@ Next is the result, check it in my [Instagram](https://www.instagram.com/juanmar
 **Done!**
 
 
-### Bonus
+## Bonus
 
 Aspect ratio was `2.038` instead of the desired `2.244`.
 
@@ -148,11 +161,19 @@ $$
 
 Since the $height$ is fixed (to 2472), then:
 
-$$
-x =
-\frac{width_{desired}}{height_{desired}} * height
-= 2.244 * 2472 = 5547
-$$
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  $$
+  \begin{array}{ll}
+    x 
+    & = \dfrac{width_{desired}}{height_{desired}} &* &height\\
+    & = 2.244 &* &2472\\ 
+    & = 5547
+    \end{array}
+  $$
+</div>
+{{< /rawhtml >}}
 
 To extend with blank space we just need to:
 
@@ -200,39 +221,8 @@ Image height: 891
 
 Re-**done!**
 
-### Extra: LaTeX in Hugo Scroll
 
-How did I enable $LaTeX$ in my [Hugo](https://gohugo.io/) website?
-
-1. Open a terminal. Go to your project directory: `cd <path>`
-2. Run `$EDITOR layouts/partials/custom_head.html`
-3. Append and save
-```
-<!-- MathJax Support -->
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']]
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
-</script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-```
-
-4. Edit a markdown file, for example `content/en/*.md`
-5. Insert $LaTeX$ code inline like `$\sqrt{x^2 + y^2} = r$` or in `$$` blocks. Save
-6. Build it with `hugo server --disableFastRender`.
-Build details in my post [How to **create** a **Hugo-scroll web**site](/blogs/create_hugo_website/)
-7. Check locally the changes on [http://localhost:1313/](http://localhost:1313/)
-
-
-
-### Code
+## Code
 
 ```sh
 #!/usr/bin/env zsh
@@ -323,18 +313,15 @@ create_ig_mosaic() {
   # Extend each section to 1080x1350 pixels by adding 35 pixels of extra space to both the left and right sides
   (( dimension_w += 2 * image_final_w_padd ))
   dimensions="${dimension_w}x${image_final_h}"
-
-  # Check
   for file in "$output_dir"/tile_*.jpg; do
     convert "$file" -background white -gravity center -extent "$dimensions" "$file"
     echo -n "$file dims: "
     echo $(get_image_dimensions "$file")
   done
 
-  # open imgs side-by-side
+  # Open imgs side-by-side
   local imgs_to_preview=("$output_dir"/tile_*.jpg)
   open_imgs_side_by_side $imgs_to_preview
-
 }
 
 open_imgs_side_by_side() {
@@ -397,8 +384,23 @@ add_suffix_before_ext() {
     echo "${base}${suffix}"
   fi
 }
-
 ```
+
+## Extra: LaTeX in Hugo Scroll
+
+How did I enable $\LaTeX$ for the equations of the [Bonus](#bonus) section?
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  Check my blog
+  <a href="/blogs/latex_for_webdev/">
+  $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for <strong>web dev</strong>
+  </a>
+  .
+</div>
+{{< /rawhtml >}}
+
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}

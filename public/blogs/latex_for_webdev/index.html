@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>J. Marinero - Data Scientist & AI Engineer</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Juan Marinero - Data Scientist"
+/>
+
+  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        "
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/latex_for_webdev/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:description" content="$\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web developers $\LaTeX$ is a markup language for typesetting math and science. It’s used in web-dev because it’s a fast and easy way to typeset equations and other math content.
+Table of Contents
+MathJax Support Block equations Error handling LaTeX packages Include extra packages Test a LaTeX package TikZ Enable TikZ TikZJax issues MathJax Support Open a terminal. Go to your project directory: cd &lt;path&gt; Run $EDITOR layouts/partials/custom_head.html Append and save &lt;!-- MathJax Support --&gt; &lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt; &lt;script&gt; window.MathJax = { tex: { inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]], displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]], processEscapes: true, processEnvironments: true, packages: {&#39;[&#43;]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]} // &#39;base&#39; &#43; extras }, options: { skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;], ignoreHtmlClass: &#39;tex2jax_ignore&#39; }, loader: { load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;] }, startup: { ready() { console.log(&#39;MathJax is initializing...&#39;); MathJax.startup.defaultReady(); MathJax.startup.promise.then(() =&gt; { console.log(&#39;MathJax typesetting complete&#39;); }).catch((err) =&gt; { console.error(&#39;MathJax failed:&#39;, err); }); } } }; &lt;/script&gt; &lt;!-- Only include polyfill if supporting older browsers --&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt; &lt;!-- https://www.mathjax.org/#gettingstarted --&gt; &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt; Edit a markdown file, for example content/en/*.md Insert $\LaTeX$ code inline like $\sqrt{x^2 &#43; y^2} = r$ or in $$ blocks. Save Build it with hugo server --disableFastRender. Build details in my post How to create a Hugo-scroll website Check locally the changes on http://localhost:1313/ or alike Open the browser console. Refresh the page. Check if any error is loaded. It should just show MathJax is initializing... and MathJax typesetting complete Run console.log(&#39;MathJax version:&#39;, MathJax.version). Expected output: 4.0.0 Block equations Long one line equations, like this ($$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} &#43; N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha&#43;1}} \righ...), see, expand beyond the Hugo screen. Though they are visible. Therefore, one needs newlines for block equations.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta name="twitter:description" content="$\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web developers $\LaTeX$ is a markup language for typesetting math and science. It’s used in web-dev because it’s a fast and easy way to typeset equations and other math content.
+Table of Contents
+MathJax Support Block equations Error handling LaTeX packages Include extra packages Test a LaTeX package TikZ Enable TikZ TikZJax issues MathJax Support Open a terminal. Go to your project directory: cd &lt;path&gt; Run $EDITOR layouts/partials/custom_head.html Append and save &lt;!-- MathJax Support --&gt; &lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt; &lt;script&gt; window.MathJax = { tex: { inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]], displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]], processEscapes: true, processEnvironments: true, packages: {&#39;[&#43;]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]} // &#39;base&#39; &#43; extras }, options: { skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;], ignoreHtmlClass: &#39;tex2jax_ignore&#39; }, loader: { load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;] }, startup: { ready() { console.log(&#39;MathJax is initializing...&#39;); MathJax.startup.defaultReady(); MathJax.startup.promise.then(() =&gt; { console.log(&#39;MathJax typesetting complete&#39;); }).catch((err) =&gt; { console.error(&#39;MathJax failed:&#39;, err); }); } } }; &lt;/script&gt; &lt;!-- Only include polyfill if supporting older browsers --&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt; &lt;!-- https://www.mathjax.org/#gettingstarted --&gt; &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt; Edit a markdown file, for example content/en/*.md Insert $\LaTeX$ code inline like $\sqrt{x^2 &#43; y^2} = r$ or in $$ blocks. Save Build it with hugo server --disableFastRender. Build details in my post How to create a Hugo-scroll website Check locally the changes on http://localhost:1313/ or alike Open the browser console. Refresh the page. Check if any error is loaded. It should just show MathJax is initializing... and MathJax typesetting complete Run console.log(&#39;MathJax version:&#39;, MathJax.version). Expected output: 4.0.0 Block equations Long one line equations, like this ($$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} &#43; N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha&#43;1}} \righ...), see, expand beyond the Hugo screen. Though they are visible. Therefore, one needs newlines for block equations.">
+
+
+  <meta itemprop="name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta itemprop="description" content="$\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web developers $\LaTeX$ is a markup language for typesetting math and science. It’s used in web-dev because it’s a fast and easy way to typeset equations and other math content.
+Table of Contents
+MathJax Support Block equations Error handling LaTeX packages Include extra packages Test a LaTeX package TikZ Enable TikZ TikZJax issues MathJax Support Open a terminal. Go to your project directory: cd &lt;path&gt; Run $EDITOR layouts/partials/custom_head.html Append and save &lt;!-- MathJax Support --&gt; &lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt; &lt;script&gt; window.MathJax = { tex: { inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]], displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]], processEscapes: true, processEnvironments: true, packages: {&#39;[&#43;]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]} // &#39;base&#39; &#43; extras }, options: { skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;], ignoreHtmlClass: &#39;tex2jax_ignore&#39; }, loader: { load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;] }, startup: { ready() { console.log(&#39;MathJax is initializing...&#39;); MathJax.startup.defaultReady(); MathJax.startup.promise.then(() =&gt; { console.log(&#39;MathJax typesetting complete&#39;); }).catch((err) =&gt; { console.error(&#39;MathJax failed:&#39;, err); }); } } }; &lt;/script&gt; &lt;!-- Only include polyfill if supporting older browsers --&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt; &lt;!-- https://www.mathjax.org/#gettingstarted --&gt; &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt; Edit a markdown file, for example content/en/*.md Insert $\LaTeX$ code inline like $\sqrt{x^2 &#43; y^2} = r$ or in $$ blocks. Save Build it with hugo server --disableFastRender. Build details in my post How to create a Hugo-scroll website Check locally the changes on http://localhost:1313/ or alike Open the browser console. Refresh the page. Check if any error is loaded. It should just show MathJax is initializing... and MathJax typesetting complete Run console.log(&#39;MathJax version:&#39;, MathJax.version). Expected output: 4.0.0 Block equations Long one line equations, like this ($$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} &#43; N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha&#43;1}} \righ...), see, expand beyond the Hugo screen. Though they are visible. Therefore, one needs newlines for block equations.">
+  <meta itemprop="wordCount" content="1167">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 2.2em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="http://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title"></h1>
+      <section class="post-content">
+        
+
+<div class="html-content">
+<h1>$\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web developers</h1>
+</div>
+
+
+<p>$\LaTeX$ is a markup language for typesetting math and science.
+It&rsquo;s used in web-dev because it&rsquo;s a <strong>fast and easy</strong> way to typeset equations and other math content.</p>
+<p>Table of Contents</p>
+<ul>
+<li><a href="/blogs/latex_for_webdev/#mathjax-support">MathJax Support</a>
+<ul>
+<li><a href="/blogs/latex_for_webdev/#block-equations">Block equations</a></li>
+<li><a href="/blogs/latex_for_webdev/#error-handling">Error handling</a></li>
+<li><a href="/blogs/latex_for_webdev/#latex-packages">LaTeX packages</a>
+<ul>
+<li><a href="/blogs/latex_for_webdev/#include-extra-packages">Include extra packages</a></li>
+<li><a href="/blogs/latex_for_webdev/#test-a-latex-package">Test a LaTeX package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/blogs/latex_for_webdev/#tikz">TikZ</a>
+<ul>
+<li><a href="/blogs/latex_for_webdev/#enable-tikz">Enable TikZ</a></li>
+<li><a href="/blogs/latex_for_webdev/#tikzjax-issues">TikZJax issues</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="mathjax-support">MathJax Support</h2>
+<ol>
+<li>Open a terminal. Go to your project directory: <code>cd &lt;path&gt;</code></li>
+<li>Run <code>$EDITOR layouts/partials/custom_head.html</code></li>
+<li>Append and save</li>
+</ol>
+<pre tabindex="0"><code>&lt;!-- MathJax Support --&gt;
+&lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt;
+&lt;script&gt;
+window.MathJax = {
+  tex: {
+    inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]],
+    displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {&#39;[+]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]}  // &#39;base&#39; + extras
+  },
+  options: {
+    skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;],
+    ignoreHtmlClass: &#39;tex2jax_ignore&#39;
+  },
+  loader: {
+    load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;]
+  },
+  startup: {
+    ready() {
+      console.log(&#39;MathJax is initializing...&#39;);
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() =&gt; {
+        console.log(&#39;MathJax typesetting complete&#39;);
+      }).catch((err) =&gt; {
+        console.error(&#39;MathJax failed:&#39;, err);
+      });
+    }
+  }
+};
+&lt;/script&gt;
+&lt;!-- Only include polyfill if supporting older browsers --&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt;
+&lt;!-- https://www.mathjax.org/#gettingstarted --&gt;
+&lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt;
+</code></pre><ol start="4">
+<li>Edit a markdown file, for example <code>content/en/*.md</code></li>
+<li>Insert $\LaTeX$ code inline like <code>$\sqrt{x^2 + y^2} = r$</code> or in <code>$$</code> blocks. Save</li>
+<li>Build it with <code>hugo server --disableFastRender</code>.
+Build details in my post <a href="/blogs/create_hugo_website/">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a></li>
+<li>Check locally the changes on <a href="http://localhost:1313/">http://localhost:1313/</a> or alike</li>
+<li>Open the browser console. Refresh the page.</li>
+<li>Check if any error is loaded. It should just show <code>MathJax is initializing...</code> and <code>MathJax typesetting complete</code></li>
+<li>Run <code>console.log('MathJax version:', MathJax.version)</code>. Expected output: <code>4.0.0</code></li>
+</ol>
+<h3 id="block-equations">Block equations</h3>
+<p>Long one line <strong>equations</strong>, like <a href="https://github.com/acgetchell/blog/blob/56b8c03c0f66dbd1636c7b314a696400d59f8cc7/content/posts/designing-a-metropolis-class.md?plain=1#L93">this</a>
+(<code>$$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} + N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha+1}} \righ...</code>),
+<a href="https://www.adamgetchell.org/posts/designing-a-metropolis-class/#:~:text=The%20CDT%20action%20is%20then%20based%20on%20the%20Regge%20action">see</a>,
+expand beyond the <em>Hugo</em> screen. Though they are visible.
+Therefore, one needs <strong>newlines</strong> for block equations.</p>
+<p>Hugo&rsquo;s Markdown processor converts <code>\\</code> to spaces.
+This breaks $\LaTeX$ environments that rely on <code>\\</code> for line endings.</p>
+<p>For example</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} <span style="color:#e6db74">$$</span>
+</span></span></code></pre></div><p>Gets converted to:</p>
+<p>$$ \begin{matrix} a &amp; b \ c &amp; d \end{matrix} $$</p>
+<p>The <strong>correct</strong> way is via <em>raw HTML</em>:</p>
+
+
+<div class="html-content">
+  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;div class="html-content"&#62;
+  $$ \begin{matrix} a & b \\ c & d \end{matrix} $$
+&#60;/div&#62;
+&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
+</div>
+
+
+<p>Which displays as:</p>
+
+
+<div class="html-content">
+  $$ \begin{matrix} a & b \\ c & d \end{matrix} $$
+</div>
+
+
+<p><em>Raw HTML</em> explanation and usage in my post <a href="/blogs/create_hugo_website/#raw-html">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>.</p>
+<p>Alternative use <code>\newline</code> instead of <code>\\</code>. E.g.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span>
+</span></span><span style="display:flex;"><span>\left<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>\begin{matrix}
+</span></span><span style="display:flex;"><span>  a &amp; b \newline
+</span></span><span style="display:flex;"><span>  c &amp; d
+</span></span><span style="display:flex;"><span>\end{matrix}
+</span></span><span style="display:flex;"><span>\right<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">$$</span>
+</span></span></code></pre></div><p>produces</p>
+<p>$$
+\left(
+\begin{matrix}
+a &amp; b \newline
+c &amp; d
+\end{matrix}
+\right)
+$$</p>
+<h3 id="error-handling">Error handling</h3>
+<p>Insert an invalid <em>alignment specification</em> to check its error.
+Instead of <code>matrix</code> lets use <code>foo</code></p>
+<p>Original:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} <span style="color:#e6db74">$$</span>
+</span></span></code></pre></div><p>Error:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{foo} a &amp; b \\ c &amp; d \end{foo} <span style="color:#e6db74">$$</span>
+</span></span></code></pre></div><p>Gets converted to:</p>
+<p>$$ \begin{foo} a &amp; b \ c &amp; d \end{foo} $$</p>
+<p>This message (<code>Unknown environment 'foo'</code>) is from MathJax.
+Specific from <code>MathJax.config.tex.formatError</code>&rsquo;s default value, as shown in its
+<a href="https://docs.mathjax.org/en/latest/options/input/tex.html">docs.mathjax.org</a> configuration:</p>
+<pre tabindex="0"><code>MathJax = {
+  tex: {
+    formatError:   // function called when TeX syntax errors occur
+       (jax, err) =&gt; jax.formatError(err),
+  }
+};
+</code></pre><p>In the <a href="/blogs/latex_for_webdev/#mathjax-support">MathJax Support</a> section we did not change the <code>formatError</code>.
+So we benefit from previous default setting.</p>
+<h3 id="latex-packages">LaTeX packages</h3>
+<p><a href="https://docs.mathjax.org/en/latest/options/input/tex.html">docs.mathjax.org</a> config includes</p>
+<pre tabindex="0"><code>MathJax = {
+  tex: {
+    packages: [&#39;base&#39;],              // extensions to use
+    ...
+</code></pre><h4 id="include-extra-packages">Include extra packages</h4>
+<p>In <code>layouts/partials/custom_head.html</code> we loaded a few extra packages</p>
+<pre tabindex="0"><code>&lt;script&gt;
+window.MathJax = {
+  tex: {
+    ...
+    packages: {&#39;[+]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]}  // &#39;base&#39; + extras
+  },
+  ...
+  loader: {
+    load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;]
+  },
+  ...
+};
+&lt;/script&gt;
+</code></pre><p>Previous config lines use
+<a href="https://docs.mathjax.org/en/latest/input/tex/extensions/boldsymbol.html">docs.mathjax.org - boldsymbol</a>
+config as reference:</p>
+<pre tabindex="0"><code>window.MathJax = {
+  loader: {load: [&#39;[tex]/boldsymbol&#39;]},
+  tex: {packages: {&#39;[+]&#39;: [&#39;boldsymbol&#39;]}}
+};
+</code></pre><h4 id="test-a-latex-package">Test a LaTeX package</h4>
+<p>Check in the browser&rsquo;s console if they are proper loaded with next, expected output: <code>Array [ &quot;[tex]/ams&quot;, &quot;[tex]/boldsymbol&quot; ]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">MathJax</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">loader</span>.<span style="color:#a6e22e">load</span>
+</span></span></code></pre></div><p>Thus, ignore if the console shows a warning
+like <code>No version information available for component [tex]/ams</code>
+when loading.
+This is might be a metadata notification.
+Maybe this package doesn&rsquo;t have version metadata included in its build.</p>
+<p>Now let&rsquo;s test if an <a href="https://www.ams.org/arc/resources/amslatex-about.html">AMS</a> package,
+like <a href="https://ctan.org/pkg/amsmath">amsmath</a>,
+performs OK.</p>
+<p>Code</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{equation}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\forall</span> x <span style="color:#66d9ef">\in</span> <span style="color:#66d9ef">\mathbb</span>{R}, <span style="color:#66d9ef">\quad</span> <span style="color:#66d9ef">\exists</span> y &gt; 0 <span style="color:#66d9ef">\quad</span> <span style="color:#66d9ef">\text</span>{such that} <span style="color:#66d9ef">\quad</span> x + y &gt; 0
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{equation}
+</span></span></code></pre></div><p>Render</p>
+<p>$$
+\begin{equation}
+\forall x \in \mathbb{R}, \quad \exists y &gt; 0 \quad \text{such that} \quad x + y &gt; 0
+\end{equation}
+$$</p>
+<p>Test if <a href="https://docs.mathjax.org/en/latest/input/tex/extensions/boldsymbol.html">boldsymbol</a>, notice this is a <em>docs.mathjax.org</em> link, succeeds.</p>
+<p>Code</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\text</span>{x normally: } x
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\backslash\text</span>{LaTeX normally: } <span style="color:#66d9ef">\LaTeX</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\text</span>{x as arg of } <span style="color:#66d9ef">\texttt</span>{boldsymbol} <span style="color:#66d9ef">\text</span>{: } <span style="color:#66d9ef">\boldsymbol</span>{x}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\backslash\text</span>{LaTeX as arg of } <span style="color:#66d9ef">\texttt</span>{boldsymbol} <span style="color:#66d9ef">\text</span>{: } <span style="color:#66d9ef">\boldsymbol</span>{<span style="color:#66d9ef">\LaTeX</span>}
+</span></span></code></pre></div><p>Output</p>
+<p>$$
+\text{x normally: } x
+\newline
+\backslash\text{LaTeX normally: } \LaTeX
+\newline
+\text{x as arg of } \texttt{boldsymbol} \text{: } \boldsymbol{x}
+\newline
+\backslash\text{LaTeX as arg of } \texttt{boldsymbol} \text{: } \boldsymbol{\LaTeX}
+$$</p>
+<h2 id="tikz">TikZ</h2>
+<p><a href="https://www.ctan.org/pkg/pgf">$\text{Ti}\textit{k}\text{Z}$</a> is probably the most complex and powerful tool to create graphic elements in $\LaTeX$.</p>
+<h3 id="enable-tikz">Enable TikZ</h3>
+<p>Follow steps of <a href="https://github.com/kisonecat/tikzjax">TikZJax</a>:</p>
+<ol>
+<li>Add to <code>layouts/partials/custom_head.html</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- TikZJax --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- https://github.com/kisonecat/tikzjax --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://tikzjax.com/v1/fonts.css&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://tikzjax.com/v1/tikzjax.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><ol start="2">
+<li>Try the <a href="https://github.com/kisonecat/tikzjax#example">MWE</a></li>
+</ol>
+
+
+<div class="html-content">
+  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;div class="html-content"&#62;
+  &#60;script type="text/tikz"&#62;
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+    \end{tikzpicture}
+  &#60;/script&#62;
+&#60;/div&#62;
+&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
+</div>
+
+
+<p>Which draws next circle. So far so good.</p>
+
+
+<div class="html-content">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<ol start="3">
+<li>I prefer a centered circle, so let&rsquo;s add some more code to <code>layouts/partials/custom_head.html</code>, to its <code>&lt;style&gt;</code> tag:</li>
+</ol>
+<pre tabindex="0"><code>/* TikZJax centering */
+/* https://github.com/kisonecat/tikzjax/issues/12 */
+.tikzjax {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;     /* centers vertically if needed */
+}
+</code></pre><ol start="4">
+<li>Now expand the classes in previous $\text{Ti}\textit{k}\text{Z}$ code,
+actually in the pure raw HTML <code>&lt;div&gt;</code>,
+to <code>&lt;div class=&quot;html-content tikzjax&quot;&gt;</code> and redraw it:</li>
+</ol>
+
+
+<div class="html-content tikzjax">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<p><strong>TL;DR</strong></p>
+
+
+<div class="html-content">
+  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;div class="html-content tikzjax"&#62;
+  &#60;script type="text/tikz"&#62;
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+    \end{tikzpicture}
+  &#60;/script&#62;
+&#60;/div&#62;
+&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
+</div>
+
+
+<h3 id="tikzjax-issues">TikZJax issues</h3>
+<p>The most evident <strong>annoy</strong>ance is the amount of <strong>messages</strong> in the <strong>console</strong>.
+But this is not an error nor a limitation.
+On the other hand, next are real problems.</p>
+<p>To draw a 5 points star we can use</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[thick, fill=yellow!50, draw=orange]</span>
+</span></span><span style="display:flex;"><span>    (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
+</span></span><span style="display:flex;"><span>    -- (234:1in) -- (270:0.4in) -- (306:1in) 
+</span></span><span style="display:flex;"><span>    -- (342:0.4in) -- (18:1in) -- (54:0.4in) -- cycle;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
+</span></span></code></pre></div><p>Like this:</p>
+
+
+<div class="html-content">
+  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;div class="html-content tikzjax"&#62;
+  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
+  &#60;script type="text/tikz"&#62;
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+      \draw[thick, fill=yellow!50, draw=orange]
+        (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
+        -- (234:1in) -- (270:0.4in) -- (306:1in) 
+        -- (342:0.4in) -- (18:1in) -- (54:0.4in) -- cycle;
+    \end{tikzpicture}
+  &#60;/script&#62;
+&#60;/div&#62;
+&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
+</div>
+
+
+<p>Result:</p>
+
+
+<div class="html-content tikzjax">
+  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw (0,0) circle (1in);
+      \draw[thick, fill=yellow!50, draw=orange]
+        (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
+        -- (234:1in) -- (270:0.4in) -- (306:1in) 
+        -- (342:0.4in) -- (18:1in) -- (54:0.4in) -- cycle;
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<p>Though this does not take advantage of $\text{Ti}\textit{k}\text{Z}$&rsquo;s <a href="https://tikz.dev/tikz-shapes">nodes</a>.
+Following is clearer and more customizable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[thick,fill=yellow!50, draw=orange]</span>
+</span></span><span style="display:flex;"><span>    (0,0)
+</span></span><span style="display:flex;"><span>    node[
+</span></span><span style="display:flex;"><span>      star,
+</span></span><span style="display:flex;"><span>      star points=5,
+</span></span><span style="display:flex;"><span>      star point ratio=2.5,
+</span></span><span style="display:flex;"><span>      minimum size=2in,
+</span></span><span style="display:flex;"><span>      draw
+</span></span><span style="display:flex;"><span>    ] {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
+</span></span></code></pre></div><p>But it has some <strong>disadvantages</strong>. Notice that <code>fill=yellow!50</code> didn&rsquo;t work:</p>
+
+
+<div class="html-content tikzjax">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,0)
+        node[
+          star,
+          star points=5,
+          star point ratio=2.5,
+          minimum size=2in,
+          draw
+        ] {};
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<p>The <code>node[star, ...]</code> construct relies on $\text{Ti}\textit{k}\text{Z}$&rsquo;s nodes shapes defined in libraries like <code>shapes.geometric</code>.
+TikZJax currently has limited support for some of these specialized nodes and their <code>fill</code>s may not be properly rendered in the generated SVG.</p>
+<p>Anyhow, there are still many capabilities to explore with $\text{Ti}\textit{k}\text{Z}$:</p>
+
+
+<div class="html-content tikzjax">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      % Draw two intersecting lines
+      \draw[gray, thick] (-1,2) -- (2,-4);
+      \draw[gray, thick] (-1,-1) -- (2,2);
+
+      % Draw and fill a black circle at the intersection point
+      \filldraw[black] (0,0) circle (2pt) node[anchor=west] {Some \LaTeX\, text};
+
+      % Define nodes with styles
+      \node[circle, draw=green!60, fill=green!5, very thick, minimum size=7mm] (A) at (6,0) {A};
+      \node[rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm, right=2cm of A] (B) {B};
+
+      % Draw arrow between nodes
+      \draw[->] (A) -- (B);
+    \end{tikzpicture}
+
+    \begin{tikzcd}
+      % Commutative diagram from https://tikzjax.com/
+      A \arrow[r, "\phi"] \arrow[d, red]
+        & B \arrow[d, "\psi" red] \\
+      C \arrow[r, red, "\eta" blue]
+        & |[blue, rotate=-15]| D
+    \end{tikzcd}
+  </script>
+</div>
+
+
+
+
+<div class="html-content">
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+</div>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>
