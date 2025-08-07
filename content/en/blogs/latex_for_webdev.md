@@ -671,6 +671,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
+Actually I set a intial delay bigger than 3 secs, and with retries.
+Check the [script](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/assets/js/tikzjax-node.js).
 
 3. `$EDITOR layouts/partials/custom_head.html` and append
 
@@ -702,6 +704,9 @@ Result:
 {{< /rawhtml >}}
 
 The star is now **right colored**!
+If not, then the drawing took too long to be rendered, thus `assets/js/tikzjax-node.js` found nothing to fix.
+Just refresh the page without clearing the cache memory (`F5`).
+Remember this is a *workaround*, not an official patch.
 
 We can even draw multiple $\text{Ti}\textit{k}\text{Z}$ nodes in the same `<div>`:
 
@@ -790,7 +795,7 @@ Last but not list **explore** the many drawing capabilities that $\text{Ti}\text
       \filldraw[black] (0,0) circle (2pt) node[anchor=west] {Some \LaTeX\, text};
 
       % Define nodes with styles
-      \node[circle, draw=green!60, fill=green!5, very thick, minimum size=7mm] (A) at (6,0) {A};
+      \node[circle, draw=green!60, fill=green!5, very thick, minimum size=7mm] (A) at (5,0) {A};
       \node[rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm, right=2cm of A] (B) {B};
 
       % Draw arrow between nodes
