@@ -5,7 +5,7 @@ for (let i = 0; i < 5; i++) {
 const TIKZJAX_FIX_CONFIG = {
   MAX_RETRIES: 3,
   RETRY_DELAY: 500,
-  TIMEOUT_MS: 2000,
+  TIMEOUT_MS: 4000,
   CONTAINER_SELECTORS: ['.tikzjax-node']
 };
 
