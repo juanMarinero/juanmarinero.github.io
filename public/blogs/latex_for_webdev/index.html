@@ -79,7 +79,7 @@ MathJax Support Block equations Error handling LaTeX packages Include extra pack
   <meta itemprop="description" content="$\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web developers $\LaTeX$ is a markup language for typesetting math and science. It’s used in web-dev because it’s a fast and easy way to typeset equations and other math content.
 Table of Contents
 MathJax Support Block equations Error handling LaTeX packages Include extra packages Test a LaTeX package TikZ Enable TikZ TikZJax issues MathJax Support Open a terminal. Go to your project directory: cd &lt;path&gt; Run $EDITOR layouts/partials/custom_head.html Append and save &lt;!-- MathJax Support --&gt; &lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt; &lt;script&gt; window.MathJax = { tex: { inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]], displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]], processEscapes: true, processEnvironments: true, packages: {&#39;[&#43;]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]} // &#39;base&#39; &#43; extras }, options: { skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;], ignoreHtmlClass: &#39;tex2jax_ignore&#39; }, loader: { load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;] }, startup: { ready() { console.log(&#39;MathJax is initializing...&#39;); MathJax.startup.defaultReady(); MathJax.startup.promise.then(() =&gt; { console.log(&#39;MathJax typesetting complete&#39;); }).catch((err) =&gt; { console.error(&#39;MathJax failed:&#39;, err); }); } } }; &lt;/script&gt; &lt;!-- Only include polyfill if supporting older browsers --&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt; &lt;!-- https://www.mathjax.org/#gettingstarted --&gt; &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt; Edit a markdown file, for example content/en/*.md Insert $\LaTeX$ code inline like $\sqrt{x^2 &#43; y^2} = r$ or in $$ blocks. Save Build it with hugo server --disableFastRender. Build details in my post How to create a Hugo-scroll website Check locally the changes on http://localhost:1313/ or alike Open the browser console. Refresh the page. Check if any error is loaded. It should just show MathJax is initializing... and MathJax typesetting complete Run console.log(&#39;MathJax version:&#39;, MathJax.version). Expected output: 4.0.0 Block equations Long one line equations, like this ($$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} &#43; N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha&#43;1}} \righ...), see, expand beyond the Hugo screen. Though they are visible. Therefore, one needs newlines for block equations.">
-  <meta itemprop="wordCount" content="1167">
+  <meta itemprop="wordCount" content="1778">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -232,6 +232,10 @@ window.MathJax = {
 
 <link rel="stylesheet" type="text/css" href="http://tikzjax.com/v1/fonts.css">
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<script src="/js/tikzjax-node.min.cbe0ef1e642949b19f30ce720fa487d3f9fb3e76973d469c26bf5519b5974af4.js" integrity="sha256-y&#43;DvHmQpSbGfMM5yD6SH0/n7PnaXPUacJr9VGbWXSvQ=" defer></script>
 </head>
   <body>
   <main class="content page-template page-">
@@ -565,7 +569,6 @@ On the other hand, next are real problems.</p>
 <div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
 &#60;div class="html-content tikzjax"&#62;
-  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
   &#60;script type="text/tikz"&#62;
     \begin{tikzpicture}
       \draw (0,0) circle (1in);
@@ -584,10 +587,8 @@ On the other hand, next are real problems.</p>
 
 
 <div class="html-content tikzjax">
-  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
   <script type="text/tikz">
     \begin{tikzpicture}
-      \draw (0,0) circle (1in);
       \draw[thick, fill=yellow!50, draw=orange]
         (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
         -- (234:1in) -- (270:0.4in) -- (306:1in) 
@@ -632,7 +633,287 @@ Following is clearer and more customizable:</p>
 
 <p>The <code>node[star, ...]</code> construct relies on $\text{Ti}\textit{k}\text{Z}$&rsquo;s nodes shapes defined in libraries like <code>shapes.geometric</code>.
 TikZJax currently has limited support for some of these specialized nodes and their <code>fill</code>s may not be properly rendered in the generated SVG.</p>
-<p>Anyhow, there are still many capabilities to explore with $\text{Ti}\textit{k}\text{Z}$:</p>
+<p>The right colored star produces</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;html-content tikzjax&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page&#34;</span>
+</span></span><span style="display:flex;"><span>    &gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">svg</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;138.2669pt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;131.5379pt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">viewBox</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-72 -72 138.2669 131.5379&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
+</span></span><span style="display:flex;"><span>      &gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-miterlimit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(1,-1)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ffff80&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff8000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span> <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 72.26999 L -16.99138 23.38681 L -68.73346 22.33293 L -27.49295 -8.93303 L -42.47913 -58.46793 L 0.0 -28.90755 L 42.47913 -58.46793 L 27.49295 -8.93303 L 68.73346 22.33293 L 16.99138 23.38681 Z  &#34;</span>&gt;&lt;/<span style="color:#f92672">path</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">svg</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span></code></pre></div><p>The other makes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;html-content tikzjax&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page&#34;</span>
+</span></span><span style="display:flex;"><span>    &gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">svg</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;138.2669pt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;131.5379pt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">viewBox</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-72 -72 138.2669 131.5379&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
+</span></span><span style="display:flex;"><span>      &gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-miterlimit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(1,-1)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ffff80&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff8000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span> <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 0.0  &#34;</span>&gt;&lt;/<span style="color:#f92672">path</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 72.26999 L -16.99527 23.39217 L -68.73346 22.33293 L -27.49925 -8.93507 L -42.47913 -58.46793 L 0.0 -28.91417 L 42.47913 -58.46793 L 27.49925 -8.93507 L 68.73346 22.33293 L 16.99527 23.39217 Z  &#34;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span>                      &gt;&lt;/<span style="color:#f92672">path</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">g</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(-1.00375,1.00375)translate(0.19677734374999994,0.3999786376953124)scale(-1,-1)&#34;</span>
+</span></span><span style="display:flex;"><span>                      &gt;
+</span></span><span style="display:flex;"><span>                        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>&gt; &lt;/<span style="color:#f92672">g</span>&gt;{&#34; &#34;}
+</span></span><span style="display:flex;"><span>                        &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">g</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">svg</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span></code></pre></div><p>The differences can be checked with <code>vim -d a.html b.html</code> or online with <a href="https://text-compare.com/">text-compare</a>.
+These are inside <code>&lt;g stroke=&quot;#ff8000&quot;&gt;</code>.</p>
+<p>On the not fill-colored, those lines are next.
+Notes:</p>
+
+
+<div class="html-content">
+  <ul>
+  <li>Mismatches in <span style="color: red;">red</span> font color</li>
+  <li><code>...</code> to hide non important parts</li>
+  </ul>
+</div>
+
+
+
+
+<div class="html-content">
+  <div style="white-space: pre-wrap; color: red;">
+  &#60;path d=" M 0.0 0.0  "&#62;&#60;/path&#62;
+    <span style="color: grey;">&#60;path"</span>
+      <span style="color: grey;">d=" M 0.0 72.26999 ... Z  "</span>
+      fill="none"
+    <span style="color: grey;">&#62;/path"</span>
+    &#60;g
+      stroke="none"
+      transform="scale(...)translate(...)scale(-1,-1)"
+    &#62;
+      &#60;g fill="#000"&#62;
+        &#60;g stroke="none"&#62; &#60;/g&#62;{" "}
+      &#60;/g&#62;
+    &#60;/g&#62; 
+  </div>
+</div>
+
+
+<p>On the right colored star all previous HTML lines are just next <code>&lt;path&gt;</code>,
+which is like the second one of previous code but without <code>fill=&quot;none&quot;</code>.
+I said <em>like</em> because some decimals of <code>d</code> might differ, but this doesn&rsquo;t matter.</p>
+
+
+<div class="html-content">
+  <div style="white-space: pre-wrap; color: grey;">
+    &#60;path
+      d=" M 0.0 72.26999 ... Z  "
+    &#62;&#60;/path&#62;
+  </div>
+</div>
+
+
+<p>Thus, inspecting this star in the browser we can force remove <code>fill=&quot;none&quot;</code>,
+now the star will be right colored (as long as we don&rsquo;t refresh the page obviously).
+Let&rsquo;s apply this fix permanently and programmatically in next section.</p>
+<h4 id="workaround">Workaround</h4>
+<ol>
+<li>
+<p>Add a new class to previous $\text{Ti}\textit{k}\text{Z}$-node star:
+<code>&lt;div class=&quot;html-content tikzjax tikzjax-node&quot;&gt;</code> instead of <code>&lt;div class=&quot;html-content tikzjax&quot;&gt;</code>.</p>
+</li>
+<li>
+<p><code>$EDITOR assets/js/tikzjax-node.js</code> with content</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TIMEOUT_MS</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">3000</span>,  <span style="color:#75715e">// 3 second timeout to ensure TikZJax is done
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CONTAINER_SELECTORS</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;.tikzjax-node&#39;</span>] <span style="color:#75715e">// All possible container classes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// CONTAINER_SELECTORS: [&#39;.tikzjax&#39;, &#39;.tikzjax-node&#39;] // All possible container classes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Main processing function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processTikzNodes</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Process all TikZ containers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">containers</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span>.<span style="color:#a6e22e">CONTAINER_SELECTORS</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;,&#39;</span>));
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">containers</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">container</span> =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">svgs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">container</span>.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#e6db74">&#39;svg&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">svgs</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">svg</span> =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Find all paths that have M and Z commands
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">paths</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">svg</span>.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#e6db74">&#39;path&#39;</span>)).<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">path</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;d&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;M&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;Z&#39;</span>);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Process each star path
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">path</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Remove fill=&#34;none&#34; if present
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;none&#39;</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">removeAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Also check parent groups
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">parentElement</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">current</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">current</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">svg</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;none&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">removeAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>);
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">parentElement</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>document.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;DOMContentLoaded&#39;</span>, <span style="color:#66d9ef">function</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Wait for TikZJax to finish rendering
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">processTikzNodes</span>, <span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span>.<span style="color:#a6e22e">TIMEOUT_MS</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><ol start="3">
+<li><code>$EDITOR layouts/partials/custom_head.html</code> and append</li>
+</ol>
+<pre tabindex="0"><code>&lt;!-- TikZJax-node --&gt;
+{{ $js := resources.Get &#34;js/tikzjax-node.js&#34; | minify | fingerprint }}
+&lt;script src=&#34;{{ $js.RelPermalink }}&#34; integrity=&#34;{{ $js.Data.Integrity }}&#34; defer&gt;&lt;/script&gt;
+</code></pre><p>Result:</p>
+
+
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,0)
+        node[
+          star,
+          star points=5,
+          star point ratio=2.5,
+          minimum size=2in,
+          draw
+        ] {};
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<p>The star is now <strong>right colored</strong>!</p>
+<p>We can even draw multiple $\text{Ti}\textit{k}\text{Z}$ nodes in the same <code>&lt;div&gt;</code>:</p>
+
+
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      % Figures in cornels of a pentagon
+      % Position must be:
+      % - (xi,yi)=(rcos(90+72*i),rsin(90+72*i))  for i=0,1,2,3,4 starting from the top vertex (90 grades)
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,3) node[
+          star,
+          star points=5,
+          star point ratio=0.5,
+          minimum size=0.3in,
+          draw
+        ] {};
+      \draw[thick, fill=green!50, draw=green]
+        (-2.85,0.93) node[rectangle, minimum size=0.5in, draw] {};
+      \draw[thick, fill=blue!50, draw=blue]
+        (-1.76,-2.43) node[circle, minimum size=0.5in, draw] {};
+      \draw[thick, fill=gray!50, draw=gray]
+        (1.76,-2.43) node[diamond, minimum size=0.5in, draw] {};
+      \draw[thick, fill=pink!50, draw=red]
+        (2.85,0.93) node[regular polygon, regular polygon sides=6, minimum size=0.5in, draw] {};
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+
+
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      % This does nothing visible but reserves vertical space
+      \draw[opacity=0] (0,0) -- (0,0.5in);
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<h4 id="unleash-your-creativity">Unleash your creativity</h4>
+<p>Last but not list <strong>explore</strong> the many drawing capabilities that $\text{Ti}\textit{k}\text{Z}$ offers.</p>
+<p><strong>Combine</strong> normal text (with emojis), HTML-tags, $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$:</p>
+
+
+<div class="html-content tikzjax tikzjax-node">
+  <span style="color: yellow; font-weight: bold; -webkit-text-stroke: 1px orange;">
+    5 points star
+  </span>
+  ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,0)
+        node[
+          star,
+          star points=5,
+          star point ratio=2.5,
+          minimum size=2in,
+          draw
+        ] {};
+    \end{tikzpicture}
+  </script>
+</div>
+
+
+<p><strong>Various</strong> drawings and shapes:</p>
 
 
 <div class="html-content tikzjax">
@@ -664,6 +945,7 @@ TikZJax currently has limited support for some of these specialized nodes and th
 </div>
 
 
+<p>Do you need <strong>inspiration</strong>? Check out some <a href="https://github.com/xiaohanyu/awesome-tikz#gallery">$\text{Ti}\textit{k}\text{Z}$ galleries</a>!</p>
 
 
 <div class="html-content">

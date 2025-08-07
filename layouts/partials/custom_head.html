@@ -168,3 +168,7 @@ window.MathJax = {
 <!-- https://github.com/kisonecat/tikzjax -->
 <link rel="stylesheet" type="text/css" href="http://tikzjax.com/v1/fonts.css">
 <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+<!-- TikZJax-node -->
+{{ $js := resources.Get "js/tikzjax-node.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

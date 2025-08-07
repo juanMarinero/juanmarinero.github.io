@@ -402,7 +402,6 @@ Like this:
 <div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
 &#60;div class="html-content tikzjax"&#62;
-  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
   &#60;script type="text/tikz"&#62;
     \begin{tikzpicture}
       \draw (0,0) circle (1in);
@@ -422,10 +421,8 @@ Result:
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
 <div class="html-content tikzjax">
-  5 points star ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
   <script type="text/tikz">
     \begin{tikzpicture}
-      \draw (0,0) circle (1in);
       \draw[thick, fill=yellow!50, draw=orange]
         (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
         -- (234:1in) -- (270:0.4in) -- (306:1in) 
@@ -476,7 +473,309 @@ But it has some **disadvantages**. Notice that `fill=yellow!50` didn't work:
 The `node[star, ...]` construct relies on $\text{Ti}\textit{k}\text{Z}$'s nodes shapes defined in libraries like `shapes.geometric`.
 TikZJax currently has limited support for some of these specialized nodes and their `fill`s may not be properly rendered in the generated SVG.
 
-Anyhow, there are still many capabilities to explore with $\text{Ti}\textit{k}\text{Z}$:
+The right colored star produces
+
+```html
+<div class="html-content tikzjax">
+  <div style="display: flex; width: 138.267pt; height: 131.538pt;">
+    <div
+      style="position: relative; width: 100%; height: 0.3999786376953124pt;"
+      class="page"
+    >
+      <svg
+        width="138.2669pt"
+        height="131.5379pt"
+        viewBox="-72 -72 138.2669 131.5379"
+        style="position: absolute; top: 0pt; left: 0pt; overflow: visible;"
+      >
+        <g transform="translate(-3.1365509033203116,0.3999786376953124)">
+          <g stroke-miterlimit="10" transform="scale(1,-1)">
+            <g stroke="#000" fill="#000">
+              <g stroke-width="0.4">
+                <g stroke-width="0.8">
+                  <g fill="#ffff80">
+                    <g stroke="#ff8000">
+                      <path d=" M 0.0 72.26999 L -16.99138 23.38681 L -68.73346 22.33293 L -27.49295 -8.93303 L -42.47913 -58.46793 L 0.0 -28.90755 L 42.47913 -58.46793 L 27.49295 -8.93303 L 68.73346 22.33293 L 16.99138 23.38681 Z  "></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>;
+```
+
+The other makes
+
+```html
+<div class="html-content tikzjax">
+  <div style="display: flex; width: 138.267pt; height: 131.538pt;">
+    <div
+      style="position: relative; width: 100%; height: 0.3999786376953124pt;"
+      class="page"
+    >
+      <svg
+        width="138.2669pt"
+        height="131.5379pt"
+        viewBox="-72 -72 138.2669 131.5379"
+        style="position: absolute; top: 0pt; left: 0pt; overflow: visible;"
+      >
+        <g transform="translate(-3.1365509033203116,0.3999786376953124)">
+          <g stroke-miterlimit="10" transform="scale(1,-1)">
+            <g stroke="#000" fill="#000">
+              <g stroke-width="0.4">
+                <g stroke-width="0.8">
+                  <g fill="#ffff80">
+                    <g stroke="#ff8000">
+                      <path d=" M 0.0 0.0  "></path>
+                      <path
+                        d=" M 0.0 72.26999 L -16.99527 23.39217 L -68.73346 22.33293 L -27.49925 -8.93507 L -42.47913 -58.46793 L 0.0 -28.91417 L 42.47913 -58.46793 L 27.49925 -8.93507 L 68.73346 22.33293 L 16.99527 23.39217 Z  "
+                        fill="none"
+                      ></path>
+                      <g
+                        stroke="none"
+                        transform="scale(-1.00375,1.00375)translate(0.19677734374999994,0.3999786376953124)scale(-1,-1)"
+                      >
+                        <g fill="#000">
+                          <g stroke="none"> </g>{" "}
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>;
+```
+
+The differences can be checked with `vim -d a.html b.html` or online with [text-compare](https://text-compare.com/).
+These are inside `<g stroke="#ff8000">`.
+
+On the not fill-colored, those lines are next. 
+Notes:
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <ul>
+  <li>Mismatches in <span style="color: red;">red</span> font color</li>
+  <li><code>...</code> to hide non important parts</li>
+  </ul>
+</div>
+{{< /rawhtml >}}
+
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <div style="white-space: pre-wrap; color: red;">
+  &#60;path d=" M 0.0 0.0  "&#62;&#60;/path&#62;
+    <span style="color: grey;">&#60;path"</span>
+      <span style="color: grey;">d=" M 0.0 72.26999 ... Z  "</span>
+      fill="none"
+    <span style="color: grey;">&#62;/path"</span>
+    &#60;g
+      stroke="none"
+      transform="scale(...)translate(...)scale(-1,-1)"
+    &#62;
+      &#60;g fill="#000"&#62;
+        &#60;g stroke="none"&#62; &#60;/g&#62;{" "}
+      &#60;/g&#62;
+    &#60;/g&#62; 
+  </div>
+</div>
+{{< /rawhtml >}}
+
+On the right colored star all previous HTML lines are just next `<path>`,
+which is like the second one of previous code but without `fill="none"`.
+I said *like* because some decimals of `d` might differ, but this doesn't matter.
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <div style="white-space: pre-wrap; color: grey;">
+    &#60;path
+      d=" M 0.0 72.26999 ... Z  "
+    &#62;&#60;/path&#62;
+  </div>
+</div>
+{{< /rawhtml >}}
+
+Thus, inspecting this star in the browser we can force remove `fill="none"`,
+now the star will be right colored (as long as we don't refresh the page obviously).
+Let's apply this fix permanently and programmatically in next section.
+
+#### Workaround
+
+1. Add a new class to previous $\text{Ti}\textit{k}\text{Z}$-node star:
+`<div class="html-content tikzjax tikzjax-node">` instead of `<div class="html-content tikzjax">`.
+
+2. `$EDITOR assets/js/tikzjax-node.js` with content
+
+```js
+// Configuration
+const TIKZJAX_FIX_CONFIG = {
+  TIMEOUT_MS: 3000,  // 3 second timeout to ensure TikZJax is done
+  CONTAINER_SELECTORS: ['.tikzjax-node'] // All possible container classes
+  // CONTAINER_SELECTORS: ['.tikzjax', '.tikzjax-node'] // All possible container classes
+};
+
+// Main processing function
+function processTikzNodes() {
+  // Process all TikZ containers
+  const containers = document.querySelectorAll(TIKZJAX_FIX_CONFIG.CONTAINER_SELECTORS.join(','));
+  
+  containers.forEach(container => {
+    const svgs = container.querySelectorAll('svg');
+    
+    svgs.forEach(svg => {
+      // Find all paths that have M and Z commands
+      const paths = Array.from(svg.querySelectorAll('path')).filter(path => {
+        const d = path.getAttribute('d') || '';
+        return d.includes('M') && d.includes('Z');
+      });
+      
+      // Process each star path
+      paths.forEach(path => {
+        // Remove fill="none" if present
+        if (path.getAttribute('fill') === 'none') {
+          path.removeAttribute('fill');
+        }
+        
+        // Also check parent groups
+        let current = path.parentElement;
+        while (current && current !== svg) {
+          if (current.getAttribute('fill') === 'none') {
+            current.removeAttribute('fill');
+          }
+          current = current.parentElement;
+        }
+      });
+    });
+  });
+}
+
+// Initialization
+document.addEventListener('DOMContentLoaded', function() {
+  // Wait for TikZJax to finish rendering
+  setTimeout(processTikzNodes, TIKZJAX_FIX_CONFIG.TIMEOUT_MS);
+});
+```
+
+
+3. `$EDITOR layouts/partials/custom_head.html` and append
+
+```
+<!-- TikZJax-node -->
+{{ $js := resources.Get "js/tikzjax-node.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+```
+
+Result:
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,0)
+        node[
+          star,
+          star points=5,
+          star point ratio=2.5,
+          minimum size=2in,
+          draw
+        ] {};
+    \end{tikzpicture}
+  </script>
+</div>
+{{< /rawhtml >}}
+
+The star is now **right colored**!
+
+We can even draw multiple $\text{Ti}\textit{k}\text{Z}$ nodes in the same `<div>`:
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      % Figures in cornels of a pentagon
+      % Position must be:
+      % - (xi,yi)=(rcos(90+72*i),rsin(90+72*i))  for i=0,1,2,3,4 starting from the top vertex (90 grades)
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,3) node[
+          star,
+          star points=5,
+          star point ratio=0.5,
+          minimum size=0.3in,
+          draw
+        ] {};
+      \draw[thick, fill=green!50, draw=green]
+        (-2.85,0.93) node[rectangle, minimum size=0.5in, draw] {};
+      \draw[thick, fill=blue!50, draw=blue]
+        (-1.76,-2.43) node[circle, minimum size=0.5in, draw] {};
+      \draw[thick, fill=gray!50, draw=gray]
+        (1.76,-2.43) node[diamond, minimum size=0.5in, draw] {};
+      \draw[thick, fill=pink!50, draw=red]
+        (2.85,0.93) node[regular polygon, regular polygon sides=6, minimum size=0.5in, draw] {};
+    \end{tikzpicture}
+  </script>
+</div>
+{{< /rawhtml >}}
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content tikzjax tikzjax-node">
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      % This does nothing visible but reserves vertical space
+      \draw[opacity=0] (0,0) -- (0,0.5in);
+    \end{tikzpicture}
+  </script>
+</div>
+{{< /rawhtml >}}
+
+#### Unleash your creativity
+
+Last but not list **explore** the many drawing capabilities that $\text{Ti}\textit{k}\text{Z}$ offers.
+
+**Combine** normal text (with emojis), HTML-tags, $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$:
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content tikzjax tikzjax-node">
+  <span style="color: yellow; font-weight: bold; -webkit-text-stroke: 1px orange;">
+    5 points star
+  </span>
+  ⭐ with $\,Ti\textit{k}Z \quad\Rightarrow\qquad$ 
+  <script type="text/tikz">
+    \begin{tikzpicture}
+      \draw[thick,fill=yellow!50, draw=orange]
+        (0,0)
+        node[
+          star,
+          star points=5,
+          star point ratio=2.5,
+          minimum size=2in,
+          draw
+        ] {};
+    \end{tikzpicture}
+  </script>
+</div>
+{{< /rawhtml >}}
+
+**Various** drawings and shapes:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
@@ -508,6 +807,8 @@ Anyhow, there are still many capabilities to explore with $\text{Ti}\textit{k}\t
   </script>
 </div>
 {{< /rawhtml >}}
+
+Do you need **inspiration**? Check out some [$\text{Ti}\textit{k}\text{Z}$ galleries](https://github.com/xiaohanyu/awesome-tikz#gallery)!
 
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
