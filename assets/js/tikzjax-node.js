@@ -3,48 +3,54 @@ for (let i = 0; i < 5; i++) {
 }
 // Configuration
 const TIKZJAX_FIX_CONFIG = {
-  TIMEOUT_MS: 3000,  // 3 second timeout to ensure TikZJax is done
-  CONTAINER_SELECTORS: ['.tikzjax-node'] // All possible container classes
-  // CONTAINER_SELECTORS: ['.tikzjax', '.tikzjax-node'] // All possible container classes
+  MAX_RETRIES: 3,
+  RETRY_DELAY: 500,
+  TIMEOUT_MS: 2000,
+  CONTAINER_SELECTORS: ['.tikzjax-node']
 };
 
-// Main processing function
-function processTikzNodes() {
-  // Process all TikZ containers
-  const containers = document.querySelectorAll(TIKZJAX_FIX_CONFIG.CONTAINER_SELECTORS.join(','));
-  
-  containers.forEach(container => {
-    const svgs = container.querySelectorAll('svg');
+function processTikzNodes(retryCount = 0) {
+  try {
+    const containers = document.querySelectorAll(TIKZJAX_FIX_CONFIG.CONTAINER_SELECTORS.join(','));
     
-    svgs.forEach(svg => {
-      // Find all paths that have M and Z commands
-      const paths = Array.from(svg.querySelectorAll('path')).filter(path => {
-        const d = path.getAttribute('d') || '';
-        return d.includes('M') && d.includes('Z');
-      });
+    // If no containers found and we have retries left
+    if (containers.length === 0 && retryCount < TIKZJAX_FIX_CONFIG.MAX_RETRIES) {
+      setTimeout(() => processTikzNodes(retryCount + 1), TIKZJAX_FIX_CONFIG.RETRY_DELAY);
+      return;
+    }
+
+    containers.forEach(container => {
+      const svgs = container.querySelectorAll('svg');
       
-      // Process each star path
-      paths.forEach(path => {
-        // Remove fill="none" if present
-        if (path.getAttribute('fill') === 'none') {
-          path.removeAttribute('fill');
-        }
+      svgs.forEach(svg => {
+        const paths = Array.from(svg.querySelectorAll('path')).filter(path => {
+          const d = path.getAttribute('d') || '';
+          return d.includes('M') && d.includes('Z');
+        });
         
-        // Also check parent groups
-        let current = path.parentElement;
-        while (current && current !== svg) {
-          if (current.getAttribute('fill') === 'none') {
-            current.removeAttribute('fill');
+        paths.forEach(path => {
+          if (path.getAttribute('fill') === 'none') {
+            path.removeAttribute('fill');
           }
-          current = current.parentElement;
-        }
+          
+          let current = path.parentElement;
+          while (current && current !== svg) {
+            if (current.getAttribute('fill') === 'none') {
+              current.removeAttribute('fill');
+            }
+            current = current.parentElement;
+          }
+        });
       });
     });
-  });
+  } catch (error) {
+    console.error('TikZJax processing error:', error);
+    if (retryCount < TIKZJAX_FIX_CONFIG.MAX_RETRIES) {
+      setTimeout(() => processTikzNodes(retryCount + 1), TIKZJAX_FIX_CONFIG.RETRY_DELAY);
+    }
+  }
 }
 
-// Initialization
 document.addEventListener('DOMContentLoaded', function() {
-  // Wait for TikZJax to finish rendering
   setTimeout(processTikzNodes, TIKZJAX_FIX_CONFIG.TIMEOUT_MS);
 });
