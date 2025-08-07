@@ -105,9 +105,12 @@ They may not be commercial hits, but they are worth reading.
 
 ### English
 
-[A **Guide** to Tolkien Audiobooks](https://www.youtube.com/watch?v=4uq6vlrfZPY) by 
-[Nerd of the Rings](https://www.youtube.com/c/NerdoftheRings).
-That's it. Those 12 minutes are gold!
+A **Guide** to Tolkien Audiobooks by 
+[Nerd of the Rings](https://www.youtube.com/c/NerdoftheRings):
+
+{{< youtube id=4uq6vlrfZPY loading="lazy" >}}
+
+That's it. These twelve minutes are of the finest mithril!
 This recommends *enhanced* audio books too, like:
 - The [Hobbit](https://archive.org/details/roast-moose) by [Bluefax](https://www.youtube.com/@Bluefax), which is free! Also enjoy its [making-of](https://www.youtube.com/watch?v=30yW7a9g0vs&list=PLHuqOGq8HdsKf6OcP-cCD6_mOODvMf0aT)
 - The [lotr](https://archive.org/details/the-fellowship-of-the-ring_soundscape-by-phil-dragash) by [Phil Dragash](https://www.phildragash.com/index.html)
