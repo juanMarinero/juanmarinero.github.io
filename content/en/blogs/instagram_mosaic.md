@@ -2,11 +2,9 @@
 title: "Create an Instagram mosaic"
 ---
 
-Let's just follow [these](https://www.reddit.com/r/Instagram/comments/1icsc30/creating_a_seamless_45_instagram_mosaic_new/)
-steps to create a **4:5 Instagram mosaic**.
-
-But we are lazy, we achieve this **on the terminal**.
-
+Let's create a **4:5 Instagram mosaic**.
+Instead of following [manual steps](https://www.reddit.com/r/Instagram/comments/1icsc30/creating_a_seamless_45_instagram_mosaic_new/),
+we will achieve this **on the terminal**.
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
