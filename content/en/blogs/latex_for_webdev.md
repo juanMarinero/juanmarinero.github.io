@@ -12,6 +12,8 @@
 $\LaTeX$ is a markup language for typesetting math and science.
 It's used in web-dev because it's a **fast and easy** way to typeset equations and other math content.
 
+Official [documentation](https://gohugo.io/content-management/mathematics/).
+
 Table of Contents
 * [MathJax Support](#mathjax-support)
   * [Block equations](#block-equations)
@@ -103,9 +105,7 @@ The **correct** way is via *raw HTML*:
 {{< rawhtml >}}
 <div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
   $$ \begin{matrix} a & b \\ c & d \end{matrix} $$
-&#60;/div&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
 </div>
 {{< /rawhtml >}}
@@ -119,7 +119,8 @@ Which displays as:
 </div>
 {{< /rawhtml >}}
 
-*Raw HTML* explanation and usage in my post [How to **create** a **Hugo-scroll web**site](/blogs/create_hugo_website/#raw-html).
+*Raw HTML* explanation and usage in my [post](/blogs/hugo_shortcodes/) concerning Hugo shortcodes,
+specially its dedicated [paragraph](/blogs/hugo_shortcodes/#raw-html) about raw HTML.
 
 Alternative use `\newline` instead of `\\`. E.g.
 ```tex
