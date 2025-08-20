@@ -142,7 +142,7 @@ They even share [tips](https://www.tolkiengesellschaft.de/44866/5-tipps-fuer-euc
 If you want to **contribute**, in any language, please share your reading recordings in [LibriVox](https://librivox.org).
 This platform holds many public domain audio books (and more).
 Though [Tolkien's works in LibriVox](https://librivox.org/author/1536?primary_key=1536) are almost none.
-Hopefully in [Internet Archive](https://archive.org/) there are more than **one thousand** Tolkien related
+Luckily in [Internet Archive](https://archive.org/) there are more than **one thousand** Tolkien related
 [audios](https://archive.org/search?query=tolkien&and%5B%5D=mediatype%3A%22audio%22).
 
 
@@ -163,7 +163,7 @@ I just listen next two, though for sure there are many more broadcasting, fell f
 Actually, this is not my strongest point. I have only three favourites:
 - [Tolkien Untangled](https://www.youtube.com/@tolkienuntangled)
 - [Nerd of the Rings](https://www.youtube.com/c/NerdoftheRings)
-- And [Kai47](https://www.youtube.com/@Kai47) for Spanish readers. Btw check his [novels](https://www.goodreads.com/author/show/20964301.Bernard_Torell_)!
+- And [Kai47](https://www.youtube.com/@Kai47) for Spanish viewers. Btw check his [novels](https://www.goodreads.com/author/show/20964301.Bernard_Torell_)!
 
 [Tolkien Untangled](https://www.youtube.com/@tolkienuntangled) is focused on Tolkien's writtings. So any of his videos is a flawless choice.
 Directly open a [playlist](https://www.youtube.com/@tolkienuntangled/playlists) and watch all its videos in a row (during various days, optional).
@@ -263,7 +263,7 @@ Did someone mention fun? More?? Wasn't this suppose to be about Tolkien's **seri
 
 For a full list of Middle-earth games, check [Wikipedia](https://en.wikipedia.org/wiki/List_of_Middle-earth_video_games).
 
-I played few, but [The Battle for Middle-earth II](https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Battle_for_Middle-earth_II)
+I played a few, but [The Battle for Middle-earth II](https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Battle_for_Middle-earth_II)
 and its [expansion](https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Battle_for_Middle-earth_II:_The_Rise_of_the_Witch-king)
 keep a special place in my teen's memories.
 Back then I spent countless hours at a cybercafé with my friends, battling over Middle Earth.
@@ -308,8 +308,8 @@ Including original Tolkien artwork, fan art, and official illustrations.
 
 The most famous artist associated with [Middle Earth illustrations](https://en.wikipedia.org/wiki/Illustrating_Middle-earth)
 is widely regarded as [Alan Lee](https://en.wikipedia.org/wiki/Alan_Lee_(illustrator)).
-My first *lotr* book had his [this](https://tolkiengateway.net/wiki/File:Alan_Lee_-_The_Black_Gate_is_Closed.jpg)
-as cover. More [here](https://tolkiengateway.net/wiki/Category:Images_by_Alan_Lee).
+My first *lotr* book had [his](https://tolkiengateway.net/wiki/File:Alan_Lee_-_The_Black_Gate_is_Closed.jpg)
+cover. More [here](https://tolkiengateway.net/wiki/Category:Images_by_Alan_Lee).
 
 Ted Nasmith [illustrations](https://www.tednasmith.com/site-map/j-r-r-tolkien/) are also well-known.
 The [interviews](https://www.tednasmith.com/videos/) are also worth listening to.
