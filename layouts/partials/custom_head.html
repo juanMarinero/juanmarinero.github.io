@@ -98,6 +98,10 @@ h1 {
   align-items: center;     /* centers vertically if needed */
 }
 
+/** ======== Table of Contents all bold except summary ========= */
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
 </style>
 
 
@@ -172,3 +176,8 @@ window.MathJax = {
 <!-- TikZJax-node -->
 {{ $js := resources.Get "js/tikzjax-node.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+
+
+<!-- Tachyons for CSS -->
+<!-- https://tachyons.io/ -->
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>

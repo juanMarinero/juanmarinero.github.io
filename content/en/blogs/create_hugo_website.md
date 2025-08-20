@@ -570,31 +570,9 @@ Instead in `layouts/partials/custom_head.html` write:
 
 ### Raw HTML
 
+Check out my [post](/blogs/hugo_shortcodes/) concerning Hugo shortcodes,
+specially its dedicated [paragraph](/blogs/hugo_shortcodes/#raw-html) about raw HTML.
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
-{{< rawhtml >}}
-<div class="html-content">
-  To use raw HTML content wrap the HTML lines inside
-  <code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;&#60;div class="html-content"&#62;</code>
-  and 
-  <code>&#60;/div&#62;&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code>.
-  For more info read
-  <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html">layouts/shortcodes/rawhtml.html</a>
-  from the official Hugo-scroll repo.
-  Example usage in the <strong>TL;DR</strong> of my <a href="/blogs/nerd_fonts_and_more/#great-vibes">Nerd Fonts and more</a> blog.
-</div>
-{{< /rawhtml >}}
-
-Alternative **but NOT** recommended. Add this to your `config.toml` (or equivalent in YAML/JSON)
-
-```toml
-[markup.goldmark.renderer]
-  unsafe = true
-```
-
-Read
-- [Do you set `unsafe = true` in `[markup.goldmark.renderer]`?](https://discourse.gohugo.io/t/do-you-set-unsafe-true-in-markup-goldmark-renderer/37555)
-- https://gohugo.io/configuration/markup/
 
 
 ## Deploy

@@ -166,6 +166,10 @@ h1 {
   align-items: center;      
 }
 
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
 </style>
 
 
@@ -239,6 +243,11 @@ window.MathJax = {
 
 
 <script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 </head>
   <body>
   <main class="content page-template page-">
@@ -307,42 +316,42 @@ For details read the <a href="https://github.com/sharkdp/pastel#via-cargo-source
 </div>
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_valid_format<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example usage: color_check_valid_format &#34;#FF0000&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_valid_format<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Example usage: color_check_valid_format &#34;#FF0000&#34;</span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if any argument was supplied</span>
-</span></span><span style="display:flex;"><span>  local color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;No argument supplied&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if any argument was supplied</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">color</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> <span style="color:#719e07">[</span> -z <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;No argument supplied&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if it&#39;s a valid color code</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> pastel color <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> &gt;/dev/null 2&gt;&amp;1; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;This is NOT a valid color format: </span>$color<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>color_picker<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Open zenity color picker, then pick a color and click &#34;Select&#34;</span>
-</span></span><span style="display:flex;"><span>  color<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>zenity --color-selection --title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pick a Color&#34;</span> --color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span> 2&gt;/dev/null<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if it&#39;s a valid color code</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> pastel color <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> &gt;/dev/null 2&gt;&amp;1; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;This is NOT a valid color format: </span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
+</span></span><span style="display:flex;"><span>color_picker<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Open zenity color picker, then pick a color and click &#34;Select&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">color</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>zenity --color-selection --title<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Pick a Color&#34;</span> --color<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;green&#34;</span> 2&gt;/dev/null<span style="color:#719e07">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if user clicked &#34;Cancel&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>      echo <span style="color:#e6db74">&#34;No color selected.&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if user clicked &#34;Cancel&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;No color selected.&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#719e07">return</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if a valid color is provided</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ! color_check_valid_format <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if a valid color is provided</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> ! color_check_valid_format <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Convert HEX to RGB, etc.</span>
-</span></span><span style="display:flex;"><span>  pastel color <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Convert HEX to RGB, etc.</span>
+</span></span><span style="display:flex;"><span>  pastel color <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
 </span></span></code></pre></div><h3 id="bonus">Bonus</h3>
 <p>Check the color format. Screenshot:</p>
 
@@ -362,31 +371,31 @@ For details read the <a href="https://github.com/sharkdp/pastel#via-cargo-source
 <li><a href="https://github.com/zdharma-continuum/fast-syntax-highlighting">zdharma-continuum/fast-syntax-highlighting</a></li>
 </ul>
 <p>Code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_format<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Example usage: </span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;rgba(207, 196, 26, 0.737)&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;rgb(207, 196, 26)&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;hsla(56, 77.7%, 45.7%, 0.737)&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;hsl(56, 77.7%, 45.7%)&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;#FF0000&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;red&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   color_check_format &#34;Invalid-format&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>color_check_format<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Example usage: </span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;rgba(207, 196, 26, 0.737)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;rgb(207, 196, 26)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;hsla(56, 77.7%, 45.7%, 0.737)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;hsl(56, 77.7%, 45.7%)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;#FF0000&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">#   color_check_format &#34;Invalid-format&#34;</span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check if a valid color format is provided</span>
-</span></span><span style="display:flex;"><span>  local color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ! color_check_valid_format <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if a valid color format is provided</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">color</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> ! color_check_valid_format <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Check the format</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^rgba <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;RGBA format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^rgb <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;RGB format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^hsla <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HSLA format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^hsl <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HSL format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$color<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^# <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span> echo <span style="color:#e6db74">&#34;HEX format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> echo <span style="color:#e6db74">&#34;Other [valid] format&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check the format</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">=</span>~ ^rgba <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;RGBA format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">elif</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">=</span>~ ^rgb <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;RGB format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">elif</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">=</span>~ ^hsla <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;HSLA format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">elif</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">=</span>~ ^hsl <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;HSL format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">elif</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$color</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">=</span>~ ^# <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;HEX format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">else</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Other [valid] format&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
 </span></span></code></pre></div>
 
 <div class="html-content">

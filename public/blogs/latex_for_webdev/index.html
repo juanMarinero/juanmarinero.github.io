@@ -163,6 +163,10 @@ h1 {
   align-items: center;      
 }
 
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
 </style>
 
 
@@ -236,6 +240,11 @@ window.MathJax = {
 
 
 <script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 </head>
   <body>
   <main class="content page-template page-">
@@ -339,7 +348,7 @@ Therefore, one needs <strong>newlines</strong> for block equations.</p>
 <p>Hugo&rsquo;s Markdown processor converts <code>\\</code> to spaces.
 This breaks $\LaTeX$ environments that rely on <code>\\</code> for line endings.</p>
 <p>For example</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} <span style="color:#e6db74">$$</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#586e75">$$</span><span style="color:#b58900"> </span><span style="color:#268bd2">\begin</span><span style="color:#b58900">{matrix} a &amp; b </span><span style="color:#268bd2">\\</span><span style="color:#b58900"> c &amp; d </span><span style="color:#268bd2">\end</span><span style="color:#b58900">{matrix} </span><span style="color:#2aa198">$$</span>
 </span></span></code></pre></div><p>Gets converted to:</p>
 <p>$$ \begin{matrix} a &amp; b \ c &amp; d \end{matrix} $$</p>
 <p>The <strong>correct</strong> way is via <em>raw HTML</em>:</p>
@@ -364,14 +373,14 @@ This breaks $\LaTeX$ environments that rely on <code>\\</code> for line endings.
 
 <p><em>Raw HTML</em> explanation and usage in my post <a href="/blogs/create_hugo_website/#raw-html">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>.</p>
 <p>Alternative use <code>\newline</code> instead of <code>\\</code>. E.g.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span>
-</span></span><span style="display:flex;"><span>\left<span style="color:#f92672">(</span>
-</span></span><span style="display:flex;"><span>\begin{matrix}
-</span></span><span style="display:flex;"><span>  a &amp; b \newline
-</span></span><span style="display:flex;"><span>  c &amp; d
-</span></span><span style="display:flex;"><span>\end{matrix}
-</span></span><span style="display:flex;"><span>\right<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">$$</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#586e75">$$</span><span style="color:#b58900">
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900"></span><span style="color:#268bd2">\left</span><span style="color:#719e07">(</span><span style="color:#b58900">
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900"></span><span style="color:#268bd2">\begin</span><span style="color:#b58900">{matrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900">  a &amp; b </span><span style="color:#268bd2">\newline</span><span style="color:#b58900">
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900">  c &amp; d
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900"></span><span style="color:#268bd2">\end</span><span style="color:#b58900">{matrix}
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900"></span><span style="color:#268bd2">\right</span><span style="color:#719e07">)</span><span style="color:#b58900">
+</span></span></span><span style="display:flex;"><span><span style="color:#b58900"></span><span style="color:#2aa198">$$</span>
 </span></span></code></pre></div><p>produces</p>
 <p>$$
 \left(
@@ -385,9 +394,9 @@ $$</p>
 <p>Insert an invalid <em>alignment specification</em> to check its error.
 Instead of <code>matrix</code> lets use <code>foo</code></p>
 <p>Original:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} <span style="color:#e6db74">$$</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#586e75">$$</span><span style="color:#b58900"> </span><span style="color:#268bd2">\begin</span><span style="color:#b58900">{matrix} a &amp; b </span><span style="color:#268bd2">\\</span><span style="color:#b58900"> c &amp; d </span><span style="color:#268bd2">\end</span><span style="color:#b58900">{matrix} </span><span style="color:#2aa198">$$</span>
 </span></span></code></pre></div><p>Error:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#e6db74">$$</span> \begin{foo} a &amp; b \\ c &amp; d \end{foo} <span style="color:#e6db74">$$</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#586e75">$$</span><span style="color:#b58900"> </span><span style="color:#268bd2">\begin</span><span style="color:#b58900">{foo} a &amp; b </span><span style="color:#268bd2">\\</span><span style="color:#b58900"> c &amp; d </span><span style="color:#268bd2">\end</span><span style="color:#b58900">{foo} </span><span style="color:#2aa198">$$</span>
 </span></span></code></pre></div><p>Gets converted to:</p>
 <p>$$ \begin{foo} a &amp; b \ c &amp; d \end{foo} $$</p>
 <p>This message (<code>Unknown environment 'foo'</code>) is from MathJax.
@@ -431,7 +440,7 @@ config as reference:</p>
 };
 </code></pre><h4 id="test-a-latex-package">Test a LaTeX package</h4>
 <p>Check in the browser&rsquo;s console if they are proper loaded with next, expected output: <code>Array [ &quot;[tex]/ams&quot;, &quot;[tex]/boldsymbol&quot; ]</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">MathJax</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">loader</span>.<span style="color:#a6e22e">load</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>MathJax.config.loader.load
 </span></span></code></pre></div><p>Thus, ignore if the console shows a warning
 like <code>No version information available for component [tex]/ams</code>
 when loading.
@@ -441,9 +450,9 @@ Maybe this package doesn&rsquo;t have version metadata included in its build.</p
 like <a href="https://ctan.org/pkg/amsmath">amsmath</a>,
 performs OK.</p>
 <p>Code</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{equation}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\forall</span> x <span style="color:#66d9ef">\in</span> <span style="color:#66d9ef">\mathbb</span>{R}, <span style="color:#66d9ef">\quad</span> <span style="color:#66d9ef">\exists</span> y &gt; 0 <span style="color:#66d9ef">\quad</span> <span style="color:#66d9ef">\text</span>{such that} <span style="color:#66d9ef">\quad</span> x + y &gt; 0
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{equation}
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#719e07">\begin</span><span style="color:#b58900">{</span>equation<span style="color:#b58900">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\forall</span> x <span style="color:#719e07">\in</span> <span style="color:#719e07">\mathbb</span><span style="color:#b58900">{</span>R<span style="color:#b58900">}</span>, <span style="color:#719e07">\quad</span> <span style="color:#719e07">\exists</span> y &gt; 0 <span style="color:#719e07">\quad</span> <span style="color:#719e07">\text</span><span style="color:#b58900">{</span>such that<span style="color:#b58900">}</span> <span style="color:#719e07">\quad</span> x + y &gt; 0
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\end</span><span style="color:#b58900">{</span>equation<span style="color:#b58900">}</span>
 </span></span></code></pre></div><p>Render</p>
 <p>$$
 \begin{equation}
@@ -452,13 +461,13 @@ performs OK.</p>
 $$</p>
 <p>Test if <a href="https://docs.mathjax.org/en/latest/input/tex/extensions/boldsymbol.html">boldsymbol</a>, notice this is a <em>docs.mathjax.org</em> link, succeeds.</p>
 <p>Code</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\text</span>{x normally: } x
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\backslash\text</span>{LaTeX normally: } <span style="color:#66d9ef">\LaTeX</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\text</span>{x as arg of } <span style="color:#66d9ef">\texttt</span>{boldsymbol} <span style="color:#66d9ef">\text</span>{: } <span style="color:#66d9ef">\boldsymbol</span>{x}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\newline</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\backslash\text</span>{LaTeX as arg of } <span style="color:#66d9ef">\texttt</span>{boldsymbol} <span style="color:#66d9ef">\text</span>{: } <span style="color:#66d9ef">\boldsymbol</span>{<span style="color:#66d9ef">\LaTeX</span>}
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#719e07">\text</span><span style="color:#b58900">{</span>x normally: <span style="color:#b58900">}</span> x
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\backslash\text</span><span style="color:#b58900">{</span>LaTeX normally: <span style="color:#b58900">}</span> <span style="color:#719e07">\LaTeX</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\text</span><span style="color:#b58900">{</span>x as arg of <span style="color:#b58900">}</span> <span style="color:#719e07">\texttt</span><span style="color:#b58900">{</span>boldsymbol<span style="color:#b58900">}</span> <span style="color:#719e07">\text</span><span style="color:#b58900">{</span>: <span style="color:#b58900">}</span> <span style="color:#719e07">\boldsymbol</span><span style="color:#b58900">{</span>x<span style="color:#b58900">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\newline</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\backslash\text</span><span style="color:#b58900">{</span>LaTeX as arg of <span style="color:#b58900">}</span> <span style="color:#719e07">\texttt</span><span style="color:#b58900">{</span>boldsymbol<span style="color:#b58900">}</span> <span style="color:#719e07">\text</span><span style="color:#b58900">{</span>: <span style="color:#b58900">}</span> <span style="color:#719e07">\boldsymbol</span><span style="color:#b58900">{</span><span style="color:#719e07">\LaTeX</span><span style="color:#b58900">}</span>
 </span></span></code></pre></div><p>Output</p>
 <p>$$
 \text{x normally: } x
@@ -476,10 +485,10 @@ $$</p>
 <ol>
 <li>Add to <code>layouts/partials/custom_head.html</code>:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- TikZJax --&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- https://github.com/kisonecat/tikzjax --&gt;</span>
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://tikzjax.com/v1/fonts.css&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://tikzjax.com/v1/tikzjax.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- TikZJax --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- https://github.com/kisonecat/tikzjax --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/css&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;http://tikzjax.com/v1/fonts.css&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://tikzjax.com/v1/tikzjax.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 </span></span></code></pre></div><ol start="2">
 <li>Try the <a href="https://github.com/kisonecat/tikzjax#example">MWE</a></li>
 </ol>
@@ -557,12 +566,12 @@ to <code>&lt;div class=&quot;html-content tikzjax&quot;&gt;</code> and redraw it
 But this is not an error nor a limitation.
 On the other hand, next are real problems.</p>
 <p>To draw a 5 points star we can use</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[thick, fill=yellow!50, draw=orange]</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#719e07">\begin</span><span style="color:#b58900">{</span>tikzpicture<span style="color:#b58900">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">\draw</span>[thick, fill=yellow!50, draw=orange]
 </span></span><span style="display:flex;"><span>    (90:1in) -- (126:0.4in) -- (162:1in) -- (198:0.4in) 
 </span></span><span style="display:flex;"><span>    -- (234:1in) -- (270:0.4in) -- (306:1in) 
 </span></span><span style="display:flex;"><span>    -- (342:0.4in) -- (18:1in) -- (54:0.4in) -- cycle;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\end</span><span style="color:#b58900">{</span>tikzpicture<span style="color:#b58900">}</span>
 </span></span></code></pre></div><p>Like this:</p>
 
 
@@ -600,8 +609,8 @@ On the other hand, next are real problems.</p>
 
 <p>Though this does not take advantage of $\text{Ti}\textit{k}\text{Z}$&rsquo;s <a href="https://tikz.dev/tikz-shapes">nodes</a>.
 Following is clearer and more customizable:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\begin</span>{tikzpicture}
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[thick,fill=yellow!50, draw=orange]</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#719e07">\begin</span><span style="color:#b58900">{</span>tikzpicture<span style="color:#b58900">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">\draw</span>[thick,fill=yellow!50, draw=orange]
 </span></span><span style="display:flex;"><span>    (0,0)
 </span></span><span style="display:flex;"><span>    node[
 </span></span><span style="display:flex;"><span>      star,
@@ -609,8 +618,8 @@ Following is clearer and more customizable:</p>
 </span></span><span style="display:flex;"><span>      star point ratio=2.5,
 </span></span><span style="display:flex;"><span>      minimum size=2in,
 </span></span><span style="display:flex;"><span>      draw
-</span></span><span style="display:flex;"><span>    ] {};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">\end</span>{tikzpicture}
+</span></span><span style="display:flex;"><span>    ] <span style="color:#b58900">{}</span>;
+</span></span><span style="display:flex;"><span><span style="color:#719e07">\end</span><span style="color:#b58900">{</span>tikzpicture<span style="color:#b58900">}</span>
 </span></span></code></pre></div><p>But it has some <strong>disadvantages</strong>. Notice that <code>fill=yellow!50</code> didn&rsquo;t work:</p>
 
 
@@ -634,81 +643,81 @@ Following is clearer and more customizable:</p>
 <p>The <code>node[star, ...]</code> construct relies on $\text{Ti}\textit{k}\text{Z}$&rsquo;s nodes shapes defined in libraries like <code>shapes.geometric</code>.
 TikZJax currently has limited support for some of these specialized nodes and their <code>fill</code>s may not be properly rendered in the generated SVG.</p>
 <p>The right colored star produces</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;html-content tikzjax&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;html-content tikzjax&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">div</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">div</span>
+</span></span><span style="display:flex;"><span>      style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
+</span></span><span style="display:flex;"><span>      class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;page&#34;</span>
 </span></span><span style="display:flex;"><span>    &gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">svg</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;138.2669pt&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;131.5379pt&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">viewBox</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-72 -72 138.2669 131.5379&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">svg</span>
+</span></span><span style="display:flex;"><span>        width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;138.2669pt&#34;</span>
+</span></span><span style="display:flex;"><span>        height<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;131.5379pt&#34;</span>
+</span></span><span style="display:flex;"><span>        viewBox<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;-72 -72 138.2669 131.5379&#34;</span>
+</span></span><span style="display:flex;"><span>        style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
 </span></span><span style="display:flex;"><span>      &gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-miterlimit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(1,-1)&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.4&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.8&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ffff80&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff8000&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span> <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 72.26999 L -16.99138 23.38681 L -68.73346 22.33293 L -27.49295 -8.93303 L -42.47913 -58.46793 L 0.0 -28.90755 L 42.47913 -58.46793 L 27.49295 -8.93303 L 68.73346 22.33293 L 16.99138 23.38681 Z  &#34;</span>&gt;&lt;/<span style="color:#f92672">path</span>&gt;
-</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">svg</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#268bd2">g</span> transform<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">g</span> stroke-miterlimit<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;10&#34;</span> transform<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;scale(1,-1)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#268bd2">g</span> stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#000&#34;</span> fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#268bd2">g</span> stroke-width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0.4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#268bd2">g</span> stroke-width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0.8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#268bd2">g</span> fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#ffff80&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#268bd2">g</span> stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#ff8000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#268bd2">path</span> d<span style="color:#719e07">=</span><span style="color:#2aa198">&#34; M 0.0 72.26999 L -16.99138 23.38681 L -68.73346 22.33293 L -27.49295 -8.93303 L -42.47913 -58.46793 L 0.0 -28.90755 L 42.47913 -58.46793 L 27.49295 -8.93303 L 68.73346 22.33293 L 16.99138 23.38681 Z  &#34;</span>&gt;&lt;/<span style="color:#268bd2">path</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">svg</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">div</span>&gt;;
 </span></span></code></pre></div><p>The other makes</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;html-content tikzjax&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;page&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;html-content tikzjax&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">div</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;display: flex; width: 138.267pt; height: 131.538pt;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">div</span>
+</span></span><span style="display:flex;"><span>      style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position: relative; width: 100%; height: 0.3999786376953124pt;&#34;</span>
+</span></span><span style="display:flex;"><span>      class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;page&#34;</span>
 </span></span><span style="display:flex;"><span>    &gt;
-</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">svg</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;138.2669pt&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;131.5379pt&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">viewBox</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-72 -72 138.2669 131.5379&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">svg</span>
+</span></span><span style="display:flex;"><span>        width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;138.2669pt&#34;</span>
+</span></span><span style="display:flex;"><span>        height<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;131.5379pt&#34;</span>
+</span></span><span style="display:flex;"><span>        viewBox<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;-72 -72 138.2669 131.5379&#34;</span>
+</span></span><span style="display:flex;"><span>        style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position: absolute; top: 0pt; left: 0pt; overflow: visible;&#34;</span>
 </span></span><span style="display:flex;"><span>      &gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-miterlimit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(1,-1)&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.4&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke-width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.8&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ffff80&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff8000&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span> <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 0.0  &#34;</span>&gt;&lt;/<span style="color:#f92672">path</span>&gt;
-</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">path</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">d</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; M 0.0 72.26999 L -16.99527 23.39217 L -68.73346 22.33293 L -27.49925 -8.93507 L -42.47913 -58.46793 L 0.0 -28.91417 L 42.47913 -58.46793 L 27.49925 -8.93507 L 68.73346 22.33293 L 16.99527 23.39217 Z  &#34;</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>
-</span></span><span style="display:flex;"><span>                      &gt;&lt;/<span style="color:#f92672">path</span>&gt;
-</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#f92672">g</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">transform</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scale(-1.00375,1.00375)translate(0.19677734374999994,0.3999786376953124)scale(-1,-1)&#34;</span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#268bd2">g</span> transform<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;translate(-3.1365509033203116,0.3999786376953124)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">g</span> stroke-miterlimit<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;10&#34;</span> transform<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;scale(1,-1)&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#268bd2">g</span> stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#000&#34;</span> fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#268bd2">g</span> stroke-width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0.4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#268bd2">g</span> stroke-width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0.8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;<span style="color:#268bd2">g</span> fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#ffff80&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#268bd2">g</span> stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#ff8000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#268bd2">path</span> d<span style="color:#719e07">=</span><span style="color:#2aa198">&#34; M 0.0 0.0  &#34;</span>&gt;&lt;/<span style="color:#268bd2">path</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#268bd2">path</span>
+</span></span><span style="display:flex;"><span>                        d<span style="color:#719e07">=</span><span style="color:#2aa198">&#34; M 0.0 72.26999 L -16.99527 23.39217 L -68.73346 22.33293 L -27.49925 -8.93507 L -42.47913 -58.46793 L 0.0 -28.91417 L 42.47913 -58.46793 L 27.49925 -8.93507 L 68.73346 22.33293 L 16.99527 23.39217 Z  &#34;</span>
+</span></span><span style="display:flex;"><span>                        fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span>                      &gt;&lt;/<span style="color:#268bd2">path</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;<span style="color:#268bd2">g</span>
+</span></span><span style="display:flex;"><span>                        stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span>                        transform<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;scale(-1.00375,1.00375)translate(0.19677734374999994,0.3999786376953124)scale(-1,-1)&#34;</span>
 </span></span><span style="display:flex;"><span>                      &gt;
-</span></span><span style="display:flex;"><span>                        &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">fill</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#000&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>                          &lt;<span style="color:#f92672">g</span> <span style="color:#a6e22e">stroke</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>&gt; &lt;/<span style="color:#f92672">g</span>&gt;{&#34; &#34;}
-</span></span><span style="display:flex;"><span>                        &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                      &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">g</span>&gt;
-</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">svg</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;;
+</span></span><span style="display:flex;"><span>                        &lt;<span style="color:#268bd2">g</span> fill<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;#000&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                          &lt;<span style="color:#268bd2">g</span> stroke<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;none&#34;</span>&gt; &lt;/<span style="color:#268bd2">g</span>&gt;{&#34; &#34;}
+</span></span><span style="display:flex;"><span>                        &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                      &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                    &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                  &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#268bd2">g</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">svg</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">div</span>&gt;;
 </span></span></code></pre></div><p>The differences can be checked with <code>vim -d a.html b.html</code> or online with <a href="https://text-compare.com/">text-compare</a>.
 These are inside <code>&lt;g stroke=&quot;#ff8000&quot;&gt;</code>.</p>
 <p>On the not fill-colored, those lines are next.
@@ -771,52 +780,52 @@ Let&rsquo;s apply this fix permanently and programmatically in next section.</p>
 <p><code>$EDITOR assets/js/tikzjax-node.js</code> with content</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// Configuration
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TIMEOUT_MS</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">3000</span>,  <span style="color:#75715e">// 3 second timeout to ensure TikZJax is done
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CONTAINER_SELECTORS</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;.tikzjax-node&#39;</span>] <span style="color:#75715e">// All possible container classes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// CONTAINER_SELECTORS: [&#39;.tikzjax&#39;, &#39;.tikzjax-node&#39;] // All possible container classes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#586e75">// Configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">const</span> TIKZJAX_FIX_CONFIG <span style="color:#719e07">=</span> {
+</span></span><span style="display:flex;"><span>  TIMEOUT_MS<span style="color:#719e07">:</span> <span style="color:#2aa198">3000</span>,  <span style="color:#586e75">// 3 second timeout to ensure TikZJax is done
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  CONTAINER_SELECTORS<span style="color:#719e07">:</span> [<span style="color:#2aa198">&#39;.tikzjax-node&#39;</span>] <span style="color:#586e75">// All possible container classes
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  <span style="color:#586e75">// CONTAINER_SELECTORS: [&#39;.tikzjax&#39;, &#39;.tikzjax-node&#39;] // All possible container classes
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Main processing function
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processTikzNodes</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Process all TikZ containers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">containers</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span>.<span style="color:#a6e22e">CONTAINER_SELECTORS</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;,&#39;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#586e75">// Main processing function
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">function</span> processTikzNodes() {
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">// Process all TikZ containers
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> containers <span style="color:#719e07">=</span> <span style="color:#b58900">document</span>.querySelectorAll(TIKZJAX_FIX_CONFIG.CONTAINER_SELECTORS.join(<span style="color:#2aa198">&#39;,&#39;</span>));
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">containers</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">container</span> =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">svgs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">container</span>.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#e6db74">&#39;svg&#39;</span>);
+</span></span><span style="display:flex;"><span>  containers.forEach(container =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">const</span> svgs <span style="color:#719e07">=</span> container.querySelectorAll(<span style="color:#2aa198">&#39;svg&#39;</span>);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">svgs</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">svg</span> =&gt; {
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Find all paths that have M and Z commands
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">paths</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">svg</span>.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#e6db74">&#39;path&#39;</span>)).<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">path</span> =&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;d&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;M&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;Z&#39;</span>);
+</span></span><span style="display:flex;"><span>    svgs.forEach(svg =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#586e75">// Find all paths that have M and Z commands
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>      <span style="color:#268bd2">const</span> paths <span style="color:#719e07">=</span> <span style="color:#b58900">Array</span>.from(svg.querySelectorAll(<span style="color:#2aa198">&#39;path&#39;</span>)).filter(path =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#268bd2">const</span> d <span style="color:#719e07">=</span> path.getAttribute(<span style="color:#2aa198">&#39;d&#39;</span>) <span style="color:#719e07">||</span> <span style="color:#2aa198">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">return</span> d.includes(<span style="color:#2aa198">&#39;M&#39;</span>) <span style="color:#719e07">&amp;&amp;</span> d.includes(<span style="color:#2aa198">&#39;Z&#39;</span>);
 </span></span><span style="display:flex;"><span>      });
 </span></span><span style="display:flex;"><span>      
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Process each star path
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">path</span> =&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Remove fill=&#34;none&#34; if present
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;none&#39;</span>) {
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">removeAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#586e75">// Process each star path
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>      paths.forEach(path =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#586e75">// Remove fill=&#34;none&#34; if present
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>        <span style="color:#719e07">if</span> (path.getAttribute(<span style="color:#2aa198">&#39;fill&#39;</span>) <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;none&#39;</span>) {
+</span></span><span style="display:flex;"><span>          path.removeAttribute(<span style="color:#2aa198">&#39;fill&#39;</span>);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Also check parent groups
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">parentElement</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">current</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">current</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">svg</span>) {
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;none&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">removeAttribute</span>(<span style="color:#e6db74">&#39;fill&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#586e75">// Also check parent groups
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>        <span style="color:#268bd2">let</span> current <span style="color:#719e07">=</span> path.parentElement;
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">while</span> (current <span style="color:#719e07">&amp;&amp;</span> current <span style="color:#719e07">!==</span> svg) {
+</span></span><span style="display:flex;"><span>          <span style="color:#719e07">if</span> (current.getAttribute(<span style="color:#2aa198">&#39;fill&#39;</span>) <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;none&#39;</span>) {
+</span></span><span style="display:flex;"><span>            current.removeAttribute(<span style="color:#2aa198">&#39;fill&#39;</span>);
 </span></span><span style="display:flex;"><span>          }
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">parentElement</span>;
+</span></span><span style="display:flex;"><span>          current <span style="color:#719e07">=</span> current.parentElement;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>      });
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>  });
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Initialization
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>document.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;DOMContentLoaded&#39;</span>, <span style="color:#66d9ef">function</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Wait for TikZJax to finish rendering
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">processTikzNodes</span>, <span style="color:#a6e22e">TIKZJAX_FIX_CONFIG</span>.<span style="color:#a6e22e">TIMEOUT_MS</span>);
+</span></span><span style="display:flex;"><span><span style="color:#586e75">// Initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#b58900">document</span>.addEventListener(<span style="color:#2aa198">&#39;DOMContentLoaded&#39;</span>, <span style="color:#268bd2">function</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">// Wait for TikZJax to finish rendering
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  setTimeout(processTikzNodes, TIKZJAX_FIX_CONFIG.TIMEOUT_MS);
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><p>Actually I set a intial delay bigger than 3 secs, and with retries.
 Check the <a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/assets/js/tikzjax-node.js">script</a>.</p>

@@ -144,3 +144,14 @@ enableEmoji = true
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[markup]
+  [markup.highlight]
+    style = 'solarized-dark'
+
+  # https://gohugo.io/content-management/markdown-attributes/
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true

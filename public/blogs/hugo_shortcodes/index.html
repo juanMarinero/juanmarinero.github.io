@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>Hugo shortcodes: step by step</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Juan Marinero - Data Scientist"
+/>
+
+  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        "
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/hugo_shortcodes/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="Hugo shortcodes: step by step">
+  <meta property="og:description" content="Hugo brings pre-defined shortcodes to expand your content beyond the basic markdown syntax. The official docs explain them quite well. The goal of this post is to distill the essential information into concise, ready-to-use Minimal Working Examples (MWE) for easy copy-pasting. As well as really understanding the code behind so you can create your own shortcodes.
+Index - Click to expand 📜 Go and Hugo code basics Shortcode templates vs call Go basics .Get Positional arguments Named arguments Both named and positional args if-else-end Details MWE Practical usage Declaration Parameters declaration Get values Render Docs Figure MWE Docs Declaration Gist shortcode Highlight MWE Syntax highlighting Declaration Instagram MWE Declaration Param MWE Declaration QR MWE Declaration Ref Relref Vimeo MWE Declaration X - Twitter MWE Declaration YouTube MWE Declaration Override a default shortcode Hugo Scroll Raw HTML contact_list email and phone extlink icon Go and Hugo code basics Basic coding skills are indispensable to understand later shortcode templates.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="Hugo shortcodes: step by step">
+  <meta name="twitter:description" content="Hugo brings pre-defined shortcodes to expand your content beyond the basic markdown syntax. The official docs explain them quite well. The goal of this post is to distill the essential information into concise, ready-to-use Minimal Working Examples (MWE) for easy copy-pasting. As well as really understanding the code behind so you can create your own shortcodes.
+Index - Click to expand 📜 Go and Hugo code basics Shortcode templates vs call Go basics .Get Positional arguments Named arguments Both named and positional args if-else-end Details MWE Practical usage Declaration Parameters declaration Get values Render Docs Figure MWE Docs Declaration Gist shortcode Highlight MWE Syntax highlighting Declaration Instagram MWE Declaration Param MWE Declaration QR MWE Declaration Ref Relref Vimeo MWE Declaration X - Twitter MWE Declaration YouTube MWE Declaration Override a default shortcode Hugo Scroll Raw HTML contact_list email and phone extlink icon Go and Hugo code basics Basic coding skills are indispensable to understand later shortcode templates.">
+
+
+  <meta itemprop="name" content="Hugo shortcodes: step by step">
+  <meta itemprop="description" content="Hugo brings pre-defined shortcodes to expand your content beyond the basic markdown syntax. The official docs explain them quite well. The goal of this post is to distill the essential information into concise, ready-to-use Minimal Working Examples (MWE) for easy copy-pasting. As well as really understanding the code behind so you can create your own shortcodes.
+Index - Click to expand 📜 Go and Hugo code basics Shortcode templates vs call Go basics .Get Positional arguments Named arguments Both named and positional args if-else-end Details MWE Practical usage Declaration Parameters declaration Get values Render Docs Figure MWE Docs Declaration Gist shortcode Highlight MWE Syntax highlighting Declaration Instagram MWE Declaration Param MWE Declaration QR MWE Declaration Ref Relref Vimeo MWE Declaration X - Twitter MWE Declaration YouTube MWE Declaration Override a default shortcode Hugo Scroll Raw HTML contact_list email and phone extlink icon Go and Hugo code basics Basic coding skills are indispensable to understand later shortcode templates.">
+  <meta itemprop="wordCount" content="8180">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 2.2em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">Hugo shortcodes: step by step</h1>
+      <section class="post-content">
+        <p>Hugo brings pre-defined <a href="https://gohugo.io/shortcodes/">shortcodes</a> to <strong>expand</strong> your content beyond the basic <strong>markdown syntax</strong>.
+The <a href="https://gohugo.io/shortcodes/">official <strong>docs</strong></a> explain them quite well.
+The goal of this post is to distill the essential information into concise, ready-to-use Minimal Working Examples (<strong>MWE</strong>) for easy <strong>copy-past</strong>ing.
+As well as really understanding the code behind so you can create <strong>your own shortcodes</strong>.</p>
+
+
+<div class="html-content">
+<div id="index"> </div>
+</div>
+
+
+
+<details>
+  <summary><strong>Index</strong> - Click to expand 📜</summary>
+  <ul>
+<li><a href="/blogs/hugo_shortcodes/#details">Go and Hugo code basics</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#shortcode-templates-vs-call">Shortcode templates vs call</a></li>
+<li><a href="/blogs/hugo_shortcodes/#go-basics">Go basics</a></li>
+<li><a href="/blogs/hugo_shortcodes/#get">.Get</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#positional-arguments">Positional arguments</a></li>
+<li><a href="/blogs/hugo_shortcodes/#named-arguments">Named arguments</a></li>
+<li><a href="/blogs/hugo_shortcodes/#both-named-and-positional-args">Both named and positional args</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#details">Details</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#details-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#details-practical">Practical usage</a></li>
+<li><a href="/blogs/hugo_shortcodes/#details-declaration">Declaration </a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#parameters-declaration">Parameters declaration</a></li>
+<li><a href="/blogs/hugo_shortcodes/#get-values">Get values</a></li>
+<li><a href="/blogs/hugo_shortcodes/#render">Render</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#details-docs">Docs</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#figure">Figure</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#fig-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#fig-docs">Docs</a></li>
+<li><a href="/blogs/hugo_shortcodes/#fig-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#gist-shortcode">Gist shortcode</a></li>
+<li><a href="/blogs/hugo_shortcodes/#highlight">Highlight</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#highlight-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#syntax-highlighting">Syntax highlighting</a></li>
+<li><a href="/blogs/hugo_shortcodes/#highlight-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#instagram">Instagram</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#instagram-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#instagram-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#param">Param</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#param-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#param-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#qr">QR</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#qr-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#qr-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#ref">Ref</a></li>
+<li><a href="/blogs/hugo_shortcodes/#relref">Relref</a></li>
+<li><a href="/blogs/hugo_shortcodes/#vimeo">Vimeo</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#vimeo-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#vimeo-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#x---twitter">X - Twitter</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#x-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#x-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#youtube">YouTube</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#youtube-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_shortcodes/#youtube-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_shortcodes/#override-a-default-shortcode">Override a default shortcode</a></li>
+<li><a href="/blogs/hugo_shortcodes/#hugo-scroll">Hugo Scroll</a>
+<ul>
+<li><a href="/blogs/hugo_shortcodes/#raw-html">Raw HTML</a></li>
+<li><a href="/blogs/hugo_shortcodes/#contact_list">contact_list</a></li>
+<li><a href="/blogs/hugo_shortcodes/#email-and-phone">email and phone</a></li>
+<li><a href="/blogs/hugo_shortcodes/#extlink">extlink</a></li>
+<li><a href="/blogs/hugo_shortcodes/#icon">icon</a></li>
+</ul>
+</li>
+</ul>
+</details>
+
+
+
+<div class="html-content">
+<br>
+</div>
+
+
+<h2 id="go-and-hugo-code-basics">Go and Hugo code basics</h2>
+<p>Basic <strong>coding skills</strong> are indispensable to understand later shortcode templates.</p>
+<p>This guide constanstly links <strong>official doc</strong>umention for reference.
+Though a <strong>basic</strong> knowledge of <strong>Go&rsquo;s syntax</strong> is expected, this is extremily <strong>summarized</strong> in the ongoing section.</p>
+<p>Semi-extensive HTML proficiency is a must too.</p>
+<h3 id="shortcode-templates-vs-call">Shortcode templates vs call</h3>
+<p>Before we go any deeper, let&rsquo;s make sure we&rsquo;re on the same page. In this post:</p>
+<ul>
+<li>A <em><strong>shortcode call</strong></em> refers to Markdown snippets that use a shortcode, e.g., <code>{{&lt; qr text=&quot;https://gohugo.io&quot; &gt;}}</code>.</li>
+<li>A <em><strong>shortcode declaration</strong></em> is the HTML (or template) code that defines these Markdown snippets,
+such as the <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/qr.html">qr.html</a> script.
+In the Hugo documentation this is referred to as a <strong>shortcode template</strong> or sometimes simply a <strong>shortcode</strong> or <strong>template</strong>.</li>
+</ul>
+<h3 id="go-basics">Go basics</h3>
+<p><strong>Actions</strong> -data evaluations or control structures- are delimited by <code>{{</code> and <code>}}</code>.</p>
+<p><code>{{-</code> and <code>-}}</code> <strong>trim whitespace</strong> to the left and right respectively.
+MWE:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#2aa198">&#34;  foo  &#34;</span> }}  <span style="color:#586e75">// &#34;foo  &#34;</span>
+</span></span><span style="display:flex;"><span>{{ <span style="color:#2aa198">&#34;  foo  &#34;</span> <span style="color:#719e07">-</span>}}  <span style="color:#586e75">// &#34;  foo&#34;</span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#2aa198">&#34;  foo  &#34;</span> <span style="color:#719e07">-</span>}} <span style="color:#586e75">// &#34;foo&#34;</span>
+</span></span></code></pre></div><p><code>{{/*</code> and <code>*/}}</code> wrap a <strong>comment</strong>. Read <a href="https://gohugo.io/templates/introduction/#comments">docs</a> and <a href="https://manski.net/articles/hugo/comments">this</a> brief article.</p>
+<p><code>{{ . }}</code> and <code>with</code>. Within a template, the dot (<code>.</code>) represents the current <a href="https://gohugo.io/quick-reference/glossary/#context">context</a>.
+We rebind the context to another value or object within <a href="https://gohugo.io/functions/go-template/range/"><code>range</code></a> or <a href="https://gohugo.io/functions/go-template/with/"><code>with</code></a> blocks.
+Read <a href="https://gohugo.io/templates/introduction/#current-context">Current context</a>.
+Becoming <strong>familiar with</strong> the <strong>dot</strong> is <strong>essential</strong> for understanding shortcode templates.</p>
+<p>Further reading:</p>
+<ul>
+<li><a href="https://golang.org/ref/spec">Go&rsquo;s Table of Contents</a></li>
+<li>Specially the <a href="https://pkg.go.dev/text/template">text/template</a> documentation.</li>
+</ul>
+<h3 id="if-else-end">if-else-end</h3>
+<p>The <a href="https://gohugo.io/functions/go-template/with/"><code>with</code></a> statement is an important feature to master.
+We have already explained its usage with the <em>dot</em> context.
+Don&rsquo;t worry if for now it sounds all very abstract, when we focus on each shortcode template we&rsquo;ll see how it&rsquo;s used.</p>
+<p>The <a href="https://gohugo.io/functions/go-template/if/"><code>if</code></a> statement is equally essential.
+It is widely used for validations and other conditional logic.</p>
+<p>Recommended reviewing the documentation linked above before proceeding.</p>
+<p>Other actions (like <code>define</code> or <code>errorf</code>) may appear in certain templates.
+However, their behavior can usually be inferred from the surrounding code.</p>
+<h3 id="get">.Get</h3>
+<p><a href="https://gohugo.io/methods/shortcode/get/"><code>SHORTCODE.Get ARG</code></a></p>
+<h4 id="positional-arguments">Positional arguments</h4>
+<ol>
+<li>Create a shortcode template [script] via</li>
+</ol>
+<ul>
+<li><code>printf</code> and <code>Get</code>: <code>echo '{{ printf &quot;%s %s.&quot; (.Get 0) (.Get 1) }}' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li>Just <code>Get</code>: <code>echo '{{ .Get 0 }} {{ .Get 1 }}.' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li>Use the <a href="https://gohugo.io/methods/shortcode/params/">Params</a> method to access the arguments as a collection.
+Read <a href="https://gohugo.io/templates/shortcode/#argument-collection">Argument collection</a>.
+<code>echo '{{ .Params 0 }} {{ .Params 1 }}.' &gt; layouts/shortcodes/myshortcode.html</code></li>
+</ul>
+<ol start="2">
+<li>Insert the respective shortcode call (usage) in a markdown file
+<code>echo '---\ntitle: &quot;Test Shortcode&quot;\n---\n\n{{&lt; myshortcode &quot;Hello&quot; &quot;world&quot; &gt;}}' &gt; content/en/myshortcode.md</code></li>
+<li>Build <code>hugo server --disableFastRender</code></li>
+<li>Check in the browser (<a href="http://localhost:1313/myshortcode/">http://localhost:1313/myshortcode/</a>) that it&rsquo;s rendered to <code>Hello world.</code>
+(actually to <code>&lt;section class=&quot;post-content&quot;&gt;Hello world.&lt;/section&gt;</code> since Hugo renders plain line in sections elements).</li>
+</ol>
+<p>This time create a <code>&lt;p&gt;</code> HTML element with bold text:</p>
+<ul>
+<li><code>echo '&lt;p style=&quot;font-weight: bold&quot;&gt;{{ .Get 0 }} {{ .Get 1 }}.&lt;/p&gt;' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li>or <code>echo '{{ printf &quot;&lt;p style=\&quot;font-weight: bold\&quot;&gt;%s %s.&lt;/p&gt;&quot; (.Get 0) (.Get 1) | safeHTML }}' &gt; layouts/shortcodes/myshortcode.html</code></li>
+</ul>
+<p>Which renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">section</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;post-content&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">p</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;font-weight: bold&#34;</span>&gt;Hello world.&lt;/<span style="color:#268bd2">p</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">section</span>&gt;
+</span></span></code></pre></div><h4 id="named-arguments">Named arguments</h4>
+<ol>
+<li>Choose one among</li>
+</ol>
+<ul>
+<li><code>echo '{{ printf &quot;%s %s.&quot; (.Get &quot;greeting&quot;) (.Get &quot;firstName&quot;) }}' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li><code>echo '{{ .Get &quot;greeting&quot; }} {{ .Get &quot;firstName&quot; }}.' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li><code>echo '{{ .Params.greeting }} {{ .Params.firstName }}.' &gt; layouts/shortcodes/myshortcode.html</code></li>
+</ul>
+<ol start="2">
+<li><code>echo '---\ntitle: &quot;Test Shortcode&quot;\n---\n\n{{&lt; myshortcode greeting=&quot;Hello&quot; firstName=&quot;world&quot; &gt;}}' &gt; content/en/myshortcode.md</code></li>
+<li><code>hugo server --disableFastRender</code></li>
+<li><a href="http://localhost:1313/myshortcode/">http://localhost:1313/myshortcode/</a></li>
+</ol>
+<h4 id="both-named-and-positional-args">Both named and positional args</h4>
+<p>Accept <strong>both</strong> named and positional arguments, but not at the same time.
+Read <a href="https://gohugo.io/templates/shortcode/#named-and-positional-arguments">IsNamedParams</a>.</p>
+<p><a href="/blogs/hugo_shortcodes/#vimeo-declaration">Vimeo shortcode</a> is a good example of this.
+There the <code>id</code> in the shortcode call can be either the first (and only) positional parameter or a named parameter (as rest of the arguments, though these others are optional).</p>
+<p>TL;DR. All next are equivalent shortcode calls (with optional parameters assigned to default values [of future respective arguments]):</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; vimeo    55073825 &gt;}}
+{{&lt; vimeo id=55073825 &gt;}}
+{{&lt; vimeo    55073825 loading=eager &gt;}}
+{{&lt; vimeo id=55073825 loading=eager &gt;}}
+{{&lt; vimeo    55073825 loading=eager allowFullScreen=true &gt;}}
+{{&lt; vimeo id=55073825 loading=eager allowFullScreen=true &gt;}}
+</code></pre><p>Note. Whitespaces added for readability. They will be trimmed anyway.</p>
+<blockquote>
+<p>but not at the same time</p></blockquote>
+<p>Therefore, next calls are invalid:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; vimeo    55073825 id=55073825 &gt;}} // id was already assigned by the first positional arg
+{{&lt; vimeo id=55073825    55073825 &gt;}} // id was already assigned by the first named arg
+{{&lt; vimeo    55073825 id=55073825 loading=eager &gt;}} // as 1st call
+{{&lt; vimeo id=55073825    55073825 loading=eager &gt;}} // as 2nd call
+{{&lt; vimeo    55073825    eager &gt;}} // Max one positional arg (the id if any) in this template
+</code></pre><h2 id="details">Details</h2>
+<p>Create a HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"><code>&lt;details&gt;</code></a></p>
+<blockquote>
+<p>A disclosure widget in which information is visible only when the widget is toggled into an open state.</p></blockquote>
+<h3 id="details-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; details summary=&#34;See the details&#34; &gt;}}
+This is a **bold** word.
+{{&lt; /details &gt;}}
+</code></pre><p>Hugo <strong>render</strong>s previous <strong>shortcode</strong> call to next <strong>HTML</strong> chunk:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">details</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">summary</span>&gt;See the details&lt;/<span style="color:#268bd2">summary</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">p</span>&gt;This is a &lt;<span style="color:#268bd2">strong</span>&gt;bold&lt;/<span style="color:#268bd2">strong</span>&gt; word.&lt;/<span style="color:#268bd2">p</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">details</span>&gt;
+</span></span></code></pre></div><p>Which looks like this in your browser (click to toggle un-/fold):</p>
+
+<details>
+  <summary>See the details</summary>
+  <p>This is a <strong>bold</strong> word.</p>
+</details>
+
+<p>Next is pre-expanded (<code>open</code> attribute with boolean <code>true</code> is passed):</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; details summary=&#34;See the details&#34; open=true &gt;}}
+This is a **bold** word.
+{{&lt; /details &gt;}}
+</code></pre>
+<details open>
+  <summary>See the details</summary>
+  <p>This is a <strong>bold</strong> word.</p>
+</details>
+
+<h3 id="details-practical">Practical usage </h3>
+<p>Fold your headers index (table of contents):</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; details summary=&#34;**Index** - Click to expand 📜&#34; &gt;}}
+  * [header-1](#header-1)
+    * [header-1-1](#header-1-1)
+      * [header-1-1-1](#header-1-1-1)
+      * [header-1-1-2](#header-1-1-2)
+  * [header-2](#header-2)
+  ...
+{{&lt; /details &gt;}}
+</code></pre><p>This is applied in current post, jump to <a href="/blogs/hugo_shortcodes/#index">index</a>.</p>
+<p>Tip. With Vim&rsquo;s plugin <a href="https://github.com/preservim/vim-markdown">vim-markdown</a>
+one can directly run <code>:InsertToc</code> to get the markdown&rsquo;s table of contents.
+Or <code>:InsertNToc</code> for the <code>N</code>umbered version.
+This plugin and many others are showcasted in my <a href="https://github.com/juanMarinero/vim-plugins-screenshots?tab=readme-ov-file#vim-markdown">vim-plugins-screenshots</a> repo.</p>
+<h3 id="details-declaration">Declaration</h3>
+<p>In Hugo&rsquo;s repo, script <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html"><code>details.html</code></a> contains:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">Renders an HTML details element.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@param {string} [class] The value of the element&#39;s class attribute.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@param {string} [name] The value of the element&#39;s name attribute.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@param {string} [summary] The content of the child summary element.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@param {string} [title] The value of the element&#39;s title attribute.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@param {bool} [open=false] Whether to initially display the content of the details element.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@reference...
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">@examples...
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">*/</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Get arguments. */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $class <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;class&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $name <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;name&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $summary <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;summary&#34;</span>) <span style="color:#2aa198">&#34;Details&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $title <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;title&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $open <span style="color:#719e07">:=</span> <span style="color:#cb4b16">false</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">in</span> (slice <span style="color:#2aa198">&#34;false&#34;</span> <span style="color:#cb4b16">false</span> <span style="color:#2aa198">0</span>) (.Get <span style="color:#2aa198">&#34;open&#34;</span>) }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $open = <span style="color:#cb4b16">false</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">in</span> (slice <span style="color:#2aa198">&#34;true&#34;</span> <span style="color:#cb4b16">true</span> <span style="color:#2aa198">1</span>) (.Get <span style="color:#2aa198">&#34;open&#34;</span>) }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $open = <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Render. */</span>}}
+</span></span><span style="display:flex;"><span>&lt;details
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with $class }} class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with $name }} name=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with $open }} open {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with $title }} title=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;summary&gt;{{ $summary | .Page.RenderString }}&lt;<span style="color:#719e07">/</span>summary&gt;
+</span></span><span style="display:flex;"><span>  {{ .Inner | .Page.<span style="color:#268bd2">RenderString</span> (dict <span style="color:#2aa198">&#34;display&#34;</span> <span style="color:#2aa198">&#34;block&#34;</span>) <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#719e07">/</span>details&gt;
+</span></span></code></pre></div><p>This template generates a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"><code>&lt;details&gt;</code></a>
+HTML element with dynamic attributes and content.</p>
+<h4 id="parameters-declaration">Parameters declaration</h4>
+<p>These <code>param</code>s are usually called arguments in functions of other prog-languages, or attributes in HTML.
+But <code>arguments</code> is later used to refer those objects accesed via <code>$VAR</code>, like <code>$class</code>,
+which value of course will depend (here match) the param <code>class</code> value or be empty string if this param is not present in the shortcode call (<code>{{- $class := or (.Get &quot;class&quot;) &quot;&quot; }}</code>);
+but we will cover this in the <a href="/blogs/hugo_shortcodes/#get-values">Get values</a> section.</p>
+<p>Btw. this is the reason why in the <code>param</code>-s declaration, that we cover now, there is <strong>no default value</strong> to assign.
+For example <code>false</code> is not the default value for the param <code>open</code>, this param just values what it&rsquo;s passed in the shortcode call (here by positional arguments) or nil if not passed.
+Positional vs named parameters is coverd in the <a href="/blogs/hugo_shortcodes/#get">.Get</a> section.</p>
+<p>In this shortcode we have <a href="https://manski.net/articles/hugo/comments">comments</a> for each <code>@param</code> (<code>class</code>, <code>name</code>, <code>summary</code>, <code>title</code> and <code>open</code>) with the following info:</p>
+<ul>
+<li>A <strong>name</strong>: <code>class</code>, <code>name</code>, <code>summary</code>, <code>title</code> or <code>open</code></li>
+<li>A <strong>type</strong>: <code>string</code> or <code>bool</code></li>
+<li>A <strong>description</strong>, e.g. <code>Whether to initially display the content of the details element</code></li>
+<li><strong>Optional/required</strong> status. <strong>All</strong> these <strong>parameter</strong>s are <strong>optional</strong>,
+because their names are wrapped <strong>in square brackets</strong> (<code>[]</code>).
+For example, the param <code>class</code> is described as (making the <code>[]</code> bold) as <code>@param {string}</code><strong><code>[</code></strong><code>class</code><strong><code>]</code></strong><code> The value of...</code> instead of <code>@param {string} class The value of...</code>
+Later, in the <a href="/blogs/hugo_shortcodes/#qr-declaration">QR-declaration</a>, we will explore another shortcode template which needs an <strong>obligatory</strong> parameter.</li>
+</ul>
+<p>Let this sink in: these parameter&rsquo;s descriptions are in comments (inbetween <code>{{- /*</code> and <code>*/}}</code> comment delimiters),
+which could be removed,
+while the real <strong>logic</strong> of the template, that will make a parameter <strong>optional or obligatory</strong>, appears in <strong>code lines</strong> that actually <strong>run</strong>
+(the <code>Get arguments.</code> and <code>Render.</code> blocks for the ongoing template).</p>
+<h4 id="get-values">Get values</h4>
+<p><code>Get arguments.</code> chunk extracts the non empty <strong>parameter</strong>s values and assigns them to the respective <strong>argument</strong>.
+If the parameter was not in the shortcode call (or was an empty string), the argument is set a <strong>default</strong> value (<code>&quot;&quot;</code> for every arg except <code>$summary</code> and <code>$open</code>).
+Lets understand how it works:</p>
+<ul>
+<li>The variable <code>$class</code> is assigned to <strong>either</strong> (<code>:= or</code>):
+<ul>
+<li>The classes passed in the shortcode call (e.g. <code>{{&lt; details class=&quot;m-0 w-75&quot; &gt;}}</code>) thanks to <code>(.Get &quot;class&quot;)</code>,</li>
+<li><strong>or</strong> an empty string (<code>&quot;&quot;</code>) if no class was passed in the shortcode call (or passed an empty string like <code>{{&lt; details class=&quot;&quot; &gt;}}</code>).</li>
+</ul>
+</li>
+<li>Analogous for <code>$name</code> and <code>$title</code>.</li>
+<li><code>$summary</code> setting is alike previous ones, but if no <code>summary</code> param is passed in the shortcode call, then its arguments is set to <code>&quot;Details&quot;</code>.</li>
+<li>The variable <code>$open</code> is pre-set to <code>false</code> and then assigned to <strong>either</strong>:
+<ul>
+<li><code>false</code> if <code>(.Get &quot;open&quot;)</code> is in the list of values <code>(&quot;false&quot;, false, 0)</code>. I.e. next three shortcode calls are equivalent:
+<ul>
+<li><code>{{&lt; details open=&quot;false&quot; &gt;}}</code></li>
+<li><code>{{&lt; details open=false &gt;}}</code></li>
+<li><code>{{&lt; details open=0 &gt;}}</code></li>
+</ul>
+</li>
+<li><strong>or</strong> to <code>true</code> if <code>(.Get &quot;open&quot;)</code> is one of next values: <code>&quot;true&quot;</code>, <code>true</code> or <code>1</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Finally we need to know how it&rsquo;s handled the content of the children of the <code>&lt;details&gt;</code> (siblings of the <code>&lt;summary&gt;</code> element).
+I.e. the actual content folded of the <code>&lt;details&gt;</code> element.
+It&rsquo;s used <strong><code>.Inner</code></strong>, <a href="https://gohugo.io/methods/shortcode/inner/">docs</a>:</p>
+<blockquote>
+<p>Returns the content between opening and closing shortcode tags, applicable when the shortcode call includes a closing tag.</p></blockquote>
+<p>Thus, in the details shortcode call, we have:</p>
+<ul>
+<li>An opening shortcode tag, .e.g <code>{{&lt; details summary=&quot;See the details&quot; &gt;}}</code></li>
+<li>The closing shortcode tag <code>{{&lt; /details &gt;}}</code></li>
+<li>And the content in between, .e.g. <code>This is a **bold** word.</code></li>
+</ul>
+<p>The <strong><code>.Inner</code></strong> appears in the penultimate line of <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html">details.html</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">73</span><span>  &lt;<span style="color:#268bd2">summary</span>&gt;{{ $summary | .Page.RenderString }}&lt;/<span style="color:#268bd2">summary</span>&gt;
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">74</span><span>  {{ .Inner | .Page.RenderString (dict &#34;display&#34; &#34;block&#34;) -}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">75</span><span>&lt;/<span style="color:#268bd2">details</span>&gt;</span></span></code></pre></div>
+<p>Where the <code>| .Page.RenderString (dict &quot;display&quot; &quot;block&quot;)</code> ensures <code>block</code>-level rendering (for paragraphs, lists, etc.).
+The <code>.Page.RenderString</code> <a href="https://gohugo.io/methods/page/renderstring">method</a> provides next excellent example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $s <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;An *emphasized* word&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $opts <span style="color:#719e07">:=</span> dict <span style="color:#2aa198">&#34;display&#34;</span> <span style="color:#2aa198">&#34;block&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $s | .RenderString $opts }} → &lt;p&gt;An &lt;em&gt;emphasized&lt;<span style="color:#719e07">/</span>em&gt; word&lt;<span style="color:#719e07">/</span>p&gt;
+</span></span></code></pre></div><p>The documentation also explains the <code>block</code> <strong><code>display</code></strong> effect. Without it we will no longer get a <code>&lt;p&gt;</code>aragraph:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $s <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;An *emphasized* word&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $s | .RenderString }} → An &lt;em&gt;emphasized&lt;<span style="color:#719e07">/</span>em&gt; word
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#586e75">/* Alternative with explicit display. */</span> }}
+</span></span><span style="display:flex;"><span>{{ $opts <span style="color:#719e07">:=</span> dict <span style="color:#2aa198">&#34;display&#34;</span> <span style="color:#2aa198">&#34;inline&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $s | .RenderString $opts }} → An &lt;em&gt;emphasized&lt;<span style="color:#719e07">/</span>em&gt; word
+</span></span></code></pre></div><h4 id="render">Render</h4>
+<p>Let&rsquo;s overview the template:</p>
+<ul>
+<li>Intially there are some comments describing the <code>@param</code>eters (see the <a href="/blogs/hugo_shortcodes/#parameters-declaration">Parameters declaration</a>),
+the docs <code>@reference</code> and <code>@example</code>-s of shortcode calls.</li>
+<li><code>Get arguments.</code> chunk uses the non empty <strong>parameter</strong>s to populate the respective [positional] <strong>argument</strong>s.
+If the parameter was not in the shortcode call (or was an empty string), the argument is set a <strong>default</strong> value.
+Details in previous <a href="/blogs/hugo_shortcodes/#get-values">Get values</a> pararagraph.</li>
+<li>Finally the <code>Render.</code> code lines <strong>construct</strong> the <strong>HTML element</strong>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"><code>&lt;details&gt;</code></a> thanks to the <strong>arguments</strong>.
+We focus on this.</li>
+</ul>
+<p>Basic HTML knowledge:</p>
+<ul>
+<li>Attributes like <code>open</code> are considered <em>true</em> simply by being present. They are called <strong>boolean attributes</strong> in HTML.</li>
+<li>Attributes like <code>class</code> require an explicit value (e.g., <code>class=&quot;c1 c2&quot;</code>). These are known as <strong>normal</strong> attributes or <strong>valued attributes</strong>.</li>
+</ul>
+<p>Let&rsquo;s start with the boolean attribute <code>open</code>.
+An HTML <code>&lt;details&gt;</code> might:</p>
+<ul>
+<li>Contain it like <code>&lt;details open&gt;&lt;summary&gt;Expand&lt;/summary&gt;&lt;p&gt;...&lt;/p&gt;&lt;/details&gt;</code></li>
+<li>Or not <code>&lt;details&gt;&lt;summary&gt;Expand&lt;/summary&gt;&lt;p&gt;...&lt;/p&gt;&lt;/details&gt;</code></li>
+</ul>
+<p>Also, we expect</p>
+<ul>
+<li>When <code>$open=true</code> this renders to <code>&lt;details open&gt;</code></li>
+<li>When <code>$open=false</code> this renders to <code>&lt;details&gt;</code></li>
+</ul>
+<p>Above is rendered via <code>{{- with $open }} open {{- end }}</code>.
+Where,</p>
+<ul>
+<li>The syntax <code>{{- with $VAR }} CONTENT {{- end }}</code> just prints <code>CONTENT</code> (here the string <code>open</code>) if <code>$VAR</code> (<code>$open</code> here) is <code>true</code>.
+Remember that the <code>if-else-end</code> in <code>Get arguments</code> replaces
+falsy values (string <code>&quot;false&quot;</code> and number <code>0</code>) with boolean <code>false</code> and viceversa (<code>&quot;true&quot;</code> and <code>1</code> to <code>true</code>).</li>
+<li>Check Hugo&rsquo;s <a href="https://gohugo.io/functions/go-template/with/"><code>with-else-end</code></a>.</li>
+</ul>
+<p>To not confuse the string to add (<code>open</code>)
+with the boolean argument that enables this (<code>$open</code>)
+we could define a new variable <code>$openAttribute</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $openAttribute <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;open&#34;</span> }}
+</span></span><span style="display:flex;"><span><span style="color:#719e07">...</span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with $open }} $openAttribute {{<span style="color:#719e07">-</span> end }}
+</span></span></code></pre></div><p>Do <strong>not</strong> apply this alternative! It&rsquo;s just for learning purposes.
+The original code, with the literal string <code>open</code>, is clearer in this simple case.</p>
+<p>Let&rsquo;s now study how it&rsquo;s rendered the normal  attribute <code>class</code>.
+An HTML <code>&lt;details&gt;</code> can:</p>
+<ul>
+<li>Contain a list of <code>class</code>-es like <code>&lt;details class=&quot;c1 c2&quot;&gt;&lt;summary&gt;Expand&lt;/summary&gt;&lt;p&gt;...&lt;/p&gt;&lt;/details&gt;</code></li>
+<li>Or it can skip the <code>class</code> attribute like <code>&lt;details&gt;&lt;summary&gt;Expand&lt;/summary&gt;&lt;p&gt;...&lt;/p&gt;&lt;/details&gt;</code></li>
+</ul>
+<p>Previously we did <code>.Get</code> the <code>$class</code>: the given string value (positional parameter <code>class</code> passed), except if what was passed was falsy
+(empty string or shortcode call without this param at all),
+then <code>$class</code> would fall back to an empty string (<code>&quot;&quot;</code>).
+Now we will render it via <code>{{- with $class }} class=&quot;{{ . }}&quot; {{- end }}</code></p>
+<ul>
+<li>The <strong>syntax</strong> is <code>{{- with $VAR }} ATTRIBUTE=&quot;{{ . }}&quot; {{- end }}</code>.
+Which means next. If the variable <code>$VAR</code> (<code>$class</code> here) is true-ish (i.e. not empty since its a <code>string</code> var) then it adds the string <code>ATTRIBUTE=&quot;&quot;</code> (here <code>class=&quot;&quot;</code>),
+and inbetween the double quotes puts the value of the variable <code>$VAR</code> (string <code>$class</code> here) via <code>{{ . }}</code>.
+Otherwise, if <code>$VAR</code> is falsy, no content is added at all, not even <code>class=&quot;&quot;</code>.</li>
+<li><code>{{-</code> and <code>-}}</code> trim whitespaces</li>
+</ul>
+<p>To not confuse the string to add inside the double quotes (string variable <code>$class</code>)
+with the string that indicates the HTML attribute (<code>class</code> followed by <code>=</code>)
+we could define a new variable <code>$classAttribute</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $classAttribute <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;class&#34;</span> }}
+</span></span><span style="display:flex;"><span><span style="color:#719e07">...</span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with $class }} $classAttribute=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span></code></pre></div><h3 id="details-docs">Docs </h3>
+<p>Visit <a href="https://gohugo.io/shortcodes/details/">https://gohugo.io/shortcodes/details/</a></p>
+<ul>
+<li>To learn how to override Hugo&rsquo;s embedded <code>details</code> shortcode.
+Or just read the <a href="/blogs/hugo_shortcodes/#override-a-default-shortcode">Override a default shortcode</a> section in the ongoing post.</li>
+<li>Find out more about the <a href="https://gohugo.io/shortcodes/details/#arguments">parameters</a>
+(though here <code>@</code>-<code>params</code> and <code>$</code>-arguments are somehow mixed an just called <code>Arguments</code>).
+E.g. it explains that <code>open (bool)</code> serves to initially display (unscroll) the content and that its default value is <code>false</code>.</li>
+<li>CSS styling</li>
+</ul>
+<h2 id="figure">Figure</h2>
+<p>Create a HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure"><code>&lt;figure&gt;</code></a></p>
+<blockquote>
+<p>Represents self-contained content, potentially with an optional caption.</p></blockquote>
+<h3 id="fig-MWE">MWE</h3>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{&lt; <span style="color:#268bd2">figure</span>
+</span></span><span style="display:flex;"><span>  src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>  alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Unrecognizable woman walking dogs on leashes in countryside&#34;</span>
+</span></span><span style="display:flex;"><span>  link<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.pexels.com/photo/unrecognizable-woman-walking-dogs-on-leashes-in-countryside-7210754/&#34;</span>
+</span></span><span style="display:flex;"><span>  caption<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Unrecognizable *woman* walking **dogs** on leashes in ***countryside***. Class `bg-black`. Check [this **link**\!](/blogs/instagram_mosaic/)&#34;</span>
+</span></span><span style="display:flex;"><span>  class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;m-0 w-75 bg-black p-4&#34;</span>
+</span></span><span style="display:flex;"><span>  loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span>&gt;}}
+</span></span></code></pre></div><p>Hugo renders previous shortcode call to next HTML:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">figure</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;m-0 w-75 bg-black p-4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.pexels.com/...&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">img</span> 
+</span></span><span style="display:flex;"><span>      src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/...&#34;</span> 
+</span></span><span style="display:flex;"><span>      alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Unrecognizable woman walking...&#34;</span>
+</span></span><span style="display:flex;"><span>      loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span>    &gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">figcaption</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">p</span>&gt;Unrecognizable &lt;<span style="color:#268bd2">em</span>&gt;woman&lt;/<span style="color:#268bd2">em</span>&gt; walking &lt;<span style="color:#268bd2">strong</span>&gt;dogs&lt;/<span style="color:#268bd2">strong</span>&gt; on leashes in &lt;<span style="color:#268bd2">strong</span>&gt;&lt;<span style="color:#268bd2">em</span>&gt;countryside&lt;/<span style="color:#268bd2">em</span>&gt;&lt;/<span style="color:#268bd2">strong</span>&gt;. Class &lt;<span style="color:#268bd2">code</span>&gt;bg-black&lt;/<span style="color:#268bd2">code</span>&gt;. Check &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/blogs/instagram_mosaic/&#34;</span>&gt;this &lt;<span style="color:#268bd2">strong</span>&gt;link&lt;/<span style="color:#268bd2">strong</span>&gt;!&lt;/<span style="color:#268bd2">a</span>&gt;&lt;/<span style="color:#268bd2">p</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">figcaption</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">figure</span>&gt;
+</span></span></code></pre></div><p>Which looks like this:</p>
+<figure class="m-0 w-75 bg-black p-4"><a href="https://www.pexels.com/photo/unrecognizable-woman-walking-dogs-on-leashes-in-countryside-7210754/"><img src="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+    alt="Unrecognizable woman walking dogs on leashes in countryside" loading="lazy"></a><figcaption>
+      <p>Unrecognizable <em>woman</em> walking <strong>dogs</strong> on leashes in <em><strong>countryside</strong></em>. Class <code>bg-black</code>. Check <a href="/blogs/instagram_mosaic/">this <strong>link</strong>!</a></p>
+    </figcaption>
+</figure>
+
+<p>The caption applied many <a href="https://www.markdownguide.org/basic-syntax/">Markdown elements</a> to highlight that one can use them there.</p>
+<p>Note. <code>class=&quot;m-0 w-75 bg-black p-4&quot;</code> requires <a href="https://tachyons.io/">Tachyons</a>.
+Enable it adding next to <code>layouts/partials/custom_head.html</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- Tachyons for CSS --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- https://tachyons.io/ --&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css&#34;</span>/&gt;
+</span></span></code></pre></div><p>Btw. This photo is used in my post
+<a href="/blogs/instagram_mosaic/">How to create an <strong>Instagram mosaic</strong> on the terminal</a>.
+Which may interest you if you are active on Instagram.</p>
+<p>Off-topic. <code>loading</code> attribute is <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading#loading_attribute">supported</a> in HTML5.</p>
+<blockquote>
+<p>To instruct the browser to defer loading of images/iframes that are off-screen until the user scrolls near them</p></blockquote>
+<p>Check it out:</p>
+<ol>
+<li>Refresh current website removing the cache - try a private tab</li>
+<li>Run next JS code in the browser&rsquo;s console.
+It will print <code>https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg Not loaded yet</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#b58900">document</span>.querySelectorAll(<span style="color:#2aa198">&#39;img[loading=&#34;lazy&#34;]&#39;</span>).forEach(img =&gt; {
+</span></span><span style="display:flex;"><span>  console.log(img.src, img.complete <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;Loaded&#39;</span> <span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;Not loaded yet&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><ol start="3">
+<li>Then scroll till that <code>&lt;figure&gt;</code> (previous dogs picture).</li>
+<li>And run it again. Now it echoes <code>https://images.pexels... Loaded</code></li>
+</ol>
+<h3 id="fig-docs">Docs</h3>
+<p>Visit <a href="https://gohugo.io/shortcodes/figure/">https://gohugo.io/shortcodes/figure/</a> to learn more about this shortcode.</p>
+<ul>
+<li>Arguments - <code>src</code>, <code>alt</code>, <code>link</code>, <code>caption</code>, etc.</li>
+<li>Image location</li>
+</ul>
+<h3 id="fig-declaration">Declaration</h3>
+<p>In Hugo&rsquo;s repo read <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/figure.html"><code>figure.html</code></a>.</p>
+<p>Most of next shortcode template is easy to understand if you read
+the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.</p>
+<p>Just few chunks are a little tricky, like</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> .Get <span style="color:#2aa198">&#34;link&#34;</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  &lt;a href=<span style="color:#2aa198">&#34;{{ .Get &#34;</span>link<span style="color:#2aa198">&#34; }}&#34;</span>{{ with .Get <span style="color:#2aa198">&#34;target&#34;</span> }} target=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}{{ with .Get <span style="color:#2aa198">&#34;rel&#34;</span> }} rel=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}&gt;
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>Read the <a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a> section.
+Then indent these three lines for clarity:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> .Get <span style="color:#2aa198">&#34;link&#34;</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  &lt;a href=<span style="color:#2aa198">&#34;{{ .Get &#34;</span>link<span style="color:#2aa198">&#34; }}&#34;</span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with .Get <span style="color:#2aa198">&#34;target&#34;</span> }} target=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with .Get <span style="color:#2aa198">&#34;rel&#34;</span> }} rel=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}
+</span></span><span style="display:flex;"><span>  &gt;
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>This code chunk is reading the positional parameters <code>link</code>, <code>target</code> and <code>rel</code> passed via a shortcode call like next</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; figure link=&#34;https://www.nps.gov/zion/index.htm&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34; &gt;}}
+</code></pre><p>And directly rendering the <code>&lt;a&gt;</code> children of the <code>&lt;figure&gt;</code> (see next code block),
+without populating intermediate argumentes <code>$link</code>, <code>$target</code> and <code>$rel</code>.
+On the other hand, for more complex HTML attributes this intermediate step is needed [or deeply recommended], e.g. in the <a href="/blogs/hugo_shortcodes/#details-declaration">details</a> template.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.nps.gov/zion/index.htm&#34;</span>
+</span></span><span style="display:flex;"><span>   target<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;_blank&#34;</span>
+</span></span><span style="display:flex;"><span>   rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;noopener noreferrer&#34;</span>&gt;
+</span></span></code></pre></div><p>Notice that a [non empty] positional parameter <code>link</code> is mandatory to construct the <code>&lt;a&gt;</code>, while <code>target</code> and <code>rel</code> are optional.
+I.e. if the condition <code>{{- if .Get &quot;link&quot; -}}</code> isn&rsquo;t true then no code till <code>{{- end -}}</code> is executed.</p>
+<p>We end this shortcode with a little challenge.
+Can you rewrite the previous three lines (six if indented) using <code>with</code> instead of <code>if</code>?</p>
+
+<details>
+  <summary><strong>Solution</strong> - Click to expand</summary>
+  <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with .Get <span style="color:#2aa198">&#34;link&#34;</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  &lt;a href=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $.Get <span style="color:#2aa198">&#34;target&#34;</span> }} target=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $.Get <span style="color:#2aa198">&#34;rel&#34;</span> }} rel=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}
+</span></span><span style="display:flex;"><span>  &gt;
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div></details>
+
+<p>And can we actually apply this replacement in the <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/figure.html"><code>figure.html</code></a> template?</p>
+
+<details>
+  <summary><strong>Solution</strong> - Click to expand</summary>
+  <p><strong>Yes</strong>, the replacement is valid.
+There is <strong>no dot conflict</strong>.
+We verified that no surrounding <code>with</code> was employing its dot (<code>.</code>) within the <code>if</code> block being replaced.</p>
+<p>Actually there is no parent <code>with</code> at all. The one in the first line is an inline <code>with</code> (it starts and ends in the same line),
+thus it cannot interfere with our context.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>&lt;figure{{ with .Get <span style="color:#2aa198">&#34;class&#34;</span> }} class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}&gt;
+</span></span></code></pre></div></details>
+
+<h2 id="gist-shortcode">Gist shortcode</h2>
+<p>Deprecated in v0.143.0. Check the <a href="https://gohugo.io/shortcodes/gist/">docs</a> for workarounds.</p>
+<h2 id="highlight">Highlight</h2>
+<p>Visit <a href="https://gohugo.io/shortcodes/highlight/">https://gohugo.io/shortcodes/highlight/</a> for reference.</p>
+<p>Insert syntax-highlighted code.</p>
+<h3 id="highlight-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; highlight go &#34;linenos=inline, hl_lines=3 6-8, style=monokai&#34; &gt;}}
+package main
+
+import &#34;fmt&#34;
+
+func main() {
+    for i := 0; i &lt; 3; i++ {
+        fmt.Println(&#34;Value of i:&#34;, i)
+    }
+}
+{{&lt; /highlight &gt;}}
+</code></pre><p>Hugo renders this to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Value of i:&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>}</span></span></code></pre></div>
+<h3 id="syntax-highlighting">Syntax highlighting</h3>
+<p>Few more to point out. The <a href="https://gohugo.io/shortcodes/highlight/">docs</a> are self-explanatory.
+And the MWE above is easy to follow.</p>
+<p>You might just need the link for the <a href="https://gohugo.io/quick-reference/syntax-highlighting-styles/">Syntax highlighting styles</a>.
+The default can be set in <code>config.toml</code>.</p>
+
+
+<div class="html-content">
+⚠️ <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks">Fenced code blocks</a>,
+markdown lines surrounded by triple backticks (<code>&#96;&#96;&#96;</code>), depend on that config too.
+Observe next code chunk for Hugo:
+</div>
+
+
+
+
+<div class="html-content">
+  <pre><code>&#96;&#96;&#96;python
+  import numpy as np
+
+  np.random.seed(42)
+&#96;&#96;&#96;</code></pre>
+</div>
+
+
+<p>Hugo renders this to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#719e07">import</span> numpy <span style="color:#719e07">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>np<span style="color:#719e07">.</span>random<span style="color:#719e07">.</span>seed(<span style="color:#2aa198">42</span>)
+</span></span></code></pre></div><p>Since my <a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/hugo.toml"><code>config.toml</code></a> has</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[markup]
+</span></span><span style="display:flex;"><span>  [markup.highlight]
+</span></span><span style="display:flex;"><span>    style = <span style="color:#2aa198">&#39;solarized-dark&#39;</span>
+</span></span></code></pre></div><p>Check it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>fetch(<span style="color:#2aa198">&#39;https://raw.githubusercontent.com/juanMarinero/juanmarinero.github.io/refs/heads/main/hugo.toml&#39;</span>)
+</span></span><span style="display:flex;"><span>  .then(r =&gt; r.text())
+</span></span><span style="display:flex;"><span>  .then(t =&gt; console.log(t.split(<span style="color:#2aa198">&#39;\n&#39;</span>).filter(l =&gt; l.includes(<span style="color:#2aa198">&#39;style&#39;</span>))));
+</span></span></code></pre></div><p>Finally some practical <strong>examples</strong>.
+View the highlighted code lines in the post <a href="https://overreacted.io/the-math-is-haunted/#the-math-is-haunted">The Math Is Haunted</a> by <a href="https://overreacted.io/">Overreacted</a>.
+These help guide the reader&rsquo;s attention to specific parts of code chunks.</p>
+<h3 id="highlight-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.
+Specially the <a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a> section.</p>
+<p>Hugo&rsquo;s repo <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/highlight.html"><code>hightlight.html</code></a> content is, once indented:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> len .Params | eq <span style="color:#2aa198">2</span> }}
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#268bd2">highlight</span> (trim .InnerDeindent <span style="color:#2aa198">&#34;\n\r&#34;</span>) (.Get <span style="color:#2aa198">0</span>) (.Get <span style="color:#2aa198">1</span>) }}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#268bd2">highlight</span> (trim .InnerDeindent <span style="color:#2aa198">&#34;\n\r&#34;</span>) (.Get <span style="color:#2aa198">0</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>For <code>.Params</code> take a quick look at:</p>
+<ul>
+<li>The <a href="https://gohugo.io/methods/shortcode/params/">param method</a></li>
+<li>The basics shortcode templates created in <a href="/blogs/hugo_shortcodes/#positional-arguments">Positional arguments</a> and <a href="/blogs/hugo_shortcodes/#named-arguments">Named arguments</a> sections
+that apply the syntax <code>{{ Params POSITION }}</code> or <code>{{ Params.NAME }}</code></li>
+</ul>
+<p><a href="https://gohugo.io/methods/shortcode/inner/"><code>SHORTCODE.Inner</code></a>
+and its indented version
+<a href="https://gohugo.io/methods/shortcode/innerdeindent/"><code>SHORTCODE.InnerDeindent</code></a>
+return the content between opening and closing shortcode tags.
+E.g. the content in between <code>{{&lt; highlight go &quot;linenos=inline, hl_lines=3 6-8, style=monokai&quot; &gt;}}</code> and <code>{{&lt; /highlight &gt;}}</code>, i.e. the Go code.</p>
+<p>Previous shortcode call had two <del>arguments</del> parameters:</p>
+<ul>
+<li><code>go</code></li>
+<li>and <code>&quot;linenos=inline, hl_lines=3 6-8, style=monokai&quot;</code></li>
+</ul>
+<p>In summary,</p>
+<ul>
+<li><code>trim .InnerDeindent &quot;\n\r&quot;</code> cleans the code content</li>
+<li><code>(.Get 0)</code> gets the language (e.g. <code>go</code>)</li>
+<li><code>(.Get 1)</code> prints the options string (e.g. <code>&quot;linenos=inline, hl_lines=3&quot;</code>)</li>
+</ul>
+<p>Therefore, in previous shortcode call the <code>{{ if len .Params | eq 2 }}</code> will trigger true, and the <code>highlight</code> function is called with cleaned code, language and options.</p>
+<p>Wrapping up:</p>
+<ul>
+<li>
+<p>Template Function <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/highlight.html"><code>hightlight.html</code></a> makes all previous described.
+I.e., this shortcode template pass code lines, code language and some attributes (or it can pass none of any/all) from the shortcode call to the <code>highlight</code> function,
+which is bolded next:
+<code>{{</code><strong><code>highlight</code></strong><code>(trim .InnerDeindent &quot;\n\r&quot;) (.Get 0) (.Get 1) }}</code></p>
+</li>
+<li>
+<p>This <code>highlight</code> of the shortcode template resolves to <code>func (ns *Namespace) Highlight(s any, lang string, opts ...any) (template.HTML, error)</code>
+in <a href="https://github.com/gohugoio/hugo/blob/2216028620fd68d5d8fc18511096eeb5216ed2ba/tpl/transform/transform.go#L94"><code>transform.go</code></a></p>
+</li>
+<li>
+<p>Which then calls the Go Function <a href="https://github.com/gohugoio/hugo/blob/2216028620fd68d5d8fc18511096eeb5216ed2ba/markup/highlight/highlight.go#L72">highlight.go</a>.</p>
+</li>
+<li>
+<p>And the previous uses Chroma to generate HTML5-compliant syntax highlighting</p>
+</li>
+</ul>
+
+
+<div class="html-content tikzjax">
+  <script type="text/tikz">
+  \begin{tikzpicture}[
+    node distance=1in,
+    box/.style={rectangle, draw, rounded corners, align=center, fill=blue!10},
+    >={Latex[length=.2in]}
+    ]
+
+    \node[box] (A) {Shortcode};
+    \node[box, below=of A] (B) {transform.Highlight};
+    \node[box, below=of B] (C) {markup/highlight.Highlight};
+    \node[box, below=of C] (D) {Chroma};
+
+    \draw[->] (A) -- (B);
+    \draw[->] (B) -- (C);
+    \draw[->] (C) -- (D);
+
+  \end{tikzpicture}
+  </script>
+</div>
+
+
+
+
+<div class="html-content">
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+  Btw. If you fancy this $\text{Ti}\textit{k}\text{Z}$ flowchart then check my post 
+  <a href="/blogs/latex_for_webdev/">
+  $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for <strong>web dev</strong>
+  </a>
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+</div>
+
+
+<h2 id="instagram">Instagram</h2>
+<p>Visit <a href="https://gohugo.io/shortcodes/instagram/">https://gohugo.io/shortcodes/instagram/</a> for reference.</p>
+<h3 id="instagram-mwe">MWE </h3>
+<p>A video from <a href="https://www.instagram.com/p/CxOWiQNP2MO/">Instagram</a></p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; instagram CxOWiQNP2MO &gt;}}
+</code></pre><p>Renders to next. Press to play.</p>
+<blockquote
+    class="instagram-media"
+    data-instgrm-captioned
+    data-instgrm-permalink="https://www.instagram.com/p/CxOWiQNP2MO"
+    data-instgrm-version="14"
+    style="
+      background: #fff;
+      border: 0;
+      border-radius: 3px;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+      margin: 1px;
+      max-width: 540px;
+      min-width: 326px;
+      padding: 0;
+      width: 99.375%;
+      width: -webkit-calc(100% - 2px);
+      width: calc(100% - 2px);
+    "
+  >
+    <div style="padding: 16px">
+      <a
+        href="https://www.instagram.com/p/CxOWiQNP2MO"
+        style="
+          background: #ffffff;
+          line-height: 0;
+          padding: 0 0;
+          text-align: center;
+          text-decoration: none;
+          width: 100%;
+        "
+        target="_blank"
+      >
+        <div style="display: flex; flex-direction: row; align-items: center">
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 50%;
+              flex-grow: 0;
+              height: 40px;
+              margin-right: 14px;
+              width: 40px;
+            "
+          ></div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1;
+              justify-content: center;
+            "
+          >
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 4px;
+                flex-grow: 0;
+                height: 14px;
+                margin-bottom: 6px;
+                width: 100px;
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 4px;
+                flex-grow: 0;
+                height: 14px;
+                width: 60px;
+              "
+            ></div>
+          </div>
+        </div>
+        <div style="padding: 19% 0"></div>
+        <div
+          style="display: block; height: 50px; margin: 0 auto 12px; width: 50px"
+        >
+          <svg
+            width="50px"
+            height="50px"
+            viewBox="0 0 60 60"
+            version="1.1"
+            xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g transform="translate(-511.000000, -20.000000)" fill="#000000">
+                <g>
+                  <path
+                    d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div style="padding-top: 8px">
+          <div
+            style="
+              color: #3897f0;
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 550;
+              line-height: 18px;
+            "
+          >
+            View this post on Instagram
+          </div>
+        </div>
+        <div style="padding: 12.5% 0"></div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 14px;
+            align-items: center;
+          "
+        >
+          <div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                height: 12.5px;
+                width: 12.5px;
+                transform: translateX(0px) translateY(7px);
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                height: 12.5px;
+                transform: rotate(-45deg) translateX(3px) translateY(1px);
+                width: 12.5px;
+                flex-grow: 0;
+                margin-right: 14px;
+                margin-left: 2px;
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                height: 12.5px;
+                width: 12.5px;
+                transform: translateX(9px) translateY(-18px);
+              "
+            ></div>
+          </div>
+          <div style="margin-left: 8px">
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                flex-grow: 0;
+                height: 20px;
+                width: 20px;
+              "
+            ></div>
+            <div
+              style="
+                width: 0;
+                height: 0;
+                border-top: 2px solid transparent;
+                border-left: 6px solid #f4f4f4;
+                border-bottom: 2px solid transparent;
+                transform: translateX(16px) translateY(-4px) rotate(30deg);
+              "
+            ></div>
+          </div>
+          <div style="margin-left: auto">
+            <div
+              style="
+                width: 0px;
+                border-top: 8px solid #f4f4f4;
+                border-right: 8px solid transparent;
+                transform: translateY(16px);
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                flex-grow: 0;
+                height: 12px;
+                width: 16px;
+                transform: translateY(-4px);
+              "
+            ></div>
+            <div
+              style="
+                width: 0;
+                height: 0;
+                border-top: 8px solid #f4f4f4;
+                border-left: 8px solid transparent;
+                transform: translateY(-4px) translateX(8px);
+              "
+            ></div>
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            margin-bottom: 24px;
+          "
+        >
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 4px;
+              flex-grow: 0;
+              height: 14px;
+              margin-bottom: 6px;
+              width: 224px;
+            "
+          ></div>
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 4px;
+              flex-grow: 0;
+              height: 14px;
+              width: 144px;
+            "
+          ></div></div
+      ></a>
+    </div>
+  </blockquote><script async src="https://www.instagram.com/embed.js"></script>
+<p>Post of photos from <a href="https://www.instagram.com/p/CxOWiQNP2MO/">Instagram</a> are supported too:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; instagram CxOWiQNP2MO &gt;}}
+</code></pre><blockquote
+    class="instagram-media"
+    data-instgrm-captioned
+    data-instgrm-permalink="https://www.instagram.com/p/DNEOm1vSmyX"
+    data-instgrm-version="14"
+    style="
+      background: #fff;
+      border: 0;
+      border-radius: 3px;
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+      margin: 1px;
+      max-width: 540px;
+      min-width: 326px;
+      padding: 0;
+      width: 99.375%;
+      width: -webkit-calc(100% - 2px);
+      width: calc(100% - 2px);
+    "
+  >
+    <div style="padding: 16px">
+      <a
+        href="https://www.instagram.com/p/DNEOm1vSmyX"
+        style="
+          background: #ffffff;
+          line-height: 0;
+          padding: 0 0;
+          text-align: center;
+          text-decoration: none;
+          width: 100%;
+        "
+        target="_blank"
+      >
+        <div style="display: flex; flex-direction: row; align-items: center">
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 50%;
+              flex-grow: 0;
+              height: 40px;
+              margin-right: 14px;
+              width: 40px;
+            "
+          ></div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1;
+              justify-content: center;
+            "
+          >
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 4px;
+                flex-grow: 0;
+                height: 14px;
+                margin-bottom: 6px;
+                width: 100px;
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 4px;
+                flex-grow: 0;
+                height: 14px;
+                width: 60px;
+              "
+            ></div>
+          </div>
+        </div>
+        <div style="padding: 19% 0"></div>
+        <div
+          style="display: block; height: 50px; margin: 0 auto 12px; width: 50px"
+        >
+          <svg
+            width="50px"
+            height="50px"
+            viewBox="0 0 60 60"
+            version="1.1"
+            xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g transform="translate(-511.000000, -20.000000)" fill="#000000">
+                <g>
+                  <path
+                    d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div style="padding-top: 8px">
+          <div
+            style="
+              color: #3897f0;
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 550;
+              line-height: 18px;
+            "
+          >
+            View this post on Instagram
+          </div>
+        </div>
+        <div style="padding: 12.5% 0"></div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 14px;
+            align-items: center;
+          "
+        >
+          <div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                height: 12.5px;
+                width: 12.5px;
+                transform: translateX(0px) translateY(7px);
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                height: 12.5px;
+                transform: rotate(-45deg) translateX(3px) translateY(1px);
+                width: 12.5px;
+                flex-grow: 0;
+                margin-right: 14px;
+                margin-left: 2px;
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                height: 12.5px;
+                width: 12.5px;
+                transform: translateX(9px) translateY(-18px);
+              "
+            ></div>
+          </div>
+          <div style="margin-left: 8px">
+            <div
+              style="
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                flex-grow: 0;
+                height: 20px;
+                width: 20px;
+              "
+            ></div>
+            <div
+              style="
+                width: 0;
+                height: 0;
+                border-top: 2px solid transparent;
+                border-left: 6px solid #f4f4f4;
+                border-bottom: 2px solid transparent;
+                transform: translateX(16px) translateY(-4px) rotate(30deg);
+              "
+            ></div>
+          </div>
+          <div style="margin-left: auto">
+            <div
+              style="
+                width: 0px;
+                border-top: 8px solid #f4f4f4;
+                border-right: 8px solid transparent;
+                transform: translateY(16px);
+              "
+            ></div>
+            <div
+              style="
+                background-color: #f4f4f4;
+                flex-grow: 0;
+                height: 12px;
+                width: 16px;
+                transform: translateY(-4px);
+              "
+            ></div>
+            <div
+              style="
+                width: 0;
+                height: 0;
+                border-top: 8px solid #f4f4f4;
+                border-left: 8px solid transparent;
+                transform: translateY(-4px) translateX(8px);
+              "
+            ></div>
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            margin-bottom: 24px;
+          "
+        >
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 4px;
+              flex-grow: 0;
+              height: 14px;
+              margin-bottom: 6px;
+              width: 224px;
+            "
+          ></div>
+          <div
+            style="
+              background-color: #f4f4f4;
+              border-radius: 4px;
+              flex-grow: 0;
+              height: 14px;
+              width: 144px;
+            "
+          ></div></div
+      ></a>
+    </div>
+  </blockquote><script async src="https://www.instagram.com/embed.js"></script>
+<h3 id="instagram-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.
+Specially the <a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a>.</p>
+<p>Hugo&rsquo;s repo <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/instagram.html"><code>instagram.html</code></a> content is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $pc <span style="color:#719e07">:=</span> site.Config.Privacy.Instagram <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $pc.Disable <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with .Get <span style="color:#2aa198">0</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> template <span style="color:#2aa198">&#34;render-instagram&#34;</span> (dict <span style="color:#2aa198">&#34;id&#34;</span> . <span style="color:#2aa198">&#34;pc&#34;</span> $pc) <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> errorf <span style="color:#2aa198">&#34;The %q shortcode requires a single positional parameter, the ID of the Instagram post. See %s&#34;</span> .Name .Position <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> define <span style="color:#2aa198">&#34;render-instagram&#34;</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  &lt;blockquote
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">...</span>
+</span></span><span style="display:flex;"><span>    data<span style="color:#719e07">-</span>instgrm<span style="color:#719e07">-</span>permalink=<span style="color:#2aa198">&#34;https://www.instagram.com/p/{{ .id }}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">...</span>
+</span></span><span style="display:flex;"><span>  &gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">...</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>blockquote&gt;
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not .pc.Simple <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    &lt;script async src=<span style="color:#2aa198">&#34;https://www.instagram.com/embed.js&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>script&gt;
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>Read the <a href="https://gohugo.io/shortcodes/instagram/#privacy">Privacy subsection</a> of this shortcode.
+<code>config.toml</code> must use default values for <code>Privacy.Instagram</code> or explicitly set it to <code>false</code>.
+This settings are read via <a href="https://gohugo.io/methods/site/config/#privacy"><code>site.Config.Privacy</code></a> into <code>$pc</code>.
+This way <code>{{- if not $pc.Disable -}}</code> is <code>true</code>.</p>
+<p>Watch if <code>hugo config</code> echoes something alike:</p>
+<pre tabindex="0"><code>&gt; hugo config | grep -C 5 &#34;instagram&#34;
+[privacy]
+  [privacy.instagram]
+--
+[services]
+  [services.instagram]
+</code></pre><p>Furthermore at least one param is required in the shortcode call, the ID of the Instagram post: <code>{{- with .Get 0 -}}</code>.
+See Hugo&rsquo;s <a href="https://gohugo.io/functions/go-template/with/"><code>with-else-end</code></a>.</p>
+<p>If both requirements (<code>Privacy.Instagram</code> and ID) are satisfied then the shortcode template runs <code>{{- template &quot;render-instagram&quot; (dict &quot;id&quot; . &quot;pc&quot; $pc) -}}</code>,
+where that function is after the <code>if-else-end</code> defined: <code>{{- define &quot;render-instagram&quot; -}}...{{- end -}}</code>.</p>
+<p>The <code>template</code> function executes a defined template called <code>render-instagram</code>.
+Docs about <a href="https://gohugo.io/functions/go-template/template/">go-template</a>.
+MWE:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ template <span style="color:#2aa198">&#34;foo&#34;</span> (dict <span style="color:#2aa198">&#34;answer&#34;</span> <span style="color:#2aa198">42</span>) }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{ define <span style="color:#2aa198">&#34;foo&#34;</span> }}
+</span></span><span style="display:flex;"><span>  {{ printf <span style="color:#2aa198">&#34;The answer is %v.&#34;</span> .answer }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>The arguments passed to that defined template are mapped to <code>(dict &quot;id&quot; . &quot;pc&quot; $pc)</code>:</p>
+<ul>
+<li>The key <code>&quot;id&quot;</code> maps to the first positional parameter since the <em>dot</em> is binded to the enclosing <code>{{- with .Get 0 -}}</code>.</li>
+<li>While the key <code>&quot;pc&quot;</code> maps to the variable <code>$pc</code> defined as <code>site.Config.Privacy.Instagram</code> as we saw in the first line.</li>
+</ul>
+<p>The proper HTML-render with that two arguments is out of this scope.
+But I summary what concerns to our arguments:</p>
+<ul>
+<li>The ID is accesed via <code>{{ .id }}</code> and it&rsquo;s to be found:
+<ul>
+<li>Inside the <code>&lt;blockquote&gt;</code> attributes: <code>data-instgrm-permalink=&quot;https://www.instagram.com/p/{{ .id }}&quot;</code></li>
+<li>And in <code>('blockquote div a').href</code></li>
+</ul>
+</li>
+<li>Finally the <code>render-instagram</code> template checks if the Instagram policy is <code>false</code> in configs via (<code>{{- if not .pc.Simple -}}</code>),
+if so then Hugo creates a static card without JavaScript for images only (no videos).
+Details in <a href="https://gohugo.io/shortcodes/instagram/#privacy">Privacy</a>.</li>
+</ul>
+<h2 id="param">Param</h2>
+<p>Visit <a href="https://gohugo.io/shortcodes/param/">https://gohugo.io/shortcodes/param/</a> for reference.</p>
+<h3 id="param-mwe">MWE </h3>
+<p>At top of current markown there&rsquo;s a <code>title</code> param.
+It can be read with:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">Current post title is **{{% param &#34;title&#34; %}}**.
+</code></pre><p>Which renders to:</p>
+<p>Current post title is <strong>Hugo shortcodes: step by step</strong>.</p>
+<p>In <code>config.toml</code> there&rsquo;s a <code>favicon</code> param:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">Global favicon value is `{{% param &#34;favicon&#34; %}}`.
+</code></pre><p>Outputs:</p>
+<p>Global favicon value is <code>images/favicon.png</code>.
+It could also be accesed creating a shortcode template with <code>{{ .Site.Params.favicon }}</code>, read <a href="https://gohugo.io/methods/site/params/">https://gohugo.io/methods/site/params/</a>.</p>
+<p>Not all <code>params</code> are accessible via <code>{{ .Site.Params.&lt;param-name&gt; }}</code>. Same applies for other <code>SITE</code> config settings. Full list can be found at <a href="https://gohugo.io/methods/site/">https://gohugo.io/methods/site/</a>.</p>
+<p>Let&rsquo;s exemplify how to access the global <code>title</code> (<a href="https://gohugo.io/methods/site/title/"><code>.Site.Title</code></a>), defined in <code>config.toml</code>, we must instead create our own shortcode template:</p>
+<ol>
+<li>Create a HTML shortcode with
+<code>echo 'Global title: &lt;strong&gt;{{ .Site.Title }}&lt;/strong&gt;.' &gt; layouts/shortcodes/myshortcode.html</code></li>
+<li>Insert it in a markdown <code>echo '---\ntitle: &quot;Test Shortcode&quot;\n---\n\n{{&lt; myshortcode &gt;}}' &gt; content/en/myshortcode.md</code></li>
+<li>Build <code>hugo server --disableFastRender</code></li>
+<li>Check in the browser (<a href="http://localhost:1313/myshortcode/">http://localhost:1313/myshortcode/</a>) that it&rsquo;s rendered to:
+Global title: <strong>J. Marinero&hellip;</strong></li>
+</ol>
+<p><code>hugo config</code> also has multiple <code>contacts</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[params]
+</span></span><span style="display:flex;"><span>  copyright = <span style="color:#2aa198">&#39;...&#39;</span>
+</span></span><span style="display:flex;"><span>  description = <span style="color:#2aa198">&#39;Juan Marinero...&#39;</span>
+</span></span><span style="display:flex;"><span>  favicon = <span style="color:#2aa198">&#39;images/favicon.png&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  [[params.contacts]]
+</span></span><span style="display:flex;"><span>    icon = <span style="color:#2aa198">&#39;fa fa-phone&#39;</span>
+</span></span><span style="display:flex;"><span>    label = <span style="color:#2aa198">&#39;phone&#39;</span>
+</span></span><span style="display:flex;"><span>    url = <span style="color:#2aa198">&#39;tel:...&#39;</span>
+</span></span><span style="display:flex;"><span>    value = <span style="color:#2aa198">&#39;...&#39;</span>
+</span></span></code></pre></div><p>Replace previous shortcode <code>$EDITOR layouts/shortcodes/myshortcode.html</code> with</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{ with (index site.Params.contacts 2) }}
+By 3rd index:&lt;br&gt;
+- Label: {{ .label }}&lt;br&gt;
+- Value: {{ .value }}
+{{ end }}
+
+{{ with (index (where site.Params.contacts &#34;label&#34; &#34;GitHub&#34;) 0) }}
+  &lt;br&gt;&lt;br&gt;
+If &lt;code&gt;label&lt;/code&gt; values &lt;code&gt;GitHub&lt;/code&gt;:&lt;br&gt;
+- URL: {{ .url }}&#34;&lt;br&gt;
+- Value: {{ .value }}
+{{ end }}
+</code></pre><p>To get:</p>
+
+
+<div class="html-content">
+  By 3rd index:<br>
+  - Label: GitHub<br>
+  - Value: github.com/juanMarinero
+
+  <br><br>
+  If <code>label</code> values <code>GitHub</code>:<br>
+  - URL: https://github.com/juanMarinero"<br>
+  - Value: github.com/juanMarinero
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+</div>
+
+
+<h3 id="param-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.
+Specially the <a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a> section.</p>
+<p>Hugo&rsquo;s repo <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/param.html"><code>param.html</code></a> content is, once indented:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $name <span style="color:#719e07">:=</span> (.Get <span style="color:#2aa198">0</span>) <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with $name <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#268bd2">with</span> ($.Page.Param .) }}
+</span></span><span style="display:flex;"><span>    {{ . }}
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>    {{ errorf <span style="color:#2aa198">&#34;Param %q not found: %s&#34;</span> $name $.Position }}
+</span></span><span style="display:flex;"><span>  {{ end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  {{ errorf <span style="color:#2aa198">&#34;Missing param key: %s&#34;</span> $.Position }}
+</span></span><span style="display:flex;"><span>{{ end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p><code>.Page</code> methods docs <a href="https://gohugo.io/methods/page/">here</a>. <code>.Page.Param</code> specific in this <a href="https://gohugo.io/methods/page/param/">link</a>.</p>
+<p>Let&rsquo;s suppose that we have <code>{{% param &quot;favicon&quot; %}}</code> as shortcode call.
+Then <code>$name</code> values <code>&quot;favicon&quot;</code> (the first positional parameter of the shortcode call).</p>
+<p><code>{{- with $name -}}</code> is true-ish since <code>$name</code> exists (the shortcode call passed a parameter) and is not an empty string (this parameter passed wasn&rsquo;t <code>&quot;&quot;</code>).</p>
+<p><code>{{- with ($.Page.Param .) }}</code> would be <code>{{- with ($.Page.Param $name) }}</code> because the dot is binded by the enclosing <code>{{- with $name -}}</code>.
+The <strong>parentheses</strong> serve as a <em><strong>grouping</strong></em> <em>operator</em> for <a href="https://go.dev/ref/spec#Notation">Go</a>.
+In vanille Go we would just write <code>page.Param(&quot;favicon&quot;)</code>.
+But in this shortcode template we need the grouping <code>($.Page.Param &quot;favicon&quot;)</code> to force evaluation of the entire method call first.</p>
+<p>Without parentheses (<code>{{- with $.Page.Param . -}}</code>) the result would be [again!] just the previous dot (of upper <code>with</code>),
+the string <code>&quot;favicon&quot;</code>, as long as <code>$.Page.Param</code> is <code>true</code>-ish, instead of the desired value of <code>page.Param(&quot;favicon&quot;)</code>.
+The Go&rsquo;s <strong>precedence rules</strong> are just this way, the parentheses force the evaluation of its content first.
+I.e. the equivalent Go code without proper grouping could be as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>methodValue <span style="color:#719e07">:=</span> $.Page.Param  <span style="color:#586e75">// Gets the method as a value</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">if</span> methodValue <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+</span></span><span style="display:flex;"><span>  dot = .  <span style="color:#586e75">// Sets dot to the PREVIOUS context (e.g., &#34;favicon&#34;)</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The need and purpose of the parentheses is demonstrated.
+In summary, this second <code>with</code> achieves:</p>
+<ul>
+<li>Checks that <code>page.Param(&quot;favicon&quot;)</code> is <code>true</code>-ish.</li>
+<li>Assigns that value to dot</li>
+</ul>
+<p>This way, and finally, the forth line is just a dot <code>{{ . }}</code>, inside that second <code>with</code> it&rsquo;s the parentheses value (e.g. <code>page.Param(&quot;title&quot;)</code>) as just explained.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span>{{- $name := (.Get 0) -}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span>{{- with $name -}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span>  {{- with ($.Page.Param .) }}
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span>    {{ . }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span>  {{ else }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span>  ...</span></span></code></pre></div>
+<h2 id="qr">QR</h2>
+<p>Visit <a href="https://gohugo.io/shortcodes/qr/">https://gohugo.io/shortcodes/qr/</a> for reference.</p>
+<h3 id="qr-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}
+</code></pre><p>Renders to</p>
+<img src="/qr_924bf7d80a564b23.png" width="132" height="132">
+<p>Now check if the QR does actually points to <code>https://gohugo.io</code>.</p>
+<ol>
+<li>Copy the image URL above, or just <code>https://gohugo.io/images/qr/qr_a1aee921a2e8180d.png</code></li>
+<li>Go to an online QR code reader via <code>Paste URL</code> of image. Like <a href="https://www.minifier.org/qr-code-scanner">https://www.minifier.org/qr-code-scanner</a></li>
+<li>Test it</li>
+</ol>
+<p>We are not limited to URLs. The <a href="https://gohugo.io/shortcodes/qr/">docs</a> explain how to use this shortcode to generate QRs of:</p>
+<ul>
+<li>Phone numbers</li>
+<li>Contact information in the <a href="https://en.wikipedia.org/wiki/VCard">vCard</a> format</li>
+</ul>
+<h3 id="qr-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.
+Specially the <a href="/blogs/hugo_shortcodes/#if-else-end">if-else-end</a> section.</p>
+<p>Hugo&rsquo;s repo <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/qr.html"><code>qr.html</code></a> content is basically:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Constants. */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $validLevels <span style="color:#719e07">:=</span> slice <span style="color:#2aa198">&#34;low&#34;</span> <span style="color:#2aa198">&#34;medium&#34;</span> <span style="color:#2aa198">&#34;quartile&#34;</span> <span style="color:#2aa198">&#34;high&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $minimumScale <span style="color:#719e07">:=</span> <span style="color:#2aa198">2</span> }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Get arguments. */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $text <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;text&#34;</span>) (strings.TrimSpace .Inner) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $level <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;level&#34;</span>) <span style="color:#2aa198">&#34;medium&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $scale <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;scale&#34;</span>) <span style="color:#2aa198">4</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $targetDir <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;targetDir&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $alt <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;alt&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $class <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;class&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $id <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;id&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $title <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;title&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $loading <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;loading&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Validate arguments. */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $errors <span style="color:#719e07">:=</span> <span style="color:#cb4b16">false</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $text }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> errorf <span style="color:#2aa198">&#34;The %q shortcode requires a %q argument. See %s&#34;</span> .Name <span style="color:#2aa198">&#34;text&#34;</span> .Position }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $errors = <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">not</span> (in $validLevels $level) }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> errorf <span style="color:#2aa198">&#34;The %q argument passed to the %q shortcode must be one of %s. See %s&#34;</span> <span style="color:#2aa198">&#34;level&#34;</span> .<span style="color:#268bd2">Name</span> (delimit $validLevels <span style="color:#2aa198">&#34;, &#34;</span> <span style="color:#2aa198">&#34;, or &#34;</span>) .Position }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $errors = <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">or</span> (lt $scale $minimumScale) (ne $<span style="color:#268bd2">scale</span> (<span style="color:#dc322f">int</span> $scale)) }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> errorf <span style="color:#2aa198">&#34;The %q argument passed to the %q shortcode must be an integer greater than or equal to %d. See %s&#34;</span> <span style="color:#2aa198">&#34;scale&#34;</span> .Name $minimumScale .Position }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $errors = <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/* Render image. */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $errors }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $opts <span style="color:#719e07">:=</span> dict <span style="color:#2aa198">&#34;level&#34;</span> $level <span style="color:#2aa198">&#34;scale&#34;</span> $scale <span style="color:#2aa198">&#34;targetDir&#34;</span> $targetDir }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with images.QR $text $opts <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    &lt;img src=<span style="color:#2aa198">&#34;{{ .RelPermalink }}&#34;</span> width=<span style="color:#2aa198">&#34;{{ .Width }}&#34;</span> height=<span style="color:#2aa198">&#34;{{ .Height }}&#34;</span>
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> with $alt }} alt=<span style="color:#2aa198">&#34;{{ $alt }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> with $class }} class=<span style="color:#2aa198">&#34;{{ $class }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> with $id }} id=<span style="color:#2aa198">&#34;{{ $id }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> with $title }} title=<span style="color:#2aa198">&#34;{{ $title }}&#34;</span> {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> with $loading }} loading=<span style="color:#2aa198">&#34;{{ $loading }}&#34;</span> {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    &gt;
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>Code explanation.</p>
+<ol>
+<li>Assigning the arguments values (<code>$text</code>, <code>$level</code>, <code>$scale</code>, etc.) dependent on the parameters of the shortcode call or default values.</li>
+<li>The arguments values are validated.
+If the parameter <code>text</code> was not passed in the shortcode call
+or if other parameters trigger an invalid situation (like incompatible <code>level</code> and <code>validLevels</code>)
+then <code>$errors</code> is set to <code>true</code>.
+Which will cause the image to not be rendered (the <code>{{- if not $errors }}</code> condition).
+The requirement for the presence of the parameter <code>text</code> is explained in the <a href="https://manski.net/articles/hugo/comments">comment</a>
+<code>@param {string} text The text to encode...</code> where its <code>text</code> is not wrapped in square brackets.</li>
+<li>The QR object itself is achieved calling the <code>images.QR</code> function with the arguments <code>$text</code> (e.g. an URL) and <code>$opts</code> (a dictionay with some of the rest arguments).
+We could add (and bold) some parentheses to clarify the evaluation order: <code>{{- with </code><strong><code>(</code></strong><code>images.QR $text $opts</code><strong><code>)</code></strong><code> -}}</code>.</li>
+<li>That function returns an object. Let&rsquo;s suppose that that object is <code>true</code>-ish (ideally an image with relPermalink, width and height for later use).
+Then the dot <code>.</code> is binded to this QR object, thanks to the <code>{{ with VAR }}</code> syntax, for the current <code>with</code> scope.</li>
+<li>Inside the <code>with</code> block it&rsquo;s rendered the HTML element <code>&lt;img&gt;</code> providing:</li>
+</ol>
+<ul>
+<li>Properties of the dot (the QR-object returned by the <code>images.QR</code> function), respectively <code>{{ .RelPermalink }}</code> (for the <code>src</code> attribute), <code>{{ .Width }}</code> and <code>{{ .Height }}</code>:</li>
+<li><code>class</code>, <code>id</code>, etc. <code>&lt;img&gt;</code>-attributes value the respective arguments (<code>$class</code>, <code>$id</code>, etc.). Checking each string
+(yes, <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/qr.html">qr.html</a> initial lines define all the shortcode call parameters as string,
+except <code>scale</code>, and logically the respective template arguments are also strings)
+and if they are truthy then their respective <code>with</code> will assign its value to the homonym attribute.
+For example <code>{{- with $alt }} alt=&quot;{{ $alt }}&quot; {{- end }}</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">67</span><span>{{- /* Render image. */}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">68</span><span>{{- if not $errors }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">69</span><span>  {{- $opts := dict &#34;level&#34; $level &#34;scale&#34; $scale &#34;targetDir&#34; $targetDir }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">70</span><span>  {{- with images.QR $text $opts -}}
+</span></span><span style="display:flex; background-color:#19404a"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">71</span><span>    &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ .RelPermalink }}&#34;</span> width<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ .Width }}&#34;</span> height<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ .Height }}&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">72</span><span>      {{- with $alt }} alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ $alt }}&#34;</span> {{- end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">73</span><span>      {{- with $class }} class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ $class }}&#34;</span> {{- end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">74</span><span>      {{- with $id }} id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ $id }}&#34;</span> {{- end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">75</span><span>      {{- with $title }} title<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ $title }}&#34;</span> {{- end -}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">76</span><span>      {{- with $loading }} loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ $loading }}&#34;</span> {{- end -}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">77</span><span>    &gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">78</span><span>  {{- end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">79</span><span>{{- end -}}</span></span></code></pre></div>
+<h2 id="ref">Ref</h2>
+<p><a href="https://gohugo.io/shortcodes/ref/">Docs</a>:</p>
+<blockquote>
+<p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p></blockquote>
+<p>The <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a></p>
+<blockquote>
+<p>Create a link render hook to override the rendering of Markdown links to HTML.</p></blockquote>
+<p>MWE</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">[Post 1](/posts/post-1 &#34;My first post&#34;)
+ ------  -------------  -------------
+  text    destination       title
+</code></pre><p>Template script in <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_markup/render-link.html">render-link.html</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $u <span style="color:#719e07">:=</span> urls.Parse .Destination <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $href <span style="color:#719e07">:=</span> $u.String <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> strings.HasPrefix $u.String <span style="color:#2aa198">&#34;#&#34;</span> <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $href = printf <span style="color:#2aa198">&#34;%s#%s&#34;</span> .PageInner.RelPermalink $u.Fragment <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> and $<span style="color:#268bd2">href</span> (not $u.IsAbs) <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $path <span style="color:#719e07">:=</span> strings.TrimPrefix <span style="color:#2aa198">&#34;./&#34;</span> $u.Path <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with <span style="color:#268bd2">or</span>
+</span></span><span style="display:flex;"><span>    ($.PageInner.GetPage $path)
+</span></span><span style="display:flex;"><span>    ($.PageInner.Resources.Get $path)
+</span></span><span style="display:flex;"><span>    (resources.Get $path)
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $href = .RelPermalink <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $u.RawQuery <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $href = printf <span style="color:#2aa198">&#34;%s?%s&#34;</span> $href . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $u.Fragment <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $href = printf <span style="color:#2aa198">&#34;%s#%s&#34;</span> $href . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>&lt;a href=<span style="color:#2aa198">&#34;{{ $href }}&#34;</span> {{<span style="color:#719e07">-</span> with .Title }} title=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}&gt;{{ .Text }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/**/</span> <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>Explanation.</p>
+<ol>
+<li>When you write a Markdown link like <code>[Post 1](/posts/post-1 &quot;My first post&quot;)</code> Hugo parses it into a [dot] structured object with these fields:</li>
+</ol>
+<ul>
+<li><code>.Text</code>: <code>&quot;Post 1&quot;</code>, the link text. To be found in: <code>&lt;/a href=&quot;...&quot;&gt;{{ .Text }}&lt;/a&gt;</code>.</li>
+<li><code>.Title</code>: <code>&quot;My first post&quot;</code> (the optional title attribute). Also in the second to last line: <code>{{- with .Title }} title=&quot;{{ . }}&quot; {{- end }}</code>.</li>
+<li><code>.Destination</code>: <code>&quot;/posts/post-1&quot;</code> is the URL/target to be parsed.</li>
+</ul>
+<ol start="2">
+<li><code>{{- $u := urls.Parse .Destination -}}</code> calls the <code>urls.Parse</code> <a href="https://gohugo.io/functions/urls/parse/">function</a>
+on the <code>.Destination</code> paramater. The return populates the <code>$u</code> <a href="https://godoc.org/net/url#URL">URL structure</a>:</li>
+</ol>
+<ul>
+<li><code>$u.String</code>: full URL (<code>/posts/post-1</code>)</li>
+<li><code>$u.Path</code>: path part (<code>&quot;/posts/post-1&quot;</code>).</li>
+<li><code>$u.Fragment</code>: empty (unless URL had <code>#section</code>)</li>
+<li><code>$u.RawQuery</code>: empty (unless URL had <code>?foo=bar</code>)</li>
+<li><code>$u.IsAbs</code>: <code>false</code>. This method reports whether the URL is absolute (with a non-empty scheme like <code>https://...</code>). Examples in <a href="https://pkg.go.dev/net/url?utm_source=godoc#URL.IsAbs">docs</a></li>
+</ul>
+<p>The <code>urls.Parse</code> <a href="https://gohugo.io/functions/urls/parse/">reference</a> provides a more complete example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $url <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;https://example.org:123/foo?a=6&amp;b=7#bar&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $u <span style="color:#719e07">:=</span> urls.Parse $url }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{ $u.String }}        <span style="color:#586e75">// https://example.org:123/foo?a=6&amp;b=7#bar</span>
+</span></span><span style="display:flex;"><span>{{ $u.IsAbs }}         <span style="color:#586e75">// true</span>
+</span></span><span style="display:flex;"><span>{{ $u.Scheme }}        <span style="color:#586e75">// https</span>
+</span></span><span style="display:flex;"><span>{{ $u.Host }}          <span style="color:#586e75">// example.org:123</span>
+</span></span><span style="display:flex;"><span>{{ $u.Hostname }}      <span style="color:#586e75">// example.org</span>
+</span></span><span style="display:flex;"><span>{{ $u.RequestURI }}    <span style="color:#586e75">// /foo?a=6&amp;b=7</span>
+</span></span><span style="display:flex;"><span>{{ $u.Path }}          <span style="color:#586e75">// /foo</span>
+</span></span><span style="display:flex;"><span>{{ $u.RawQuery }}      <span style="color:#586e75">// a=6&amp;b=7</span>
+</span></span><span style="display:flex;"><span>{{ $u.Query }}         <span style="color:#586e75">// map[a:[6] b:[7]]</span>
+</span></span><span style="display:flex;"><span>{{ $u.Query.a }}       <span style="color:#586e75">// [6]</span>
+</span></span><span style="display:flex;"><span>{{ $u.Query.Get <span style="color:#2aa198">&#34;a&#34;</span> }} <span style="color:#586e75">// 6</span>
+</span></span><span style="display:flex;"><span>{{ $u.Query.Has <span style="color:#2aa198">&#34;b&#34;</span> }} <span style="color:#586e75">// true</span>
+</span></span><span style="display:flex;"><span>{{ $u.Fragment }}      <span style="color:#586e75">// bar</span>
+</span></span></code></pre></div><ol start="3">
+<li>The remaining code lines concatenate strings into the variable <code>$href</code> (for the <code>href</code> attribute) to construct the <code>&lt;a&gt;</code> HTML element:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/resolved/path/to/post-1&#34;</span> title<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;My first post&#34;</span>&gt;Post 1&lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span></code></pre></div><p>OK, understood. But&hellip;why not just use the default markdown <code>[text](url)</code>?
+Well, among other features, this render hook adds <strong>smart resolution</strong> for:</p>
+<ol>
+<li><strong>Relative links</strong>: ensures <code>/posts/post-1</code> points to the correct permalink (e.g., <code>/blog/post-1/</code>).</li>
+<li><strong>Fragments</strong>: fixes <code>#section</code> links to work with Hugo&rsquo;s URL structure.</li>
+</ol>
+<h2 id="relref">Relref</h2>
+<p><a href="https://gohugo.io/shortcodes/relref/">Docs</a>:</p>
+<blockquote>
+<p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p></blockquote>
+<p>This is the same warning message as for <a href="/blogs/hugo_shortcodes/#ref">Ref</a>.
+Read the <a href="/blogs/hugo_shortcodes/#ref">Ref</a> section to grasp how an <a href="/blogs/hugo_shortcodes/#embedded-link-render-hook">embedded link render hook</a> works.</p>
+<h2 id="vimeo">Vimeo</h2>
+<h3 id="vimeo-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; vimeo 55073825 &gt;}}
+</code></pre><p>Renders the Vimeo video <a href="https://vimeo.com/channels/staffpicks/55073825">https://vimeo.com/channels/staffpicks/55073825</a> to:</p>
+
+      <div
+          style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe
+          src="https://player.vimeo.com/video/55073825?dnt=0"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allow="fullscreen">
+        </iframe>
+      </div>
+
+<p>The <a href="https://gohugo.io/shortcodes/vimeo/">docs</a>:</p>
+<ul>
+<li>Explain each argument</li>
+<li>How to overwrite this shortcode call to run your own shortcode template</li>
+<li>And the Hugo configs related</li>
+</ul>
+<h3 id="vimeo-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.</p>
+<p>Vimeo&rsquo;s shortcode template is <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/vimeo.html">vimeo.html</a>.
+But if in your Hugo configs has set <code>true</code> to <code>simple</code>&rsquo;s Vimeo <code>privacy</code> (like next <code>hugo.toml</code> extract)
+then it runs <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/vimeo_simple.html">vimeo_simple.html</a>
+(<code>{{- if $pc.Simple }}</code> code lines).</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>privacy:
+</span></span><span style="display:flex;"><span>  vimeo:
+</span></span><span style="display:flex;"><span>    disable: <span style="color:#cb4b16">false</span>
+</span></span><span style="display:flex;"><span>    enableDNT: <span style="color:#cb4b16">false</span>
+</span></span><span style="display:flex;"><span>    simple: <span style="color:#cb4b16">true</span> <span style="color:#586e75"># default is false</span>
+</span></span></code></pre></div><p><a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/vimeo.html">vimeo.html</a>
+is easy to understand if you has comprehended the <a href="/blogs/hugo_shortcodes/#instagram-declaration">Instagram</a> template.
+Below <code>@param</code>s, <code>@return</code> and <code>@example</code>-s <a href="https://manski.net/articles/hugo/comments">comments</a> are removed,
+while some commented insights and blank lines are added.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#586e75">/* Get hugo.toml configs about Vimeo&#39;s privacy */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $pc <span style="color:#719e07">:=</span> site.Config.Privacy.Vimeo }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#586e75">/* If Vimeo&#39;s privacy is not disabled */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $pc.Disable }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  {{<span style="color:#586e75">/* If Vimeo&#39;s privacy is simple run the respective template */</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> $pc.Simple }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> template <span style="color:#2aa198">&#34;_shortcodes/vimeo_simple.html&#34;</span> . }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#586e75">/* Get arguments.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    By:
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">      - `id` can be the 1st positional param or a named param.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">      - All rest must be named params: `title`, `class`,...
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    If a parameter is not passed in the shortcode call (or passed nil) then assign the respective default value to its argument.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    Otherwise assign the param value.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    Validate bool argument $allowFullScreen (and $iframeAllowList).
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    Validate $id in later render block (with).
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    Constant $divStyle and $iframeStyle
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    --- START --- */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $dnt <span style="color:#719e07">:=</span> cond $pc.EnableDNT <span style="color:#2aa198">1</span> <span style="color:#2aa198">0</span> }} {{<span style="color:#586e75">/* For $src */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $allowFullScreen <span style="color:#719e07">:=</span> <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $class <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;class&#34;</span>) }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $id <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;id&#34;</span>) (.Get <span style="color:#2aa198">0</span>) }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $loading <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;loading&#34;</span>) }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $title <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;title&#34;</span>) }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">in</span> (slice <span style="color:#2aa198">&#34;true&#34;</span> <span style="color:#cb4b16">true</span> <span style="color:#2aa198">1</span>) (.Get <span style="color:#2aa198">&#34;allowFullScreen&#34;</span>) }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $allowFullScreen = <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> <span style="color:#268bd2">in</span> (slice <span style="color:#2aa198">&#34;false&#34;</span> <span style="color:#cb4b16">false</span> <span style="color:#2aa198">0</span>) (.Get <span style="color:#2aa198">&#34;allowFullScreen&#34;</span>) }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $allowFullScreen = <span style="color:#cb4b16">false</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $iframeAllowList <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> $allowFullScreen }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $iframeAllowList = <span style="color:#2aa198">&#34;fullscreen&#34;</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $divStyle <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;</span> }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $iframeStyle <span style="color:#719e07">:=</span> <span style="color:#2aa198">&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34;</span> }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#586e75">/* --- END --- */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#586e75">/* Render &lt;div&gt; and &lt;iframe&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">    --- START --- */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $id }} {{<span style="color:#586e75">/* id param must be pased in the shortcode call (1st positional or named) */</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $src <span style="color:#719e07">:=</span> printf <span style="color:#2aa198">&#34;https://player.vimeo.com/video/%v?dnt=%v&#34;</span> . $dnt }}
+</span></span><span style="display:flex;"><span>      &lt;div
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> with $class }}
+</span></span><span style="display:flex;"><span>          class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>          style=<span style="color:#2aa198">&#34;{{ $divStyle | safeCSS }}&#34;</span>
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> end }}&gt;
+</span></span><span style="display:flex;"><span>        &lt;iframe
+</span></span><span style="display:flex;"><span>          src=<span style="color:#2aa198">&#34;{{- $src }}&#34;</span>
+</span></span><span style="display:flex;"><span>          {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $class }}
+</span></span><span style="display:flex;"><span>            style=<span style="color:#2aa198">&#34;{{ $iframeStyle | safeCSS }}&#34;</span>
+</span></span><span style="display:flex;"><span>          {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>          {{<span style="color:#719e07">-</span> with $iframeAllowList }} allow=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>          {{<span style="color:#719e07">-</span> with $loading }} loading=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>          {{<span style="color:#719e07">-</span> with $title }} title=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end }}&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#719e07">/</span>iframe&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#719e07">/</span>div&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> errorf <span style="color:#2aa198">&#34;The %q shortcode requires a video id, either as the first positional argument or an argument named id. See %s&#34;</span> .Name .Position }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }} {{<span style="color:#586e75">/* with $id */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {{<span style="color:#586e75">/* --- END --- */</span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end }} {{<span style="color:#586e75">/* if not $pc.Simple */</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end }} {{<span style="color:#586e75">/* if not $pc.Disable */</span>}}
+</span></span></code></pre></div><p>So much effort into understanding the shortcode template;
+it would be a shame if it went to waste because it wasn&rsquo;t properly called.
+Check examples of invalid calls in the <a href="/blogs/hugo_shortcodes/#both-named-and-positional-args">Both named and positional args</a> section.</p>
+<h2 id="x---twitter">X - Twitter</h2>
+<h3 id="x-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; x user=&#34;SanDiegoZoo&#34; id=&#34;1453110110599868418&#34; &gt;}}
+</code></pre><p>Renders the X&rsquo;s tweet <a href="https://x.com/SanDiegoZoo/status/1453110110599868418">https://x.com/SanDiegoZoo/status/1453110110599868418</a> to:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Owl bet you&#39;ll lose this staring contest 🦉 <a href="https://t.co/eJh4f2zncC">pic.twitter.com/eJh4f2zncC</a></p>&mdash; San Diego Zoo Wildlife Alliance (@sandiegozoo) <a href="https://twitter.com/sandiegozoo/status/1453110110599868418?ref_src=twsrc%5Etfw">October 26, 2021</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>The <a href="https://gohugo.io/shortcodes/vimeo/">docs</a>:</p>
+<ul>
+<li>Explain each argument</li>
+<li>How to overwrite this shortcode call to run your own shortcode template</li>
+<li>And the Hugo configs related</li>
+</ul>
+<h3 id="x-declaration">Declaration</h3>
+<p>First understand the comprensive explanation of the <code>display</code> shortcode in previous <a href="/blogs/hugo_shortcodes/#display-declaration">section</a>.</p>
+<p>X&rsquo;s shortcode template is <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/x.html">x.html</a>.
+But if in your Hugo configs has set <code>true</code> to <code>simple</code>&rsquo;s X <code>privacy</code>
+then it runs <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/x_simple.html">x_simple.html</a></p>
+<p>This is a little complex to understand it 100% since it take advantage of some functions:</p>
+<ul>
+<li><a href="https://gohugo.io/functions/collections/querify/"><code>collections.Querify</code></a>, in code just <code>querify</code> because Hugo allows omitting the namespace in templates</li>
+<li><a href="https://gohugo.io/functions/transform/unmarshal/"><code>transform.Unmarshal</code></a></li>
+<li><a href="https://gohugo.io/functions/resources/getremote/"><code>resources.GetRemote</code></a></li>
+</ul>
+<p>Anyhow, if you want to attempt this comprehension challenge,
+first read Vimeo&rsquo;s template overview in the <a href="/blogs/hugo_shortcodes/#vimeo-declaration">paragraph above</a>.</p>
+<h2 id="youtube">YouTube</h2>
+<h3 id="youtube-mwe">MWE </h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; youtube 0RKpf3rK57I &gt;}}
+</code></pre><p>Renders the video <a href="https://www.youtube.com/watch?v=0RKpf3rK57I">https://www.youtube.com/watch?v=0RKpf3rK57I</a> to:</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0RKpf3rK57I?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<p>The <a href="https://gohugo.io/shortcodes/vimeo/">docs</a>:</p>
+<ul>
+<li>Explain each argument</li>
+<li>How to overwrite this shortcode call to run your own shortcode template</li>
+<li>And the Hugo configs related</li>
+</ul>
+<h3 id="youtube-declaration">Declaration</h3>
+<p>Youtube shortcode template is <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/youtube.html">youtube.html</a>.</p>
+<p>Fortunately, Vimeo&rsquo;s template overview in the <a href="/blogs/hugo_shortcodes/#vimeo-declaration">paragraph above</a> is analogous to YouTube&rsquo;s template.</p>
+<h2 id="override-a-default-shortcode">Override a default shortcode</h2>
+<p>For example the  <code>details</code> shortcode declaration in the script <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html"><code>details.html</code></a>
+might not fit your needs.
+To solve this we consulted the details shortcode <a href="https://gohugo.io/shortcodes/details/">documentation</a>, which says</p>
+<blockquote>
+<p>To override Hugo’s embedded <code>details</code> shortcode, copy the <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html">source</a> code to a file with the same name in the <code>layouts/_shortcodes</code> directory.</p></blockquote>
+<p>Let&rsquo;s get to work.</p>
+<ol>
+<li><code>$EDITOR layouts/_shortcodes/details.html</code>. Note the underscore <code>_</code> in <code>_shortcodes</code>.</li>
+<li>Paste next</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{- /* Get arguments. */}}
+</span></span><span style="display:flex;"><span>{{- $class := or (.Get &#34;class&#34;) &#34;table-of-contents&#34; }}
+</span></span><span style="display:flex;"><span>{{- $name := or (.Get &#34;name&#34;) &#34;&#34; }}
+</span></span><span style="display:flex;"><span>{{- $summary := or (.Get &#34;summary&#34;) &#34;Table of Contents&#34; }}
+</span></span><span style="display:flex;"><span>{{- $open := true }}
+</span></span><span style="display:flex;"><span>{{- if in (slice &#34;false&#34; false 0) (.Get &#34;open&#34;) }}
+</span></span><span style="display:flex;"><span>  {{- $open = false }}
+</span></span><span style="display:flex;"><span>{{- else if in (slice &#34;true&#34; true 1) (.Get &#34;open&#34;) }}
+</span></span><span style="display:flex;"><span>  {{- $open = true }}
+</span></span><span style="display:flex;"><span>{{- end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{- /* Render. */}}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">details</span>
+</span></span><span style="display:flex;"><span>  {{- with $class }} class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{- end }}
+</span></span><span style="display:flex;"><span>  {{- with $name }} name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{- end }}
+</span></span><span style="display:flex;"><span>  {{- with $open }} open {{- end }}
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">summary</span>&gt;{{ $summary | .Page.RenderString }}&lt;/<span style="color:#268bd2">summary</span>&gt;
+</span></span><span style="display:flex;"><span>  {{ .Inner | .Page.RenderString (dict &#34;display&#34; &#34;block&#34;) -}}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">details</span>&gt;
+</span></span></code></pre></div><p>Quick explanation:</p>
+<ul>
+<li><code>@param</code>, <code>@reference</code> and <code>@examples</code> comments are removed for brevity</li>
+<li>The <code>title</code> [param and argument] is removed.
+Now if we hover our pointer over the <code>&lt;describe&gt;</code> element we will no longer see a small pop-up text.
+More about this global attribute <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/title">here</a>.</li>
+<li><code>$summary</code> new default value is <code>&quot;Table of contents&quot;</code>.</li>
+<li><code>$open</code> new default value is <code>true</code></li>
+<li><code>$class</code> new default value is <code>&quot;table-of-contents&quot;</code>. Define it in <code>layouts/partials/custom_head.html</code>. For example:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CSS" data-lang="CSS"><span style="display:flex;"><span><span style="color:#268bd2">details</span>.<span style="color:#268bd2">table-of-contents</span> <span style="color:#719e07">&gt;</span> :<span style="color:#268bd2">not</span><span style="color:#719e07">(</span><span style="color:#268bd2">summary</span><span style="color:#719e07">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">font-weight</span>: <span style="color:#cb4b16">bold</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Which means: for all direct children (see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator">child combinator <code>&gt;</code></a>),
+except <code>&lt;summary&gt;</code>-s, of a <code>&lt;details&gt;</code> elements with class <code>table-of-contents</code> set the <code>font-weight</code> to <code>bold</code>.
+So <code>:not(summary)</code> is every HTML element except <code>&lt;summary&gt;</code>.
+This is valid because it&rsquo;s compatible with Hugo&rsquo;s <code>.Page.RenderString</code> method,
+which is already briefly described when
+<code>.Inner</code> is discussed in the <a href="/blogs/hugo_shortcodes/#get-values">Get values</a> section within the <a href="/blogs/hugo_shortcodes/#details">Details</a> paragraphs.</p>
+<ol start="3">
+<li>Insert the shortcode call in a markdown, e.g., <code>$EDITOR content/en/myshortcode.md</code> with</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;Test Custom Details&#34;
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{&lt; <span style="color:#268bd2">details</span> &gt;}}
+</span></span><span style="display:flex;"><span>This <span style="color:#586e75">`&lt;p&gt;`</span> and <span style="color:#586e75">`&lt;code&gt;`</span> are bold
+</span></span><span style="display:flex;"><span><span style="color:#719e07">-</span> And this <span style="color:#586e75">`&lt;li&gt;`</span> too.
+</span></span><span style="display:flex;"><span><span style="color:#719e07">-</span> Even [<span style="color:#268bd2">links</span>](https://gohugo.io)!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Every HTML element children of <span style="color:#586e75">`&lt;details&gt;`</span> is bold
+</span></span><span style="display:flex;"><span>...except <span style="color:#586e75">`&lt;summary&gt;`</span> !!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>| Tables | are |
+</span></span><span style="display:flex;"><span>|----|---|
+</span></span><span style="display:flex;"><span>| not exempt | from |
+</span></span><span style="display:flex;"><span>| being | bold |
+</span></span><span style="display:flex;"><span>{{&lt; /<span style="color:#268bd2">details</span> &gt;}}
+</span></span></code></pre></div><ol start="4">
+<li>Build <code>hugo server --disableFastRender</code></li>
+<li>Check in the browser (<a href="http://localhost:1313/myshortcode/">http://localhost:1313/myshortcode/</a>) that it&rsquo;s rendered alike:</li>
+</ol>
+
+<details class="table-of-contents-all-bold-but-summary" open>
+  <summary>Table of Contents</summary>
+  <p>This <code>&lt;p&gt;</code> and <code>&lt;code&gt;</code> are bold</p>
+<ul>
+<li>And this <code>&lt;li&gt;</code> too.</li>
+<li>Even <a href="https://gohugo.io">links</a>!</li>
+</ul>
+<p>Every HTML element children of <code>&lt;details&gt;</code> is bold
+&hellip;except <code>&lt;summary&gt;</code> !!</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tables</th>
+          <th>are</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>not exempt</td>
+          <td>from</td>
+      </tr>
+      <tr>
+          <td>being</td>
+          <td>bold</td>
+      </tr>
+  </tbody>
+</table>
+</details>
+
+<h2 id="hugo-scroll">Hugo Scroll</h2>
+<p>Theme defined shortcodes are declared in <a href="https://github.com/zjedi/hugo-scroll/tree/master/layouts/shortcodes"><code>layouts/shortcodes/</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; tree layouts/shortcodes
+</span></span><span style="display:flex;"><span>layouts/shortcodes
+</span></span><span style="display:flex;"><span>├── contact_list.html
+</span></span><span style="display:flex;"><span>├── email.html
+</span></span><span style="display:flex;"><span>├── extlink.html
+</span></span><span style="display:flex;"><span>├── icon.html
+</span></span><span style="display:flex;"><span>├── phone.html
+</span></span><span style="display:flex;"><span>└── rawhtml.html
+</span></span></code></pre></div><h3 id="raw-html">Raw HTML</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html"><code>rawhtml.html</code></a> is defined as</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- raw html --&gt;</span>
+</span></span><span style="display:flex;"><span>{{.Inner}}
+</span></span></code></pre></div><p>E.g. usage to change <code>font-family</code> in part of a link <code>&lt;a&gt;</code> text:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; rawhtml &gt;}}
+  My post about Tolkien:
+  &lt;a href=&#34;/blogs/tolkien/&#34;&gt;
+  &lt;span style=&#34;font-family: &#39;MiddleEarth JoannaVu&#39;, cursive;&#34;&gt;Tolkien&lt;/span&gt;:
+  books, podcasts and much more!
+  &lt;/a&gt;
+{{&lt; /rawhtml &gt;}}
+</code></pre><p>Renders to:</p>
+
+
+  My post about Tolkien:
+  <a href="/blogs/tolkien/">
+  <span style="font-family: 'MiddleEarth JoannaVu', cursive;;">Tolkien</span>:
+  books, podcasts and much more!
+  </a>
+
+
+<p>This is the simplest shortcode to use.
+It uses <code>.Inner</code>. See <a href="/blogs/hugo_shortcodes/#get-values">Get values</a> for more info.</p>
+<p>Alternative, to directly write HTML in your Hugo markdowns add next to your <code>config.toml</code> (or equivalent in YAML/JSON).
+<strong>But</strong> it&rsquo;s <strong>NOT</strong> recommended.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[markup.goldmark.renderer]
+</span></span><span style="display:flex;"><span>  unsafe = <span style="color:#cb4b16">true</span>
+</span></span></code></pre></div><p>Read</p>
+<ul>
+<li><a href="https://discourse.gohugo.io/t/do-you-set-unsafe-true-in-markup-goldmark-renderer/37555">Do you set <code>unsafe = true</code> in <code>[markup.goldmark.renderer]</code>?</a></li>
+<li><a href="https://gohugo.io/configuration/markup/">https://gohugo.io/configuration/markup/</a></li>
+</ul>
+<p>For simpler usage, just a block class/style attribute use <a href="https://gohugo.io/content-management/markdown-attributes/">markdown attributes</a> like:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">Tolkien
+{class=&#34;font-middle-earth-joanna-vu&#34;}
+
+Tolkien
+{.font-middle-earth-joanna-vu}
+
+Tolkien
+{style=&#34;font-family: &#39;MiddleEarth JoannaVu&#39;, &#39;Great Vibes&#39;, &#39;Open Sans&#39;, sans-serif;&#34;}
+</code></pre><h3 id="contact_list">contact_list</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/contact_list.html"><code>contact_list.html</code></a> is defined as</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">range</span> .Site.Params.contacts }}
+</span></span><span style="display:flex;"><span>    &lt;p&gt;&lt;i class=<span style="color:#2aa198">&#34;{{ .icon }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;<span style="color:#719e07">&amp;</span>nbsp;&lt;a href=<span style="color:#2aa198">&#34;{{ .url | safeURL }}&#34;</span>&gt;{{ .value }}&lt;<span style="color:#719e07">/</span>a&gt;&lt;<span style="color:#719e07">/</span>p&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p><a href="https://gohugo.io/methods/site/params/"><code>Site.Params</code></a> access docs.</p>
+<p>Use</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt;contact_list&gt;}}
+</code></pre><p>Renders to:</p>
+
+    <p><i class="fa fa-phone"></i>&nbsp;<a href="tel:&#43;&#43;34%20616%2042%2036%2034">&#43;34 616 42 36 34</a></p>
+
+    <p><i class="fa fa-envelope"></i>&nbsp;<a href="mailto:juan.g.marinero@gmail.com">juan.g.marinero@gmail.com</a></p>
+
+    <p><i class="fa-brands fa-github"></i>&nbsp;<a href="https://github.com/juanMarinero">github.com/juanMarinero</a></p>
+
+    <p><i class="fa-brands fa-linkedin"></i>&nbsp;<a href="https://www.linkedin.com/in/juanmarinero/">linkedin.com/juanmarinero</a></p>
+
+    <p><i class="fa fa-globe"></i>&nbsp;<a href="https://juan-marinero.info/">juan-marinero.info</a></p>
+
+
+<p>It&rsquo;s almost all the content of the example site <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/contact.md?plain=1"><code>contact.md</code></a>.</p>
+<p>The theme&rsquo;s <code>params</code> are specified in your configuration file,
+mine is <a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/hugo.toml"><code>config.toml</code></a>,
+in <code>[params]</code> section. It starts with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#586e75"># Theme-specific variables `.Site.Params.myParamName`</span>
+</span></span><span style="display:flex;"><span>[params]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75"># The path to your &#34;favicon&#34;. This should be a square (at least 32px x 32px) png-file.</span>
+</span></span><span style="display:flex;"><span>    favicon = <span style="color:#2aa198">&#34;images/favicon.png&#34;</span>
+</span></span></code></pre></div><p>One can also read them via <code>hugo config | sed -n '/^\[params\]/,/^\[permalinks\]/p'</code>:</p>
+<pre tabindex="0"><code>[params]
+  copyright = &#39;...&#39;
+  description = &#39;Juan Marinero...&#39;
+  favicon = &#39;images/favicon.png&#39;
+  hidedesignbyline = true/false
+  image_options = &#39;webp ...&#39;
+  images = [&#39;images/cover-image.jpg&#39;]
+  title = &#39;Juan Marinero...&#39;
+  title_guard = true
+
+  [[params.contacts]]
+    icon = &#39;fa fa-phone&#39;
+    label = &#39;phone&#39;
+    url = &#39;tel:...&#39;
+    value = &#39;...&#39;
+  ...
+  [params.meta]
+    keywords = &#34;Data Science, ...&#34;
+[permalinks]
+</code></pre><p>Read <a href="https://gohugo.io/templates/shortcode/#argument-collection">Argument collection</a></p>
+<blockquote>
+<p>Use the <a href="https://gohugo.io/methods/shortcode/params/">Params</a> method to access the arguments as a collection.</p></blockquote>
+<p>MWE: read <a href="https://gohugo.io/templates/introduction/#access-site-parameters">Access site/page parameters</a>
+and <a href="https://gohugo.io/templates/introduction/#current-context">Current context</a> for pages.</p>
+<p>Concerning the contact list, the shortcode template <code>contact_list.html</code> loop all via <code>{{ range .Site.Params.contacts }}</code>.
+More about the <code>range</code> function in the <a href="https://gohugo.io/functions/go-template/range/">docs</a>.
+It&rsquo;s worth also checking how to access a specific element of the slice (or array) via <code>{{ index .Site.Params.contacts 0 }}</code> for example,
+this is explained in previous section about the <code>param</code> shortcode, <a href="/blogs/hugo_shortcodes/#param-mwe">link</a>.</p>
+<h3 id="email-and-phone">email and phone</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/email.html"><code>email.html</code></a> is defined as</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ .Site.Params.contact.email }}
+</span></span></code></pre></div><p>Usage:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt;email&gt;}}
+</code></pre><p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/phone.html"><code>phone.html</code></a> is analogous.</p>
+<h3 id="extlink">extlink</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/extlink.html"><code>extlink.html</code></a> is defined as</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ with .Get <span style="color:#2aa198">&#34;href&#34;</span> }}
+</span></span><span style="display:flex;"><span>  &lt;a href=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> target=<span style="color:#2aa198">&#34;_blank&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span><span style="display:flex;"><span>{{ with .Get <span style="color:#2aa198">&#34;icon&#34;</span> }}
+</span></span><span style="display:flex;"><span>  &lt;i class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span><span style="display:flex;"><span>{{ with .Get <span style="color:#2aa198">&#34;text&#34;</span> }}
+</span></span><span style="display:flex;"><span>  {{ . }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>Example of shortcode call:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; extlink href=&#34;https://example.com&#34; text=&#34;Click Me&#34; &gt;}}
+</code></pre><p>Which renders as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://example.com&#34;</span> target<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;_blank&#34;</span>&gt;Click Me&lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span></code></pre></div><p>i.e. to</p>
+<a href="https://example.com" target="_blank">Click Me</a>
+
+<p>An optional icon can be created too:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; extlink href=&#34;https://example.com&#34; icon=&#34;fas fa-external-link-alt&#34; text=&#34;Visit Example&#34; &gt;}}
+</code></pre><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://example.com&#34;</span> target<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;_blank&#34;</span>&gt;&lt;<span style="color:#268bd2">i</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;fas fa-external-link-alt&#34;</span>&gt;&lt;/<span style="color:#268bd2">i</span>&gt; Visit Example&lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span></code></pre></div><p>And one can see:
+<a href="https://example.com" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Example</a>
+</p>
+<p>What about calling it without a <code>text</code> parameter? Or explicitly empty like this:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; extlink href=&#34;https://example.com&#34; text=&#34;&#34; &gt;}}
+</code></pre><p>Take a minute to study the highlighted code lines below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>  {{ with .Get <span style="color:#2aa198">&#34;href&#34;</span> }}
+</span></span><span style="display:flex;"><span>    &lt;a href=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> target=<span style="color:#2aa198">&#34;_blank&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex;"><span>  {{ with .Get <span style="color:#2aa198">&#34;icon&#34;</span> }}
+</span></span><span style="display:flex;"><span>    &lt;i class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex; background-color:#19404a"><span>  {{ with .Get <span style="color:#2aa198">&#34;text&#34;</span> }}
+</span></span><span style="display:flex; background-color:#19404a"><span>    {{ . }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex; background-color:#19404a"><span>  {{ end }}</span></span></code></pre></div>
+<p>Well, in both scenarios the <code>{{ with .Get &quot;text&quot; }}</code> will be evaluated as <code>false</code>,
+and consequently the <code>{{ . }}&lt;/a&gt;</code> won&rsquo;t be rendered (with dot the <code>text</code> value).
+This can be considered as a critical <strong>flaw</strong>,
+or as a feature, since it makes both <code>href</code> and <code>text</code> mandatory parameters.</p>
+<p>If both are mandatory lets prevent a broken link (<code>&lt;/a&gt;</code> not closed) if the Hugo user forgets to pass the <code>text</code> parameter.
+And analogous (missing opening <code>&lt;a&gt;</code> tag) if forgot to pass the <code>href</code> parameter.
+Thus our proposal should render anything at all only if both parameters are passed.
+Try to code it yourself!</p>
+
+<details>
+  <summary><strong>Solution A</strong> - Click to expand</summary>
+  <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $href <span style="color:#719e07">:=</span> <span style="color:#268bd2">or</span> (.Get <span style="color:#2aa198">&#34;href&#34;</span>) <span style="color:#2aa198">&#34;&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ with $href }}
+</span></span><span style="display:flex;"><span>  {{ with .Get <span style="color:#2aa198">&#34;text&#34;</span> }}
+</span></span><span style="display:flex;"><span>    &lt;a href=$ref target=<span style="color:#2aa198">&#34;_blank&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ with .Get <span style="color:#2aa198">&#34;icon&#34;</span> }}
+</span></span><span style="display:flex;"><span>      &lt;i class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;
+</span></span><span style="display:flex;"><span>    {{ end }}
+</span></span><span style="display:flex;"><span>    {{ . }}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div></details>
+
+
+<details>
+  <summary><strong>Solution B</strong> - Click to expand</summary>
+  <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $href <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;href&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $text <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;text&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> and $href $text }}
+</span></span><span style="display:flex;"><span>  &lt;a href=<span style="color:#2aa198">&#34;{{ $href }}&#34;</span> target=<span style="color:#2aa198">&#34;_blank&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ with .Get <span style="color:#2aa198">&#34;icon&#34;</span> }}&lt;i class=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt; {{ end }}
+</span></span><span style="display:flex;"><span>    {{ $text }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  {{ errorf &#34;extlink shortcode requires &#39;href&#39; and &#39;text&#39; parameters. }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div></details>
+
+
+
+<div style="height: 0.5em;"></div> <!-- Half line break -->
+
+
+<h3 id="icon">icon</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/icon.html"><code>icon.html</code></a> is defined as</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> .Get <span style="color:#2aa198">&#34;brand&#34;</span> }}
+</span></span><span style="display:flex;"><span>  {{ with .Get <span style="color:#2aa198">&#34;name&#34;</span> }}&lt;i class=<span style="color:#2aa198">&#34;fa-brands fa-{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;{{ end }}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  {{ with .Get <span style="color:#2aa198">&#34;name&#34;</span> }}&lt;i class=<span style="color:#2aa198">&#34;fa fa-{{ . }}&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;{{ end }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>Usage example passing <code>brand</code></p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; icon name=&#34;github&#34; brand=true &gt;}}
+</code></pre><p>Which renders as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">i</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;fa-brands fa-github&#34;</span>&gt;&lt;/<span style="color:#268bd2">i</span>&gt;
+</span></span></code></pre></div><p>i.e. to</p>
+
+  <i class="fa-brands fa-github"></i>
+
+
+<p>Now with <code>name</code></p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; icon name=&#34;rocket&#34; &gt;}}
+</code></pre><p>We get</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">i</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;fa fa-rocket&#34;</span>&gt;&lt;/<span style="color:#268bd2">i</span>&gt;
+</span></span></code></pre></div><p>And it&rsquo;s shown:</p>
+
+  <i class="fa fa-rocket"></i>
+
+
+<p>A practical use (as tutorial) in the example site <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md?plain=1"><code>services.md</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>### Icons
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This theme includes the full set of [Font Awesome v6.6.0 icons](https://fontawesome.com/icons). Use the `{{&lt; <span style="color:#268bd2">icon</span> &gt;}}` [shortcode](https://gohugo.io/content-management/shortcodes/) with the respective `name` to use an icon directly in your `.md` files. For example &#34;{{&lt; <span style="color:#268bd2">icon</span> name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;envelope&#34;</span> &gt;}}&#34;:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```html
+</span></span><span style="display:flex;"><span>{{&lt; <span style="color:#268bd2">icon</span> name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;envelope&#34;</span> &gt;}}
+</span></span><span style="display:flex;"><span>```
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you want to use one of Font Awesome&#39;s brand icons—the ones that have a trademark warning and the `fa-brands` class—add `brand=true`. For example &#34;{{&lt; <span style="color:#268bd2">icon</span> name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;github&#34;</span> brand<span style="color:#719e07">=</span><span style="color:#2aa198">true</span> &gt;}}&#34;:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```html
+</span></span><span style="display:flex;"><span>{{&lt; <span style="color:#268bd2">icon</span> name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;github&#34;</span> brand<span style="color:#719e07">=</span><span style="color:#2aa198">true</span> &gt;}}
+</span></span><span style="display:flex;"><span>```</span></span></code></pre></div>
+
+
+<div class="html-content">
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+</div>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>

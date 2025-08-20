@@ -15,6 +15,30 @@ menu:
 </div>
 {{< /rawhtml >}}
 
+### Hugo
+
+
+<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
+{{< rawhtml >}}
+<div class="html-content">
+  <div style="height: 0.5em;"></div> <!-- Half line break -->
+
+  <a href="/blogs/create_hugo_website/" class="no-underline-except-hover">
+  How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site
+  </a>
+
+  <br>
+  <a href="/blogs/hugo_shortcodes/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>shortcodes</strong>: step by step
+  </a>
+
+  <br>
+  <br>
+  <br>
+</div>
+{{< /rawhtml >}}
+
+
 ### </> Web dev
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
@@ -22,20 +46,8 @@ menu:
 <div class="html-content">
   <div style="height: 0.5em;"></div> <!-- Half line break -->
 
-  <a href="/blogs/nerd_fonts_and_more/" class="no-underline-except-hover">
-  😎 Installing 
-  <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:
-  <strong>system</strong>-wide setup <strong>& Hugo</strong> integration
-  </a>
-
-  <br>
   <a href="/blogs/color_picker/" class="no-underline-except-hover">
   🎨🧪 <strong>Color picker</strong> enhanced
-  </a>
-
-  <br>
-  <a href="/blogs/create_hugo_website/" class="no-underline-except-hover">
-  How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site
   </a>
 
   <br>
@@ -48,6 +60,7 @@ menu:
   <br>
 </div>
 {{< /rawhtml >}}
+
 
 ### 📚 Books
 
