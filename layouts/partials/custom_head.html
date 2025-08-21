@@ -72,11 +72,20 @@
 /* Hide underline except on hover */
 .no-underline-except-hover {
   text-decoration: none;    /* No underline normally */
-  line-height: 2.2em; /* Controls spacing between lines */
+  line-height: 1.5em; /* Spacing between lines of text (both multilines of text of <a> and other <a>-s */
+  display: block; /* Enable margins */
+  margin-bottom: 1.1em; /* Space between each <a> */
 }
 .no-underline-except-hover:hover {
   text-decoration: underline;  /* Underline on hover */
 }
+
+/** ======== Blogs index page ========= */
+.blogs_index {
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
+}
+
 
 /** ======== Fonts ========= */
 .great-vibes {
