@@ -186,34 +186,27 @@ And finally apply it in a *mardown* script of your project, e.g. `content/en/blo
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   Wrap next <code>div</code> inside 
   <code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;</code>
   and 
   <code>&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code>
   because it is raw HTML. 
-  For more info read
-  <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html">layouts/shortcodes/rawhtml.html</a>
-  from the official Hugo-scroll repo.
-</div>
+  Check out my <a href="/blogs/hugo_shortcodes/">post</a> concerning Hugo shortcodes,
+  specially its dedicated <a href="/blogs/hugo_shortcodes/#raw-html">paragraph</a> about raw HTML.
 {{< /rawhtml >}}
 
 
 ```html
-<div class="html-content">
- <span>Let's try it: </span>
- <span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span> 
-</div>
+<span>Let's try it: </span>
+<span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span> 
 ```
 
 ...which will render like this:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's try it: </span>
- <span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span>
-</div>
+<span>Let's try it: </span>
+<span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span>
 {{< /rawhtml >}}
 
 **TL;DR**:
@@ -221,14 +214,10 @@ And finally apply it in a *mardown* script of your project, e.g. `content/en/blo
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 <!-- Replace <,>,{ and } to avoid auto-render -->
 {{< rawhtml >}}
-<div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
  &#60;span&#62;Let's try it: &#60;/span&#62;
  &#60;span class="great-vibes" style="font-size: 1.5em;"&#62;This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm&#60;/span&#62;
-&#60;/div&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 {{< /rawhtml >}}
 
 Where did I get that `googleapis` link from? I give credit to this [guide](https://bootstrap.hugoblox.com/getting-started/customization/#custom-theme). Summary adding screenshots:

@@ -82,7 +82,7 @@ Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add t
 Table of Contents
 Global Nerd Fonts More fonts Hugo-scroll Great Vibes Oswald Awesome Font Global installed fail Iosevka local installed Summary HTML-tag &lt;h1&gt; Beyond Hugo Scroll Global Nerd Fonts Install steps:
 Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add the code below to your ~/.bashrc Preview fonts here Install the selected, e.g. nerd_fonts_install &#34;Iosevka&#34; for the Iosevka font Use the picked font in programs like LibreOffice! nerd_fonts_install() { # Install Nerd Fonts from release archives # Example usage: nerd_fonts_install &#34;Iosevka&#34; # Default font: JetBrainsMono # Check if any argument was supplied or use default font local font_to_install=&#34;${1:-JetBrainsMono}&#34; # Download files/dirs and fonts directory local DOWNLOAD_DIR=$HOME/Downloads local FONT_FILE=&#34;$DOWNLOAD_DIR/$font_to_install.tar.xz&#34; local TEMP_EXTRACT_DIR=&#34;$DOWNLOAD_DIR/${font_to_install}_nerd_fonts_temp&#34; local FONT_DIR=$HOME/.local/share/fonts # Check if the font files already exist in the font directory if [ -d &#34;$FONT_DIR&#34; ] &amp;&amp; [ -n &#34;$(find &#34;$FONT_DIR&#34; -name &#34;*$font_to_install*&#34; -print -quit)&#34; ]; then echo &#34;$font_to_install fonts are already installed.&#34; return 0 fi # Download if needed if [ ! -f &#34;$FONT_FILE&#34; ]; then echo &#34;Downloading $font_to_install fonts...&#34; if ! curl -L &#34;https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_to_install.tar.xz&#34; -o &#34;$FONT_FILE&#34;; then echo &#34;Error: Failed to download font&#34; &gt;&amp;2 return 1 fi else echo &#34;$FONT_FILE already exists.&#34; fi # Create and extract to temp directory mkdir -p &#34;$TEMP_EXTRACT_DIR&#34; echo &#34;Extracting fonts to temporary directory...&#34; if ! tar -xvf &#34;$FONT_FILE&#34; -C &#34;$TEMP_EXTRACT_DIR&#34;; then echo &#34;Error: Failed to extract archive&#34; &gt;&amp;2 rm -rf &#34;$TEMP_EXTRACT_DIR&#34; return 1 fi # Install mkdir -p &#34;$FONT_DIR&#34; find &#34;$TEMP_EXTRACT_DIR&#34; -type f \ \( -iname &#34;*$font_to_install*.ttf&#34; -o -iname &#34;*$font_to_install*.otf&#34; \) \ -exec mv -n {} &#34;$FONT_DIR/&#34; \; # Cleanup rm -f &#34;$FONT_FILE&#34; rm -rf &#34;$TEMP_EXTRACT_DIR&#34; # Update the font cache echo &#34;Updating font cache...&#34; fc-cache -f -v # Verify installation echo &#34;Verifying installation...&#34; fc-list | grep &#34;$font_to_install&#34; echo -e &#34;\nSuccessfully installed $font_to_install Nerd Font&#34; } The function structure is:">
-  <meta itemprop="wordCount" content="1292">
+  <meta itemprop="wordCount" content="1290">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -436,42 +436,31 @@ Though this is not about CSS code, but about different approachs to add fonts to
 </span></span></code></pre></div><p>And finally apply it in a <em>mardown</em> script of your project, e.g. <code>content/en/blogs/nerd_fonts_and_more.md</code>.</p>
 
 
-<div class="html-content">
   Wrap next <code>div</code> inside 
   <code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;</code>
   and 
   <code>&#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code>
   because it is raw HTML. 
-  For more info read
-  <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html">layouts/shortcodes/rawhtml.html</a>
-  from the official Hugo-scroll repo.
-</div>
+  Check out my <a href="/blogs/hugo_shortcodes/">post</a> concerning Hugo shortcodes,
+  specially its dedicated <a href="/blogs/hugo_shortcodes/#raw-html">paragraph</a> about raw HTML.
 
 
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;html-content&#34;</span>&gt;
-</span></span><span style="display:flex;"><span> &lt;<span style="color:#268bd2">span</span>&gt;Let&#39;s try it: &lt;/<span style="color:#268bd2">span</span>&gt;
-</span></span><span style="display:flex;"><span> &lt;<span style="color:#268bd2">span</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;great-vibes&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;font-size: 1.5em;&#34;</span>&gt;This line is written with Great Vibes font! It looks awesome, doesn&#39;t it? 0123456789 qwertyuiopasdfghjklzxcvbnm&lt;/<span style="color:#268bd2">span</span>&gt; 
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">div</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">span</span>&gt;Let&#39;s try it: &lt;/<span style="color:#268bd2">span</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">span</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;great-vibes&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;font-size: 1.5em;&#34;</span>&gt;This line is written with Great Vibes font! It looks awesome, doesn&#39;t it? 0123456789 qwertyuiopasdfghjklzxcvbnm&lt;/<span style="color:#268bd2">span</span>&gt; 
 </span></span></code></pre></div><p>&hellip;which will render like this:</p>
 
 
-<div class="html-content">
- <span>Let's try it: </span>
- <span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span>
-</div>
+<span>Let's try it: </span>
+<span class="great-vibes" style="font-size: 1.5em;">This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm</span>
 
 
 <p><strong>TL;DR</strong>:</p>
 
 
-<div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
  &#60;span&#62;Let's try it: &#60;/span&#62;
  &#60;span class="great-vibes" style="font-size: 1.5em;"&#62;This line is written with Great Vibes font! It looks awesome, doesn't it? 0123456789 qwertyuiopasdfghjklzxcvbnm&#60;/span&#62;
-&#60;/div&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 
 
 <p>Where did I get that <code>googleapis</code> link from? I give credit to this <a href="https://bootstrap.hugoblox.com/getting-started/customization/#custom-theme">guide</a>. Summary adding screenshots:</p>
