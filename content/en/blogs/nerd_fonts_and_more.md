@@ -6,14 +6,12 @@ Next **fonts** look **great**. Follow this guide to install them **global**ly an
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
-  <img
-    src="https://www.nerdfonts.com/assets/img/nerd-fonts-patched-fonts.svg"
-    style="width:50%;"
-    class="circular-bg"
-    alt="Preview of Patched Fonts"
-    >
-</div>
+<img
+  src="https://www.nerdfonts.com/assets/img/nerd-fonts-patched-fonts.svg"
+  style="width:50%;"
+  class="circular-bg"
+  alt="Preview of Patched Fonts"
+  >
 {{< /rawhtml >}}
 
 
@@ -123,13 +121,11 @@ Though **propetary** fonts are **not** included.
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's install </span>
- <span class="great-vibes">Great Vibes</span> 
- <span>  font from </span>
- <a href="https://fonts.google.com/specimen/Great+Vibes">Google Fonts</a>
- <span>.</span>
-</div>
+<span>Let's install </span>
+<span class="great-vibes">Great Vibes</span> 
+<span>  font from </span>
+<a href="https://fonts.google.com/specimen/Great+Vibes">Google Fonts</a>
+<span>.</span>
 {{< /rawhtml >}}
 
 Just **download** it and **run**:
@@ -229,18 +225,16 @@ Where did I get that `googleapis` link from? I give credit to this [guide](https
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
-  <table class="data-table">
-    <tr>
-      <td class="data-cell image-cell">
-        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts__get_font.png" alt="google_web_fonts__get_font" class="table-image">
-      </td>
-      <td class="data-cell image-cell">
-        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts_get_embed_code.png" alt="google_web_fonts_get_embed_code" class="table-image">
-      </td>
-    </tr>
-  </table>
-</div>
+<table class="data-table">
+  <tr>
+    <td class="data-cell image-cell">
+      <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts__get_font.png" alt="google_web_fonts__get_font" class="table-image">
+    </td>
+    <td class="data-cell image-cell">
+      <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts_get_embed_code.png" alt="google_web_fonts_get_embed_code" class="table-image">
+    </td>
+  </tr>
+</table>
 {{< /rawhtml >}}
 
 Furthermore,
@@ -250,13 +244,11 @@ Furthermore,
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
-  <img
-    src="/images/blogs/nerd_fonts_and_more/google_web_fonts_helper__great_vibes.png"
-    style="width:90%;"
-    alt="color_picker_and_pastel_with_notes.png"
-    >
-</div>
+<img
+  src="/images/blogs/nerd_fonts_and_more/google_web_fonts_helper__great_vibes.png"
+  style="width:90%;"
+  alt="color_picker_and_pastel_with_notes.png"
+  >
 {{< /rawhtml >}}
 
 Rememeber to
@@ -272,10 +264,8 @@ Example use of the *Oswald* font directly via **CSS inline**, instead of definin
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Oswald';">This line is written with the Oswald font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Oswald';">This line is written with the Oswald font!</span>
 {{< /rawhtml >}}
 
 Hugo code:
@@ -283,14 +273,10 @@ Hugo code:
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 <!-- Replace <,>,{ and } to avoid auto-render -->
 {{< rawhtml >}}
-<div class="html-content">
-  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
- &#60;span&#62;Let's try it: &#60;/span&#62;
- &#60;span style="font-size: 1.5em; font-family: 'Oswald';"&#62;This line is written with the Oswald font!&#60;/span&#62;
-&#60;/div&#62;
+<pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;span&#62;Let's try it: &#60;/span&#62;
+&#60;span style="font-size: 1.5em; font-family: 'Oswald';"&#62;This line is written with the Oswald font!&#60;/span&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 {{< /rawhtml >}}
 
 
@@ -302,10 +288,8 @@ E.g.
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free'">This line is written with the Font Awesome 6 Free font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free'">This line is written with the Font Awesome 6 Free font!</span>
 {{< /rawhtml >}}
 
 Hugo code:
@@ -313,14 +297,10 @@ Hugo code:
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 <!-- Replace <,>,{ and } to avoid auto-render -->
 {{< rawhtml >}}
-<div class="html-content">
-  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
- &#60;span&#62;Let's try it: &#60;/span&#62;
- &#60;span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free';"&#62;This line is written with the Font Awesome 6 Free font!&#60;/span&#62;
-&#60;/div&#62;
+<pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;span&#62;Let's try it: &#60;/span&#62;
+&#60;span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free';"&#62;This line is written with the Font Awesome 6 Free font!&#60;/span&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 {{< /rawhtml >}}
 
 ### Global installed fail
@@ -329,10 +309,8 @@ And what about a **global installed** font? What happens if I use *Iosevka* font
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Iosevka', 'Roboto Slab', serif">This line FAILs to be displayed with the Iosevka font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Iosevka', 'Roboto Slab', serif">This line FAILs to be displayed with the Iosevka font!</span>
 {{< /rawhtml >}}
 
 If you don't trust me, I like your scepticism btw., then inspect it with your favority web-dev tool to check the font used.
@@ -363,12 +341,10 @@ Now we will **install** the font **local**ly, instead of providing a link as don
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Iosevka BoldItalic', 'Roboto Slab', serif">This line is displayed with the Iosevka-BoldItalic font!</span>
- <br>
- <br>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Iosevka BoldItalic', 'Roboto Slab', serif">This line is displayed with the Iosevka-BoldItalic font!</span>
+<br>
+<br>
 {{< /rawhtml >}}
 
 ### Summary
@@ -426,11 +402,9 @@ Or even without a pre-made theme, check [this](https://robinvanderknaap.dev/blog
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
-  <br>
-  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
-  <br>
-  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
-  <br>
-</div>
+<br>
+<a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+<br>
+<a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+<br>
 {{< /rawhtml >}}

@@ -82,7 +82,7 @@ Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add t
 Table of Contents
 Global Nerd Fonts More fonts Hugo-scroll Great Vibes Oswald Awesome Font Global installed fail Iosevka local installed Summary HTML-tag &lt;h1&gt; Beyond Hugo Scroll Global Nerd Fonts Install steps:
 Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add the code below to your ~/.bashrc Preview fonts here Install the selected, e.g. nerd_fonts_install &#34;Iosevka&#34; for the Iosevka font Use the picked font in programs like LibreOffice! nerd_fonts_install() { # Install Nerd Fonts from release archives # Example usage: nerd_fonts_install &#34;Iosevka&#34; # Default font: JetBrainsMono # Check if any argument was supplied or use default font local font_to_install=&#34;${1:-JetBrainsMono}&#34; # Download files/dirs and fonts directory local DOWNLOAD_DIR=$HOME/Downloads local FONT_FILE=&#34;$DOWNLOAD_DIR/$font_to_install.tar.xz&#34; local TEMP_EXTRACT_DIR=&#34;$DOWNLOAD_DIR/${font_to_install}_nerd_fonts_temp&#34; local FONT_DIR=$HOME/.local/share/fonts # Check if the font files already exist in the font directory if [ -d &#34;$FONT_DIR&#34; ] &amp;&amp; [ -n &#34;$(find &#34;$FONT_DIR&#34; -name &#34;*$font_to_install*&#34; -print -quit)&#34; ]; then echo &#34;$font_to_install fonts are already installed.&#34; return 0 fi # Download if needed if [ ! -f &#34;$FONT_FILE&#34; ]; then echo &#34;Downloading $font_to_install fonts...&#34; if ! curl -L &#34;https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_to_install.tar.xz&#34; -o &#34;$FONT_FILE&#34;; then echo &#34;Error: Failed to download font&#34; &gt;&amp;2 return 1 fi else echo &#34;$FONT_FILE already exists.&#34; fi # Create and extract to temp directory mkdir -p &#34;$TEMP_EXTRACT_DIR&#34; echo &#34;Extracting fonts to temporary directory...&#34; if ! tar -xvf &#34;$FONT_FILE&#34; -C &#34;$TEMP_EXTRACT_DIR&#34;; then echo &#34;Error: Failed to extract archive&#34; &gt;&amp;2 rm -rf &#34;$TEMP_EXTRACT_DIR&#34; return 1 fi # Install mkdir -p &#34;$FONT_DIR&#34; find &#34;$TEMP_EXTRACT_DIR&#34; -type f \ \( -iname &#34;*$font_to_install*.ttf&#34; -o -iname &#34;*$font_to_install*.otf&#34; \) \ -exec mv -n {} &#34;$FONT_DIR/&#34; \; # Cleanup rm -f &#34;$FONT_FILE&#34; rm -rf &#34;$TEMP_EXTRACT_DIR&#34; # Update the font cache echo &#34;Updating font cache...&#34; fc-cache -f -v # Verify installation echo &#34;Verifying installation...&#34; fc-list | grep &#34;$font_to_install&#34; echo -e &#34;\nSuccessfully installed $font_to_install Nerd Font&#34; } The function structure is:">
-  <meta itemprop="wordCount" content="1290">
+  <meta itemprop="wordCount" content="1284">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -273,14 +273,12 @@ window.MathJax = {
         <p>Next <strong>fonts</strong> look <strong>great</strong>. Follow this guide to install them <strong>global</strong>ly and even in your <strong>Hugo</strong> website.</p>
 
 
-<div class="html-content">
-  <img
-    src="https://www.nerdfonts.com/assets/img/nerd-fonts-patched-fonts.svg"
-    style="width:50%;"
-    class="circular-bg"
-    alt="Preview of Patched Fonts"
-    >
-</div>
+<img
+  src="https://www.nerdfonts.com/assets/img/nerd-fonts-patched-fonts.svg"
+  style="width:50%;"
+  class="circular-bg"
+  alt="Preview of Patched Fonts"
+  >
 
 
 <p>Table of Contents</p>
@@ -389,13 +387,11 @@ window.MathJax = {
 Though <strong>propetary</strong> fonts are <strong>not</strong> included.</p>
 
 
-<div class="html-content">
- <span>Let's install </span>
- <span class="great-vibes">Great Vibes</span> 
- <span>  font from </span>
- <a href="https://fonts.google.com/specimen/Great+Vibes">Google Fonts</a>
- <span>.</span>
-</div>
+<span>Let's install </span>
+<span class="great-vibes">Great Vibes</span> 
+<span>  font from </span>
+<a href="https://fonts.google.com/specimen/Great+Vibes">Google Fonts</a>
+<span>.</span>
 
 
 <p>Just <strong>download</strong> it and <strong>run</strong>:</p>
@@ -472,18 +468,16 @@ Though this is not about CSS code, but about different approachs to add fonts to
 </ul>
 
 
-<div class="html-content">
-  <table class="data-table">
-    <tr>
-      <td class="data-cell image-cell">
-        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts__get_font.png" alt="google_web_fonts__get_font" class="table-image">
-      </td>
-      <td class="data-cell image-cell">
-        <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts_get_embed_code.png" alt="google_web_fonts_get_embed_code" class="table-image">
-      </td>
-    </tr>
-  </table>
-</div>
+<table class="data-table">
+  <tr>
+    <td class="data-cell image-cell">
+      <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts__get_font.png" alt="google_web_fonts__get_font" class="table-image">
+    </td>
+    <td class="data-cell image-cell">
+      <img src="/images/blogs/nerd_fonts_and_more/google_web_fonts_get_embed_code.png" alt="google_web_fonts_get_embed_code" class="table-image">
+    </td>
+  </tr>
+</table>
 
 
 <p>Furthermore,</p>
@@ -493,13 +487,11 @@ Though this is not about CSS code, but about different approachs to add fonts to
 </ul>
 
 
-<div class="html-content">
-  <img
-    src="/images/blogs/nerd_fonts_and_more/google_web_fonts_helper__great_vibes.png"
-    style="width:90%;"
-    alt="color_picker_and_pastel_with_notes.png"
-    >
-</div>
+<img
+  src="/images/blogs/nerd_fonts_and_more/google_web_fonts_helper__great_vibes.png"
+  style="width:90%;"
+  alt="color_picker_and_pastel_with_notes.png"
+  >
 
 
 <p>Rememeber to</p>
@@ -512,23 +504,17 @@ Though this is not about CSS code, but about different approachs to add fonts to
 Example use of the <em>Oswald</em> font directly via <strong>CSS inline</strong>, instead of defining a <em>CSS class selector</em>, is:</p>
 
 
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Oswald';">This line is written with the Oswald font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Oswald';">This line is written with the Oswald font!</span>
 
 
 <p>Hugo code:</p>
 
 
-<div class="html-content">
-  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
- &#60;span&#62;Let's try it: &#60;/span&#62;
- &#60;span style="font-size: 1.5em; font-family: 'Oswald';"&#62;This line is written with the Oswald font!&#60;/span&#62;
-&#60;/div&#62;
+<pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;span&#62;Let's try it: &#60;/span&#62;
+&#60;span style="font-size: 1.5em; font-family: 'Oswald';"&#62;This line is written with the Oswald font!&#60;/span&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 
 
 <h3 id="awesome-font">Awesome Font</h3>
@@ -537,33 +523,25 @@ which is provided <a href="https://github.com/zjedi/hugo-scroll/tree/master/asse
 E.g.</p>
 
 
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free'">This line is written with the Font Awesome 6 Free font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free'">This line is written with the Font Awesome 6 Free font!</span>
 
 
 <p>Hugo code:</p>
 
 
-<div class="html-content">
-  <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
- &#60;span&#62;Let's try it: &#60;/span&#62;
- &#60;span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free';"&#62;This line is written with the Font Awesome 6 Free font!&#60;/span&#62;
-&#60;/div&#62;
+<pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
+&#60;span&#62;Let's try it: &#60;/span&#62;
+&#60;span style="font-size: 1.5em; font-family: 'Font Awesome 6 Free';"&#62;This line is written with the Font Awesome 6 Free font!&#60;/span&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 
 
 <h3 id="global-installed-fail">Global installed fail</h3>
 <p>And what about a <strong>global installed</strong> font? What happens if I use <em>Iosevka</em> font? Well, it will <strong>fall to</strong> the <em>Roboto Slab</em> font, which is provided by Hugo-scroll.</p>
 
 
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Iosevka', 'Roboto Slab', serif">This line FAILs to be displayed with the Iosevka font!</span>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Iosevka', 'Roboto Slab', serif">This line FAILs to be displayed with the Iosevka font!</span>
 
 
 <p>If you don&rsquo;t trust me, I like your scepticism btw., then inspect it with your favority web-dev tool to check the font used.</p>
@@ -590,12 +568,10 @@ E.g.</p>
 </ol>
 
 
-<div class="html-content">
- <span>Let's try it: </span>
- <span style="font-size: 1.5em; font-family: 'Iosevka BoldItalic', 'Roboto Slab', serif">This line is displayed with the Iosevka-BoldItalic font!</span>
- <br>
- <br>
-</div>
+<span>Let's try it: </span>
+<span style="font-size: 1.5em; font-family: 'Iosevka BoldItalic', 'Roboto Slab', serif">This line is displayed with the Iosevka-BoldItalic font!</span>
+<br>
+<br>
 
 
 <h3 id="summary">Summary</h3>
@@ -638,13 +614,11 @@ E.g.</p>
 <p>Or even without a pre-made theme, check <a href="https://robinvanderknaap.dev/blog/building-robinvanderknaap-dev/#17-add-tailwind-css:~:text=add%20a%20font%20for%20headers">this</a>.</p>
 
 
-<div class="html-content">
-  <br>
-  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
-  <br>
-  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
-  <br>
-</div>
+<br>
+<a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+<br>
+<a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+<br>
 
 
 
