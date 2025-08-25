@@ -2,12 +2,7 @@
 ---
 
 <!-- Remove 'title' in markdown header and replace it with next -->
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
-{{< rawhtml >}}
-<div class="html-content">
-<h1 class="font-middle-earth-joanna-vu">Tolkien: books, podcasts and much more!</h1>
-</div>
-{{< /rawhtml >}}
+# Tolkien: books, podcasts and much more! {.font-middle-earth-joanna-vu}
 
 Do you fancy the beauty of languages?
 Does the original, deep meaning of words (*etymology*) intrigue you?
