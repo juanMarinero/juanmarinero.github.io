@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
 
 
-  <meta name="description" content="Juan Marinero - Data Scientist"
+  <meta name="description" content="Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more."
 />
 
   <meta name="keywords" content="Hugo Render Hooks, Hugo templates, customize Markdown, Markdown rendering, Goldmark, headless CMS, Hugo links, Hugo images, heading anchors, automatic link titles, Hugo theme development, override Markdown output, content styling, Hugo blocks, render-link hook, render-image hook, render-heading hook, Hugo best practices, web development, static site generator, custom attributes, Hugo advanced features, Hugo shortcodes"
@@ -39,11 +39,7 @@
 <meta property="og:url" content="http://localhost:1313/blogs/hugo_render_hooks/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
   <meta property="og:title" content="Hugo render hooks: a quick guide">
-  <meta property="og:description" content="Reference https://gohugo.io/render-hooks/
-Table of contents:
-Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
-Shortcodes:
-Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+  <meta property="og:description" content="Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="blogs">
@@ -53,19 +49,11 @@ Used manually in content files. You control when and how they’re used. Ideal f
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
   <meta name="twitter:title" content="Hugo render hooks: a quick guide">
-  <meta name="twitter:description" content="Reference https://gohugo.io/render-hooks/
-Table of contents:
-Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
-Shortcodes:
-Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+  <meta name="twitter:description" content="Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more.">
 
 
   <meta itemprop="name" content="Hugo render hooks: a quick guide">
-  <meta itemprop="description" content="Reference https://gohugo.io/render-hooks/
-Table of contents:
-Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
-Shortcodes:
-Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+  <meta itemprop="description" content="Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more.">
   <meta itemprop="wordCount" content="3192">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo Render Hooks,Hugo templates,customize Markdown,Markdown rendering,Goldmark,headless CMS,Hugo links,Hugo images,heading anchors,automatic link titles,Hugo theme development,override Markdown output,content styling,Hugo blocks,render-link hook,render-image hook,render-heading hook,Hugo best practices,web development,static site generator,custom attributes,Hugo advanced features,Hugo shortcodes">

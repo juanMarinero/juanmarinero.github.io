@@ -1,5 +1,6 @@
 ---
 title: "Hugo render hooks: a quick guide"
+description: "Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more."
 keywords: ["Hugo Render Hooks", "Hugo templates", "customize Markdown", "Markdown rendering", "Goldmark", "headless CMS", "Hugo links", "Hugo images", "heading anchors", "automatic link titles", "Hugo theme development", "override Markdown output", "content styling", "Hugo blocks", "render-link hook", "render-image hook", "render-heading hook", "Hugo best practices", "web development", "static site generator", "custom attributes", "Hugo advanced features", "Hugo shortcodes"]
 ---
 
