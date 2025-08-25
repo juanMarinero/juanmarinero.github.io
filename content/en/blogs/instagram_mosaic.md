@@ -6,15 +6,12 @@ Let's create a **4:5 Instagram mosaic**.
 Instead of following [manual steps](https://www.reddit.com/r/Instagram/comments/1icsc30/creating_a_seamless_45_instagram_mosaic_new/),
 we will achieve this **on the terminal**.
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <img
     src="/images/blogs/instagram_mosaic/screenshot_instagram_02.png"
     style="width:90%;"
     alt="screenshot_instagram_02.png"
     >
-</div>
 {{< /rawhtml >}}
 
 
@@ -93,9 +90,7 @@ In this example the selected image was too tall, or not wide enough.
 Anyway, it had a low aspect ratio (`width:height = 5040:3360 = 1.5`).
 The local preview and [Instagram](https://www.instagram.com/juanmarinerotarazona/) results are:
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <table class="data-table">
     <tr>
       <td class="data-cell image-cell">
@@ -106,7 +101,6 @@ The local preview and [Instagram](https://www.instagram.com/juanmarinerotarazona
       </td>
     </tr>
   </table>
-</div>
 {{< /rawhtml >}}
 
 
@@ -128,15 +122,12 @@ Save it (just overwrite the file). And then run the same command: `create_ig_mos
 
 Next is the result, check it in my [Instagram](https://www.instagram.com/juanmarinerotarazona/):
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <img
     src="/images/blogs/instagram_mosaic/screenshot_instagram_02.png"
     style="width:90%;"
     alt="screenshot_instagram_02.png"
     >
-</div>
 {{< /rawhtml >}}
 
 **Done!**
@@ -159,9 +150,7 @@ $$
 
 Since the $height$ is fixed (to 2472), then:
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   $$
   \begin{array}{ll}
     x 
@@ -170,7 +159,6 @@ Since the $height$ is fixed (to 2472), then:
     & = 5547
     \end{array}
   $$
-</div>
 {{< /rawhtml >}}
 
 To extend with blank space we just need to:
@@ -206,15 +194,12 @@ Image height: 891
 
 9. Upload to [Instagram](https://www.instagram.com/juanmarinerotarazona/)
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <img
     src="/images/blogs/instagram_mosaic/screenshot_instagram_03.png"
     style="width:90%;"
     alt="screenshot_instagram_03.png"
     >
-</div>
 {{< /rawhtml >}}
 
 Re-**done!**
@@ -388,25 +373,19 @@ add_suffix_before_ext() {
 
 How did I enable $\LaTeX$ for the equations of the [Bonus](#bonus) section?
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   Check my blog
   <a href="/blogs/latex_for_webdev/">
   $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for <strong>web dev</strong>
   </a>
   .
-</div>
 {{< /rawhtml >}}
 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <br>
   <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
   <br>
   <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
   <br>
-</div>
 {{< /rawhtml >}}
