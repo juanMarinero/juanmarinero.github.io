@@ -1,5 +1,6 @@
 ---
 title: "Create an Instagram mosaic"
+keywords: ["Instagram mosaic", "Instagram grid", "Instagram feed website", "social media gallery", "web development", "CSS grid", "CSS masonry", "Hugo shortcodes", "Instagram API", "JavaScript gallery", "photo portfolio", "website widget", "social media integration", "frontend development", "web design", "responsive gallery", "image grid layout", "Instagram embed", "personal website", "custom Instagram feed", "web project", "UI design", "CSS tricks", "zsh code", "process image", "code image"]
 ---
 
 Let's create a **4:5 Instagram mosaic**.
