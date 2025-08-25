@@ -170,6 +170,13 @@ h1 {
 details.table-of-contents-all-bold-but-summary > :not(summary) {
   font-weight: bold;
 }
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
+}
 </style>
 
 
@@ -510,8 +517,13 @@ Press Ctrl+C to stop
 <p>Let&rsquo;s stop the server <code>Ctrl+C</code> and add some content.</p>
 <h2 id="get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</h2>
 <p><a href="https://github.com/zjedi/hugo-scroll#-installation">https://github.com/zjedi/hugo-scroll#-installation</a> says:</p>
-<blockquote>
-<p>If you are starting fresh, simply copy over the contents of the <code>exampleSite</code>-directory included in this theme to your source directory. That should give you a good idea about how things work, and then you can go on from there to make the site your own.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>If you are starting fresh, simply copy over the contents of the <code>exampleSite</code>-directory included in this theme to your source directory. That should give you a good idea about how things work, and then you can go on from there to make the site your own.</p>
+  </blockquote>
+
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> ~/Downloads/quickstart
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">hugo_scroll_dir</span><span style="color:#719e07">=</span><span style="color:#268bd2">$HOME</span>/Downloads/hugo-scroll
 </span></span><span style="display:flex;"><span>git clone --depth <span style="color:#2aa198">1</span> https://github.com/zjedi/hugo-scroll.git <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_dir</span><span style="color:#2aa198">&#34;</span>
@@ -734,13 +746,23 @@ header_use_video: false
 </ul>
 <p>In contrast <code>content/en/homepage/opener.md</code> has no <code>header_menu_title</code> nor <code>navigation_menu_title</code>. And therefore this website section does not appear in the cover section nor in the cover menu. As its content stated
 <a href="https://zjedi.github.io/hugo-scroll/#:~:text=By%20the%20way%20this%20welcome%20section%20won%E2%80%99t%20show%20in%20the%20cover%20menu.">here</a>:</p>
-<blockquote>
-<p>By the way this welcome section won&rsquo;t show in the cover menu.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>By the way this welcome section won&rsquo;t show in the cover menu.</p>
+  </blockquote>
+
 <h3 id="edit-a-not-mainpage">Edit a not mainpage</h3>
 <p>For example <code>https://zjedi.github.io/hugo-scroll/services/</code> has the content of <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md</a> (not to confuse with <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/services.md</a>)</p>
 <p><a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/opener.md?plain=1">https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/opener.md?plain=1</a>, i.e. the mainpage, links to this not-mainpage via <code>[dedicated pages](services)</code> of:</p>
-<blockquote>
-<p><code>You can also delegate lengthier, less important or more sizeable content to [dedicated pages](services).</code></p></blockquote>
+
+
+
+  <blockquote>
+    <p><code>You can also delegate lengthier, less important or more sizeable content to [dedicated pages](services).</code></p>
+  </blockquote>
+
 <p>In the language directory, for example <code>public/en/</code> edit the <code>sitemap.xml</code> file.</p>
 <h3 id="css">CSS</h3>
 <p><code>layouts/partials/custom_head.html</code> shows how to add CSS code:</p>
@@ -1102,8 +1124,13 @@ It&rsquo;s exaplained for a <em>user or organization site</em>, but it&rsquo;s a
 </ol>
 <p>Note. The <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site">Github Pages docs</a>
 is not limited to <code>index.html</code>:</p>
-<blockquote>
-<p>Create the entry file for your site. GitHub Pages will look for an <code>index.html</code>, <code>index.md</code>, or <code>README.md</code> file as the entry file for your site.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>Create the entry file for your site. GitHub Pages will look for an <code>index.html</code>, <code>index.md</code>, or <code>README.md</code> file as the entry file for your site.</p>
+  </blockquote>
+
 <p>Now let&rsquo;s create another repo, for example <code>test-publishing-from-a-branch</code>, with that same <code>index.html</code>. Then follow steps of
 <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch">Publishing from a branch</a>
 (TL;DR <em>Settings/Pages</em>, under <em>Source</em> select <em>Deploy from a branch</em>, select the <code>main</code> branch, and click <em>Save</em>)</p>

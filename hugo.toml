@@ -128,6 +128,9 @@ enableEmoji = true
         url = "https://juan-marinero.info/"
         icon = "fa fa-globe"
 
+  # https://gohugo.io/content-management/mathematics/
+  math = true
+
 # Define additional languages
 [languages]
   [languages.en]
@@ -149,9 +152,21 @@ enableEmoji = true
   [markup.highlight]
     style = 'solarized-dark'
 
-  # https://gohugo.io/content-management/markdown-attributes/
   [markup.goldmark]
+
+    # https://gohugo.io/render-hooks/images/
     [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+
+      # https://gohugo.io/content-management/markdown-attributes/
       [markup.goldmark.parser.attribute]
         block = true
         title = true
+
+    # https://gohugo.io/content-management/mathematics/
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]

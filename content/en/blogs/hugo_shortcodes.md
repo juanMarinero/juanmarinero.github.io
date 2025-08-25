@@ -18,7 +18,7 @@ As well as really understanding the code behind so you can create **your own sho
 
 {{< details summary="**Index** - Click to expand 📜">}}
 
-* [Go and Hugo code basics](#details)
+* [Go and Hugo code basics](#go-and-hugo-code-basics)
   * [Shortcode templates vs call](#shortcode-templates-vs-call)
   * [Go basics](#go-basics)
   * [.Get](#get)

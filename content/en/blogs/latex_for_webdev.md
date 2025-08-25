@@ -28,9 +28,10 @@ Table of Contents
 
 ## MathJax Support
 
-1. Open a terminal. Go to your project directory: `cd <path>`
-2. Run `$EDITOR layouts/partials/custom_head.html`
-3. Append and save
+1. Enable and configure the Goldmark passthrough extension in your site configs as described [here](https://gohugo.io/content-management/mathematics/#step-1).
+2. Open a terminal. Go to your project directory: `cd <path>`
+3. Run `$EDITOR layouts/partials/custom_head.html`
+4. Append and save
 ```
 <!-- MathJax Support -->
 <!-- https://docs.mathjax.org/en/latest/options/input/tex.html -->
@@ -69,14 +70,14 @@ window.MathJax = {
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
 ```
 
-4. Edit a markdown file, for example `content/en/*.md`
-5. Insert $\LaTeX$ code inline like `$\sqrt{x^2 + y^2} = r$` or in `$$` blocks. Save
-6. Build it with `hugo server --disableFastRender`.
+5. Edit a markdown file, for example `content/en/*.md`
+6. Insert $\LaTeX$ code inline like `$\sqrt{x^2 + y^2} = r$` or in `$$` blocks. Save
+7. Build it with `hugo server --disableFastRender`.
 Build details in my post [How to **create** a **Hugo-scroll web**site](/blogs/create_hugo_website/)
-7. Check locally the changes on [http://localhost:1313/](http://localhost:1313/) or alike
-8. Open the browser console. Refresh the page.
-9. Check if any error is loaded. It should just show `MathJax is initializing...` and `MathJax typesetting complete`
-10. Run `console.log('MathJax version:', MathJax.version)`. Expected output: `4.0.0`
+8. Check locally the changes on [http://localhost:1313/](http://localhost:1313/) or alike
+9. Open the browser console. Refresh the page.
+10. Check if any error is loaded. It should just show `MathJax is initializing...` and `MathJax typesetting complete`
+11. Run `console.log('MathJax version:', MathJax.version)`. Expected output: `4.0.0`
 
 ### Block equations
 

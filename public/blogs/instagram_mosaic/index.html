@@ -79,7 +79,7 @@ Steps Example Bonus Code Extra: $\LaTeX$ in Hugo Scroll Steps Get the desired im
   <meta itemprop="description" content="Let’s create a 4:5 Instagram mosaic. Instead of following manual steps, we will achieve this on the terminal.
 Table of Contents
 Steps Example Bonus Code Extra: $\LaTeX$ in Hugo Scroll Steps Get the desired image Rename it as img_original.jpg Open the terminal. Change to the image directory (e.g. cd ~/Downloads) Copy the CODE at the end of this post Paste it on a script via $EDITOR create_ig_mosaic.sh (CWD is still ~/Downloads), or in your ~/.zshrc file Make it executable chmod &#43;x create_ig_mosaic.sh Run source ./create_ig_mosaic.sh &amp;&amp; create_ig_mosaic Alternative, no need to rename the file.">
-  <meta itemprop="wordCount" content="1360">
+  <meta itemprop="wordCount" content="1359">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -175,6 +175,13 @@ h1 {
  
 details.table-of-contents-all-bold-but-summary > :not(summary) {
   font-weight: bold;
+}
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
 }
 </style>
 
@@ -390,11 +397,10 @@ Aspect ratio: 2.038
 <li>Vertically: unchanged</li>
 <li>Horizontally, apply basic maths:</li>
 </ul>
-<p>$$
+$$
 \frac{width_{desired}}{height_{desired}}
 = \frac{x}{height}
-$$</p>
-<p>Since the $height$ is fixed (to 2472), then:</p>
+$$<p>Since the $height$ is fixed (to 2472), then:</p>
 
 
 <div class="html-content">

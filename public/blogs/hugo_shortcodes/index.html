@@ -173,6 +173,13 @@ h1 {
 details.table-of-contents-all-bold-but-summary > :not(summary) {
   font-weight: bold;
 }
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
+}
 </style>
 
 
@@ -279,7 +286,7 @@ As well as really understanding the code behind so you can create <strong>your o
 <details>
   <summary><strong>Index</strong> - Click to expand 📜</summary>
   <ul>
-<li><a href="/blogs/hugo_shortcodes/#details">Go and Hugo code basics</a>
+<li><a href="/blogs/hugo_shortcodes/#go-and-hugo-code-basics">Go and Hugo code basics</a>
 <ul>
 <li><a href="/blogs/hugo_shortcodes/#shortcode-templates-vs-call">Shortcode templates vs call</a></li>
 <li><a href="/blogs/hugo_shortcodes/#go-basics">Go basics</a></li>
@@ -475,8 +482,13 @@ There the <code>id</code> in the shortcode call can be either the first (and onl
 {{&lt; vimeo    55073825 loading=eager allowFullScreen=true &gt;}}
 {{&lt; vimeo id=55073825 loading=eager allowFullScreen=true &gt;}}
 </code></pre><p>Note. Whitespaces added for readability. They will be trimmed anyway.</p>
-<blockquote>
-<p>but not at the same time</p></blockquote>
+
+
+
+  <blockquote>
+    <p>but not at the same time</p>
+  </blockquote>
+
 <p>Therefore, next calls are invalid:</p>
 <pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; vimeo    55073825 id=55073825 &gt;}} // id was already assigned by the first positional arg
 {{&lt; vimeo id=55073825    55073825 &gt;}} // id was already assigned by the first named arg
@@ -485,8 +497,13 @@ There the <code>id</code> in the shortcode call can be either the first (and onl
 {{&lt; vimeo    55073825    eager &gt;}} // Max one positional arg (the id if any) in this template
 </code></pre><h2 id="details">Details</h2>
 <p>Create a HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"><code>&lt;details&gt;</code></a></p>
-<blockquote>
-<p>A disclosure widget in which information is visible only when the widget is toggled into an open state.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>A disclosure widget in which information is visible only when the widget is toggled into an open state.</p>
+  </blockquote>
+
 <h3 id="details-mwe">MWE </h3>
 <pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; details summary=&#34;See the details&#34; &gt;}}
 This is a **bold** word.
@@ -620,8 +637,13 @@ Lets understand how it works:</p>
 <p>Finally we need to know how it&rsquo;s handled the content of the children of the <code>&lt;details&gt;</code> (siblings of the <code>&lt;summary&gt;</code> element).
 I.e. the actual content folded of the <code>&lt;details&gt;</code> element.
 It&rsquo;s used <strong><code>.Inner</code></strong>, <a href="https://gohugo.io/methods/shortcode/inner/">docs</a>:</p>
-<blockquote>
-<p>Returns the content between opening and closing shortcode tags, applicable when the shortcode call includes a closing tag.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>Returns the content between opening and closing shortcode tags, applicable when the shortcode call includes a closing tag.</p>
+  </blockquote>
+
 <p>Thus, in the details shortcode call, we have:</p>
 <ul>
 <li>An opening shortcode tag, .e.g <code>{{&lt; details summary=&quot;See the details&quot; &gt;}}</code></li>
@@ -723,8 +745,13 @@ E.g. it explains that <code>open (bool)</code> serves to initially display (unsc
 </ul>
 <h2 id="figure">Figure</h2>
 <p>Create a HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure"><code>&lt;figure&gt;</code></a></p>
-<blockquote>
-<p>Represents self-contained content, potentially with an optional caption.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>Represents self-contained content, potentially with an optional caption.</p>
+  </blockquote>
+
 <h3 id="fig-MWE">MWE</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{&lt; <span style="color:#268bd2">figure</span>
 </span></span><span style="display:flex;"><span>  src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span>
@@ -764,8 +791,13 @@ Enable it adding next to <code>layouts/partials/custom_head.html</code></p>
 <a href="/blogs/instagram_mosaic/">How to create an <strong>Instagram mosaic</strong> on the terminal</a>.
 Which may interest you if you are active on Instagram.</p>
 <p>Off-topic. <code>loading</code> attribute is <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading#loading_attribute">supported</a> in HTML5.</p>
-<blockquote>
-<p>To instruct the browser to defer loading of images/iframes that are off-screen until the user scrolls near them</p></blockquote>
+
+
+
+  <blockquote>
+    <p>To instruct the browser to defer loading of images/iframes that are off-screen until the user scrolls near them</p>
+  </blockquote>
+
 <p>Check it out:</p>
 <ol>
 <li>Refresh current website removing the cache - try a private tab</li>
@@ -1733,11 +1765,21 @@ For example <code>{{- with $alt }} alt=&quot;{{ $alt }}&quot; {{- end }}</code><
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">79</span><span>{{- end -}}</span></span></code></pre></div>
 <h2 id="ref">Ref</h2>
 <p><a href="https://gohugo.io/shortcodes/ref/">Docs</a>:</p>
-<blockquote>
-<p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p></blockquote>
+
+
+
+  <blockquote>
+    <p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p>
+  </blockquote>
+
 <p>The <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a></p>
-<blockquote>
-<p>Create a link render hook to override the rendering of Markdown links to HTML.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>Create a link render hook to override the rendering of Markdown links to HTML.</p>
+  </blockquote>
+
 <p>MWE</p>
 <pre tabindex="0"><code class="language-texts" data-lang="texts">[Post 1](/posts/post-1 &#34;My first post&#34;)
  ------  -------------  -------------
@@ -1814,8 +1856,13 @@ Well, among other features, this render hook adds <strong>smart resolution</stro
 </ol>
 <h2 id="relref">Relref</h2>
 <p><a href="https://gohugo.io/shortcodes/relref/">Docs</a>:</p>
-<blockquote>
-<p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p></blockquote>
+
+
+
+  <blockquote>
+    <p>This shortcode is <strong>obsolete</strong> [&hellip;] use the <a href="https://gohugo.io/render-hooks/links/#embedded">embedded link render hook</a> or create your own</p>
+  </blockquote>
+
 <p>This is the same warning message as for <a href="/blogs/hugo_shortcodes/#ref">Ref</a>.
 Read the <a href="/blogs/hugo_shortcodes/#ref">Ref</a> section to grasp how an <a href="/blogs/hugo_shortcodes/#embedded-link-render-hook">embedded link render hook</a> works.</p>
 <h2 id="vimeo">Vimeo</h2>
@@ -1988,8 +2035,13 @@ first read Vimeo&rsquo;s template overview in the <a href="/blogs/hugo_shortcode
 <p>For example the  <code>details</code> shortcode declaration in the script <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html"><code>details.html</code></a>
 might not fit your needs.
 To solve this we consulted the details shortcode <a href="https://gohugo.io/shortcodes/details/">documentation</a>, which says</p>
-<blockquote>
-<p>To override Hugo’s embedded <code>details</code> shortcode, copy the <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html">source</a> code to a file with the same name in the <code>layouts/_shortcodes</code> directory.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>To override Hugo’s embedded <code>details</code> shortcode, copy the <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/details.html">source</a> code to a file with the same name in the <code>layouts/_shortcodes</code> directory.</p>
+  </blockquote>
+
 <p>Let&rsquo;s get to work.</p>
 <ol>
 <li><code>$EDITOR layouts/_shortcodes/details.html</code>. Note the underscore <code>_</code> in <code>_shortcodes</code>.</li>
@@ -2191,8 +2243,13 @@ in <code>[params]</code> section. It starts with:</p>
     keywords = &#34;Data Science, ...&#34;
 [permalinks]
 </code></pre><p>Read <a href="https://gohugo.io/templates/shortcode/#argument-collection">Argument collection</a></p>
-<blockquote>
-<p>Use the <a href="https://gohugo.io/methods/shortcode/params/">Params</a> method to access the arguments as a collection.</p></blockquote>
+
+
+
+  <blockquote>
+    <p>Use the <a href="https://gohugo.io/methods/shortcode/params/">Params</a> method to access the arguments as a collection.</p>
+  </blockquote>
+
 <p>MWE: read <a href="https://gohugo.io/templates/introduction/#access-site-parameters">Access site/page parameters</a>
 and <a href="https://gohugo.io/templates/introduction/#current-context">Current context</a> for pages.</p>
 <p>Concerning the contact list, the shortcode template <code>contact_list.html</code> loop all via <code>{{ range .Site.Params.contacts }}</code>.

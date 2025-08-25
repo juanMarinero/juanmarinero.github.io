@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>Hugo render hooks: a quick guide</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Juan Marinero - Data Scientist"
+/>
+
+  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
+          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
+          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
+          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
+          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
+          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
+          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
+          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
+          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
+          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
+          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
+          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
+          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
+          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
+          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
+          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
+          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
+          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
+          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
+        "
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/hugo_render_hooks/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="Hugo render hooks: a quick guide">
+  <meta property="og:description" content="Reference https://gohugo.io/render-hooks/
+Table of contents:
+Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
+Shortcodes:
+Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="Hugo render hooks: a quick guide">
+  <meta name="twitter:description" content="Reference https://gohugo.io/render-hooks/
+Table of contents:
+Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
+Shortcodes:
+Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+
+
+  <meta itemprop="name" content="Hugo render hooks: a quick guide">
+  <meta itemprop="description" content="Reference https://gohugo.io/render-hooks/
+Table of contents:
+Shortcodes vs Render Hooks Blockquote Alerts MWE Declaration As an HTML figure with an optional citation and caption MWE Declaration Multiple render hooks Code block MWE GoAT Heading Image MWE Declaration Link Passthrough Table MWE Declaration Shortcodes vs Render Hooks We studied shortcodes in the previous post. But what are the main differences between shortcodes and render hooks?
+Shortcodes:
+Used manually in content files. You control when and how they’re used. Ideal for complex elements/functionality: Complex layout like a multi-column section Dynamic data such as the latest blog posts list Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map. Use the {{&lt; ... &gt;}} syntax. Multiline {{&lt; details &gt;}}...{{&lt; /details &gt;}} or inline as {{&lt; qr text=&#34;https://gohugo.io&#34; &gt;}}. They allow custom Go HTML templates and complex logic, including calling Go functions. See the flowchart of the Highlight shortcode explanation: the template takes advantage of transform.go and highlight.go scripts. .Page.RenderString method, described in previous post, or other rendering methods can be applied within the shortcode to parse its inner content as Markdown. But they are optional. Shortcodes can be nested. Details here. Render Hooks:">
+  <meta itemprop="wordCount" content="3192">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 1.5em;  
+  display: block;  
+  margin-bottom: 1.1em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.blogs_index {
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
+}
+
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">Hugo render hooks: a quick guide</h1>
+      <section class="post-content">
+        <p>Reference <a href="https://gohugo.io/render-hooks/">https://gohugo.io/render-hooks/</a></p>
+<p>Table of contents:</p>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#shortcodes-vs-render-hooks">Shortcodes vs Render Hooks</a></li>
+<li><a href="/blogs/hugo_render_hooks/#blockquote">Blockquote</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#alerts">Alerts</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#blockquote-alerts-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_render_hooks/#blockquote-alerts-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_render_hooks/#as-an-html-figure-with-an-optional-citation-and-caption">As an HTML figure with an optional citation and caption</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#blockquote-figure-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_render_hooks/#blockquote-figure-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_render_hooks/#multiple-render-hooks">Multiple render hooks</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_render_hooks/#code-block">Code block</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#codeblock-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_render_hooks/#codeblock-goat">GoAT</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_render_hooks/#heading">Heading</a></li>
+<li><a href="/blogs/hugo_render_hooks/#image">Image</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#image-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_render_hooks/#image-declaration">Declaration</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_render_hooks/#link">Link</a></li>
+<li><a href="/blogs/hugo_render_hooks/#passthrough">Passthrough</a></li>
+<li><a href="/blogs/hugo_render_hooks/#table">Table</a>
+<ul>
+<li><a href="/blogs/hugo_render_hooks/#table-mwe">MWE</a></li>
+<li><a href="/blogs/hugo_render_hooks/#table-declaration">Declaration</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="shortcodes-vs-render-hooks">Shortcodes vs Render Hooks</h2>
+<p>We studied shortcodes in the <a href="/blogs/hugo_shortcodes/">previous post</a>.
+But what are the main differences between shortcodes and render hooks?</p>
+<p><strong>Shortcodes</strong>:</p>
+<ul>
+<li>Used <strong>manual</strong>ly in content files. You control when and how they&rsquo;re used. Ideal for complex elements/functionality:
+<ul>
+<li>Complex layout like a multi-column section</li>
+<li>Dynamic data such as the <em>latest blog posts</em> list</li>
+<li>Embed a specific piece of non-markdown content. E.g., a specific video player or an interactive map.</li>
+</ul>
+</li>
+<li>Use the <code>{{&lt; ... &gt;}}</code> <strong>syntax</strong>. Multiline <code>{{&lt; details &gt;}}...{{&lt; /details &gt;}}</code> or inline as <code>{{&lt; qr text=&quot;https://gohugo.io&quot; &gt;}}</code>.</li>
+<li>They allow <strong>custom Go</strong> HTML templates and complex logic, including calling Go functions.
+See the flowchart of the <a href="/blogs/hugo_shortcodes/#highlight-declaration">Highlight</a> shortcode explanation:
+the template takes advantage of <code>transform.go</code> and <code>highlight.go</code> scripts.</li>
+<li><code>.Page.RenderString</code> <a href="https://gohugo.io/methods/page/renderstring/">method</a>,
+described in <a href="/blogs/hugo_shortcodes/#get-values">previous post</a>,
+or other rendering methods can be applied <em>within</em> the shortcode to parse its inner content as Markdown. But they are optional.</li>
+<li>Shortcodes can be <a href="https://gohugo.io/content-management/shortcodes/#nesting">nested</a>.
+Details <a href="https://stackoverflow.com/questions/55401755/use-shortcode-within-definition-of-shortcode">here</a>.</li>
+</ul>
+<p><strong>Render Hooks</strong>:</p>
+<ul>
+<li>Usage <strong>global</strong>ly for Markdown elements.
+Automatically intercept and modify how standard markdown elements render.
+It works implicitly, e.g. <code>&gt; [!NOTE]</code> becomes an styled blockquote.</li>
+<li><strong>Standard Markdown</strong> syntax, e.g. <code>[link](url)</code>. Thus, it&rsquo;s more <strong>portable</strong>, though the custom rendering would not automatically work in other engines.</li>
+<li>Specific Markdown rendering, it cannot call any Go function.
+Only <strong>certain Markdown elements</strong> can be customized (images, links, headings, tables, etc.), whereas shortcodes can create virtually anything.</li>
+</ul>
+<h2 id="blockquote">Blockquote</h2>
+<ul>
+<li><a href="https://gohugo.io/render-hooks/blockquotes/">Docs</a></li>
+<li><a href="https://github.com/gohugoio/hugo/blob/master/markup/goldmark/blockquotes/blockquotes.go">Goldmark source</a></li>
+</ul>
+<h3 id="alerts">Alerts</h3>
+<h4 id="blockquote-alerts-mwe">MWE</h4>
+<p>To achieve next automatic renders just follow the <a href="https://gohugo.io/render-hooks/blockquotes/">docs</a> steps:</p>
+<ol start="0">
+<li>Create the directory <code>layouts/_markup/</code></li>
+<li>Copy the code in next section to <code>layouts/_markup/render-blockquote.html</code></li>
+<li>Edit your markdowns following next Minimal Working Examples</li>
+</ol>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!NOTE]
+&gt; Useful information that users should know, even when skimming content.
+</code></pre><p>Which renders to</p>
+
+
+
+  <blockquote class="alert alert-note">
+    <p class="alert-heading">
+      ℹ️
+      
+        Note
+      
+    </p>
+    <p>Useful information that users should know, even when skimming content.</p>
+  </blockquote>
+
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!TIP]
+&gt; Helpful advice for doing things better or more easily.
+</code></pre><p>Previous renders to</p>
+
+
+
+  <blockquote class="alert alert-tip">
+    <p class="alert-heading">
+      💡
+      
+        Tip
+      
+    </p>
+    <p>Helpful advice for doing things better or more easily.</p>
+  </blockquote>
+
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!IMPORTANT]
+&gt; Key information users need to know to achieve their goal.
+</code></pre><p>Now it renders to</p>
+
+
+
+  <blockquote class="alert alert-important">
+    <p class="alert-heading">
+      ℹ️
+      
+        Important
+      
+    </p>
+    <p>Key information users need to know to achieve their goal.</p>
+  </blockquote>
+
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!warning]
+&gt; Urgent info that needs immediate user attention to avoid problems.
+</code></pre><p>Outputs:</p>
+
+
+
+  <blockquote class="alert alert-warning">
+    <p class="alert-heading">
+      ℹ️
+      
+        Warning
+      
+    </p>
+    <p>Urgent info that needs immediate user attention to avoid problems.</p>
+  </blockquote>
+
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!CAUTION]
+&gt; Advises about risks or negative outcomes of certain actions.
+</code></pre><p>Can render in markdowns to next</p>
+
+
+
+  <blockquote class="alert alert-caution">
+    <p class="alert-heading">
+      ❗
+      
+        Caution
+      
+    </p>
+    <p>Advises about risks or negative outcomes of certain actions.</p>
+  </blockquote>
+
+<p>Notice the red font-color is applied to every HTML element except the alert line (the first <code>&lt;p&gt;</code>aragraph) of the blockquote of type <code>alert-caution</code>.
+This can be customized by editing <code>layouts/partials/custom_head.html</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#268bd2">blockquote</span>.<span style="color:#268bd2">alert-caution</span> <span style="color:#719e07">*</span>:<span style="color:#268bd2">not</span><span style="color:#719e07">(</span><span style="color:#268bd2">p</span>:<span style="color:#268bd2">first-of-type</span><span style="color:#719e07">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">color</span>: <span style="color:#cb4b16">red</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="blockquote-alerts-declaration">Declaration</h4>
+<p>Edit the <code>layouts/_markup/render-blockquote.html</code> script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $emojis <span style="color:#719e07">:=</span> dict
+</span></span><span style="display:flex;"><span>  <span style="color:#2aa198">&#34;caution&#34;</span> <span style="color:#2aa198">&#34;:exclamation:&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#2aa198">&#34;important&#34;</span> <span style="color:#2aa198">&#34;:information_source:&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#2aa198">&#34;note&#34;</span> <span style="color:#2aa198">&#34;:information_source:&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#2aa198">&#34;tip&#34;</span> <span style="color:#2aa198">&#34;:bulb:&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#2aa198">&#34;warning&#34;</span> <span style="color:#2aa198">&#34;:information_source:&#34;</span>
+</span></span><span style="display:flex;"><span>}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> eq .Type <span style="color:#2aa198">&#34;alert&#34;</span> }}
+</span></span><span style="display:flex;"><span>  &lt;blockquote class=<span style="color:#2aa198">&#34;alert alert-{{ .AlertType }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;p class=<span style="color:#2aa198">&#34;alert-heading&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      {{ transform.<span style="color:#268bd2">Emojify</span> (index $emojis .AlertType) }}
+</span></span><span style="display:flex;"><span>      {{ with .AlertTitle }}
+</span></span><span style="display:flex;"><span>        {{ . }}
+</span></span><span style="display:flex;"><span>      {{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>        {{ <span style="color:#268bd2">or</span> (i18n .AlertType) (title .AlertType) }}
+</span></span><span style="display:flex;"><span>      {{ end }}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#719e07">/</span>p&gt;
+</span></span><span style="display:flex;"><span>    {{ .Text }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>blockquote&gt;
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  &lt;blockquote&gt;
+</span></span><span style="display:flex;"><span>    {{ .Text }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>blockquote&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>First of all I recommend you to understand basic Go code, <code>with</code> statement, etc.
+Read <a href="/blogs/hugo_shortcodes/#go-and-hugo-code-basics">Go and Hugo code basics</a> from my Hugo&rsquo;s shortcode post.</p>
+<p>Let&rsquo;s dive in!</p>
+<p>First a Go <a href="https://gohugo.io/functions/collections/dictionary/">dictionary</a> for emojis is defined.
+Depending on the <code>Alertype</code>-key the respective emoji-value is retrieved with <code>index $emojis .AlertType</code>.</p>
+<p>The rest of the bloquote template is basicaly just:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> eq .Type <span style="color:#2aa198">&#34;alert&#34;</span> }}
+</span></span><span style="display:flex;"><span>  [<span style="color:#719e07">...</span>]
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  &lt;blockquote&gt;
+</span></span><span style="display:flex;"><span>    {{ .Text }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>blockquote&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>I.e., if the blockquote is not an alert, the <code>{{ else }}</code>,
+e.g. a single line like <code>&gt; Useful information that users should know</code> not preceded by <code>&gt; [!NOTE]</code> or alike,
+then we just print the content of the blockquote as it is (<code>.Text</code>).</p>
+<p>On the other hand, if the markdown blockquote (first line) is an alert <a href="https://gohugo.io/render-hooks/blockquotes/#type"><code>Type</code></a>, <code>{{ if eq .Type &quot;alert&quot; }}</code> is true,
+then we run the code that <code>[...]</code> represents - a <code>&lt;blockquote&gt;</code> element:</p>
+<ul>
+<li>The <code>alert</code> class and the <code>alert-{{ .AlertType }}</code> class (see <a href="https://gohugo.io/render-hooks/blockquotes/#alerttype"><code>AlertType</code></a>) define the style of the blockquote.
+See the CSS style customization of a cauton blockquote at the end of previous subsection.</li>
+<li>The first paragraph <code>&lt;p&gt;</code> starts with the respecitive alert emoji, see <a href="https://gohugo.io/functions/transform/emojify/"><code>transform.Emojify</code></a>.</li>
+<li>Then it&rsquo;s followed by the capitalized title of the alert, i.e. <code>Note</code>, <code>Tip</code>, <code>Warning</code>, etc. thanks to <a href="https://gohugo.io/functions/strings/title/"><code>strings.Title</code></a>.</li>
+<li>The paragrah&rsquo;s final content is the <a href="https://gohugo.io/render-hooks/blockquotes/#alerttitle"><code>.AlertTitle</code></a> if any. We skipped this in previous MWEs,
+read <a href="https://gohugo.io/render-hooks/blockquotes/#extended-syntax">Extended syntax</a>.</li>
+<li>Finally a second <code>&lt;p&gt;</code> is created with just the content of the second blockquote line, i.e. <code>{{ .Text }}</code>,
+e.g. the line <code>&gt; Useful information that users should know</code> if preceded by <code>&gt; [!NOTE]</code> or other alerts.</li>
+</ul>
+<p>Actually, a blockquote is allowed to have as many lines as we want, read <a href="https://www.markdownguide.org/basic-syntax/#blockquotes-1">this</a> brief markdown guide.
+For example the <code>.Text</code> may include all next lines (from second line onwards):</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; [!CAUTION]
+&gt; **Multiple Paragraphs**:
+&gt;
+&gt; Paragraph 1.
+&gt;
+&gt; Paragraph 2.
+&gt;
+&gt; **Other Elements**:
+&gt;
+&gt; #### The quarterly results look great!
+&gt;
+&gt; - Revenue was off the chart.
+&gt; - Profits were higher than ever.
+&gt;
+&gt;  *Everything* is going ~~according~~ to **plan**.
+&gt;
+&gt; **Nested Blockquotes**:
+&gt; 
+&gt; Dorothy followed her through many of the beautiful rooms in her castle.
+&gt;
+&gt;&gt; The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+</code></pre><p>The markdown code above create next multiline blockquote. Notice though that the nested blockquotes seem to weirdly format:</p>
+
+
+
+  <blockquote class="alert alert-caution">
+    <p class="alert-heading">
+      ❗
+      
+        Caution
+      
+    </p>
+    <p><strong>Multiple Paragraphs</strong>:</p>
+<p>Paragraph 1.</p>
+<p>Paragraph 2.</p>
+<p><strong>Other Elements</strong>:</p>
+<h4 id="the-quarterly-results-look-great">The quarterly results look great!</h4>
+<ul>
+<li>Revenue was off the chart.</li>
+<li>Profits were higher than ever.</li>
+</ul>
+<p><em>Everything</em> is going <del>according</del> to <strong>plan</strong>.</p>
+<p><strong>Nested Blockquotes</strong>:</p>
+<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>
+
+
+
+  <blockquote>
+    <p>The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.</p>
+  </blockquote>
+  </blockquote>
+
+<h3 id="as-an-html-figure-with-an-optional-citation-and-caption">As an HTML figure with an optional citation and caption</h3>
+<h4 id="blockquote-figure-mwe">MWE</h4>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">&gt; Some text
+{cite=&#34;https://gohugo.io&#34; caption=&#34;—Some caption&#34;}
+</code></pre><p>Can be rendered to next HTML if <code>layouts/_markup/render-blockquote.html</code> is edited to next section content.</p>
+
+
+<figure>
+  <blockquote cite="https://gohugo.io">
+    <p>
+      Some text
+    </p>
+  </blockquote>
+  <figcaption class="blockquote-caption">
+    —Some caption
+  </figcaption>
+</figure>
+
+
+<p>Which is close to the standard usage of this HTML element. Read the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote"><code>&lt;blockquote&gt;</code> Mozilla docs</a>.</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; rawhtml &gt;}}
+&lt;div&gt;
+  &lt;blockquote cite=&#34;https://www.huxley.net/bnw/four.html&#34;&gt;
+    &lt;p&gt;
+      Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.
+    &lt;/p&gt;
+  &lt;/blockquote&gt;
+  &lt;p&gt;—Aldous Huxley, &lt;cite&gt;Brave New World&lt;/cite&gt;&lt;/p&gt;
+&lt;/div&gt;
+{{&lt; /rawhtml &gt;}}
+</code></pre><p>Previous raw HTML outputs:</p>
+
+
+<div>
+  <blockquote cite="https://www.huxley.net/bnw/four.html">
+    <p>
+      Words can be like X-rays, if you use them properly—they’ll go through
+      anything. You read and you’re pierced.
+    </p>
+  </blockquote>
+  <p>—Aldous Huxley, <cite>Brave New World</cite></p>
+</div>
+
+
+<h4 id="blockquote-figure-declaration">Declaration</h4>
+<ul>
+<li>Enable Markdown attributes editing your <code>hugo.toml</code> as explained <a href="https://gohugo.io/render-hooks/blockquotes/#attributes">here</a></li>
+<li>And re-edit <code>layouts/_markup/render-blockquote.html</code> script:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>&lt;figure&gt;
+</span></span><span style="display:flex;"><span>  &lt;blockquote {{ with .Attributes.cite }}cite=<span style="color:#2aa198">&#34;{{ . }}&#34;</span>{{ end }}&gt;
+</span></span><span style="display:flex;"><span>    {{ .Text }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>blockquote&gt;
+</span></span><span style="display:flex;"><span>  {{ with .Attributes.caption }}
+</span></span><span style="display:flex;"><span>    &lt;figcaption class=<span style="color:#2aa198">&#34;blockquote-caption&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      {{ . | safeHTML }}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#719e07">/</span>figcaption&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#719e07">/</span>figure&gt;
+</span></span></code></pre></div><p>Now we no longer try to read <code>Tipe</code>, <code>AlertType</code> and <code>AlertTitle</code> attributes, but <code>Attributes</code> instead.</p>
+<ul>
+<li>If the line after a markdown quote (wrapped in curly braces) shows the parameter <code>cite</code>, then it&rsquo;s added to the <code>&lt;figure&gt;</code>-<code>&lt;blockquote&gt;</code> element.</li>
+<li>Analogous for the <code>caption</code>. If it&rsquo;s passed, then that&rsquo;s the <code>&lt;figcaption&gt;</code> text.</li>
+</ul>
+<h3 id="multiple-render-hooks">Multiple render hooks</h3>
+<p>Notice that previous <a href="/blogs/hugo_render_hooks/#blockquote-alerts">blockquote-alerts</a> render hooks and the later <a href="/blogs/hugo_render_hooks/#blockquote-figure">figure citations render hooks</a> are mutually exclusive
+because their respective HTML template <code>layouts/_markup/render-blockquote.html</code> are different.</p>
+<p>I recommend to set as <strong>render hook</strong> the <strong>most frequent</strong> for you.
+The other one can be set as a <strong>custom shortcode</strong>, the process is detailed in my previous <a href="/blogs/hugo_shortcodes/#get">post</a>;
+alternative, write HTML directly in your Hugo markdowns via the <a href="/blogs/hugo_shortcodes/#raw-html">raw HTML</a> shortcode.</p>
+<p>This advise holds for ordinary blockquotes,
+but if your blockquote might display complex HTML elements, requires special Go embedding functions, etc. then write it in a custom shortcode instead of a render hook.
+Read the <a href="/blogs/hugo_render_hooks/#shortcodes-vs-render-hooks">Shortcodes vs Render Hooks</a> initial chapter.</p>
+<h2 id="code-block">Code block</h2>
+<p>Hugo&rsquo;s internal template system for rendering code blocks is available since
+<a href="https://github.com/gohugoio/hugo/releases/tag/v0.93.0">v0.93.0</a>.
+Same release enabled diagram render hooks with GoAT (Go ASCII Tool) too.</p>
+<h3 id="codeblock-mwe">MWE</h3>
+<p>As explained in the highlight shortcode <a href="/blogs/hugo_shortcodes/#highlight-mwe">example</a> of my specific post, we can highlight code chunks with</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">{{&lt; highlight go &#34;linenos=inline, hl_lines=3 6-8, style=monokai&#34; &gt;}}
+package main
+
+import &#34;fmt&#34;
+
+func main() {
+    for i := 0; i &lt; 3; i++ {
+        fmt.Println(&#34;Value of i:&#34;, i)
+    }
+}
+{{&lt; /highlight &gt;}}
+</code></pre><p>Hugo renders this to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Value of i:&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>}</span></span></code></pre></div>
+<p>We can achieve the same via code blocks render hooks:</p>
+
+
+  <pre><code>&#96;&#96;&#96;go {lineNos=inline hl_lines="3 6-8" style=monokai}
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 3; i++ {
+        fmt.Println("Value of i:", i)
+    }
+}
+&#96;&#96;&#96;</code></pre>
+
+
+<p>Which also renders to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Value of i:&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>    }
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>}
+</span></span></code></pre></div><p>One can pass even <code>class</code>-es and <code>id</code>. Read the docs
+<a href="https://gohugo.io/render-hooks/code-blocks/">https://gohugo.io/render-hooks/code-blocks/</a></p>
+<h3 id="codeblock-goat">GoAT</h3>
+<p>For example, the following GoAT diagram</p>
+
+
+<pre><code>&#96;&#96;&#96;goat
+      .               .               .--- 1
+     / \              |           .---+     
+    /   \         .---+---.       |   '--- 2
+   +     +        |       |    ---+         
+  / \   / \     .-+-.   .-+-.     |   .--- 3
+ /   \ /   \    |   |   |   |     '---+     
+ 1   2 3   4    1   2   3   4         '--- 4
+&#96;&#96;&#96;</code></pre>
+
+
+<p>Gets converted to</p>
+
+
+
+<div class="goat svg-container ">
+  
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      font-family="Menlo,Lucida Console,monospace"
+      
+        viewBox="0 0 360 121"
+      >
+      <g transform='translate(8,16)'>
+<path d='M 304,0 L 328,0' fill='none' stroke='currentColor'></path>
+<path d='M 272,16 L 304,16' fill='none' stroke='currentColor'></path>
+<path d='M 144,32 L 176,32' fill='none' stroke='currentColor'></path>
+<path d='M 176,32 L 208,32' fill='none' stroke='currentColor'></path>
+<path d='M 304,32 L 328,32' fill='none' stroke='currentColor'></path>
+<path d='M 248,48 L 272,48' fill='none' stroke='currentColor'></path>
+<path d='M 128,64 L 144,64' fill='none' stroke='currentColor'></path>
+<path d='M 144,64 L 160,64' fill='none' stroke='currentColor'></path>
+<path d='M 192,64 L 208,64' fill='none' stroke='currentColor'></path>
+<path d='M 208,64 L 224,64' fill='none' stroke='currentColor'></path>
+<path d='M 304,64 L 328,64' fill='none' stroke='currentColor'></path>
+<path d='M 272,80 L 304,80' fill='none' stroke='currentColor'></path>
+<path d='M 304,96 L 328,96' fill='none' stroke='currentColor'></path>
+<path d='M 128,64 L 128,80' fill='none' stroke='currentColor'></path>
+<path d='M 144,32 L 144,64' fill='none' stroke='currentColor'></path>
+<path d='M 160,64 L 160,80' fill='none' stroke='currentColor'></path>
+<path d='M 176,0 L 176,32' fill='none' stroke='currentColor'></path>
+<path d='M 192,64 L 192,80' fill='none' stroke='currentColor'></path>
+<path d='M 208,32 L 208,64' fill='none' stroke='currentColor'></path>
+<path d='M 224,64 L 224,80' fill='none' stroke='currentColor'></path>
+<path d='M 272,16 L 272,48' fill='none' stroke='currentColor'></path>
+<path d='M 272,48 L 272,80' fill='none' stroke='currentColor'></path>
+<path d='M 304,0 L 304,16' fill='none' stroke='currentColor'></path>
+<path d='M 304,16 L 304,32' fill='none' stroke='currentColor'></path>
+<path d='M 304,64 L 304,80' fill='none' stroke='currentColor'></path>
+<path d='M 304,80 L 304,96' fill='none' stroke='currentColor'></path>
+<path d='M 8,80 L 24,48' fill='none' stroke='currentColor'></path>
+<path d='M 24,48 L 48,0' fill='none' stroke='currentColor'></path>
+<path d='M 56,80 L 72,48' fill='none' stroke='currentColor'></path>
+<path d='M 24,48 L 40,80' fill='none' stroke='currentColor'></path>
+<path d='M 48,0 L 72,48' fill='none' stroke='currentColor'></path>
+<path d='M 72,48 L 88,80' fill='none' stroke='currentColor'></path>
+<text text-anchor='middle' x='8' y='100' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='40' y='100' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='56' y='100' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='88' y='100' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='128' y='100' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='160' y='100' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='192' y='100' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='224' y='100' fill='currentColor' style='font-size:1em'>4</text>
+<text text-anchor='middle' x='344' y='4' fill='currentColor' style='font-size:1em'>1</text>
+<text text-anchor='middle' x='344' y='36' fill='currentColor' style='font-size:1em'>2</text>
+<text text-anchor='middle' x='344' y='68' fill='currentColor' style='font-size:1em'>3</text>
+<text text-anchor='middle' x='344' y='100' fill='currentColor' style='font-size:1em'>4</text>
+</g>
+
+    </svg>
+  
+</div>
+<p>Many more Go ASCII diagram examples <a href="https://gohugo.io/content-management/diagrams/">here</a>!</p>
+<p>Further references:</p>
+<ul>
+<li><a href="https://gohugo.io/render-hooks/code-blocks/#embedded">Docs</a></li>
+<li><a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_markup/render-codeblock-goat.html">render-codeblock-goat.html</a></li>
+<li>For other diagram renderes, not only GoAT, like Mermaid, read <a href="https://gohugo.io/render-hooks/code-blocks/#examples">this</a>.
+Follow the tip, create <em>language-specific templates</em> <code>layouts/_markup/render-codeblock&lt;/-python/-mermaid&gt;.html</code>.</li>
+</ul>
+<h2 id="heading">Heading</h2>
+<p>This will be summary in a nutshell.</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts"># Heading 1
+## Heading 1.1
+</code></pre><p>Creates a default <code>id</code> for each header. It&rsquo;s equivalent to:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts"># Heading 1 {#heading-1}
+## Heading 1.1 {#heading-1.1}
+</code></pre><p>Notice the <code>id</code> might appear, as in previous code, the first and only positional paramenter (detailed explaind in my shortcode <a href="/blogs/hugo_shortcodes/#positional-arguments">post</a>)
+or it can be defined as a named parameter (read prev. post too) like the <code>class</code>-es.
+E.g.</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts"># Heading 1 {id=&#34;heading-1&#34; class=&#34;foo&#34;}
+## Heading 1.1 {id=&#34;heading-1.1&#34; class=&#34;bar&#34;}
+</code></pre><p>Or mix of both:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts"># Heading 1 {#heading-1 class=&#34;foo&#34;}
+## Heading 1.1 {#heading-1.1 class=&#34;bar&#34;}
+</code></pre><p>For further information and guide to override this default render hook read the <a href="https://gohugo.io/render-hooks/headings/">docs</a>.</p>
+<h2 id="image">Image</h2>
+<h3 id="image-mwe">MWE</h3>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">![favicon](images/favicon.png &#34;This website favicon!&#34;)
+{id=&#34;bar&#34; class=&#34;foo&#34;}
+</code></pre><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">img</span>
+</span></span><span style="display:flex;"><span>  src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/images/favicon.png&#34;</span>
+</span></span><span style="display:flex;"><span>  alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;favicon&#34;</span>
+</span></span><span style="display:flex;"><span>  title<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;This website favicon!&#34;</span>
+</span></span><span style="display:flex;"><span>  class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;foo&#34;</span>
+</span></span><span style="display:flex;"><span>  id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;bar&#34;</span>&gt;
+</span></span></code></pre></div><p>And is displayed as</p>
+<img src="/images/favicon.png" alt="favicon" title="This website favicon!" class="foo" id="bar"><p>Note, Hugo automatically uses the <a href="https://gohugo.io/render-hooks/images/#embedded">embedded image render hook</a> for multilingual single-host sites.
+Since next is the default config:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[markup.goldmark.embeddedImageRender]
+</span></span><span style="display:flex;"><span>enable = <span style="color:#2aa198">&#39;auto&#39;</span>  <span style="color:#586e75"># or &#39;always&#39;, &#39;fallback&#39;, &#39;never&#39;</span>
+</span></span></code></pre></div><p>Other options are:</p>
+<ul>
+<li><code>always</code>: Force use of embedded hook</li>
+<li><code>fallback</code>: Use only if no custom render hooks exist</li>
+<li><code>never</code>: Disable embedded hook</li>
+</ul>
+<p>Do not forget to disable next as well:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[markup.goldmark.parser]
+</span></span><span style="display:flex;"><span>  wrapStandAloneImageWithinParagraph = <span style="color:#cb4b16">false</span>
+</span></span></code></pre></div><p>Why is this needed at all?
+Well, this render hook processes Markdown image links to provide better resource handling:</p>
+<ul>
+<li><strong>Find</strong> the actual <strong>image file</strong></li>
+<li><strong>Generate</strong> the correct <strong>URL</strong> for it</li>
+</ul>
+<p>We will explain these two main purposes in detail in the next <a href="/blogs/hugo_render_hooks/#image-declaration">section</a> studying the template code.</p>
+<p>The <a href="https://gohugo.io/render-hooks/images/#embedded">docs</a> emphasize the first feature, the <em>image destination</em>, so next we will exemplify the other one.
+Next embedded image:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">![Unrecognizable woman walking dogs on leashes in countryside](https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?width=640 &#34;Image title&#34;)
+</code></pre><p>It&rsquo;s rendered to (notice the <code>?width=640</code> in the <code>src</code>-URL is kept):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">img</span>
+</span></span><span style="display:flex;"><span>  src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;http://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?width=640&#34;</span>
+</span></span><span style="display:flex;"><span>  alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Unrecognizable woman walking dogs on leashes in countryside&#34;</span>
+</span></span><span style="display:flex;"><span>  title<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Image title&#34;</span>
+</span></span><span style="display:flex;"><span>&gt;
+</span></span></code></pre></div><p>Which leads to</p>
+<img src="http://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?width=640" alt="Unrecognizable woman walking dogs on leashes in countryside" title="Image title"><p>Open the image in a new tab to confirm that it maintains the <code>width</code> query parameter.
+No need to load a heavier image (which would happen if <code>enable='never'</code>) if the web editor finds a lighter one good enough.</p>
+<h3 id="image-declaration">Declaration</h3>
+<p>Code of <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_markup/render-image.html">render-image.html</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $u <span style="color:#719e07">:=</span> urls.Parse .Destination <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $src <span style="color:#719e07">:=</span> $u.String <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $u.IsAbs <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $path <span style="color:#719e07">:=</span> strings.TrimPrefix <span style="color:#2aa198">&#34;./&#34;</span> $u.Path <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with <span style="color:#268bd2">or</span> (.PageInner.Resources.Get $path) (resources.Get $path) <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> $src = .RelPermalink <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $u.RawQuery <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $src = printf <span style="color:#2aa198">&#34;%s?%s&#34;</span> $src . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> with $u.Fragment <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> $src = printf <span style="color:#2aa198">&#34;%s#%s&#34;</span> $src . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>&lt;img src=<span style="color:#2aa198">&#34;{{ $src }}&#34;</span> alt=<span style="color:#2aa198">&#34;{{ .PlainText }}&#34;</span>
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> with .Title }} title=<span style="color:#2aa198">&#34;{{ . }}&#34;</span> {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> $k, $v <span style="color:#719e07">:=</span> .Attributes <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> $v <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> printf <span style="color:#2aa198">&#34; %s=%q&#34;</span> $<span style="color:#268bd2">k</span> ($v | transform.HTMLEscape) | safeHTMLAttr <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#586e75">/**/</span> <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><h4 id="relative-path-resolution">Relative Path Resolution</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> not $u.IsAbs <span style="color:#719e07">-</span>}}  <span style="color:#586e75">// If it&#39;s not an absolute URL (remote image)</span>
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> $path <span style="color:#719e07">:=</span> strings.TrimPrefix <span style="color:#2aa198">&#34;./&#34;</span> $u.Path <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><ul>
+<li>Removes <code>./</code> prefix if present</li>
+<li>Handles relative paths correctly</li>
+</ul>
+<h4 id="resource-lookup">Resource Lookup</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with <span style="color:#268bd2">or</span> (.PageInner.Resources.Get $path) (resources.Get $path) <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><ul>
+<li>First tries to find the image in <strong>page resources</strong> (images in the same directory as the content file)</li>
+<li>Falls back to <strong>global resources</strong> (images in <code>assets/</code> or <code>static/</code> directories)</li>
+</ul>
+<h4 id="preserves-url-components">Preserves URL Components</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with $u.RawQuery <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $src = printf <span style="color:#2aa198">&#34;%s?%s&#34;</span> $src . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> with $u.Fragment <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> $src = printf <span style="color:#2aa198">&#34;%s#%s&#34;</span> $src . <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><ul>
+<li>Maintains query parameters like <code>?width=640</code> of the original URL in previous section example</li>
+<li>Preserves fragments as <code>#thumbnail</code></li>
+</ul>
+<h4 id="safe-html-attributes">Safe HTML Attributes</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> $k, $v <span style="color:#719e07">:=</span> .Attributes <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> $v <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> printf <span style="color:#2aa198">&#34; %s=%q&#34;</span> $<span style="color:#268bd2">k</span> ($v | transform.HTMLEscape) | safeHTMLAttr <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>{{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span></code></pre></div><p>This chunk processes programmatically assigned <a href="https://gohugo.io/render-hooks/images/#attributes">attributes</a>.</p>
+<p>It&rsquo;s like the <code>{...}</code> attribute syntax that we saw on <a href="/blogs/hugo_render_hooks/#heading">heading</a> render hooks.
+E.g. the <code>{id=&quot;bar&quot; class=&quot;foo&quot;}</code> in</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">![favicon](images/favicon.png &#34;This website favicon!&#34;)
+{id=&#34;bar&#34; class=&#34;foo&#34;}
+</code></pre><h2 id="link">Link</h2>
+<p>The link render hooks in Hugo work in a completely analogous way to the image render hooks just studied.</p>
+<p>Therefore read the previous section about <a href="/blogs/hugo_render_hooks/#images">images</a> render hooks to better comprehend:</p>
+<ul>
+<li>Its <a href="https://gohugo.io/render-hooks/links/">docs</a></li>
+<li>And its template <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_markup/render-link.html">render-link.html</a>.</li>
+</ul>
+<p>Example usage:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">[Tolkien: books, podcasts and much more!](/blogs/tolkien)
+{class=&#34;font-middle-earth-joanna-vu&#34;}
+</code></pre><p>Renders to:</p>
+<p class="font-middle-earth-joanna-vu"><a href="/blogs/tolkien/">Tolkien: books, podcasts and much more!</a></p>
+<h2 id="passthrough">Passthrough</h2>
+<p>Passthrough render hooks allow to <strong>override</strong> the <strong>rendering</strong> of <strong>raw Markdown text</strong> that is preserved by Goldmark&rsquo;s Passthrough extension.
+This is for content wrapped in special delimiters that should bypass normal Markdown processing.</p>
+
+
+  The passthrough extension is often used in conjunction with the MathJax extension,
+  check out my post concerning
+  <a href="/blogs/latex_for_webdev/">
+  $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for <strong>web dev</strong>
+  </a>.
+
+
+<p>References: <a href="https://gohugo.io/render-hooks/passthrough/">https://gohugo.io/render-hooks/passthrough/</a></p>
+<h2 id="table">Table</h2>
+<p>To achieve next automatic renders just follow the <a href="https://gohugo.io/render-hooks/tables/">docs</a> steps:</p>
+<ol>
+<li>Create the directory <code>layouts/_markup/</code></li>
+<li>Copy the code in next <a href="/blogs/hugo_render_hooks/#table-declaration">declaration section</a> to <code>layouts/_markup/render-table.html</code></li>
+<li>Edit your markdowns following next Minimal Working Examples</li>
+</ol>
+<h3 id="table-mwe">MWE</h3>
+<h5 id="default-left-alignment">Default left alignment</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name      | Age   | Score       | Country |
+</span></span><span style="display:flex;"><span>| ---       | ---   | ---         | ---     |
+</span></span><span style="display:flex;"><span>| Maria     | 30    | 95          | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel    | 25    | 87          | Germany |
+</span></span><span style="display:flex;"><span>{id=&#34;t1&#34;}
+</span></span></code></pre></div><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">table</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;t1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Name&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Age&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Score&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Country&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Maria&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;30&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;95&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Spain&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Daniel&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;25&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;87&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Germany&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">table</span>&gt;
+</span></span></code></pre></div><p>And looks like next, notice the left alignment</p>
+<table id="t1">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Score</th>
+          <th>Country</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td>30</td>
+          <td>95</td>
+          <td>Spain</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td>25</td>
+          <td>87</td>
+          <td>Germany</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="block-display">Block display</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country |
+</span></span><span style="display:flex;"><span>| ---    | ---   | ---   | ---     |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany |
+</span></span><span style="display:flex;"><span>{id=&#34;t2&#34; style=&#34;display: block&#34;}
+</span></span></code></pre></div><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">table</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;t2&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;display: block&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Name&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Age&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Score&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Country&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Maria&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;30&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;95&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Spain&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Daniel&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;25&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;87&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Germany&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">table</span>&gt;
+</span></span></code></pre></div><p>Output:</p>
+<table id="t2" style="display: block">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Score</th>
+          <th>Country</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td>30</td>
+          <td>95</td>
+          <td>Spain</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td>25</td>
+          <td>87</td>
+          <td>Germany</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="alignment-wrong-way">Alignment wrong way</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country |
+</span></span><span style="display:flex;"><span>| ---    | ---   | ---   | ---     |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany |
+</span></span><span style="display:flex;"><span>{id=&#34;t3&#34; style=&#34;text-align: right&#34;}
+</span></span></code></pre></div><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">table</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;t3&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Name&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Age&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Score&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Country&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Maria&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;30&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;95&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Spain&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Daniel&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;25&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;87&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Germany&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">table</span>&gt;
+</span></span></code></pre></div><p>Notice the fail in the right alignment:</p>
+<table id="t3" style="text-align: right">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Score</th>
+          <th>Country</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td>30</td>
+          <td>95</td>
+          <td>Spain</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td>25</td>
+          <td>87</td>
+          <td>Germany</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="alignment-correct-approach">Alignment correct approach</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country |
+</span></span><span style="display:flex;"><span>| ---    | :---: | ---:  | ---     |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany |
+</span></span><span style="display:flex;"><span>{id=&#34;t4&#34; style=&#34;color: blue&#34;}
+</span></span></code></pre></div><p>Renders to</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">table</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;t4&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;color: blue&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Name&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;Age&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;Score&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Country&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Maria&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;30&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;95&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Spain&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Daniel&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;25&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;87&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Germany&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">table</span>&gt;
+</span></span></code></pre></div><p>Thanks to the <code>:---:</code> and <code>---:</code> we can align the columns</p>
+<table id="t4" style="color: blue">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th style="text-align: center">Age</th>
+          <th style="text-align: right">Score</th>
+          <th>Country</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td style="text-align: center">30</td>
+          <td style="text-align: right">95</td>
+          <td>Spain</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td style="text-align: center">25</td>
+          <td style="text-align: right">87</td>
+          <td>Germany</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="id-and-classes">ID and classes</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country |
+</span></span><span style="display:flex;"><span>| ---    | :---: | ---:  | ---     |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany |
+</span></span><span style="display:flex;"><span>{id=&#34;t5&#34; class=&#34;font-middle-earth-joanna-vu&#34;}
+</span></span></code></pre></div><p>Or directly</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country |
+</span></span><span style="display:flex;"><span>| ---    | :---: | ---:  | ---     |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany |
+</span></span><span style="display:flex;"><span>{<span style="color:#cb4b16">#t5</span> .font-middle-earth-joanna-vu}
+</span></span></code></pre></div><p>Renders the next HTML where the Middle Earth font is applied</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">table</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;font-middle-earth-joanna-vu&#34;</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;t5&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Name&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;Age&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;Score&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">th</span>&gt;Country&lt;/<span style="color:#268bd2">th</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">thead</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Maria&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;30&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;95&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Spain&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Daniel&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: center&#34;</span>&gt;25&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text-align: right&#34;</span>&gt;87&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#268bd2">td</span>&gt;Germany&lt;/<span style="color:#268bd2">td</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">table</span>&gt;
+</span></span></code></pre></div><p>Output:</p>
+<table class="font-middle-earth-joanna-vu" id="t5">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th style="text-align: center">Age</th>
+          <th style="text-align: right">Score</th>
+          <th>Country</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td style="text-align: center">30</td>
+          <td style="text-align: right">95</td>
+          <td>Spain</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td style="text-align: center">25</td>
+          <td style="text-align: right">87</td>
+          <td>Germany</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="long-tables">Long tables</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| Name   | Age   | Score | Country | City   | Nationality | University          | Experience (years) |
+</span></span><span style="display:flex;"><span>| ---    | :---: | ---:  | ---     | ---    | ---         | ---                 | ---                |
+</span></span><span style="display:flex;"><span>| Maria  | 30    | 95    | Spain   | Madrid | Spanish     | UNED                | 3                  |
+</span></span><span style="display:flex;"><span>| Daniel | 25    | 87    | Germany | Berlin | German      | Hochschule Muenchen | 2.5                |
+</span></span><span style="display:flex;"><span>{<span style="color:#cb4b16">#t6</span>}
+</span></span></code></pre></div><p>The display indicates that the render hook template has considerable room for improvement. For example a scrollable table.</p>
+<table id="t6">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th style="text-align: center">Age</th>
+          <th style="text-align: right">Score</th>
+          <th>Country</th>
+          <th>City</th>
+          <th>Nationality</th>
+          <th>University</th>
+          <th>Experience (years)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Maria</td>
+          <td style="text-align: center">30</td>
+          <td style="text-align: right">95</td>
+          <td>Spain</td>
+          <td>Madrid</td>
+          <td>Spanish</td>
+          <td>UNED</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>Daniel</td>
+          <td style="text-align: center">25</td>
+          <td style="text-align: right">87</td>
+          <td>Germany</td>
+          <td>Berlin</td>
+          <td>German</td>
+          <td>Hochschule Muenchen</td>
+          <td>2.5</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="table-declaration">Declaration</h3>
+<p>The <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_markup/render-table.html">render-table.html</a> template is</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>&lt;table
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> $k, $v <span style="color:#719e07">:=</span> .Attributes }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">if</span> $v }}
+</span></span><span style="display:flex;"><span>      {{<span style="color:#719e07">-</span> printf <span style="color:#2aa198">&#34; %s=%q&#34;</span> $<span style="color:#268bd2">k</span> ($v | transform.HTMLEscape) | safeHTMLAttr }}
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  {{<span style="color:#719e07">-</span> end }}&gt;
+</span></span><span style="display:flex;"><span>  &lt;thead&gt;
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> .THead }}
+</span></span><span style="display:flex;"><span>      &lt;tr&gt;
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> . }}
+</span></span><span style="display:flex;"><span>          &lt;th
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> with .Alignment }}
+</span></span><span style="display:flex;"><span>              {{<span style="color:#719e07">-</span> printf <span style="color:#2aa198">&#34; style=%q&#34;</span> (printf <span style="color:#2aa198">&#34;text-align: %s&#34;</span> .) | safeHTMLAttr }}
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>          &gt;
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> .Text <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#719e07">/</span>th&gt;
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#719e07">/</span>tr&gt;
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>thead&gt;
+</span></span><span style="display:flex;"><span>  &lt;tbody&gt;
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> .TBody }}
+</span></span><span style="display:flex;"><span>      &lt;tr&gt;
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> <span style="color:#719e07">range</span> . }}
+</span></span><span style="display:flex;"><span>          &lt;td
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> with .Alignment }}
+</span></span><span style="display:flex;"><span>              {{<span style="color:#719e07">-</span> printf <span style="color:#2aa198">&#34; style=%q&#34;</span> (printf <span style="color:#2aa198">&#34;text-align: %s&#34;</span> .) | safeHTMLAttr }}
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> end <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>          &gt;
+</span></span><span style="display:flex;"><span>            {{<span style="color:#719e07">-</span> .Text <span style="color:#719e07">-</span>}}
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#719e07">/</span>td&gt;
+</span></span><span style="display:flex;"><span>        {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#719e07">/</span>tr&gt;
+</span></span><span style="display:flex;"><span>    {{<span style="color:#719e07">-</span> end }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>tbody&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#719e07">/</span>table&gt;
+</span></span></code></pre></div><p>The template basically adds:</p>
+<ul>
+<li>Process programmatically <a href="https://gohugo.io/render-hooks/images/#attributes">attributes</a>. Explained in <a href="/blogs/hugo_render_hooks/#safe-html-attributes">Safe HTML Attributes</a> subsection.</li>
+<li>Correct alignment of table cells</li>
+</ul>
+
+
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>

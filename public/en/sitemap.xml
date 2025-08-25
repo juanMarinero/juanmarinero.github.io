@@ -26,6 +26,8 @@
   </url><url>
     <loc>http://localhost:1313/blogs/create_hugo_website/</loc>
   </url><url>
+    <loc>http://localhost:1313/blogs/hugo_render_hooks/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs/hugo_shortcodes/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs_index/</loc>

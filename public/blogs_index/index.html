@@ -58,7 +58,7 @@
 <meta property="og:url" content="http://localhost:1313/blogs_index/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
   <meta property="og:title" content="JM - Blogs">
-  <meta property="og:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta property="og:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
@@ -67,12 +67,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
   <meta name="twitter:title" content="JM - Blogs">
-  <meta name="twitter:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta name="twitter:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
 
 
   <meta itemprop="name" content="JM - Blogs">
-  <meta itemprop="description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
-  <meta itemprop="wordCount" content="51">
+  <meta itemprop="description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Installing custom fonts: system-wide setup &amp; Hugo integration &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta itemprop="wordCount" content="57">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -168,6 +168,13 @@ h1 {
  
 details.table-of-contents-all-bold-but-summary > :not(summary) {
   font-weight: bold;
+}
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
 }
 </style>
 
@@ -279,6 +286,10 @@ window.MathJax = {
 
   <a href="/blogs/hugo_shortcodes/" class="no-underline-except-hover">
   <strong>Hugo</strong>'s <strong>shortcodes</strong>: step by step
+  </a>
+
+  <a href="/blogs/hugo_render_hooks/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>render hooks</strong>: a quick guide
   </a>
 
   <a href="/blogs/nerd_fonts_and_more/" class="no-underline-except-hover">
