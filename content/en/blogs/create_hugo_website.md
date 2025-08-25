@@ -1,5 +1,6 @@
 ---
 title: "Create your own Hugo-scroll website"
+keywords: ["Hugo", "static site generator", "build a website", "Jamstack", "web development", "GitHub Pages", "markdown", "Go templates", "open source", "fast websites", "content management", "front matter", "themes", "deployment", "command line", "git", "web design", "tutorial", "step-by-step guide", "blogging", "developer tools", "responsive design", "HTML", "CSS", "Go programming language"]
 ---
 
 
