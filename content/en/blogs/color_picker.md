@@ -1,5 +1,6 @@
 ---
 title: "🎨 Color Picker and Pastel"
+keywords: ["color picker", "hex color code", "web development", "CSS color", "graphic design", "website customization", "UI design", "color palette", "RGB to HEX", "color selector", "eyedropper tool", "frontend development", "accessibility", "contrast checker", "digital design", "quick tool", "free tool", "color codes", "web designer tools", "developer utilities", "color scheme", "HTML color", "SVG color"]
 ---
 
 Enhance your color picker to:
