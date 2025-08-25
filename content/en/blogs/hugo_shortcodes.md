@@ -1,5 +1,6 @@
 ---
 title: "Hugo shortcodes: step by step"
+keywords: ["Hugo shortcodes", "Hugo templates", "static site generator", "custom shortcodes", "built-in shortcodes", "content creation", "Markdown extensions", "Go HTML templates", "Hugo partials", "dynamic content", "figure shortcode", "gist shortcode", "highlight shortcode", "tweet shortcode", "YouTube embed", "Hugo functions", "layout components", "DRY principles", "web development", "content management", "Hugo documentation", "code examples", "responsive embeds", "customizable content", "Hugo power features"]
 ---
 
 Hugo brings pre-defined [shortcodes](https://gohugo.io/shortcodes/) to **expand** your content beyond the basic **markdown syntax**.
