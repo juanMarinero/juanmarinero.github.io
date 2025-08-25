@@ -1,4 +1,5 @@
 ---
+keywords: ["J.R.R. Tolkien", "Lord of the Rings", "The Hobbit", "Middle-earth", "legendarium", "Silmarillion", "fantasy literature", "mythopoeia", "Tolkien studies", "high fantasy", "English literature", "mythology", "philology", "world-building", "Tolkien blog", "Tolkien essays", "Kai47", "lore", "Tolkienian", "Tolkien fan", "Tolkien books", "Tolkien analysis", "Tolkien's legacy", "fantasy author", "indie films", "Tolkien Deutsch", "Tolkien German", "Tolkien podcast"]
 ---
 
 <!-- Remove 'title' in markdown header and replace it with next -->
