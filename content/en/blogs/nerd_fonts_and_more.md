@@ -1,5 +1,6 @@
 ---
-title: "😎 Fonts globally & for Hugo"
+title: "Fonts globally & for Hugo"
+keywords: ["Nerd Fonts", "powerline", "terminal fonts", "icons in terminal", "developer setup", "glyphs", "programming fonts", "font patching", "fontforge", "iconic fonts", "shell customization", "workflow optimization", "open source fonts", "Hugo development", "Hugo Scroll", "Hugo custom fonts"]
 ---
 
 Next **fonts** look **great**. Follow this guide to install them **global**ly and even in your **Hugo** website.

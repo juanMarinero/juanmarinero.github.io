@@ -5,7 +5,7 @@
 
 
 
-<title>😎 Fonts globally & for Hugo</title>
+<title>Fonts globally & for Hugo</title>
 
 
 
@@ -16,26 +16,7 @@
   <meta name="description" content="Juan Marinero - Data Scientist"
 />
 
-  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
-          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
-          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
-          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
-          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
-          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
-          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
-          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
-          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
-          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
-          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
-          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
-          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
-          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
-          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
-          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
-          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
-          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
-          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
-        "
+  <meta name="keywords" content="Nerd Fonts, powerline, terminal fonts, icons in terminal, developer setup, glyphs, programming fonts, font patching, fontforge, iconic fonts, shell customization, workflow optimization, open source fonts, Hugo development, Hugo Scroll, Hugo custom fonts"
 />
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
@@ -57,7 +38,7 @@
 
 <meta property="og:url" content="http://localhost:1313/blogs/nerd_fonts_and_more/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
-  <meta property="og:title" content="😎 Fonts globally & for Hugo">
+  <meta property="og:title" content="Fonts globally & for Hugo">
   <meta property="og:description" content="Next fonts look great. Follow this guide to install them globally and even in your Hugo website.
 Table of Contents
 Global Nerd Fonts More fonts Hugo-scroll Great Vibes Oswald Awesome Font Global installed fail Iosevka local installed Summary HTML-tag &lt;h1&gt; Beyond Hugo Scroll Global Nerd Fonts Install steps:
@@ -70,20 +51,21 @@ Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add t
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
-  <meta name="twitter:title" content="😎 Fonts globally & for Hugo">
+  <meta name="twitter:title" content="Fonts globally & for Hugo">
   <meta name="twitter:description" content="Next fonts look great. Follow this guide to install them globally and even in your Hugo website.
 Table of Contents
 Global Nerd Fonts More fonts Hugo-scroll Great Vibes Oswald Awesome Font Global installed fail Iosevka local installed Summary HTML-tag &lt;h1&gt; Beyond Hugo Scroll Global Nerd Fonts Install steps:
 Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add the code below to your ~/.bashrc Preview fonts here Install the selected, e.g. nerd_fonts_install &#34;Iosevka&#34; for the Iosevka font Use the picked font in programs like LibreOffice! nerd_fonts_install() { # Install Nerd Fonts from release archives # Example usage: nerd_fonts_install &#34;Iosevka&#34; # Default font: JetBrainsMono # Check if any argument was supplied or use default font local font_to_install=&#34;${1:-JetBrainsMono}&#34; # Download files/dirs and fonts directory local DOWNLOAD_DIR=$HOME/Downloads local FONT_FILE=&#34;$DOWNLOAD_DIR/$font_to_install.tar.xz&#34; local TEMP_EXTRACT_DIR=&#34;$DOWNLOAD_DIR/${font_to_install}_nerd_fonts_temp&#34; local FONT_DIR=$HOME/.local/share/fonts # Check if the font files already exist in the font directory if [ -d &#34;$FONT_DIR&#34; ] &amp;&amp; [ -n &#34;$(find &#34;$FONT_DIR&#34; -name &#34;*$font_to_install*&#34; -print -quit)&#34; ]; then echo &#34;$font_to_install fonts are already installed.&#34; return 0 fi # Download if needed if [ ! -f &#34;$FONT_FILE&#34; ]; then echo &#34;Downloading $font_to_install fonts...&#34; if ! curl -L &#34;https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_to_install.tar.xz&#34; -o &#34;$FONT_FILE&#34;; then echo &#34;Error: Failed to download font&#34; &gt;&amp;2 return 1 fi else echo &#34;$FONT_FILE already exists.&#34; fi # Create and extract to temp directory mkdir -p &#34;$TEMP_EXTRACT_DIR&#34; echo &#34;Extracting fonts to temporary directory...&#34; if ! tar -xvf &#34;$FONT_FILE&#34; -C &#34;$TEMP_EXTRACT_DIR&#34;; then echo &#34;Error: Failed to extract archive&#34; &gt;&amp;2 rm -rf &#34;$TEMP_EXTRACT_DIR&#34; return 1 fi # Install mkdir -p &#34;$FONT_DIR&#34; find &#34;$TEMP_EXTRACT_DIR&#34; -type f \ \( -iname &#34;*$font_to_install*.ttf&#34; -o -iname &#34;*$font_to_install*.otf&#34; \) \ -exec mv -n {} &#34;$FONT_DIR/&#34; \; # Cleanup rm -f &#34;$FONT_FILE&#34; rm -rf &#34;$TEMP_EXTRACT_DIR&#34; # Update the font cache echo &#34;Updating font cache...&#34; fc-cache -f -v # Verify installation echo &#34;Verifying installation...&#34; fc-list | grep &#34;$font_to_install&#34; echo -e &#34;\nSuccessfully installed $font_to_install Nerd Font&#34; } The function structure is:">
 
 
-  <meta itemprop="name" content="😎 Fonts globally & for Hugo">
+  <meta itemprop="name" content="Fonts globally & for Hugo">
   <meta itemprop="description" content="Next fonts look great. Follow this guide to install them globally and even in your Hugo website.
 Table of Contents
 Global Nerd Fonts More fonts Hugo-scroll Great Vibes Oswald Awesome Font Global installed fail Iosevka local installed Summary HTML-tag &lt;h1&gt; Beyond Hugo Scroll Global Nerd Fonts Install steps:
 Install Nerd Fonts dependencies: sudo apt-get install -y ruby-dev gcc make Add the code below to your ~/.bashrc Preview fonts here Install the selected, e.g. nerd_fonts_install &#34;Iosevka&#34; for the Iosevka font Use the picked font in programs like LibreOffice! nerd_fonts_install() { # Install Nerd Fonts from release archives # Example usage: nerd_fonts_install &#34;Iosevka&#34; # Default font: JetBrainsMono # Check if any argument was supplied or use default font local font_to_install=&#34;${1:-JetBrainsMono}&#34; # Download files/dirs and fonts directory local DOWNLOAD_DIR=$HOME/Downloads local FONT_FILE=&#34;$DOWNLOAD_DIR/$font_to_install.tar.xz&#34; local TEMP_EXTRACT_DIR=&#34;$DOWNLOAD_DIR/${font_to_install}_nerd_fonts_temp&#34; local FONT_DIR=$HOME/.local/share/fonts # Check if the font files already exist in the font directory if [ -d &#34;$FONT_DIR&#34; ] &amp;&amp; [ -n &#34;$(find &#34;$FONT_DIR&#34; -name &#34;*$font_to_install*&#34; -print -quit)&#34; ]; then echo &#34;$font_to_install fonts are already installed.&#34; return 0 fi # Download if needed if [ ! -f &#34;$FONT_FILE&#34; ]; then echo &#34;Downloading $font_to_install fonts...&#34; if ! curl -L &#34;https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_to_install.tar.xz&#34; -o &#34;$FONT_FILE&#34;; then echo &#34;Error: Failed to download font&#34; &gt;&amp;2 return 1 fi else echo &#34;$FONT_FILE already exists.&#34; fi # Create and extract to temp directory mkdir -p &#34;$TEMP_EXTRACT_DIR&#34; echo &#34;Extracting fonts to temporary directory...&#34; if ! tar -xvf &#34;$FONT_FILE&#34; -C &#34;$TEMP_EXTRACT_DIR&#34;; then echo &#34;Error: Failed to extract archive&#34; &gt;&amp;2 rm -rf &#34;$TEMP_EXTRACT_DIR&#34; return 1 fi # Install mkdir -p &#34;$FONT_DIR&#34; find &#34;$TEMP_EXTRACT_DIR&#34; -type f \ \( -iname &#34;*$font_to_install*.ttf&#34; -o -iname &#34;*$font_to_install*.otf&#34; \) \ -exec mv -n {} &#34;$FONT_DIR/&#34; \; # Cleanup rm -f &#34;$FONT_FILE&#34; rm -rf &#34;$TEMP_EXTRACT_DIR&#34; # Update the font cache echo &#34;Updating font cache...&#34; fc-cache -f -v # Verify installation echo &#34;Verifying installation...&#34; fc-list | grep &#34;$font_to_install&#34; echo -e &#34;\nSuccessfully installed $font_to_install Nerd Font&#34; } The function structure is:">
   <meta itemprop="wordCount" content="1284">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta itemprop="keywords" content="Nerd Fonts,powerline,terminal fonts,icons in terminal,developer setup,glyphs,programming fonts,font patching,fontforge,iconic fonts,shell customization,workflow optimization,open source fonts,Hugo development,Hugo Scroll,Hugo custom fonts">
 
 
 
@@ -275,7 +257,7 @@ window.MathJax = {
           
         
       </header>
-      <h1 class="post-title">😎 Fonts globally &amp; for Hugo</h1>
+      <h1 class="post-title">Fonts globally &amp; for Hugo</h1>
       <section class="post-content">
         <p>Next <strong>fonts</strong> look <strong>great</strong>. Follow this guide to install them <strong>global</strong>ly and even in your <strong>Hugo</strong> website.</p>
 

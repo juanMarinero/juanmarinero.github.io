@@ -20,11 +20,11 @@
   </url><url>
     <loc>http://localhost:1313/blogs/color_picker/</loc>
   </url><url>
-    <loc>http://localhost:1313/blogs/nerd_fonts_and_more/</loc>
-  </url><url>
     <loc>http://localhost:1313/blogs/instagram_mosaic/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/create_hugo_website/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blogs/nerd_fonts_and_more/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/hugo_render_hooks/</loc>
   </url><url>
