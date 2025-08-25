@@ -1,5 +1,6 @@
 ---
 title: "Hugo shortcodes: step by step"
+description: "Step-by-step guide to use built-in Hugo shortcodes for tweets, Instagram, YouTube, code highlights, QR, figures,... and create your own custom shortcodes."
 keywords: ["Hugo shortcodes", "Hugo templates", "static site generator", "custom shortcodes", "built-in shortcodes", "content creation", "Markdown extensions", "Go HTML templates", "Hugo partials", "dynamic content", "figure shortcode", "gist shortcode", "highlight shortcode", "tweet shortcode", "YouTube embed", "Hugo functions", "layout components", "DRY principles", "web development", "content management", "Hugo documentation", "code examples", "responsive embeds", "customizable content", "Hugo power features"]
 ---
 
