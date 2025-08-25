@@ -1,4 +1,5 @@
 ---
+description: "Learn to integrate LaTeX math and TikZ diagrams into your Hugo website. A practical guide for creating advanced scientific blogs and technical content."
 keywords: ["LaTeX for web", "LaTeX math web", "KaTeX", "MathJax", "static site", "Hugo math", "web development", "scientific blogging", "academic writing", "math equations", "typesetting", "JavaScript library", "markdown math", "blogging tools", "content creation", "web typography", "formulas website", "research blog", "technical writing", "web design", "CSS", "HTML", "static site generator", "TikZ", "TikZJax"]
 ---
 
