@@ -1,5 +1,5 @@
 ---
-title: "🎨🧪 Color Picker and Pastel"
+title: "🎨 Color Picker and Pastel"
 ---
 
 Enhance your color picker to:
@@ -10,13 +10,11 @@ Enhance your color picker to:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <img
     src="/images/blogs/color_picker/color_picker_and_pastel_with_notes.png"
     style="width:90%;"
     alt="color_picker_and_pastel_with_notes.png"
     >
-</div>
 {{< /rawhtml >}}
 
 
@@ -52,7 +50,6 @@ Steps:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <table class="data-table">
     <tr>
       <td class="data-cell image-cell">
@@ -63,7 +60,6 @@ Steps:
       </td>
     </tr>
   </table>
-</div>
 {{< /rawhtml >}}
 
 ```sh
@@ -111,13 +107,11 @@ Check the color format. Screenshot:
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <img
     src="/images/blogs/color_picker/color_check_format__outputs.png"
     style="width:90%;"
     alt="color_check_format__outputs.png"
     >
-</div>
 {{< /rawhtml >}}
 
 Did you notice that the **hex** color is previewed in the terminal? Just use a Syntax Highlighting tool, for example:
@@ -157,11 +151,9 @@ color_check_format() {
 
 <!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <br>
   <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
   <br>
   <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
   <br>
-</div>
 {{< /rawhtml >}}
