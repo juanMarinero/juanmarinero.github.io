@@ -16,26 +16,7 @@
   <meta name="description" content="Juan Marinero - Data Scientist"
 />
 
-  <meta name="keywords" content="          Juan, Marinero, Spain, Europe, Spanish, English, German, Deutsch, Bilingual,
-          Remote Work, Contract, Full-time, Part-time, Job, Job Offer, Data Scientist,
-          Data Science, Machine Learning, AI, Artificial Intelligence, Python, R, SQL, 
-          Statistical Analysis, Data Visualization, Big Data, Deep Learning, Neural Networks, 
-          Predictive Modeling, Data Mining, A/B Testing, Feature Engineering, MLOps, 
-          Natural Language Processing, NLP, Computer Vision, Time Series Analysis, 
-          Cloud Computing, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch, 
-          Scikit-learn, Pandas, NumPy, Spark, Hadoop,
-          ETL, Data Pipelines, Business Intelligence, Analytics, Experimentation, 
-          Reinforcement Learning, Bayesian Statistics, Regression, Classification, 
-          Clustering, Dimensionality Reduction, Optimization, Juan Marinero, Spain, 
-          Europe, Data Scientist, ML Engineer, AI Specialist, Quantitative Analysis, 
-          Research, PhD, Mathematics, Statistics, Programming, Data Governance, 
-          Ethics in AI, Explainable AI, Model Deployment, CI/CD, Agile, Scrum, 
-          Startup, Tech, Consulting, Finance, Healthcare, E-commerce, Retail, 
-          Marketing Analytics, Customer Segmentation, Recommendation Systems, 
-          Anomaly Detection, Fraud Detection, IoT, Edge Computing, Open Source, 
-          GitHub, Kaggle, Competitions, Publications, Research Papers, Teaching, 
-          Mentoring, Public Speaking, Conferences, Workshops, Technical Writing
-        "
+  <meta name="keywords" content="LaTeX for web, LaTeX math web, KaTeX, MathJax, static site, Hugo math, web development, scientific blogging, academic writing, math equations, typesetting, JavaScript library, markdown math, blogging tools, content creation, web typography, formulas website, research blog, technical writing, web design, CSS, HTML, static site generator, TikZ, TikZJax"
 />
 <meta name="referrer" content="no-referrer-when-downgrade" />
 
@@ -84,6 +65,7 @@ Table of Contents
 MathJax Support Block equations Error handling LaTeX packages Include extra packages Test a LaTeX package TikZ Enable TikZ TikZJax issues MathJax Support Enable and configure the Goldmark passthrough extension in your site configs as described here. Open a terminal. Go to your project directory: cd &lt;path&gt; Run $EDITOR layouts/partials/custom_head.html Append and save &lt;!-- MathJax Support --&gt; &lt;!-- https://docs.mathjax.org/en/latest/options/input/tex.html --&gt; &lt;script&gt; window.MathJax = { tex: { inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]], displayMath: [[&#39;$$&#39;, &#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;]], processEscapes: true, processEnvironments: true, packages: {&#39;[&#43;]&#39;: [&#39;ams&#39;, &#39;boldsymbol&#39;]} // &#39;base&#39; &#43; extras }, options: { skipHtmlTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;], ignoreHtmlClass: &#39;tex2jax_ignore&#39; }, loader: { load: [&#39;[tex]/ams&#39;, &#39;[tex]/boldsymbol&#39;] }, startup: { ready() { console.log(&#39;MathJax is initializing...&#39;); MathJax.startup.defaultReady(); MathJax.startup.promise.then(() =&gt; { console.log(&#39;MathJax typesetting complete&#39;); }).catch((err) =&gt; { console.error(&#39;MathJax failed:&#39;, err); }); } } }; &lt;/script&gt; &lt;!-- Only include polyfill if supporting older browsers --&gt; &lt;script src=&#34;https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js&#34;&gt;&lt;/script&gt; &lt;!-- https://www.mathjax.org/#gettingstarted --&gt; &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js&#34;&gt;&lt;/script&gt; Edit a markdown file, for example content/en/*.md Insert $\LaTeX$ code inline like $\sqrt{x^2 &#43; y^2} = r$ or in $$ blocks. Save Build it with hugo server --disableFastRender. Build details in my post How to create a Hugo-scroll website Check locally the changes on http://localhost:1313/ or alike Open the browser console. Refresh the page. Check if any error is loaded. It should just show MathJax is initializing... and MathJax typesetting complete Run console.log(&#39;MathJax version:&#39;, MathJax.version). Expected output: 4.0.0 Block equations Long one line equations, like this ($$S^{(3)} = 2\pi k\sqrt{\alpha}N_1^{TL} &#43; N_3^{(3,1)} \left[-3k\text{arcsinh} \left(\frac{1}{\sqrt{3}\sqrt{4\alpha&#43;1}} \righ...), see, expand beyond the Hugo screen. Though they are visible. Therefore, one needs newlines for block equations.">
   <meta itemprop="wordCount" content="1842">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta itemprop="keywords" content="LaTeX for web,LaTeX math web,KaTeX,MathJax,static site,Hugo math,web development,scientific blogging,academic writing,math equations,typesetting,JavaScript library,markdown math,blogging tools,content creation,web typography,formulas website,research blog,technical writing,web design,CSS,HTML,static site generator,TikZ,TikZJax">
 
 
 

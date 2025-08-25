@@ -1,4 +1,5 @@
 ---
+keywords: ["LaTeX for web", "LaTeX math web", "KaTeX", "MathJax", "static site", "Hugo math", "web development", "scientific blogging", "academic writing", "math equations", "typesetting", "JavaScript library", "markdown math", "blogging tools", "content creation", "web typography", "formulas website", "research blog", "technical writing", "web design", "CSS", "HTML", "static site generator", "TikZ", "TikZJax"]
 ---
 
 <!-- Remove 'title' in markdown header and replace it with next -->
