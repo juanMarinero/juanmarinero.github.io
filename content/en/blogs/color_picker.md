@@ -1,5 +1,6 @@
 ---
 title: "🎨 Color Picker and Pastel"
+description: "A custom color picker that converts between formats, shows terminal previews, and finds the closest color name—all in just 25 lines of zsh code."
 keywords: ["color picker", "hex color code", "web development", "CSS color", "graphic design", "website customization", "UI design", "color palette", "RGB to HEX", "color selector", "eyedropper tool", "frontend development", "accessibility", "contrast checker", "digital design", "quick tool", "free tool", "color codes", "web designer tools", "developer utilities", "color scheme", "HTML color", "SVG color"]
 ---
 
