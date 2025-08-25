@@ -13,15 +13,12 @@ If you answered *no* to most of these questions, then perhaps you should choose 
 
 But for those who appreciate all these things... beware! Once Professor Tolkien enters your life, he lingers forever, **impacting your soul**—for good.
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <p
     style="font-size: 1.5em; text-align:center; "
     class="font-middle-earth-joanna-vu">
     Welcome, fellow traveler!
   </p>
-</div>
 {{< /rawhtml >}}
 
 In this **quick post** I'm sure you will discover a book, podcast, film or even a video game that will make you fall deeper in **love** with **Tolkien's world**. 
@@ -40,9 +37,7 @@ Contents:
 
 I'll even share some memes - though they may be more Orc-work than Elven craft!
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <a href="https://www.tumblr.com/omghotmemes/643881678908129280/lady-galadriels-gifts">
     <img
       src="https://64.media.tumblr.com/9fa0942567bb06930d8f76bf654177ff/67a9bbac35837998-50/s640x960/10b327b5b73a1df2d553979555d8229c67704551.jpg"
@@ -50,7 +45,6 @@ I'll even share some memes - though they may be more Orc-work than Elven craft!
       style="width:50%; border-radius: 15%;"
       >
   </a>
-</div>
 {{< /rawhtml >}}
 
 
@@ -70,9 +64,7 @@ No shame on needing help understanding the [legendarium](https://en.wikipedia.or
 More tips for reading the *Silmarillion* [here](https://www.tolkiensociety.org/discover/faq/#readingSilm),
 I highlight the audio-book advise, the *Martin Shaw’s reading*; more about audio-books in [its section](#audio-books).
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <a
     title="AnonymousUnknown author, Public domain, via Wikimedia Commons"
     href="https://commons.wikimedia.org/wiki/File:Tolkien_monogram.png"
@@ -84,7 +76,6 @@ I highlight the audio-book advise, the *Martin Shaw’s reading*; more about aud
     src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Tolkien_monogram.png?20221020192130"
     >
   </a>
-</div>
 {{< /rawhtml >}}
 
 For a complete reading order check:
@@ -243,9 +234,7 @@ Extra. An amusing joke by [Ben Kahn](https://x.com/BenTheKahn/status/14371582173
 
 Did someone mention fun? More?? Wasn't this suppose to be about Tolkien's **serious** [legendarium](https://en.wikipedia.org/wiki/Tolkien's_legendarium)?
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <a href="https://www.getyarn.io/yarn-clip/4bedbe3e-4b2e-4ee4-abd1-00d9a5855bcf/gif">
     <img
       src="https://y.yarn.co/4bedbe3e-4b2e-4ee4-abd1-00d9a5855bcf_text.gif"
@@ -253,7 +242,6 @@ Did someone mention fun? More?? Wasn't this suppose to be about Tolkien's **seri
       style="float:center; width:50%;"
       >
   </a>
-</div>
 {{< /rawhtml >}}
 
 For a full list of Middle-earth games, check [Wikipedia](https://en.wikipedia.org/wiki/List_of_Middle-earth_video_games).
@@ -267,9 +255,7 @@ Alas! Sadly the official servers have long ago vanished *into the West*.
 But dedicated gamers kept the spirit alive through other servers
 (though the connection speeds in the early 2010s, when I played a few times, were... humble).
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <div style="width: 70%; margin: 0 auto;">
     <div
     class="tenor-gif-embed"
@@ -284,7 +270,6 @@ But dedicated gamers kept the spirit alive through other servers
     </div>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
   </div>
-</div>
 {{< /rawhtml >}}
 
 Now the *flame of Hope* is rekindled!
@@ -340,9 +325,7 @@ Let us not overlook Tolkien's elegant [calligraphy](https://www.tolkienestate.co
 ## Bonus. Tolkien fonts
 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <div
     style="font-size: 1.5em"
     class="font-middle-earth-joanna-vu">
@@ -350,7 +333,6 @@ Let us not overlook Tolkien's elegant [calligraphy](https://www.tolkienestate.co
     Credits to
     <a href="https://www.makerstype.com/profile/joanna-vu/?sortby=popular_alltime">Joanna Vu</a>
   </div>
-</div>
 {{< /rawhtml >}}
 
 To use it in your Hugo website just:
@@ -374,23 +356,16 @@ To use it in your Hugo website just:
 
 5. Use it in your Hugo markdown:
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 <!-- Replace <,>,{ and } to avoid auto-render -->
 {{< rawhtml >}}
-<div class="html-content">
   <pre><code>&#123;&#123;&#60; rawhtml &#62;&#125;&#125;
-&#60;div class="html-content"&#62;
  &#60;span&#62;Let's try it: &#60;/span&#62;
  &#60;span style="font-size: 1.5em; font-family: 'MiddleEarth JoannaVu';"&#62;This line is written with the MiddleEarth JoannaVu font!&#60;/span&#62;
-&#60;/div&#62;
 &#123;&#123;&#60; /rawhtml &#62;&#125;&#125;</code></pre>
-</div>
 {{< /rawhtml >}}
 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <br>
   For details check my post 
   <a href="/blogs/nerd_fonts_and_more/">
@@ -398,7 +373,6 @@ To use it in your Hugo website just:
   <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:
   <strong>system</strong>-wide setup <strong>& Hugo</strong> integration</a>
   .
-</div>
 {{< /rawhtml >}}
 
 More Tolkien's fonts:
@@ -412,15 +386,12 @@ And a little off topic. [Joanna Vu](https://ioannaladopoulou.design/) also creat
 - [Swimming Pool – Font](https://ioannaladopoulou.design/portfolio/swimming-pool-font/)
 - [Fabulous Pink – Font](https://ioannaladopoulou.design/portfolio/pink-and-fabulous-font/)
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
 ...what about using them to code your kids a <i>Hugo Scroll</i> website? Check the steps in my post 
   <a href="/blogs/create_hugo_website/">
   How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>.
   <br>
   <br>
-</div>
 {{< /rawhtml >}}
 
 
@@ -429,9 +400,7 @@ And a little off topic. [Joanna Vu](https://ioannaladopoulou.design/) also creat
 Did you read this far my fellow friend? You have earned a *precious* treasure,
 the last meme!
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <a href="https://www.reddit.com/r/lotrmemes/comments/1jkzzi0/hush_now/">
     <img
     src="https://preview.redd.it/hush-now-v0-iv5oibgfb7re1.png?width=320&crop=smart&auto=webp&s=98dc5c7d0e8f58ba7529f7b44257ea12104df989"
@@ -440,7 +409,6 @@ the last meme!
     >
   </a>
   <br>
-</div>
 {{< /rawhtml >}}
 
 
@@ -449,9 +417,7 @@ the last meme!
 Finally, let us warmly thank Christopher Tolkien and Professor Tolkien for creating this magical world.
 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <a
     title="Unknown photo studio commissioned by Tolkien&#039;s students 1925/6 (private communication from Catherine McIlwaine, Tolkien Archivist, Bodleian Library), Public domain, via Wikimedia Commons"
     href="https://commons.wikimedia.org/wiki/File:J._R._R._Tolkien,_ca._1925_(cropped).jpg"
@@ -463,28 +429,21 @@ Finally, let us warmly thank Christopher Tolkien and Professor Tolkien for creat
     src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/J._R._R._Tolkien%2C_ca._1925_%28cropped%29.jpg/512px-J._R._R._Tolkien%2C_ca._1925_%28cropped%29.jpg?20221110040120"
     >
   </a>
-</div>
 {{< /rawhtml >}}
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <p
     style="font-size: 2.5em; text-align:center; "
     class="font-middle-earth-joanna-vu">
     Namárië!
   </p>
-</div>
 {{< /rawhtml >}}
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
-<div class="html-content">
   <br>
   <br>
   <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
   <br>
   <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
   <br>
-</div>
 {{< /rawhtml >}}
