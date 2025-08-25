@@ -1,5 +1,6 @@
 ---
 title: "Fonts globally & for Hugo"
+description: "A step-by-step quick guide to search and install custom fonts with iconic glyphs and symbols, like Nerd Fonts, for Hugo websites and Linux tools."
 keywords: ["Nerd Fonts", "powerline", "terminal fonts", "icons in terminal", "developer setup", "glyphs", "programming fonts", "font patching", "fontforge", "iconic fonts", "shell customization", "workflow optimization", "open source fonts", "Hugo development", "Hugo Scroll", "Hugo custom fonts"]
 ---
 
