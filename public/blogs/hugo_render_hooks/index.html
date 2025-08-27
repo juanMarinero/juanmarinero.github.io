@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo render hooks: a quick guide">
   <meta itemprop="description" content="Extend the standard Markdown syntax with Hugo Render Hooks. Easily add CSS classes, IDs, responsive images, custom table alignment, GoAT diagrams and more.">
-  <meta itemprop="wordCount" content="3192">
+  <meta itemprop="wordCount" content="3273">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo Render Hooks,Hugo templates,customize Markdown,Markdown rendering,Goldmark,headless CMS,Hugo links,Hugo images,heading anchors,automatic link titles,Hugo theme development,override Markdown output,content styling,Hugo blocks,render-link hook,render-image hook,render-heading hook,Hugo best practices,web development,static site generator,custom attributes,Hugo advanced features,Hugo shortcodes">
 
@@ -761,6 +761,16 @@ E.g.</p>
 ## Heading 1.1 {#heading-1.1 class=&#34;bar&#34;}
 </code></pre><p>For further information and guide to override this default render hook read the <a href="https://gohugo.io/render-hooks/headings/">docs</a>.</p>
 <h2 id="image">Image</h2>
+<p>The default render hook funcionality can be customized/expanded
+applying <a href="https://gohugo.io/content-management/image-processing/#image-processing-performance-consideration">image process</a> methods
+in your <strong>custom shortcode</strong> template.</p>
+<p>Let&rsquo;s:</p>
+<ul>
+<li>First understand how the image <strong>render hook</strong>s operates in next pararagraphs</li>
+<li>Then, find out the how to the official <em>figure</em> <strong>shortcode</strong> works in my <a href="/blogs/hugo_shortcodes/#fig">Hugo shortcodes</a> post.</li>
+</ul>
+<p>You can do it, but you don&rsquo;t have to - <em>kann man, muss aber nicht</em> in German.
+No need to study any figure (image) shortcode nor image processing if next render hook already fulfills your requirements.</p>
 <h3 id="image-mwe">MWE</h3>
 <pre tabindex="0"><code class="language-texts" data-lang="texts">![favicon](images/favicon.png &#34;This website favicon!&#34;)
 {id=&#34;bar&#34; class=&#34;foo&#34;}

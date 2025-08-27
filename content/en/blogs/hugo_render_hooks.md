@@ -495,6 +495,18 @@ For further information and guide to override this default render hook read the 
 
 ## Image
 
+The default render hook funcionality can be customized/expanded
+applying [image process](https://gohugo.io/content-management/image-processing/#image-processing-performance-consideration) methods
+in your **custom shortcode** template.
+
+Let's:
+- First understand how the image **render hook**s operates in next pararagraphs
+- Then, find out the how to the official *figure* **shortcode** works in my [Hugo shortcodes](/blogs/hugo_shortcodes/#fig) post.
+
+You can do it, but you don't have to - *kann man, muss aber nicht* in German.
+No need to study any figure (image) shortcode nor image processing if next render hook already fulfills your requirements.
+
+
 ### MWE {#image-mwe}
 
 ```texts
