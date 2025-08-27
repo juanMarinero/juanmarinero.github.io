@@ -7,16 +7,8 @@ header_menu: true
 ---
 
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
-{{< rawhtml >}}
-<div class="html-content">
-  <img
-    src="/images/profile.png"
-    alt="Juan Marinero profile picture"
-     style="float:right; width:50%;"
-    >
-</div>
-{{< /rawhtml >}}
+![profile](images/profile.png)
+{style="float:right; width:25%; aspect-ratio: 3/4;"}
 
 I'm a Linux enthusiast and a Python developer. I'm currently working as a IT support engineer while studing an AI master.
 
