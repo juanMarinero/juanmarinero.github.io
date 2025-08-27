@@ -588,6 +588,16 @@ Visit https://gohugo.io/shortcodes/figure/ to learn more about this shortcode.
 - Arguments - `src`, `alt`, `link`, `caption`, etc.
 - Image location
 
+Apply [**image processing**](https://gohugo.io/content-management/image-processing/)
+to resize, crop, rotate, filter, and convert images in your custom shortcode template.
+This reference is is extremely well documented, I will just underline that:
+- Hugo uses [smart cropping](https://gohugo.io/content-management/image-processing/#smart-cropping-of-images)
+by default but also allows custom anchor points for crops.
+- Processed images are cached in a resources directory to optimize build times.
+Thus, if you changed image processing methods or removed images run the **garbage collection** `hugo --gc` command.
+[Reference](https://gohugo.io/content-management/image-processing/#image-processing-performance-consideration).
+
+
 ### Declaration {#fig-declaration}
 
 In Hugo's repo read [`figure.html`](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/figure.html).

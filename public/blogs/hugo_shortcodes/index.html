@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo shortcodes: step by step">
   <meta itemprop="description" content="Step-by-step guide to use built-in Hugo shortcodes for tweets, Instagram, YouTube, code highlights, QR, figures,... and create your own custom shortcodes.">
-  <meta itemprop="wordCount" content="8180">
+  <meta itemprop="wordCount" content="8252">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo shortcodes,Hugo templates,static site generator,custom shortcodes,built-in shortcodes,content creation,Markdown extensions,Go HTML templates,Hugo partials,dynamic content,figure shortcode,gist shortcode,highlight shortcode,tweet shortcode,YouTube embed,Hugo functions,layout components,DRY principles,web development,content management,Hugo documentation,code examples,responsive embeds,customizable content,Hugo power features">
 
@@ -795,6 +795,16 @@ It will print <code>https://images.pexels.com/photos/7210754/pexels-photo-721075
 <ul>
 <li>Arguments - <code>src</code>, <code>alt</code>, <code>link</code>, <code>caption</code>, etc.</li>
 <li>Image location</li>
+</ul>
+<p>Apply <a href="https://gohugo.io/content-management/image-processing/"><strong>image processing</strong></a>
+to resize, crop, rotate, filter, and convert images in your custom shortcode template.
+This reference is is extremely well documented, I will just underline that:</p>
+<ul>
+<li>Hugo uses <a href="https://gohugo.io/content-management/image-processing/#smart-cropping-of-images">smart cropping</a>
+by default but also allows custom anchor points for crops.</li>
+<li>Processed images are cached in a resources directory to optimize build times.
+Thus, if you changed image processing methods or removed images run the <strong>garbage collection</strong> <code>hugo --gc</code> command.
+<a href="https://gohugo.io/content-management/image-processing/#image-processing-performance-consideration">Reference</a>.</li>
 </ul>
 <h3 id="fig-declaration">Declaration</h3>
 <p>In Hugo&rsquo;s repo read <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/figure.html"><code>figure.html</code></a>.</p>
