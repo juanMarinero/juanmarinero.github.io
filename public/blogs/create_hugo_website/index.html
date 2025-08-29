@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
   <meta itemprop="description" content="A step-by-step beginner’s guide on how to build websites with Hugo, covering installation, theme selection, writing Markdown content, and free deployment.">
-  <meta itemprop="wordCount" content="3950">
+  <meta itemprop="wordCount" content="3958">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,static site generator,build a website,Jamstack,web development,GitHub Pages,markdown,Go templates,open source,fast websites,content management,front matter,themes,deployment,command line,git,web design,tutorial,step-by-step guide,blogging,developer tools,responsive design,HTML,CSS,Go programming language">
 
@@ -542,7 +542,8 @@ Press Ctrl+C to stop
 </span></span><span style="display:flex;"><span>git init
 </span></span></code></pre></div><p>And check that <code>hugo server</code> still works.</p>
 <h3 id="order-of-markdowns">Order of markdowns</h3>
-<p>The website sections are sorted by the <code>weight</code> metadata.</p>
+<p>The website sections are sorted by the <code>weigtht</code> metadata.
+Details in my post concerning <a href="/blogs/hugo_page_bundles/#how-the-layout-template-operates">Hugo bundle pages</a>.</p>
 <ul>
 <li>E.g. next has weight 99 to appear last <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/credits.md?plain=1#L3">exampleSite/content/en/homepage/credits.md</a></li>
 <li>Next weight 3 to appear the 3rd at top <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/about-me.md?plain=1#L3">exampleSite/content/en/homepage/about-me.md</a></li>

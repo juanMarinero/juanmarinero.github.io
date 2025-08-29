@@ -50,6 +50,10 @@ type: "section"
   <strong>Hugo</strong>'s <strong>render hooks</strong>: a quick guide
   </a>
 
+  <a href="/blogs/hugo_page_bundles/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>page bundles</strong>: the basics
+  </a>
+
   <a href="/blogs/nerd_fonts_and_more/" class="no-underline-except-hover">
   Installing 
   <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:

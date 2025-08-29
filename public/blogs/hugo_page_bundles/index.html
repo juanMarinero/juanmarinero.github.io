@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>Hugo&#39;s page bundles: the basics</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture."
+/>
+
+  <meta name="keywords" content="Hugo, page bundles, branch bundles, headless bundle, hugo list command, content organization, Hugo templates, template lookup order, leaf bundle, hugo debug, gohugo, static site generator"
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/hugo_page_bundles/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="Hugo&#39;s page bundles: the basics">
+  <meta property="og:description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="Hugo&#39;s page bundles: the basics">
+  <meta name="twitter:description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
+
+
+  <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
+  <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
+  <meta itemprop="wordCount" content="3967">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 1.5em;  
+  display: block;  
+  margin-bottom: 1.1em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.blogs_index {
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
+}
+
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">Hugo&#39;s page bundles: the basics</h1>
+      <section class="post-content">
+        <p>Table of contents:</p>
+<ul>
+<li><a href="/blogs/hugo_page_bundles/#theory">Theory</a></li>
+<li><a href="/blogs/hugo_page_bundles/#branch-bundles">Branch bundles</a>
+<ul>
+<li><a href="/blogs/hugo_page_bundles/#practical-example">Practical example</a></li>
+<li><a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">Hugo Scroll dedicated pages</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_page_bundles/#leaf-bundles">Leaf bundles</a>
+<ul>
+<li><a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a></li>
+<li><a href="/blogs/hugo_page_bundles/#an-undesired-leaf-bundle-example">An undesired leaf bundle example</a></li>
+<li><a href="/blogs/hugo_page_bundles/#the-type-front-matter-bypassing">The <code>type</code> front matter bypassing</a></li>
+<li><a href="/blogs/hugo_page_bundles/#custom-layouts-for-a-leaf-bundle">Custom layouts for a leaf bundle</a></li>
+</ul>
+</li>
+<li><a href="/blogs/hugo_page_bundles/#hugo-scroll-header-menus-to-any-page">Hugo Scroll: header menus to any page</a></li>
+</ul>
+<p>In this post, we&rsquo;ll take a closer look at how Hugo really works and explore the ins and outs of page bundles.</p>
+<p>We cover:</p>
+<ul>
+<li>Directories were just the main markdown should be rendered, <a href="/blogs/hugo_page_bundles/#an-undesired-leaf-bundle-example">an undesired leaf bundle example</a></li>
+<li>Dirs with layouts that concatenate the markdowns contents into a single page, like:
+<ul>
+<li>The Hugo Scroll <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">mainsite</a> demo</li>
+<li>And via a very simple <a href="/blogs/hugo_page_bundles/#custom-layouts-for-a-leaf-bundle">custom layout</a></li>
+</ul>
+</li>
+<li>Folders were each markdown should be rendered on its own individual page:
+<ul>
+<li>The Hugo Scroll <a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">dedicated pages</a></li>
+<li>A branch bundle <a href="/blogs/hugo_page_bundles/#practical-example">practical example</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="theory">Theory</h2>
+<p>Although the terminology is narrow, understanding it is essential to follow this guide.
+As we advance, few more new concepts will be introduced.</p>
+<p>For now, let&rsquo;s focus on the following distinctions:</p>
+<ul>
+<li><a href="https://gohugo.io/content-management/page-bundles/#leaf-bundles">Leaf bundles</a>:</li>
+</ul>
+
+
+
+  <blockquote>
+    <p>A <em>leaf bundle</em> is a directory that contains an <code>index.md</code> file and zero or more resources. It has no descendants.</p>
+  </blockquote>
+
+<ul>
+<li><a href="https://gohugo.io/content-management/page-bundles/#branch-bundles">Branch bundles</a>:</li>
+</ul>
+
+
+
+  <blockquote>
+    <p>A <em>branch bundle</em> is a directory that contains an <code>_index.md</code> file and zero or more resources.</p>
+  </blockquote>
+
+<ul>
+<li><a href="https://gohugo.io/content-management/sections/">Sections</a></li>
+</ul>
+
+
+
+  <blockquote>
+    <p>A <em>section</em> is a top-level content directory or any content directory containing an <code>_index.md</code> file.</p>
+  </blockquote>
+
+<h2 id="branch-bundles">Branch bundles</h2>
+<h3 id="practical-example">Practical example</h3>
+<p>Steps:</p>
+<ol>
+<li>Edit <code>content/en/leaf_bundle_to_branch_bundle/index.md</code></li>
+</ol>
+<p>This way the URL will be like <code>https://example.org/leaf_bundle_to_branch_bundle/</code>,
+read <a href="https://gohugo.io/content-management/organization/#organization-of-content-source">Organization of Content Source</a> docs.</p>
+<ol start="2">
+<li>Create a new <code>post_1.md</code> in <code>content/en/leaf_bundle_to_branch_bundle/</code></li>
+<li>Add a link (<code>&lt;a&gt;</code>) to <code>post_1.md</code> in <code>content/en/leaf_bundle_to_branch_bundle/index.md</code></li>
+<li>Build the site with <code>hugo server --disableFastRender</code></li>
+</ol>
+<p>If you just did previous steps, then <code>[post_1](/leaf_bundle_to_branch_bundle/post_1)</code> will link to a <strong>404</strong> page.
+This happends because Hugo doesn&rsquo;t recognize the directory as a <em>branch bundle</em> capable of having child pages, i.e. the <code>index.md</code> is treated as a standalone page.</p>
+<p>Stop (Ctrl + C) the Hugo server
+and check <code>hugo list all</code>.
+This command is explained in the <a href="/blogs/hugo_page_bundles/#the-hugo-list-all-command">bonus section</a>.
+In our scenerio it outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csv" data-lang="csv"><span style="display:flex;"><span><span style="color:#2aa198">path</span>,<span style="color:#2aa198">slug</span>,<span style="color:#2aa198">title</span>,<span style="color:#2aa198">date</span>,<span style="color:#2aa198">expiryDate</span>,<span style="color:#2aa198">publishDate</span>,<span style="color:#2aa198">draft</span>,<span style="color:#2aa198">permalink</span>,<span style="color:#2aa198">kind</span>,<span style="color:#2aa198">section</span>
+</span></span><span style="display:flex;"><span><span style="color:#2aa198">content/en/_index.md</span>,,,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">false</span>,<span style="color:#2aa198">https://juanmarinero.github.io/</span>,<span style="color:#2aa198">home</span>,
+</span></span><span style="display:flex;"><span><span style="color:#2aa198">[...]</span>
+</span></span><span style="display:flex;"><span><span style="color:#2aa198">content/en/leaf_bundle_to_branch_bundle/index.md</span>,,<span style="color:#2aa198">leaf_bundle_to_branch_bundle</span>,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">0001-01-01T00:00:00Z</span>,<span style="color:#2aa198">false</span>,<span style="color:#2aa198">https://juanmarinero.github.io/leaf_bundle_to_branch_bundle/</span>,<span style="color:#2aa198">page</span>,
+</span></span><span style="display:flex;"><span><span style="color:#2aa198">[...]</span>
+</span></span></code></pre></div><p>This CSV is hard to read, lets convert it to JSON and read with <code>jq</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo list all <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  | python3 -c <span style="color:#2aa198">&#34;import csv, json, sys; print(json.dumps([dict(r) for r in csv.DictReader(sys.stdin)]))&#34;</span> <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  | jq .
+</span></span></code></pre></div><p>Filter by <code>path</code> with <code>[...]  | jq '.[] | select(.path | startswith(&quot;content/en/leaf_bundle_to_branch_bundle&quot;))'</code> to get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;path&#34;</span>: <span style="color:#2aa198">&#34;content/en/leaf_bundle_to_branch_bundle/index.md&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;slug&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;title&#34;</span>: <span style="color:#2aa198">&#34;leaf_bundle_to_branch_bundle&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;date&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;expiryDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;publishDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;draft&#34;</span>: <span style="color:#2aa198">&#34;false&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;permalink&#34;</span>: <span style="color:#2aa198">&#34;https://juanmarinero.github.io/leaf_bundle_to_branch_bundle/&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;kind&#34;</span>: <span style="color:#2aa198">&#34;page&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;section&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Create <code>_index.md</code> converting the <code>leaf_bundle_to_branch_bundle</code> directory, a <em>leaf bundle</em>, into a <em>branch bundle</em>.</p>
+<ol start="5">
+<li>Run <code>touch content/en/leaf_bundle_to_branch_bundle/_index.md</code></li>
+<li>Run <code>hugo server --disableFastRender</code></li>
+</ol>
+<p>The <a href="/leaf_bundle_to_branch_bundle/post_1/"><code>post_1.md</code></a> link will work.</p>
+
+
+  And
+  <a href="/leaf_bundle_to_branch_bundle/">
+  <code>/content/en/leaf_bundle_to_branch_bundle/index.md</code>
+  </a>
+  is still accessible.
+
+
+<p>The new <code>hugo list all</code> includes <code>post_1.md</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;path&#34;</span>: <span style="color:#2aa198">&#34;content/en/leaf_bundle_to_branch_bundle/post_1.md&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;slug&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;title&#34;</span>: <span style="color:#2aa198">&#34;Post 1 of `leaf_bundle_to_branch_bundle`&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;date&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;expiryDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;publishDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;draft&#34;</span>: <span style="color:#2aa198">&#34;false&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;permalink&#34;</span>: <span style="color:#2aa198">&#34;https://juanmarinero.github.io/leaf_bundle_to_branch_bundle/post_1/&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;kind&#34;</span>: <span style="color:#2aa198">&#34;page&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;section&#34;</span>: <span style="color:#2aa198">&#34;leaf_bundle_to_branch_bundle&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Create more individual pages if desired, like <code>content/en/leaf_bundle_to_branch_bundle/post_2.md</code>.</p>
+<h3 id="hugo-scroll-dedicated-pages">Hugo Scroll dedicated pages</h3>
+<p>The existence of <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/_index.md?plain=1"><code>content/en/_index.md</code></a>
+creates the <code>en</code>-<strong>branch bundle</strong> in the Hugo Scroll demo.
+Non-<code>/homepage</code> English pages
+(file path <a href="https://github.com/zjedi/hugo-scroll/tree/master/exampleSite/content/en/"><code>content/en/</code></a> but not inside the <code>homepage/</code> folder)
+belong to this bundle.
+Therefore, Hugo will render them preventing 404 errors.</p>
+<p>The Hugo Scroll repo calls these sites <strong>dedicated pages</strong>, to contrast with the [mayority] <code>en/homepage</code> pages that build the main scroll website
+(discussed later in the <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a> segment).</p>
+<p>An analogous <em>branch bundle</em> is created for German content by the <code>content/de/_index.md</code> file.</p>
+<p>Due to the
+<a href="https://gohugo.io/templates/lookup-order/">template lookup order</a>,
+these dedicated pages are rendered via
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html"><code>layouts/_default/single.html</code></a>,
+as they are regular pages and no more specific template exists in this theme.</p>
+<p>Later, in the <a href="/blogs/hugo_page_bundles/#custom-layouts-for-a-leaf-bundle">custom layouts for a leaf bundle</a> section, we&rsquo;ll see how to take advantage of this template hierarchy, the lookup order.</p>
+<p>For example, the markdown <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/services.md?plain=1"><code>content/en/services.md</code></a>,
+once rendered with previous layout, produces next <a href="https://zjedi.github.io/hugo-scroll/services/">dedicated page</a>.</p>
+<h2 id="leaf-bundles">Leaf bundles</h2>
+<p>The <a href="https://gohugo.io/content-management/page-bundles/#leaf-bundles">references</a> exemplify various leaf bundles.</p>
+<p>In summary,</p>
+<ul>
+<li>
+<p>A leaf bundle can contain no page resources, like <code>content/about</code> below. <code>content/about/index.md</code> is a standalone page.</p>
+</li>
+<li>
+<p>Or, like <code>content/posts/my-post</code> below, it can contain one or more page resources.
+This leaf bundle contains an index file, two resources of <a href="https://gohugo.io/quick-reference/glossary/#resource-type">resource type</a> <code>page</code>
+(mardown files),
+and two resources of resource type <code>image</code>.</p>
+<ul>
+<li>
+<p>content-1, content-2</p>
+<p>These are resources of resource type <code>page</code>, accessible via the [<code>Resources</code>] method on the <code>Page</code> object. Hugo will not render these as individual pages.</p>
+</li>
+<li>
+<p>image-1, image-2</p>
+<p>These are resources of resource type <code>image</code>, accessible via the <code>Resources</code> method on the <code>Page</code> object</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>content/
+├── about
+│   └── index.md
+├── posts
+│   ├── my-post
+│   │   ├── content-1.md
+│   │   ├── content-2.md
+│   │   ├── image-1.jpg
+│   │   ├── image-2.png
+│   │   └── index.md
+...
+</code></pre><p>I underline: Hugo will <strong>not render</strong> <code>content-1.md</code> nor <code>content-2.md</code> as <strong>individual pages</strong>.</p>
+<h3 id="hugo-scroll-mainsite">Hugo Scroll mainsite</h3>
+<p>A practical example of a rendered leaf bundle is the Hugo Scroll <a href="https://zjedi.github.io/hugo-scroll/">demo</a> mainsite.</p>
+<h5 id="the-leaf-bundle-creation">The leaf bundle creation</h5>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/index.md?plain=1"><code>content/en/homepage/index.md</code></a>
+creates the <em>leaf bundle</em> <a href="https://github.com/zjedi/hugo-scroll/tree/master/exampleSite/content/en/homepage"><code>content/en/homepage/</code></a>.</p>
+<h5 id="the-headless-bundle-creation">The headless bundle creation</h5>
+<p>The key to this setup is the <code>headless: true</code> front matter in
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/index.md?plain=1"><code>content/en/homepage/index.md</code></a>.
+This makes it a <strong>headless bundle</strong>. A <a href="https://gohugo.io/content-management/page-bundles/#headless-bundles">headless bundle</a> has two main effects:</p>
+<ol>
+<li>The <code>index.md</code> is <strong>not rendered on its own</strong>, same applies to rest of the bundle pages.
+It will <strong>not</strong> go through the standard template <strong>lookup order</strong> to find a template (like <code>single.html</code>) to render itself into an HTML file.
+This is the &ldquo;headless&rdquo; part.</li>
+<li>Its page resources (here <code>opener.md</code>, <code>about-me.md</code>, etc.) are of course as in any leaf bundle <strong>not</strong> published individually.
+Their sole purpose is to exist as <code>Page</code> objects in Hugo&rsquo;s internal memory, to be available to be fetched by a layout template via <code>.GetPage</code> or <code>.Resources</code>.</li>
+</ol>
+<h5 id="lookup-order-the-template-hierarchy">Lookup order, the template hierarchy</h5>
+<p>The file that defines the homepage for a language is <code>content/&lt;language&gt;/_index.md</code> since
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/hugo.toml"><code>hugo.toml</code></a> sets:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[languages]
+</span></span><span style="display:flex;"><span>  [languages.en]
+</span></span><span style="display:flex;"><span>    weight = <span style="color:#2aa198">10</span>
+</span></span><span style="display:flex;"><span>    languageName = <span style="color:#2aa198">&#34;English&#34;</span>
+</span></span><span style="display:flex;"><span>    contentDir = <span style="color:#2aa198">&#34;content/en&#34;</span>
+</span></span></code></pre></div><p>This file, for us <code>content/en/_index.md</code>, automatically gets the <a href="https://gohugo.io/methods/page/kind/"><code>PAGE.Kind</code></a> of <strong><code>home</code></strong>.
+<code>hugo list all</code> confirms this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo list all <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  | python3 -c <span style="color:#2aa198">&#34;import csv, json, sys; print(json.dumps([dict(r) for r in csv.DictReader(sys.stdin)]))&#34;</span> <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  | jq <span style="color:#2aa198">&#39;.[] | select(.kind==&#34;home&#34;)&#39;</span>
+</span></span></code></pre></div><p>Notice the penultimate JSON field:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;path&#34;</span>: <span style="color:#2aa198">&#34;content/en/_index.md&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;slug&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;title&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;date&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;expiryDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;publishDate&#34;</span>: <span style="color:#2aa198">&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;draft&#34;</span>: <span style="color:#2aa198">&#34;false&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;permalink&#34;</span>: <span style="color:#2aa198">&#34;https://juanmarinero.github.io/&#34;</span>,
+</span></span><span style="display:flex; background-color:#19404a"><span>  <span style="color:#268bd2">&#34;kind&#34;</span>: <span style="color:#2aa198">&#34;home&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;section&#34;</span>: <span style="color:#2aa198">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The lookup order for <code>PAGE.Kind</code> is complex. After checking for more specific templates, the theme ultimately uses
+<code>layouts/_default/index.html</code> to render the home page.</p>
+<p>Challenge! Investigate the complete layout hierarchy followed, not just the final results.</p>
+<h5 id="how-the-layout-template-operates">How the layout template operates</h5>
+<p>The theme&rsquo;s <strong>homepage layout</strong>
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>
+is programmed to fetch the resources from this specific headless bundle.
+It uses:</p>
+<ul>
+<li><code>{{ $headless := .GetPage &quot;./homepage&quot; }}</code> to access the bundle</li>
+<li>Then <code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> to get its sections.</li>
+<li>Finally <code>{{ $content := where (where $sections &quot;Params.external&quot; &quot;==&quot; nil) &quot;Params.detailed_page_homepage_content&quot; &quot;ne&quot; false }}</code>
+has a <code>where</code> that filters the collection based on conditions (e.g., removing drafts, excluding external links)</li>
+</ul>
+<p>The final single-page site is assembled by this layout based on:</p>
+<ul>
+<li>The <strong>order</strong> of the page resources can be set by <code>weigtht</code>, <code>date</code>, etc.
+Check the <a href="https://gohugo.io/quick-reference/glossary/#default-sort-order">default sort order</a> documentation.
+In this theme it&rsquo;s sorted by the <code>weight</code> metadata.
+Details in my post <a href="/blogs/create_hugo_website/#order-of-markdowns">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>.
+<code>{{ range $index_val, $elem_val := $content }}</code> line of
+<a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144"><code>index.html</code></a>
+is the key,
+when Hugo encounters a <code>range</code> loop over a page collection (like <code>$content</code>), it automatically applies the <strong>default sort order</strong> to that collection before iterating.</li>
+<li>The <strong>content</strong> of each resource file.</li>
+</ul>
+<p>A deeper analysis of code lines of layouts templates is to come in next sections.</p>
+
+
+
+  <blockquote class="alert alert-warning">
+    <p class="alert-heading">
+      ℹ️
+      
+        Previous layout locations might change in future because recent <a href="https://gohugo.io/templates/new-templatesystem-overview/#changes-to-the-layouts-folder">changes to the <code>layouts</code> folder</a>:
+      
+    </p>
+    <p>Move all files in <code>layouts/_default</code> up to the layouts/ root.</p>
+  </blockquote>
+
+<h5 id="hugo-template-inheritance-how-baseofhtml-integrates-indexhtml-main-block">Hugo Template Inheritance: How baseof.html integrates index.html &lsquo;main&rsquo; block</h5>
+<p>This is a basic guide, therefore for us is enough to understand the next lines of
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/baseof.html"><code>layouts/_default/baseof.html</code></a>,
+the final HTML renderer (<em>base template</em> using a Hugo-sh terminology).</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">html</span> lang<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;{{ .Site.Language.Lang }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>    {{- partial &#34;head.html&#34; . -}}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">body</span>&gt;
+</span></span><span style="display:flex;"><span>    {{- partial &#34;header.html&#34; . -}}
+</span></span><span style="display:flex;"><span>    {{- block &#34;main&#34; . }}{{- end }}
+</span></span><span style="display:flex;"><span>    {{- partial &#34;footer.html&#34; . -}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    [...]
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">html</span>&gt;
+</span></span></code></pre></div><p>Note the <code>{{- block &quot;main&quot; . }}{{- end }}</code> line, there it&rsquo;s inserted the <code>main</code> block.
+This is defined in <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>,
+since its first line <code>{{ define &quot;main&quot; }}</code> is closed by a <code>{{- end }}</code> line at EOF.</p>
+<p>The footer integration is later explained in this <a href="/blogs/hugo_page_bundles/#hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">section</a>.</p>
+<h3 id="an-undesired-leaf-bundle-example">An undesired leaf bundle example</h3>
+<p><code>content/en/leaf_bundle_wrong</code> file tree is:</p>
+<pre tabindex="0"><code>leaf_bundle_wrong/
+├── index.md
+└── post_1.md
+</code></pre><p>Navigate <a href="/leaf_bundle_wrong/">there</a> and check how a link to its sibling <a href="/leaf_bundle_wrong/post_1"><code>/leaf_bundle_wrong/post_1</code></a> does <strong>not</strong> work.</p>
+<p>In next sections we study how to fix this. In summary:</p>
+<ul>
+<li>Use a <em>leaf bundle</em> as intended
+<ul>
+<li>Requiring just <strong>one</strong> <code>page</code> resource, a standalone page, e.g. <code>index.md</code>. Rest of page resources (<code>post_1.md</code>) are not needed</li>
+<li>Or create a proper <strong>layout</strong> that concatenates the <em>leaf bundle</em> resources, as we show that <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a> does</li>
+</ul>
+</li>
+<li>Alternative, of course, you can evolve it to a <em>branch bundle</em>.
+You might remember that the current file structure is identical as seen in the first steps of the <em>branch bundle</em> <a href="/blogs/hugo_page_bundles/#practical-example">practical example</a>,
+when it was just a <em>leaf bundle</em>.</li>
+</ul>
+<h3 id="the-type-front-matter-bypassing">The <code>type</code> front matter bypassing</h3>
+<p>The <a href="https://gohugo.io/content-management/front-matter/#type">docs</a> define this front matter field as:</p>
+<p>(<code>string</code>) The <a href="https://gohugo.io/quick-reference/glossary/#content-type">content type</a>,
+overriding the value derived from the top-level section [read <a href="/blogs/hugo_page_bundles/#theory">theory</a>] in which the page resides.
+Access this value from a template using the <a href="https://gohugo.io/methods/page/type/"><code>Type</code></a> method on a <code>Page</code> object.</p>
+<p>Which is vague without the <em>content types</em> definition:</p>
+<p>A <em>content type</em> is a classification of content inferred from the top-level directory name or the <code>type</code> set in
+<a href="https://gohugo.io/quick-reference/glossary/#front-matter">front matter</a>.
+Pages in the root of the <code>content</code> directory, including the home page, are of type &ldquo;page&rdquo;.
+The content type is a contributing factor in the template lookup order and determines which <a href="https://gohugo.io/content-management/archetypes/">archetype</a>
+template to use when creating new content.</p>
+<p>In the branch bundle <a href="/blogs/hugo_page_bundles/#practical-example">practical example</a>, instead of generating a <code>_index.md</code>, and therefore a <em>branch bundle</em>, as we did before,
+one can simply add the <code>type: section</code> <em>front matter</em> to <code>index.md</code>.
+Now the <a href="/leaf_bundle_to_branch_bundle/post_1/"><code>post_1.md</code></a> link will <strong>appear</strong> to work because the directory has changed:</p>
+<ul>
+<li>From a <em>leaf bundle</em> with markdowns of type &ldquo;page&rdquo;</li>
+<li>To a <del>branch bundle</del> <em>God knows what</em> with markdowns of type &ldquo;section&rdquo;. The underlying file structure is still a <em>leaf bundle</em>.</li>
+</ul>
+<p>Though using <code>type: section</code> on a regular page is a hack or an <strong>unintended</strong> use of the <code>type</code> field.
+It violates the intended encapsulation methods for accessing a page&rsquo;s internal data, bypassing the intended mechanisms for setting a <code>section</code> <em>content type</em>.
+The Hugo documentation is very clear about the structural difference between leaf and branch bundles.
+The prescribed method for creating a &ldquo;section&rdquo; is to use an <code>_index.md</code> file. Not via <code>type: section</code> front matter.</p>
+<p>Since this is not the standard (correct) approach to create a <em>branch bundle</em>, it can have totally unexpected results.
+For example the respective <code>hugo list all</code> is equal as in original <em>leaf bundle</em>: still not including <code>post_1.md</code>.</p>
+<p>So, what is the legitimate use of the <code>type</code> front matter?
+The <em>content types</em> definition already pointed a frequent use of the <code>type</code> field:
+change the <strong>template lookup order</strong> for a page.
+This is what we apply next.</p>
+<h3 id="custom-layouts-for-a-leaf-bundle">Custom layouts for a leaf bundle</h3>
+<p>Remember next case scenario:</p>
+
+
+
+  <blockquote>
+    <p>These [<code>content-1.md</code>, <code>content-2</code>] are resources of resource type <code>page</code>, accessible via the [<code>Resources</code>] method on the <code>Page</code> object.
+Hugo will not render these as individual pages.</p>
+  </blockquote>
+
+<p>For the Hugo Scroll theme we already covered <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">here</a> how the <code>en/homepage/</code> leaf bundle is rendered with
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>.
+But this layout is too complex for our learning purposes; we want a simpler example.
+Thus, we will just expand the <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html"><code>layouts/_default/single.html</code></a>
+used for the <a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">dedicated pages</a> of this Hugo theme.</p>
+<p>We want a new custom layout for our <em>leaf bundle</em>.
+This layout should render in the <code>index.md</code> file&hellip;</p>
+<ul>
+<li>First its content exactly as constructed till now.</li>
+<li>Then the content of its sibling <code>post_1.md</code>, rendering its <code>title</code> front matter as <code>&lt;h2&gt;</code>. I emphasize, this is <strong>not</strong> rendered as an <strong>individual page</strong>.</li>
+</ul>
+<p>To apply the new layout we must start creating a new <em>leaf bundle</em> directory.
+<code>content/en/leaf_bundle_to_layout/</code> shall have the same tree file structure as <code>content/en/leaf_bundle_wrong/</code>:</p>
+<pre tabindex="0"><code>leaf_bundle_to_layout/
+├── index.md
+└── post_1.md
+</code></pre><ol>
+<li>In <code>content/en/leaf_bundle_to_layout/index.md</code> override the front matter <a href="https://gohugo.io/content-management/front-matter/#type">type</a> with: <code>type: &quot;leaf_bundle_to_layout&quot;</code>.</li>
+<li>Run <code>mkdir -p layouts/leaf_bundle_to_layout</code></li>
+<li>Edit <code>layouts/leaf_bundle_to_layout/single.html</code> as next. This template enlarges <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html"><code>layouts/_default/single.html</code></a>.
+Pay particular attention to the highlighted lines.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>{{ <span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;main&#34;</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>  &lt;<span style="color:#a6e22e">main</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;content page-template page-{{ .Slug }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>    &lt;<span style="color:#a6e22e">article</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post page&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>      &lt;<span style="color:#a6e22e">header</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post-header&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>        {{ <span style="color:#a6e22e">with</span> .<span style="color:#a6e22e">Parent</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>          {{ <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">hugo</span>.<span style="color:#a6e22e">IsMultihost</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>          &lt;<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">id</span>=<span style="color:#e6db74">&#34;back-to-main-page&#34;</span> <span style="color:#a6e22e">href</span>=<span style="color:#e6db74">&#34;{{ .RelPermalink | relLangURL }}&#34;</span>&gt;&lt;<span style="color:#a6e22e">i</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;fa fa-chevron-left&#34;</span> <span style="color:#a6e22e">aria</span><span style="color:#f92672">-</span><span style="color:#a6e22e">hidden</span>=<span style="color:#e6db74">&#34;true&#34;</span>&gt;&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">i</span>&gt; {{ <span style="color:#a6e22e">or</span> .<span style="color:#a6e22e">Title</span> .<span style="color:#a6e22e">Site</span>.<span style="color:#a6e22e">Title</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>          {{ <span style="color:#66d9ef">else</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>        &lt;<span style="color:#a6e22e">a</span> <span style="color:#a6e22e">id</span>=<span style="color:#e6db74">&#34;back-to-main-page&#34;</span> <span style="color:#a6e22e">href</span>=<span style="color:#e6db74">&#34;{{ .RelPermalink | relLangURL }}&#34;</span>&gt;&lt;<span style="color:#a6e22e">i</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;fa fa-chevron-left&#34;</span> <span style="color:#a6e22e">aria</span><span style="color:#f92672">-</span><span style="color:#a6e22e">hidden</span>=<span style="color:#e6db74">&#34;true&#34;</span>&gt;&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">i</span>&gt; {{ <span style="color:#a6e22e">or</span> .<span style="color:#a6e22e">Title</span> .<span style="color:#a6e22e">Site</span>.<span style="color:#a6e22e">Title</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>          {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>        {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>      &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">header</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>      &lt;<span style="color:#a6e22e">h1</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post-title&#34;</span>&gt;{{ .<span style="color:#a6e22e">Title</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">h1</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>      &lt;<span style="color:#a6e22e">section</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post-content&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>        {{ .<span style="color:#a6e22e">Content</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>      &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">section</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>      {{<span style="color:#75715e">/* Check if `type` front matter changed the resource type */</span>}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>      {{ <span style="color:#a6e22e">with</span> .<span style="color:#a6e22e">ResourceType</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>        &lt;<span style="color:#a6e22e">div</span>&gt;<span style="color:#a6e22e">Resource</span> <span style="color:#66d9ef">type</span>: {{ . }} &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>      {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>      {{<span style="color:#75715e">/* And the Page.Type */</span>}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>      {{ <span style="color:#a6e22e">with</span> .<span style="color:#a6e22e">Page</span>.<span style="color:#a6e22e">Type</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>        &lt;<span style="color:#a6e22e">div</span>&gt;<span style="color:#a6e22e">Page</span> <span style="color:#66d9ef">type</span>: {{ . }} &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>      {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>    &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">article</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>    {{<span style="color:#75715e">/* Render the resource&#39;s content directly */</span>}}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>    {{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span> <span style="color:#f92672">:=</span> .<span style="color:#a6e22e">Resources</span>.<span style="color:#a6e22e">Get</span> <span style="color:#e6db74">&#34;post_1.md&#34;</span> }}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span><span>    {{ <span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span> }}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span>      &lt;<span style="color:#a6e22e">article</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post page&#34;</span>&gt;
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32</span><span>         &lt;<span style="color:#a6e22e">h2</span>&gt;{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span>.<span style="color:#a6e22e">Title</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">h2</span>&gt;
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33</span><span>         &lt;<span style="color:#a6e22e">div</span>&gt;{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span>.<span style="color:#a6e22e">Content</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34</span><span>         {{<span style="color:#75715e">/* Check if `type` front matter changed the resource type */</span>}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span>         {{ <span style="color:#a6e22e">with</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span>.<span style="color:#a6e22e">ResourceType</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>           &lt;<span style="color:#a6e22e">div</span>&gt;<span style="color:#a6e22e">Resource</span> <span style="color:#66d9ef">type</span>: {{ . }} &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>         {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38</span><span>         {{<span style="color:#75715e">/* And the Page.Type */</span>}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39</span><span>         {{ <span style="color:#a6e22e">with</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span>.<span style="color:#a6e22e">Page</span>.<span style="color:#a6e22e">Type</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40</span><span>           &lt;<span style="color:#a6e22e">div</span>&gt;<span style="color:#a6e22e">Page</span> <span style="color:#66d9ef">type</span>: {{ . }} &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41</span><span>         {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42</span><span>      &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">article</span>&gt;
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43</span><span>    {{ <span style="color:#66d9ef">else</span> }}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44</span><span>      &lt;<span style="color:#a6e22e">p</span>&gt;<span style="color:#a6e22e">Debug</span>: <span style="color:#a6e22e">Resource</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">post_1</span>.<span style="color:#a6e22e">md</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">found</span>.&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">p</span>&gt;
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45</span><span>    {{ <span style="color:#a6e22e">end</span> }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47</span><span>  &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">main</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48</span><span>{{ <span style="color:#a6e22e">end</span> }}
+</span></span></code></pre></div><ol start="4">
+<li>Build with <code>hugo server --disableFastRender</code> and check the result in <a href="/leaf_bundle_to_layout/"><code>content/en/leaf_bundle_to_layout/</code></a>.
+Observe how the sibling <code>post_1.md</code> is rendered just after the <code>index.md</code> content.</li>
+</ol>
+<p>These steps are a quick example of how to <strong>target a specific template</strong> by leveraging Hugo&rsquo;s
+applying <a href="https://gohugo.io/templates/lookup-order/">template lookup rules</a>.
+Read the docs for deeper understanding and customizations.</p>
+<p>As challenge find out how to make the layout render all <code>page</code> resources inside the bundle, not just <code>index.md</code> and <code>post_1.md</code>,
+but also <code>post_2.md</code>, <code>post_3.md</code>, <code>post_4.md</code>, etc.</p>
+<h4 id="type-front-matter-on-indexmd"><code>type</code> front matter on <code>index.md</code></h4>
+<p>The first step we did was</p>
+<ol>
+<li>In <code>content/en/leaf_bundle_to_layout/index.md</code> override the front matter <a href="https://gohugo.io/content-management/front-matter/#type">type</a> with: <code>type: &quot;leaf_bundle_to_layout&quot;</code>.</li>
+</ol>
+<p>One could think that the quoted statmenet could be adapted for our case scenario as:
+These <del>[<code>content-1.md</code>, <code>content-2</code>]</del> <code>post_1.md</code> [, <code>post_2.md</code>, <code>post_3.md</code>, <code>post_4.md</code>, etc.] are resources of type <del><code>page</code></del> <code>leaf_bundle_to_layout</code>,
+accessible via the [<code>Resources</code>] method on the <code>Page</code> object.</p>
+<p>This would be <strong>wrong</strong> because
+the <code>type</code> front matter in <code>index.md</code> does <strong>not change</strong> the fundamental <strong>nature</strong> of the <strong>resources inside the bundle</strong>.</p>
+<h5 id="what-type-leaf_bundle_to_layout-in-indexmd-actually-does">What <code>type: &quot;leaf_bundle_to_layout&quot;</code> in <code>index.md</code> actually does</h5>
+<ol>
+<li>
+<p>It <strong>forces the <em>Page&rsquo;s</em> type</strong>.
+The <code>Page</code> object returned by the <code>index.md</code> file (the leaf bundle itself) contains a mandatory <code>.Type</code> method, the <code>&quot;leaf_bundle_to_layout&quot;</code>
+instead of its default value.
+But anyhow the <code>PAGE.Type</code> is the same as the default value it would have had,
+which is derived (as stayed in the <a href="https://gohugo.io/content-management/front-matter/#type">type front matter doc</a>)
+from the top-level section name (the directory <code>leaf_bundle_to_layout</code>).
+The type front matter simply provides explicit control over this value.</p>
+</li>
+<li>
+<p>It <strong>changes the <a href="https://gohugo.io/templates/lookup-order/#target-a-template">template lookup</a> for the bundle</strong>, which is the powerful feature we successfully leveraged.
+It forces Hugo to look for rendering templates in <code>layouts/leaf_bundle_to_layout/</code> instead of the default location (<code>layouts/_default/</code>).
+In the <a href="/blogs/hugo_page_bundles/#the-type-front-matter-bypassing"><code>type</code> front matter bypassing</a> section we insisted on this already.
+The <a href="https://gohugo.io/methods/page/type/">PAGE.Type documentation</a> briefly points this out too:</p>
+</li>
+</ol>
+
+
+
+  <blockquote>
+    <p>The <strong><code>type</code></strong> field in front matter is also useful for <strong>targeting a template</strong>. See <a href="https://gohugo.io/templates/lookup-order/#target-a-template">details</a>.</p>
+  </blockquote>
+
+<h5 id="what-it-does-not-do">What it does <strong>NOT</strong> do</h5>
+<ul>
+<li>It does <strong>not</strong> change the <code>.ResourceType</code> (see <a href="https://gohugo.io/quick-reference/glossary/#resource-type">resource type</a> glossary)
+of the files inside the bundle (like <code>post_1.md</code>).</li>
+</ul>
+<p>The next chunks of the previously shown <code>layouts/leaf_bundle_to_layout/single.html</code> demonstrate it.</p>
+<ul>
+<li>The first block outputs <code>page</code> as the resource type of <code>index.md</code>.</li>
+<li>The second displays the same for the <code>post_1.md</code> resource type.</li>
+</ul>
+<p>On the other hand, the <code>Page.Type</code> is <code>leaf_bundle_to_layout</code> for the bundle&rsquo;s index page,
+and the resource <code>post_1.md</code> is also associated with this type within the context of the bundle.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>{{/* Check if `type` front matter changed the resource type */}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>{{ with .ResourceType }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Resource type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- page --&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span>{{ end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span><span>{{/* And the Page.Type */}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span>{{ with .Page.Type }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Page type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- leaf_bundle_to_layout --&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span><span>{{ end }}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34</span><span>{{/* Check if `type` front matter changed the resource type */}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35</span><span>{{ with $subpage.ResourceType }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Resource type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- page --&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37</span><span>{{ end }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38</span><span>{{/* And the Page.Type */}}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39</span><span>{{ with $subpage.Page.Type }}
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Page type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- leaf_bundle_to_layout --&gt;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41</span><span>{{ end }}
+</span></span></code></pre></div><p>Check the results in the rendered <a href="/leaf_bundle_to_layout/"><code>content/en/leaf_bundle_to_layout/</code></a> website.</p>
+<p>This demonstrates that the <code>type</code> front matter affects template selection and page metadata (<code>Page.Type</code>)
+but does not alter the fundamental <strong>resource type</strong> of the files within the bundle.</p>
+<h5 id="the-key-distinction-pagetype-vs-resourceresourcetype">The key distinction: <code>Page.Type</code> vs. <code>Resource.ResourceType</code></h5>
+<p>This is the heart of the confusion. Hugo has two related but different concepts:</p>
+<p><strong><code>Page.Type</code></strong> is the <code>Page</code> object representing a content file.
+It&rsquo;s a high-level classification used for <strong>template lookup</strong>. Set by:</p>
+<ul>
+<li>The section name, like <code>content/en/homepage</code> for the <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a></li>
+<li>Or by the <code>type</code> front matter as just exemplified.</li>
+</ul>
+<p><strong><code>Resource.ResourceType</code></strong> is an individual <code>Resource</code> object (a file inside a bundle).
+This property is a low-level technical classification of the file&rsquo;s format and purpose.
+This can be a <code>page</code>, <code>image</code>, <code>video</code>, etc.</p>
+<h5 id="the-accurate-description-of-our-scenario">The accurate description of our scenario</h5>
+<p>Therefore, the most precise description is:</p>
+<p><strong><code>post_1.md</code> is a resource of resource type <code>page</code></strong>,
+accessible via the [<code>Resources</code>] method on the <code>Page</code> object.
+The <code>Page</code> object for the bundle has its <code>Type</code> set to <code>&quot;leaf_bundle_to_layout&quot;</code> via front matter,
+which dictates the template used to render the entire bundle.
+Hugo will not render <code>post_1.md</code> as an individual page because it is located inside a leaf bundle folder.</p>
+<h2 id="hugo-scroll-header-menus-to-any-page">Hugo Scroll: header menus to any page</h2>
+<p>We will explore two techniques for adding items to the header menu in the Hugo Scroll theme.
+In the process, we will also learn how the footer menu links are edited.</p>
+<h3 id="hard-code">Hard code</h3>
+<p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a> code starts
+creating the <code>$sections</code> collection with all the <code>page</code> resources from the <code>homepage</code> bundle.
+This was explained in the headless bundle section
+<a href="/blogs/hugo_page_bundles/#how-the-layout-template-operates">above</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $headless <span style="color:#719e07">:=</span> .GetPage <span style="color:#2aa198">&#34;./homepage&#34;</span> }} {{<span style="color:#586e75">/* Fetch the headless bundle */</span>}}
+</span></span><span style="display:flex;"><span>{{ $sections <span style="color:#719e07">:=</span> $headless.Resources.ByType <span style="color:#2aa198">&#34;page&#34;</span> }}  {{<span style="color:#586e75">/* Get all its Markdown page resources */</span>}}
+</span></span></code></pre></div><p><code>.Site.BuildDrafts</code> checks if Hugo is building with drafts enabled:</p>
+<ul>
+<li>If true then keep all sections (including drafts)</li>
+<li>Otherwise, remove any pages that have <code>draft: true</code> in their front matter</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $sections <span style="color:#719e07">:=</span> cond .Site.BuildDrafts $<span style="color:#268bd2">sections</span> (where $sections <span style="color:#2aa198">&#34;Draft&#34;</span> <span style="color:#2aa198">&#34;==&#34;</span> <span style="color:#cb4b16">false</span>) }}
+</span></span></code></pre></div><p>And eventually the interesting block that loops the <code>$sections</code> pages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">range</span> where $sections <span style="color:#2aa198">&#34;.Params.header_menu&#34;</span> <span style="color:#2aa198">&#34;eq&#34;</span> <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>  {{ $button_title <span style="color:#719e07">:=</span> .Title }}
+</span></span><span style="display:flex;"><span>  {{ with .Params.header_menu_title }}{{ $button_title = . }}{{ end }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;external&#34;</span> }}
+</span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; href=&#39;{{ .Params.external | absURL }}&#39;&gt;{{ $button_title }}<span style="color:#719e07">&amp;</span>nbsp;&lt;i class=<span style="color:#2aa198">&#34;fa fa-external-link&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;detailed_page_path&#34;</span> }}
+</span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; href=&#39;{{ .Params.detailed_page_path | relLangURL }}&#39;&gt;{{ $button_title }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>    {{ $fnav_title <span style="color:#719e07">:=</span> .Title }}{{ with .Params.navigation_menu_title }}{{ $fnav_title = . }}{{ end }}
+</span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; data<span style="color:#719e07">-</span>title<span style="color:#719e07">-</span>anchor=&#39;{{ anchorize $fnav_title }}&#39; href=&#39;#{{ anchorize $fnav_title }}&#39;&gt;{{ $button_title }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>  {{ end }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>The condition <code>{{ range where $sections &quot;.Params.header_menu&quot; &quot;eq&quot; true }}</code> evaluates to <code>true</code> when the current page in the <code>range</code>-loop
+has a <code>header_menu</code> front matter set to <code>true</code>.
+For this same page, the nested condition <code>{{ if isset .Params &quot;external&quot; }}</code> evaluates to <code>true</code> when the page
+has an <code>external</code> front matter.
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/external.md"><code>content/en/homepage/external.md</code></a>
+has both of these front matter fields set accordingly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">title</span>: <span style="color:#2aa198">&#34;GitHub&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">weight</span>: <span style="color:#2aa198">99</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">header_menu</span>: <span style="color:#cb4b16">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">external</span>: https://github.com/zjedi/hugo-scroll
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><p>The resulting header menu button is</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">a</span>
+</span></span><span style="display:flex;"><span>  class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;btn site-menu&#34;</span>
+</span></span><span style="display:flex;"><span>  href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://github.com/zjedi/hugo-scroll&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  GitHub<span style="color:#cb4b16">&amp;nbsp;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">i</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;fa fa-external-link&#34;</span>&gt;&lt;/<span style="color:#268bd2">i</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span></code></pre></div><p>It&rsquo;s the one on the far right:</p>
+<img src="/images/blogs/hugo_page_bundles/Hugo_Scroll_demo_header_menu.png" alt="Hugo_Scroll_demo_header_menu.png" style="width:95%;"><p>Just copy this markdown script and adapt the <code>title</code>, <code>weight</code> and <code>external</code> front matter values to your needs to
+create a new header menu link in your Hugo Scroll mainsite.
+Repeat as needed.</p>
+<h3 id="detailed_page_homepage_content-false"><code>detailed_page_homepage_content: false</code></h3>
+<p>The <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/license.md?plain=1"><code>en/homepage/license.md</code></a> is</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">footer_menu_title</span>: License
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">footer_menu</span>: <span style="color:#cb4b16">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">detailed_page_path</span>: /license/
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">detailed_page_homepage_content</span>: <span style="color:#cb4b16">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">weight</span>: <span style="color:#2aa198">91</span>
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><p>The <code>detailed_page_homepage_content</code> is set to <code>false</code> to
+<strong>exclude</strong> the <code>content/en/homepage/license.md</code> page from the homepage <strong>content</strong>.
+I.e. the layout described in the <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a> unit skips the rendering of the section <code>license.md</code>.
+Since its <code>{{ .Content }}</code> will not be rendered, it has no <em>content</em>; it just contains the front matter lines.</p>
+<p>The <code>detailed_page_path</code> front matter in <code>content/en/homepage/license.md</code> is set to <code>/license/</code>,
+i.e. to <code>/content/en/license.md</code> (this file no longer resides in the <code>homepage</code> folder).
+Therefore, the footer menu link points to this later page (and not to a external link as happened with the Github header menu link).</p>
+<p>In summary, the cited layout skips this page content but it does render the footer menu link in the homepage.</p>
+<p>Edit it to render a <strong>header menu</strong> button instead, and point to a <code>index.md</code> of a <em>branch bundle</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">header_menu_title</span>: <span style="color:#2aa198">&#34;Dedicated Section&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">header_menu</span>: <span style="color:#cb4b16">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">detailed_page_path</span>: /leaf_bundle_to_branch_bundle/
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">detailed_page_homepage_content</span>: <span style="color:#cb4b16">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">weight</span>: <span style="color:#2aa198">91</span>
+</span></span><span style="display:flex;"><span>---
+</span></span></code></pre></div><p>The scenario is analogous. The layout skips previous page content (no section for it), but it does create the header menu link in the homepage.</p>
+<h4 id="hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">Hugo Template Inheritance: How baseof.html integrates footer.html content</h4>
+<p>The footer menu link rendering code is easy to understand as it&rsquo;s nearly identical to the header menu button explained in previous
+<a href="/blogs/hugo_page_bundles/#hard-code">paragraph</a>.</p>
+<p>Just focus on next lines of <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/partials/footer.html"><code>layouts/partials/footer.html</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $headless <span style="color:#719e07">:=</span> .Site.GetPage <span style="color:#2aa198">&#34;/homepage&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $sections <span style="color:#719e07">:=</span> $headless.Resources.ByType <span style="color:#2aa198">&#34;page&#34;</span> }}
+</span></span><span style="display:flex;"><span>[<span style="color:#719e07">...</span>]
+</span></span><span style="display:flex;"><span> {{ <span style="color:#719e07">range</span> where $sections <span style="color:#2aa198">&#34;.Params.footer_menu&#34;</span> <span style="color:#2aa198">&#34;eq&#34;</span> <span style="color:#cb4b16">true</span> }}
+</span></span><span style="display:flex;"><span>        &lt;li&gt;
+</span></span><span style="display:flex;"><span>          &lt;a href=<span style="color:#2aa198">&#34;{{ relLangURL .Params.detailed_page_path }}&#34;</span>&gt;{{ .Params.footer_menu_title }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#719e07">/</span>li&gt;
+</span></span><span style="display:flex;"><span>      {{ end }}
+</span></span><span style="display:flex;"><span>[<span style="color:#719e07">...</span>]
+</span></span></code></pre></div><p>Finally, the <code>{{- partial &quot;footer.html&quot; . -}}</code> call in
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/baseof.html"><code>layouts/_default/baseof.html</code></a>
+(shown <a href="/blogs/hugo_page_bundles/#hugo-template-inheritance-how-baseofhtml-integrates-indexhtml-main-block">here</a>)
+executes this code and injects the resulting footer menu into the page.</p>
+<h2 id="the-hugo-list-all-command">The <code>hugo list all</code> command</h2>
+<p><a href="https://gohugo.io/commands/hugo_list_all/"><code>hugo list all</code></a> displays, in CSV format, values related to Hugo&rsquo;s internal <a href="https://gohugo.io/methods/page/"><code>Page</code></a> object:</p>
+<ul>
+<li><a href="https://gohugo.io/methods/page/path"><code>PAGE.Path</code></a>.
+Do not confuse with the URL <a href="https://gohugo.io/content-management/organization/#paths-explained">path</a>,</li>
+<li><a href="https://gohugo.io/methods/page/slug"><code>PAGE.Slug</code></a></li>
+<li><a href="https://gohugo.io/methods/page/title"><code>PAGE.Title</code></a></li>
+<li>Etc.</li>
+</ul>
+<p>The values for some of these attributes (like <code>title</code>, <code>slug</code>, <code>date</code>) can be populated or overridden by front matter,
+while others (like <code>path</code>, <code>kind</code>, and <code>section</code>) are derived from the page&rsquo;s structure and location.</p>
+<p>The following section explains the command&rsquo;s source code.
+Feel free to skip this deep dive if you are only interested in using the command.</p>
+<h6 id="the-all-subcommand-implementation">The <code>all</code> subcommand implementation</h6>
+<p>The core function that runs, defined in <a href="https://github.com/gohugoio/hugo/blob/70d62993eef4124873d339ded8fe612cc69f0238/commands/list.go#L151"><code>hugo/commands/list.go</code></a>, is next.
+This aims to pass which pages must be later inspected, i.e. <code>all</code> content pages.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>run: <span style="color:#268bd2">func</span>(ctx context.Context, cd <span style="color:#719e07">*</span>simplecobra.Commandeer, r <span style="color:#719e07">*</span>rootCommand, args []<span style="color:#dc322f">string</span>) <span style="color:#dc322f">error</span> {
+</span></span><span style="display:flex;"><span>    shouldInclude <span style="color:#719e07">:=</span> <span style="color:#268bd2">func</span>(p page.Page) <span style="color:#dc322f">bool</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">return</span> p.<span style="color:#268bd2">File</span>() <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">return</span> <span style="color:#268bd2">list</span>(cd, r, shouldInclude, <span style="color:#2aa198">&#34;buildDrafts&#34;</span>, <span style="color:#cb4b16">true</span>, <span style="color:#2aa198">&#34;buildFuture&#34;</span>, <span style="color:#cb4b16">true</span>, <span style="color:#2aa198">&#34;buildExpired&#34;</span>, <span style="color:#cb4b16">true</span>)
+</span></span><span style="display:flex;"><span>},
+</span></span></code></pre></div><ol>
+<li>The <code>shouldInclude</code> is a filter function. It defines which pages should be included in the list.</li>
+</ol>
+<ul>
+<li><code>func(p page.Page) bool</code>: It takes a Hugo Page object as input and returns <code>true</code> if it should be included.</li>
+<li><code>return p.File() != nil</code>: This is the condition. It includes a page <strong>only if it has an associated source file</strong> (i.e., <code>p.File()</code> is not <code>nil</code>).
+This is a crucial filter because it excludes auto-generated pages
+like Hugo&rsquo;s taxonomy list pages (e.g., &ldquo;Categories&rdquo; or &ldquo;Tags&rdquo; pages)
+which don&rsquo;t have a direct <code>index.md</code> or <code>_index.md</code> file.
+This explains why <code>hugo list all</code> only shows your regular pages and section index files.</li>
+</ul>
+<ol start="2">
+<li>The <code>run</code> function then calls the generic <code>list(...)</code> where,</li>
+</ol>
+<ul>
+<li><code>shouldInclude</code> is the filter function defined above.</li>
+<li><code>&quot;buildDrafts&quot;, true</code> instructs the command to include draft pages.</li>
+<li><code>&quot;buildFuture&quot;, true</code> instructs the command to include pages with a future publication date.</li>
+<li><code>&quot;buildExpired&quot;, true</code> instructs the command to include pages that have expired.</li>
+</ul>
+<h6 id="collect-the-page-data">Collect the <code>PAGE</code> data</h6>
+<p>Once the pages are filtered, the <code>createRecord</code> function defines what data is collected for each page and how it&rsquo;s formatted for the CSV output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#268bd2">func</span> <span style="color:#268bd2">newListCommand</span>() <span style="color:#719e07">*</span>listCommand {
+</span></span><span style="display:flex;"><span>	createRecord <span style="color:#719e07">:=</span> <span style="color:#268bd2">func</span>(workingDir <span style="color:#dc322f">string</span>, p page.Page) []<span style="color:#dc322f">string</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#719e07">return</span> []<span style="color:#dc322f">string</span>{
+</span></span><span style="display:flex;"><span>			filepath.<span style="color:#268bd2">ToSlash</span>(strings.<span style="color:#268bd2">TrimPrefix</span>(p.<span style="color:#268bd2">File</span>().<span style="color:#268bd2">Filename</span>(), workingDir<span style="color:#719e07">+</span><span style="color:#b58900">string</span>(os.PathSeparator))),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Slug</span>(),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Title</span>(),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Date</span>().<span style="color:#268bd2">Format</span>(time.RFC3339),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">ExpiryDate</span>().<span style="color:#268bd2">Format</span>(time.RFC3339),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">PublishDate</span>().<span style="color:#268bd2">Format</span>(time.RFC3339),
+</span></span><span style="display:flex;"><span>			strconv.<span style="color:#268bd2">FormatBool</span>(p.<span style="color:#268bd2">Draft</span>()),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Permalink</span>(),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Kind</span>(),
+</span></span><span style="display:flex;"><span>			p.<span style="color:#268bd2">Section</span>(),
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div>
+
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>

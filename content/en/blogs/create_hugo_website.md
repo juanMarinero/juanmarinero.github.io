@@ -352,7 +352,8 @@ And check that `hugo server` still works.
 
 ### Order of markdowns
 
-The website sections are sorted by the `weight` metadata.
+The website sections are sorted by the `weigtht` metadata.
+Details in my post concerning [Hugo bundle pages](/blogs/hugo_page_bundles/#how-the-layout-template-operates).
 
 - E.g. next has weight 99 to appear last [exampleSite/content/en/homepage/credits.md](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/credits.md?plain=1#L3)
 - Next weight 3 to appear the 3rd at top [exampleSite/content/en/homepage/about-me.md](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/about-me.md?plain=1#L3)

@@ -30,8 +30,16 @@
   </url><url>
     <loc>http://localhost:1313/blogs/hugo_shortcodes/</loc>
   </url><url>
+    <loc>http://localhost:1313/leaf_bundle_to_layout/</loc>
+  </url><url>
+    <loc>http://localhost:1313/leaf_bundle_wrong/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blogs/hugo_page_bundles/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs_index/</loc>
   </url><url>
     <loc>http://localhost:1313/license/</loc>
+  </url><url>
+    <loc>http://localhost:1313/leaf_bundle_to_branch_bundle/post_1/</loc>
   </url>
 </urlset>
