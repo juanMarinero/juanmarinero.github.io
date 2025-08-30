@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="4608">
+  <meta itemprop="wordCount" content="4615">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -627,6 +627,11 @@ the final HTML renderer (<em>base template</em> using a Hugo-sh terminology).</p
 </span></span></code></pre></div><p>Note the <code>{{- block &quot;main&quot; . }}{{- end }}</code> line, there it&rsquo;s inserted the <code>main</code> block.
 This is defined in <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>,
 since its first line <code>{{ define &quot;main&quot; }}</code> is closed by a <code>{{- end }}</code> line at EOF.</p>
+<p>Next video tutorial explains this more visually.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Vj5zy2q7O9U?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=771" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
 <p>The footer integration is later explained in this <a href="/blogs/hugo_page_bundles/#hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">section</a>.</p>
 <p>If you need to consolidate the Hugo&rsquo;s content knowledges we have introduced, just follow this 5 minutes tutorial building
 <a href="https://til.simonwillison.net/hugo/basic">The <strong>most basic</strong> possible <strong>Hugo site</strong></a>.

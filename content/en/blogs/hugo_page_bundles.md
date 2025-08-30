@@ -433,6 +433,11 @@ Note the `{{- block "main" . }}{{- end }}` line, there it's inserted the `main` 
 This is defined in [`layouts/_default/index.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html),
 since its first line `{{ define "main" }}` is closed by a `{{- end }}` line at EOF.
 
+Next video tutorial explains this more visually.
+
+{{< youtube id=Vj5zy2q7O9U start=771 loading="lazy" >}}
+
+
 The footer integration is later explained in this [section](#hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content).
 
 If you need to consolidate the Hugo's content knowledges we have introduced, just follow this 5 minutes tutorial building
