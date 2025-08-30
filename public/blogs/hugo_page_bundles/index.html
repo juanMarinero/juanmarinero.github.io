@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="4615">
+  <meta itemprop="wordCount" content="4964">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -492,18 +492,12 @@ once rendered with previous layout, produces next <a href="https://zjedi.github.
 </li>
 <li>
 <p>Or, like <code>content/posts/my-post</code> below, it can contain one or more page resources.
-This leaf bundle contains an index file, two resources of <a href="https://gohugo.io/quick-reference/glossary/#resource-type">resource type</a> <code>page</code>
-(mardown files),
-and two resources of resource type <code>image</code>.</p>
+This leaf bundle contains:</p>
 <ul>
-<li>
-<p>content-1, content-2</p>
-<p>These are resources of resource type <code>page</code>, accessible via the [<code>Resources</code>] method on the <code>Page</code> object. Hugo will not render these as individual pages.</p>
-</li>
-<li>
-<p>image-1, image-2</p>
-<p>These are resources of resource type <code>image</code>, accessible via the <code>Resources</code> method on the <code>Page</code> object</p>
-</li>
+<li>An index file, two resources of  <code>page</code></li>
+<li>content-1, content-2.
+These are resources of <a href="https://gohugo.io/quick-reference/glossary/#resource-type">resource type</a> <code>page</code>, accessible via the [<code>Resources</code>] method on the <code>Page</code> object. Hugo will not render these as individual pages.</li>
+<li>image-1 and image-2 are resources of resource type <code>image</code>, accessible via the <code>Resources</code> method on the <code>Page</code> object</li>
 </ul>
 </li>
 </ul>
@@ -531,9 +525,13 @@ The resulting HTML files are under the <code>public</code> directory:</p>
 <p><a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/index.md?plain=1"><code>content/en/homepage/index.md</code></a>
 creates the <em>leaf bundle</em> <a href="https://github.com/zjedi/hugo-scroll/tree/master/exampleSite/content/en/homepage"><code>content/en/homepage/</code></a>.</p>
 <h5 id="the-headless-bundle-creation">The headless bundle creation</h5>
-<p>The key to this setup is the <code>headless: true</code> front matter in
-<a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/index.md?plain=1"><code>content/en/homepage/index.md</code></a>.
-This makes it a <strong>headless bundle</strong>. A <a href="https://gohugo.io/content-management/page-bundles/#headless-bundles">headless bundle</a> has two main effects:</p>
+<p>A <em>leaf bundle</em> can be made <em>headless</em> by adding in the <code>index.md</code>&rsquo;s front matter <code>headless = true</code>.
+<a href="https://github.com/gohugoio/hugo/issues/4311">#4311</a> proposed this feature.</p>
+<p>A <em>headless bundle</em> is called in the latest documentation a <strong>headless page</strong>.
+Check its <a href="https://gohugo.io/content-management/build-options/#example--headless-page">docs</a>
+and <a href="https://github.com/gohugoio/hugo/issues/6412#issuecomment-621170881">#6412</a>.
+A combination of other front matters will also work, like <code>headless = true</code>.</p>
+<p>A <a href="https://gohugo.io/content-management/page-bundles/#headless-bundles">headless bundle</a> has two main effects:</p>
 <ol>
 <li>The <code>index.md</code> is <strong>not rendered on its own</strong>, same applies to rest of the bundle pages.
 It will <strong>not</strong> go through the standard template <strong>lookup order</strong> to find a template (like <code>single.html</code>) to render itself into an HTML file.
@@ -577,22 +575,57 @@ is programmed to fetch the resources from this specific headless bundle.
 It uses:</p>
 <ul>
 <li><code>{{ $headless := .GetPage &quot;./homepage&quot; }}</code> to access the bundle</li>
-<li>Then <code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> to get its sections.</li>
+<li>The <a href="https://gohugo.io/methods/page/resources/#bytype"><code>ByType</code></a>
+in <code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> returns a collection of <a href="https://gohugo.io/methods/page/resources/">page resources</a>
+of the given media type
+(which content might be later fetched as sections of the unique rendered page).</li>
 <li>Finally <code>{{ $content := where (where $sections &quot;Params.external&quot; &quot;==&quot; nil) &quot;Params.detailed_page_homepage_content&quot; &quot;ne&quot; false }}</code>
 has a <code>where</code> that filters the collection based on conditions (e.g., removing drafts, excluding external links)</li>
 </ul>
 <p>The final single-page site is assembled by this layout based on:</p>
 <ul>
-<li>The <strong>order</strong> of the page resources can be set by <code>weigtht</code>, <code>date</code>, etc.
-Check the <a href="https://gohugo.io/quick-reference/glossary/#default-sort-order">default sort order</a> documentation.
-In this theme it&rsquo;s sorted by the <code>weight</code> metadata.
-Details in my post <a href="/blogs/create_hugo_website/#order-of-markdowns">How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site</a>.
-<code>{{ range $index_val, $elem_val := $content }}</code> line of
-<a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144"><code>index.html</code></a>
-is the key,
-when Hugo encounters a <code>range</code> loop over a page collection (like <code>$content</code>), it automatically applies the <strong>default sort order</strong> to that collection before iterating.</li>
 <li>The <strong>content</strong> of each resource file.</li>
+<li>The <strong>order</strong> of the page resource in the collection <code>$content</code>.
+<code>{{ range $index_val, $elem_val := $content }}</code> line of
+<a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144"><code>index.html</code></a>.</li>
 </ul>
+<p>Note the <code>$content</code> collection page have a <strong>default order</strong>:</p>
+<ol>
+<li>The <a href="https://gohugo.io/quick-reference/glossary/#default-sort-order">default sort order</a>
+for page collections, used when no other criteria are set, follows this priority: weight, date, [&hellip;]</li>
+<li>Where, a <a href="https://gohugo.io/quick-reference/glossary/#page-collection">page collections</a>
+is a slice of Page objects.</li>
+<li>Since
+<code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> returns a collection of <a href="https://gohugo.io/methods/page/resources/">page resources</a>
+that later is filtered into <code>$content</code>.</li>
+<li>And a <a href="https://gohugo.io/quick-reference/glossary/#page-resource">page resource</a>
+is a file within a page bundle.</li>
+<li>Then, <code>$sections</code>, and consequently <code>$content</code>, is a slice of Pages objects, precisely of Pages of objects of subtype &ldquo;page resources&rdquo;</li>
+<li>The documentation does not states that a &ldquo;page resource&rdquo; cannot be part of a Page object.</li>
+</ol>
+<p>The observation ratifies the pre-sorting, since:</p>
+<ul>
+<li><code>index.html</code> has no <code>.ByWeight()</code> to sort by a different criteria than the default sorting.
+Read the <a href="https://gohugo.io/quick-reference/page-collections/#sort">Hugo’s page collections explicit sorting</a>.</li>
+<li>And at the same time we observe services, contact,&hellip; appear sorted, by their <code>weight</code> front matter,
+into their respective sections of the Hugo Scroll <a href="https://zjedi.github.io/hugo-scroll/">demo mainsite</a>.</li>
+</ul>
+<p>An important note. If the returned list of resource were not pages but for example images,
+like <code>{{ $sections := $headless.Resources.ByType &quot;</code><strong><code>image</code></strong><code>&quot; }}</code> then this slice would not be pre-sorted.</p>
+<p>If <code>$section</code> was not default sorted, then the <code>range</code> loop would not sort it.
+Hugo&rsquo;s <code>render</code> only pre-sorts maps, <a href="https://gohugo.io/functions/go-template/range/#maps">link</a></p>
+
+
+
+  <blockquote>
+    <p>Unlike ranging over an array or slice, Hugo <strong>sorts by key</strong> when <strong>rang</strong>ing over <strong>a map</strong>.</p>
+  </blockquote>
+
+<p>Thus, the Go&rsquo;s <a href="https://go.dev/wiki/Range"><code>range</code></a>-loop mechanism is enhanced in Hugo&rsquo;s <code>range</code> to first sort maps by key.
+Since <code>$content</code> is a <a href="https://gohugo.io/methods/page/resources/">page resources</a> <strong>array</strong>,
+and not a <a href="https://gohugo.io/quick-reference/glossary/#map"><strong>map</strong></a>,
+then <code>render</code> will not pre-sort it.
+<code>{{ range $index_val, $elem_val := $content }}</code> would be equivalent in Python to an <code>enumerate</code>-loop: <code>for index_val, elem_val in enumerate(content): pass</code>.</p>
 <p>A deeper analysis of code lines of layouts templates is to come in next sections.</p>
 
 
@@ -636,6 +669,10 @@ since its first line <code>{{ define &quot;main&quot; }}</code> is closed by a <
 <p>If you need to consolidate the Hugo&rsquo;s content knowledges we have introduced, just follow this 5 minutes tutorial building
 <a href="https://til.simonwillison.net/hugo/basic">The <strong>most basic</strong> possible <strong>Hugo site</strong></a>.
 It&rsquo;s based on this <a href="https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28">Gist</a>.</p>
+<p>Finally, if you mastered everything till now, then try to understand further
+<a href="https://gohugo.io/content-management/build-options/#example--headless-page">headless page</a> examples,
+not just the Hugo Scroll mainsite,
+like this <a href="https://discourse.gohugo.io/t/how-to-iterate-over-headless-pages/12536/24">gallery items</a>.</p>
 <h3 id="an-undesired-leaf-bundle-example">An undesired leaf bundle example</h3>
 <p><code>content/en/leaf_bundle_wrong</code> file tree is:</p>
 <pre tabindex="0"><code>leaf_bundle_wrong/
@@ -764,12 +801,12 @@ Pay particular attention to the highlighted lines.</li>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48</span><span>{{ <span style="color:#a6e22e">end</span> }}
 </span></span></code></pre></div><ol start="4">
 <li>Build with <code>hugo server --disableFastRender</code> and check the result in <a href="/leaf_bundle_to_layout/"><code>content/en/leaf_bundle_to_layout/</code></a>.
-Observe how the sibling <code>post_1.md</code> is rendered just after the <code>index.md</code> content.</li>
+Observe how the sibling&rsquo;s <code>post_1.md</code> title and content is rendered as a section after the <code>index.md</code> content.</li>
 </ol>
 <p>These steps are a quick example of how to <strong>target a specific template</strong> by leveraging Hugo&rsquo;s
-applying <a href="https://gohugo.io/templates/lookup-order/">template lookup rules</a>.
+<a href="https://gohugo.io/templates/lookup-order/">template lookup rules</a>.
 Read the docs for deeper understanding and customizations.</p>
-<p>As challenge find out how to make the layout render all <code>page</code> resources inside the bundle, not just <code>index.md</code> and <code>post_1.md</code>,
+<p>Challenge: edit the layout code to make it render all <code>page</code> resources inside the bundle, not just <code>index.md</code> and <code>post_1.md</code>,
 but also <code>post_2.md</code>, <code>post_3.md</code>, <code>post_4.md</code>, etc.</p>
 <h4 id="type-front-matter-on-indexmd"><code>type</code> front matter on <code>index.md</code></h4>
 <p>The first step we did was</p>
@@ -795,7 +832,7 @@ The type front matter simply provides explicit control over this value.</p>
 <li>
 <p>It <strong>changes the <a href="https://gohugo.io/templates/lookup-order/#target-a-template">template lookup</a> for the bundle</strong>, which is the powerful feature we successfully leveraged.
 It forces Hugo to look for rendering templates in <code>layouts/leaf_bundle_to_layout/</code> instead of the default location (<code>layouts/_default/</code>).
-In the <a href="/blogs/hugo_page_bundles/#the-type-front-matter-bypassing"><code>type</code> front matter bypassing</a> section we insisted on this already.
+In the <a href="/blogs/hugo_page_bundles/#the-type-front-matter-bypassing"><code>type</code> front matter bypassing</a> section we cited this legitime technique already.
 The <a href="https://gohugo.io/methods/page/type/">PAGE.Type documentation</a> briefly points this out too:</p>
 </li>
 </ol>
@@ -815,9 +852,9 @@ of the files inside the bundle (like <code>post_1.md</code>).</li>
 <ul>
 <li>The first block outputs <code>page</code> as the resource type of <code>index.md</code>.</li>
 <li>The second displays the same for the <code>post_1.md</code> resource type.</li>
+<li>The <code>Page.Type</code> displayed for the bundle&rsquo;s index page is <code>leaf_bundle_to_layout</code>.
+The resource <code>post_1.md</code> is also associated with this type within the context of the bundle.</li>
 </ul>
-<p>On the other hand, the <code>Page.Type</code> is <code>leaf_bundle_to_layout</code> for the bundle&rsquo;s index page,
-and the resource <code>post_1.md</code> is also associated with this type within the context of the bundle.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>{{/* Check if `type` front matter changed the resource type */}}
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>{{ with .ResourceType }}
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Resource type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- page --&gt;</span>
@@ -856,9 +893,9 @@ The <code>Page</code> object for the bundle has its <code>Type</code> set to <co
 which dictates the template used to render the entire bundle.
 Hugo will not render <code>post_1.md</code> as an individual page because it is located inside a leaf bundle folder.</p>
 <h2 id="hugo-scroll-header-menus-to-any-page">Hugo Scroll: header menus to any page</h2>
-<p>We will explore two techniques for adding items to the header menu in the Hugo Scroll theme.
+<p>We add items to the header menu in the Hugo Scroll theme.
 In the process, we will also learn how the footer menu links are edited.</p>
-<h3 id="hard-code">Hard code</h3>
+<h3 id="external-links">External links</h3>
 <p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a> code starts
 creating the <code>$sections</code> collection with all the <code>page</code> resources from the <code>homepage</code> bundle.
 This was explained in the headless bundle section
@@ -872,11 +909,11 @@ This was explained in the headless bundle section
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $sections <span style="color:#719e07">:=</span> cond .Site.BuildDrafts $<span style="color:#268bd2">sections</span> (where $sections <span style="color:#2aa198">&#34;Draft&#34;</span> <span style="color:#2aa198">&#34;==&#34;</span> <span style="color:#cb4b16">false</span>) }}
 </span></span></code></pre></div><p>And eventually the interesting block that loops the <code>$sections</code> pages:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">range</span> where $sections <span style="color:#2aa198">&#34;.Params.header_menu&#34;</span> <span style="color:#2aa198">&#34;eq&#34;</span> <span style="color:#cb4b16">true</span> }}
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex; background-color:#19404a"><span>{{ <span style="color:#719e07">range</span> where $sections <span style="color:#2aa198">&#34;.Params.header_menu&#34;</span> <span style="color:#2aa198">&#34;eq&#34;</span> <span style="color:#cb4b16">true</span> }}
 </span></span><span style="display:flex;"><span>  {{ $button_title <span style="color:#719e07">:=</span> .Title }}
 </span></span><span style="display:flex;"><span>  {{ with .Params.header_menu_title }}{{ $button_title = . }}{{ end }}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;external&#34;</span> }}
+</span></span><span style="display:flex; background-color:#19404a"><span>  {{ <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;external&#34;</span> }}
 </span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; href=&#39;{{ .Params.external | absURL }}&#39;&gt;{{ $button_title }}<span style="color:#719e07">&amp;</span>nbsp;&lt;i class=<span style="color:#2aa198">&#34;fa fa-external-link&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>i&gt;&lt;<span style="color:#719e07">/</span>a&gt;
 </span></span><span style="display:flex;"><span>  {{ <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;detailed_page_path&#34;</span> }}
 </span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; href=&#39;{{ .Params.detailed_page_path | relLangURL }}&#39;&gt;{{ $button_title }}&lt;<span style="color:#719e07">/</span>a&gt;
@@ -933,10 +970,13 @@ Therefore, the footer menu link points to this later page (and not to a external
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">detailed_page_homepage_content</span>: <span style="color:#cb4b16">false</span>
 </span></span><span style="display:flex;"><span><span style="color:#268bd2">weight</span>: <span style="color:#2aa198">91</span>
 </span></span><span style="display:flex;"><span>---
-</span></span></code></pre></div><p>The scenario is analogous. The layout skips previous page content (no section for it), but it does create the header menu link in the homepage.</p>
-<h4 id="hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">Hugo Template Inheritance: How baseof.html integrates footer.html content</h4>
+</span></span></code></pre></div><p>The scenario is analogous. The layout skips previous page content (no section in the homepage for its content), but it does create the header menu link in the homepage.</p>
+<p>Here the <code>detailed_path</code> front matter exists in a resource page. I.e. focus on next code lines of the <code>index.html</code> layout:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> isset .Params <span style="color:#2aa198">&#34;detailed_page_path&#34;</span> }}
+</span></span><span style="display:flex;"><span>     &lt;a class=&#39;btn site<span style="color:#719e07">-</span>menu&#39; href=&#39;{{ .Params.detailed_page_path | relLangURL }}&#39;&gt;{{ $button_title }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span></code></pre></div><h4 id="hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">Hugo Template Inheritance: How baseof.html integrates footer.html content</h4>
 <p>The footer menu link rendering code is easy to understand as it&rsquo;s nearly identical to the header menu button explained in previous
-<a href="/blogs/hugo_page_bundles/#hard-code">paragraph</a>.</p>
+<a href="/blogs/hugo_page_bundles/#external-links">paragraph</a>.</p>
 <p>Just focus on next lines of <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/partials/footer.html"><code>layouts/partials/footer.html</code></a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $headless <span style="color:#719e07">:=</span> .Site.GetPage <span style="color:#2aa198">&#34;/homepage&#34;</span> }}
 </span></span><span style="display:flex;"><span>{{ $sections <span style="color:#719e07">:=</span> $headless.Resources.ByType <span style="color:#2aa198">&#34;page&#34;</span> }}
@@ -1012,7 +1052,12 @@ This explains why <code>hugo list all</code> only shows your regular pages and s
 </span></span><span style="display:flex;"><span>	}
 </span></span></code></pre></div><h2 id="further-recommended-content">Further recommended content</h2>
 <ul>
+<li><a href="https://hugo-in-action.foofun.cn/docs/part1/chapter4/3/">Better together with page bundles</a>
+from the ebook <a href="https://hugo-in-action.foofun.cn/">Hugo in Action</a>
+by <a href="https://atishay.me/">Atishay Jain</a></li>
 <li><a href="https://www.ii.com/hugo-bundles/">Introduction to Hugo Bundles</a> by <a href="https://www.ii.com/">Infinite Ink</a></li>
+<li><a href="https://scripter.co/hugo-leaf-and-branch-bundles/">Hugo: Leaf and Branch Bundles</a>
+by <a href="https://github.com/kaushalmodi/">Kaushal Modi</a>.</li>
 <li><a href="https://www.youtube.com/watch?v=qtIqKaDlqXo&amp;list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3&amp;index=1">Hugo&rsquo;s video tutorials</a> by Giraffe Academy</li>
 <li><a href="https://www.youtube.com/watch?v=l7PHRA8t4Bw&amp;list=PLE92IfveVXuXTOjdPM_nleN6Cga_d3uJ-&amp;index=1">Hugo&rsquo;s video tutorials</a> by Future Web Design</li>
 </ul>

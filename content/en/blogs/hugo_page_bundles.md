@@ -275,17 +275,12 @@ The [references](https://gohugo.io/content-management/page-bundles/#leaf-bundles
 In summary,
 - A leaf bundle can contain no page resources, like `content/about` below. `content/about/index.md` is a standalone page.
 - Or, like `content/posts/my-post` below, it can contain one or more page resources.
-This leaf bundle contains an index file, two resources of [resource type](https://gohugo.io/quick-reference/glossary/#resource-type) `page`
-(mardown files),
-and two resources of resource type `image`.
+This leaf bundle contains:
 
-  - content-1, content-2
-
-    These are resources of resource type `page`, accessible via the [`Resources`] method on the `Page` object. Hugo will not render these as individual pages.
-
-  - image-1, image-2
-
-    These are resources of resource type `image`, accessible via the `Resources` method on the `Page` object
+  - An index file, two resources of  `page`
+  - content-1, content-2.
+    These are resources of [resource type](https://gohugo.io/quick-reference/glossary/#resource-type) `page`, accessible via the [`Resources`] method on the `Page` object. Hugo will not render these as individual pages.
+  - image-1 and image-2 are resources of resource type `image`, accessible via the `Resources` method on the `Page` object
 
 
 ```
@@ -325,14 +320,21 @@ creates the *leaf bundle* [`content/en/homepage/`](https://github.com/zjedi/hugo
 
 ##### The headless bundle creation
 
-The key to this setup is the `headless: true` front matter in
-[`content/en/homepage/index.md`](https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/index.md?plain=1).
-This makes it a **headless bundle**. A [headless bundle](https://gohugo.io/content-management/page-bundles/#headless-bundles) has two main effects:
+A *leaf bundle* can be made *headless* by adding in the `index.md`'s front matter `headless = true`.
+[#4311](https://github.com/gohugoio/hugo/issues/4311) proposed this feature.
+
+A *headless bundle* is called in the latest documentation a **headless page**.
+Check its [docs](https://gohugo.io/content-management/build-options/#example--headless-page)
+and [#6412](https://github.com/gohugoio/hugo/issues/6412#issuecomment-621170881).
+A combination of other front matters will also work, like `headless = true`.
+
+A [headless bundle](https://gohugo.io/content-management/page-bundles/#headless-bundles) has two main effects:
 1. The `index.md` is **not rendered on its own**, same applies to rest of the bundle pages.
 It will **not** go through the standard template **lookup order** to find a template (like `single.html`) to render itself into an HTML file.
 This is the "headless" part.
 2. Its page resources (here `opener.md`, `about-me.md`, etc.) are of course as in any leaf bundle **not** published individually.
 Their sole purpose is to exist as `Page` objects in Hugo's internal memory, to be available to be fetched by a layout template via `.GetPage` or `.Resources`.
+
 
 ##### Lookup order, the template hierarchy
 
@@ -386,20 +388,53 @@ The theme's **homepage layout**
 is programmed to fetch the resources from this specific headless bundle.
 It uses:
 - `{{ $headless := .GetPage "./homepage" }}` to access the bundle
-- Then `{{ $sections := $headless.Resources.ByType "page" }}` to get its sections.
+- The [`ByType`](https://gohugo.io/methods/page/resources/#bytype)
+in `{{ $sections := $headless.Resources.ByType "page" }}` returns a collection of [page resources](https://gohugo.io/methods/page/resources/)
+of the given media type
+(which content might be later fetched as sections of the unique rendered page).
 - Finally `{{ $content := where (where $sections "Params.external" "==" nil) "Params.detailed_page_homepage_content" "ne" false }}`
 has a `where` that filters the collection based on conditions (e.g., removing drafts, excluding external links)
 
 The final single-page site is assembled by this layout based on:
-- The **order** of the page resources can be set by `weigtht`, `date`, etc.
-Check the [default sort order](https://gohugo.io/quick-reference/glossary/#default-sort-order) documentation.
-In this theme it's sorted by the `weight` metadata.
-Details in my post [How to **create** a **Hugo-scroll web**site](/blogs/create_hugo_website/#order-of-markdowns).
-`{{ range $index_val, $elem_val := $content }}` line of
-[`index.html`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144)
-is the key,
-when Hugo encounters a `range` loop over a page collection (like `$content`), it automatically applies the **default sort order** to that collection before iterating.
 - The **content** of each resource file.
+- The **order** of the page resource in the collection `$content`.
+`{{ range $index_val, $elem_val := $content }}` line of
+[`index.html`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144).
+
+
+Note the `$content` collection page have a **default order**:
+1. The [default sort order](https://gohugo.io/quick-reference/glossary/#default-sort-order)
+for page collections, used when no other criteria are set, follows this priority: weight, date, [...]
+2. Where, a [page collections](https://gohugo.io/quick-reference/glossary/#page-collection)
+is a slice of Page objects.
+3. Since 
+`{{ $sections := $headless.Resources.ByType "page" }}` returns a collection of [page resources](https://gohugo.io/methods/page/resources/)
+that later is filtered into `$content`.
+4. And a [page resource](https://gohugo.io/quick-reference/glossary/#page-resource)
+is a file within a page bundle.
+5. Then, `$sections`, and consequently `$content`, is a slice of Pages objects, precisely of Pages of objects of subtype "page resources"
+6. The documentation does not states that a "page resource" cannot be part of a Page object.
+
+The observation ratifies the pre-sorting, since:
+- `index.html` has no `.ByWeight()` to sort by a different criteria than the default sorting.
+Read the [Hugo’s page collections explicit sorting](https://gohugo.io/quick-reference/page-collections/#sort).
+- And at the same time we observe services, contact,... appear sorted, by their `weight` front matter,
+into their respective sections of the Hugo Scroll [demo mainsite](https://zjedi.github.io/hugo-scroll/).
+
+An important note. If the returned list of resource were not pages but for example images,
+like `{{ $sections := $headless.Resources.ByType "`**`image`**`" }}` then this slice would not be pre-sorted.
+
+If `$section` was not default sorted, then the `range` loop would not sort it.
+Hugo's `render` only pre-sorts maps, [link](https://gohugo.io/functions/go-template/range/#maps) 
+> Unlike ranging over an array or slice, Hugo **sorts by key** when **rang**ing over **a map**.
+
+Thus, the Go's [`range`](https://go.dev/wiki/Range)-loop mechanism is enhanced in Hugo's `range` to first sort maps by key.
+Since `$content` is a [page resources](https://gohugo.io/methods/page/resources/) **array**,
+and not a [**map**](https://gohugo.io/quick-reference/glossary/#map),
+then `render` will not pre-sort it.
+`{{ range $index_val, $elem_val := $content }}` would be equivalent in Python to an `enumerate`-loop: `for index_val, elem_val in enumerate(content): pass`.
+
+
 
 A deeper analysis of code lines of layouts templates is to come in next sections.
 
@@ -443,6 +478,11 @@ The footer integration is later explained in this [section](#hugo-template-inher
 If you need to consolidate the Hugo's content knowledges we have introduced, just follow this 5 minutes tutorial building
 [The **most basic** possible **Hugo site**](https://til.simonwillison.net/hugo/basic).
 It's based on this [Gist](https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28).
+
+Finally, if you mastered everything till now, then try to understand further
+[headless page](https://gohugo.io/content-management/build-options/#example--headless-page) examples,
+not just the Hugo Scroll mainsite,
+like this [gallery items](https://discourse.gohugo.io/t/how-to-iterate-over-headless-pages/12536/24).
 
 
 ### An undesired leaf bundle example
@@ -586,13 +626,13 @@ Pay particular attention to the highlighted lines.
 ```
 
 4. Build with `hugo server --disableFastRender` and check the result in [`content/en/leaf_bundle_to_layout/`](/leaf_bundle_to_layout).
-Observe how the sibling `post_1.md` is rendered just after the `index.md` content.
+Observe how the sibling's `post_1.md` title and content is rendered as a section after the `index.md` content.
 
 These steps are a quick example of how to **target a specific template** by leveraging Hugo's
-applying [template lookup rules](https://gohugo.io/templates/lookup-order/).
+[template lookup rules](https://gohugo.io/templates/lookup-order/).
 Read the docs for deeper understanding and customizations.
 
-As challenge find out how to make the layout render all `page` resources inside the bundle, not just `index.md` and `post_1.md`,
+Challenge: edit the layout code to make it render all `page` resources inside the bundle, not just `index.md` and `post_1.md`,
 but also `post_2.md`, `post_3.md`, `post_4.md`, etc.
 
 
@@ -621,7 +661,7 @@ The type front matter simply provides explicit control over this value.
 
 2.  It **changes the [template lookup](https://gohugo.io/templates/lookup-order/#target-a-template) for the bundle**, which is the powerful feature we successfully leveraged.
 It forces Hugo to look for rendering templates in `layouts/leaf_bundle_to_layout/` instead of the default location (`layouts/_default/`).
-In the [`type` front matter bypassing](#the-type-front-matter-bypassing) section we insisted on this already.
+In the [`type` front matter bypassing](#the-type-front-matter-bypassing) section we cited this legitime technique already.
 The [PAGE.Type documentation](https://gohugo.io/methods/page/type/) briefly points this out too:
 > The **`type`** field in front matter is also useful for **targeting a template**. See [details](https://gohugo.io/templates/lookup-order/#target-a-template).
 
@@ -634,9 +674,8 @@ of the files inside the bundle (like `post_1.md`).
 The next chunks of the previously shown `layouts/leaf_bundle_to_layout/single.html` demonstrate it.
 - The first block outputs `page` as the resource type of `index.md`.
 - The second displays the same for the `post_1.md` resource type.
-
-On the other hand, the `Page.Type` is `leaf_bundle_to_layout` for the bundle's index page,
-and the resource `post_1.md` is also associated with this type within the context of the bundle.
+- The `Page.Type` displayed for the bundle's index page is `leaf_bundle_to_layout`.
+The resource `post_1.md` is also associated with this type within the context of the bundle.
 
 ```html {lineNos=inline style=monokai linenostart=18}
 {{/* Check if `type` front matter changed the resource type */}}
@@ -693,10 +732,10 @@ Hugo will not render `post_1.md` as an individual page because it is located ins
 
 ## Hugo Scroll: header menus to any page
 
-We will explore two techniques for adding items to the header menu in the Hugo Scroll theme.
+We add items to the header menu in the Hugo Scroll theme.
 In the process, we will also learn how the footer menu links are edited.
 
-### Hard code
+### External links
 
 [`layouts/_default/index.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html) code starts
 creating the `$sections` collection with all the `page` resources from the `homepage` bundle.
@@ -718,7 +757,7 @@ This was explained in the headless bundle section
 
 And eventually the interesting block that loops the `$sections` pages:
 
-```go
+```go {hl_lines="1 5"}
 {{ range where $sections ".Params.header_menu" "eq" true }}
   {{ $button_title := .Title }}
   {{ with .Params.header_menu_title }}{{ $button_title = . }}{{ end }}
@@ -809,13 +848,20 @@ weight: 91
 ---
 ```
 
-The scenario is analogous. The layout skips previous page content (no section for it), but it does create the header menu link in the homepage.
+The scenario is analogous. The layout skips previous page content (no section in the homepage for its content), but it does create the header menu link in the homepage.
+
+Here the `detailed_path` front matter exists in a resource page. I.e. focus on next code lines of the `index.html` layout:
+
+```go
+{{ else if isset .Params "detailed_page_path" }}
+     <a class='btn site-menu' href='{{ .Params.detailed_page_path | relLangURL }}'>{{ $button_title }}</a>
+```
 
 
 #### Hugo Template Inheritance: How baseof.html integrates footer.html content
 
 The footer menu link rendering code is easy to understand as it's nearly identical to the header menu button explained in previous
-[paragraph](#hard-code).
+[paragraph](#external-links).
 
 Just focus on next lines of [`layouts/partials/footer.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/partials/footer.html):
 
@@ -908,7 +954,12 @@ func newListCommand() *listCommand {
 
 ## Further recommended content
 
+- [Better together with page bundles](https://hugo-in-action.foofun.cn/docs/part1/chapter4/3/)
+from the ebook [Hugo in Action](https://hugo-in-action.foofun.cn/)
+by [Atishay Jain](https://atishay.me/)
 - [Introduction to Hugo Bundles](https://www.ii.com/hugo-bundles/) by [Infinite Ink](https://www.ii.com/)
+- [Hugo: Leaf and Branch Bundles](https://scripter.co/hugo-leaf-and-branch-bundles/)
+by [Kaushal Modi](https://github.com/kaushalmodi/).
 - [Hugo's video tutorials](https://www.youtube.com/watch?v=qtIqKaDlqXo&list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3&index=1) by Giraffe Academy
 - [Hugo's video tutorials](https://www.youtube.com/watch?v=l7PHRA8t4Bw&list=PLE92IfveVXuXTOjdPM_nleN6Cga_d3uJ-&index=1) by Future Web Design
 
