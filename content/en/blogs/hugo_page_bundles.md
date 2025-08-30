@@ -25,7 +25,7 @@ We cover:
 - Dirs with layouts that concatenate the markdowns contents into a single page, like:
   - The Hugo Scroll [mainsite](#hugo-scroll-mainsite) demo
   - And via a very simple [custom layout](#custom-layouts-for-a-leaf-bundle)
-- Folders were each markdown should be rendered on its own individual page:
+- Folders where each markdown should be rendered on its own individual page:
   - The Hugo Scroll [dedicated pages](#hugo-scroll-dedicated-pages)
   - A branch bundle [practical example](#practical-example)
 
@@ -48,13 +48,17 @@ For now, let's focus on the following distinctions:
 ### Practical example
 
 Steps:
-1. Edit `content/en/leaf_bundle_to_branch_bundle/index.md`
+1. Run
+```bash
+mkfile() { mkdir -p "$(dirname "$1")" && touch "$1"; }
+mkfile content/en/leaf_bundle_to_branch_bundle/index.md
+```
 
-This way the URL will be like `https://example.org/leaf_bundle_to_branch_bundle/`,
-read [Organization of Content Source](https://gohugo.io/content-management/organization/#organization-of-content-source) docs.
+Note: the URL (permalink) for an `index` page is `<baseURL>/leaf_bundle_to_branch_bundle/`, for example, `https://example.org/leaf_bundle_to_branch_bundle/`.
+Read [Organization of Content Source](https://gohugo.io/content-management/organization/#organization-of-content-source) docs.
 
 2. Create a new `post_1.md` in `content/en/leaf_bundle_to_branch_bundle/`
-3. Add a link (`<a>`) to `post_1.md` in `content/en/leaf_bundle_to_branch_bundle/index.md`
+3. In `index.md` content add a link (`<a>`) to it siblings page `post_1.md`
 4. Build the site with `hugo server --disableFastRender`
 
 If you just did previous steps, then `[post_1](/leaf_bundle_to_branch_bundle/post_1)` will link to a **404** page.
@@ -62,7 +66,6 @@ This happends because Hugo doesn't recognize the directory as a *branch bundle* 
 
 Stop (Ctrl + C) the Hugo server
 and check `hugo list all`.
-This command is explained in the [bonus section](#the-hugo-list-all-command).
 In our scenerio it outputs:
 
 ```csv
@@ -81,7 +84,8 @@ hugo list all \
   | jq .
 ``` 
 
-Filter by `path` with `[...]  | jq '.[] | select(.path | startswith("content/en/leaf_bundle_to_branch_bundle"))'` to get:
+Filter by `path` with `[...]  | jq '.[] | select(.path | startswith("content/en/leaf_bundle_to_branch_bundle"))'` to get next.
+Notice that `post_1.md` is not found.
 
 
 ```json
@@ -103,19 +107,20 @@ Filter by `path` with `[...]  | jq '.[] | select(.path | startswith("content/en/
 Create `_index.md` converting the `leaf_bundle_to_branch_bundle` directory, a *leaf bundle*, into a *branch bundle*.
 
 5. Run `touch content/en/leaf_bundle_to_branch_bundle/_index.md`
+6. Remove the rendered files `rm -rf public/leaf_bundle_to_branch_bundle/`
 6. Run `hugo server --disableFastRender`
 
 The [`post_1.md`](/leaf_bundle_to_branch_bundle/post_1) link will work.
 
 {{< rawhtml >}}
-  And
+  But now
   <a href="/leaf_bundle_to_branch_bundle/">
   <code>/content/en/leaf_bundle_to_branch_bundle/index.md</code>
   </a>
-  is still accessible.
+  is inaccessible! We explain this shortly.
 {{< /rawhtml >}}
 
-The new `hugo list all` includes `post_1.md`:
+Run the previous `hugo list all` command again (the one with `jq`).
 
 ```json
 {
@@ -132,7 +137,74 @@ The new `hugo list all` includes `post_1.md`:
 }
 ```
 
-Create more individual pages if desired, like `content/en/leaf_bundle_to_branch_bundle/post_2.md`.
+The `post_1` now does yes appear in the JSON because it's become a regular page (`kind` field is `page`) within the branch bundle.
+It's rendered to `public/leaf_bundle_to_branch_bundle/post_1/index.html`.
+
+An image is worth a thousand words, this [post](https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/) gives a quick visual explanation.
+
+![_index.md and branch bundles](https://tangenttechnologies.ca/media/1420/hugo-branch-bundle.png)
+{style="width:50%;"}
+
+The same [post](https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/) states that
+> An `index.html` file is also generated in the *posts* folder, but it's html content is generated using the `list.html` template in the theme.
+
+This statement does not apply to the Hugo Scroll theme, which is a Single-Page Application (SPA) theme.
+`_index.md` is **not rendered** in **Hugo Scroll**.
+This theme is not designed to render traditional Hugo sections or pages in the standard way,
+it's meant to:
+- Render the homepage from the homepage *headless bundle*.
+Explained later in [Hugo Scroll mainsite](#hugo-scroll-mainsite).
+Here the `_index` scripts is yes **rendered**.
+We already show this in the CSV output above for `content/en/_index.md`.
+- Render everything else using the `single.html` template.
+Read [Hugo Scroll dedicated pages](#hugo-scroll-dedicated-pages) section.
+
+Then, no surprise that Hugo Scroll
+[`layouts/_default/list.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html)
+is empty.
+
+
+And what about the `index` page?
+Well, in the first place, 
+can you have both `index.md` and `_index.md` **in the same directory?** Long story short, **no**
+([link](https://discourse.gohugo.io/t/can-you-have-both-index-md-and-index-md-in-the-same-directory/46539)).
+In a *branch bundle* the `index.md` role is superseded by `_index.md`.
+
+Execute [`hugo --printPathWarnings`](https://gohugo.io/commands/hugo_build/#options)
+to print warnings on duplicate target paths, etc.
+For us it echoes:
+
+```
+WARN  Duplicate content path: "/leaf_bundle_to_branch_bundle"
+file: "[...]/content/en/leaf_bundle_to_branch_bundle/_index.md"
+file: "[...]/content/en/leaf_bundle_to_branch_bundle/index.md"
+```
+
+Thus,
+1. Create another individual page, e.g. `content/en/leaf_bundle_to_branch_bundle/post_2.md`.
+2. Copy the content of `index.md` into `post_2.md`.
+
+Why not simply rename `index.md` to `_index.md`? Because as I mentioned before this script is not rendered for our Hugo theme.
+Though you are right, normally this would be the recommended approach.
+
+Now there is another disadvantage.
+Bring to mind that in the original *leaf bundle* the `index`'s permalink was `<baseURL>/leaf_bundle_to_branch_bundle/`.
+How can we now browse this link?
+- Add next [aliases](https://gohugo.io/content-management/urls/#aliases) front matter (an array of strings) to `post_2.md`.
+Now `<baseURL>/leaf_bundle_to_branch_bundle/`.
+will redirect to `<baseURL>/leaf_bundle_to_branch_bundle/post_2/`.
+
+```yaml
+aliases: 
+- /leaf_bundle_to_branch_bundle
+```
+- Alternative set the [url](https://gohugo.io/content-management/urls/#url) front matter `url: leaf_bundle_to_branch_bundle`.
+But now `<baseURL>/leaf_bundle_to_branch_bundle/post_2/` will be inaccessible.
+
+So, in summary, `index` scripts are rendered if they are located where they should, that means in a *leaf bundle*.
+
+
+Note. For a deep dive of the `hugo list all` command check the [bonus section](#the-hugo-list-all-command).
 
 
 ### Hugo Scroll dedicated pages
@@ -185,17 +257,26 @@ and two resources of resource type `image`.
 content/
 ├── about
 │   └── index.md
-├── posts
-│   ├── my-post
-│   │   ├── content-1.md
-│   │   ├── content-2.md
-│   │   ├── image-1.jpg
-│   │   ├── image-2.png
-│   │   └── index.md
-...
+└── posts
+    └── my-post
+        ├── content-1.md
+        ├── content-2.md
+        ├── image-1.jpg
+        ├── image-2.png
+        └── index.md
 ```
 
 I underline: Hugo will **not render** `content-1.md` nor `content-2.md` as **individual pages**.
+The resulting HTML files are under the `public` directory:
+
+```
+public/
+├── about
+│   └── index.html
+└── posts
+    └── my-post
+        └── index.html
+```
 
 
 ### Hugo Scroll mainsite
