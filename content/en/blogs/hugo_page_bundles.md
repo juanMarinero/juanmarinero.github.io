@@ -901,6 +901,13 @@ func newListCommand() *listCommand {
 ```
 
 
+## Further recommended content
+
+- [Introduction to Hugo Bundles](https://www.ii.com/hugo-bundles/) by [Infinite Ink](https://www.ii.com/)
+- [Hugo's video tutorials](https://www.youtube.com/watch?v=qtIqKaDlqXo&list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3&index=1) by Giraffe Academy
+- [Hugo's video tutorials](https://www.youtube.com/watch?v=l7PHRA8t4Bw&list=PLE92IfveVXuXTOjdPM_nleN6Cga_d3uJ-&index=1) by Future Web Design
+
+
 {{< rawhtml >}}
   <br>
   <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
