@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="4372">
+  <meta itemprop="wordCount" content="4585">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -252,7 +252,7 @@ window.MathJax = {
       <section class="post-content">
         <p>Table of contents:</p>
 <ul>
-<li><a href="/blogs/hugo_page_bundles/#theory">Theory</a></li>
+<li><a href="/blogs/hugo_page_bundles/#introduction">Introduction</a></li>
 <li><a href="/blogs/hugo_page_bundles/#branch-bundles">Branch bundles</a>
 <ul>
 <li><a href="/blogs/hugo_page_bundles/#practical-example">Practical example</a></li>
@@ -286,40 +286,49 @@ window.MathJax = {
 </ul>
 </li>
 </ul>
-<h2 id="theory">Theory</h2>
+<h2 id="introduction">Introduction</h2>
 <p>Although the terminology is narrow, understanding it is essential to follow this guide.
 As we advance, few more new concepts will be introduced.</p>
 <p>For now, let&rsquo;s focus on the following distinctions:</p>
 <ul>
-<li><a href="https://gohugo.io/content-management/page-bundles/#leaf-bundles">Leaf bundles</a>:</li>
+<li>
+<p>A <a href="https://gohugo.io/content-management/page-bundles/#leaf-bundles"><strong>leaf bundle</strong></a>
+is a directory that contains an <code>index.md</code> file and zero or more resources. It has no descendants.</p>
+</li>
+<li>
+<p>A <a href="https://gohugo.io/content-management/page-bundles/#branch-bundles"><strong>branch bundle</strong></a>
+is a directory that contains an <code>_index.md</code> file and zero or more resources.</p>
+</li>
+<li>
+<p>A <a href="https://gohugo.io/content-management/sections/"><strong>section</strong></a>
+is a top-level content directory or any content directory containing an <code>_index.md</code> file.</p>
+</li>
+<li>
+<p>A <a href="https://gohugo.io/quick-reference/glossary/#list-page"><strong>list page</strong></a>
+is a type of page (a <code>Page</code> object) that is defined by its purpose: it receives and is designed to display a collection of other pages.
+Its <a href="https://gohugo.io/templates/introduction/#context">context</a> includes a collection of pages (e.g., <code>.Pages</code>, <code>.RegularPages</code>) that it is meant to list.</p>
+</li>
+<li>
+<p>An <a href="https://gohugo.io/content-management/organization/#index-pages-_indexmd"><strong>index-page</strong></a>(<code>_index.md</code>)
+is a content file that serves as the source content for certain types of <strong>list pages</strong>, namely sections and the home page.</p>
+</li>
+<li>
+<p><a href="https://gohugo.io/content-management/organization/#single-pages-in-sections"><strong>Single pages</strong></a>
+are single content files in each of your sections.</p>
+</li>
 </ul>
+<p>Next 15+ minutes video is a bit old, but it&rsquo;ll help you get more familiar with the last three terms.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0GZxidrlaRM?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
 
-
-
-  <blockquote>
-    <p>A <em>leaf bundle</em> is a directory that contains an <code>index.md</code> file and zero or more resources. It has no descendants.</p>
-  </blockquote>
-
-<ul>
-<li><a href="https://gohugo.io/content-management/page-bundles/#branch-bundles">Branch bundles</a>:</li>
-</ul>
-
-
-
-  <blockquote>
-    <p>A <em>branch bundle</em> is a directory that contains an <code>_index.md</code> file and zero or more resources.</p>
-  </blockquote>
-
-<ul>
-<li><a href="https://gohugo.io/content-management/sections/">Sections</a></li>
-</ul>
-
-
-
-  <blockquote>
-    <p>A <em>section</em> is a top-level content directory or any content directory containing an <code>_index.md</code> file.</p>
-  </blockquote>
-
+<p>If 15 minutes feels too long, this 2-minute read is for you:
+<a href="https://gist.github.com/janert/4e22671044ffb06ee970b04709dd7d81#hugos-processing-model">A Hugo Survival Guide – Hugo&rsquo;s Processing Model</a>.</p>
+<p>We conclude this preamble with a
+5-minute hands-on tutorial building
+<a href="https://til.simonwillison.net/hugo/basic">The <strong>most basic</strong> possible <strong>Hugo site</strong></a>.
+If it doesn&rsquo;t work for you or you don&rsquo;t fully understand every step, that&rsquo;s OK.
+Once you&rsquo;ve finished reading the current article, this little project will be easy as pie.</p>
 <h2 id="branch-bundles">Branch bundles</h2>
 <h3 id="practical-example">Practical example</h3>
 <p>Steps:</p>
@@ -328,10 +337,14 @@ As we advance, few more new concepts will be introduced.</p>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkfile<span style="color:#719e07">()</span> <span style="color:#719e07">{</span> mkdir -p <span style="color:#2aa198">&#34;</span><span style="color:#719e07">$(</span>dirname <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">)</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">&amp;&amp;</span> touch <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span>; <span style="color:#719e07">}</span>
 </span></span><span style="display:flex;"><span>mkfile content/en/leaf_bundle_to_branch_bundle/index.md
+</span></span></code></pre></div><p>Or more academic way via <a href="https://gohugo.io/commands/hugo_new_content/"><code>hugo new content [path] [flags]</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo new content leaf_bundle_to_branch_bundle/index.md
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Content &#34;[...]/content/en/leaf_bundle_to_branch_bundle/index.md&#34; created</span>
 </span></span></code></pre></div><p>Note: the URL (permalink) for an <code>index</code> page is <code>&lt;baseURL&gt;/leaf_bundle_to_branch_bundle/</code>, for example, <code>https://example.org/leaf_bundle_to_branch_bundle/</code>.
 Read <a href="https://gohugo.io/content-management/organization/#organization-of-content-source">Organization of Content Source</a> docs.</p>
 <ol start="2">
-<li>Create a new <code>post_1.md</code> in <code>content/en/leaf_bundle_to_branch_bundle/</code></li>
+<li>Create a new <code>post_1.md</code> in <code>content/en/leaf_bundle_to_branch_bundle/</code>
+with <a href="https://gohugo.io/commands/hugo_new/"><code>hugo new</code></a><code> leaf_bundle_to_branch_bundle/post_1.md</code></li>
 <li>In <code>index.md</code> content add a link (<code>&lt;a&gt;</code>) to it siblings page <code>post_1.md</code></li>
 <li>Build the site with <code>hugo server --disableFastRender</code></li>
 </ol>
@@ -615,6 +628,9 @@ the final HTML renderer (<em>base template</em> using a Hugo-sh terminology).</p
 This is defined in <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>,
 since its first line <code>{{ define &quot;main&quot; }}</code> is closed by a <code>{{- end }}</code> line at EOF.</p>
 <p>The footer integration is later explained in this <a href="/blogs/hugo_page_bundles/#hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content">section</a>.</p>
+<p>If you need to consolidate the Hugo&rsquo;s content knowledges we have introduced, just follow this 5 minutes tutorial building
+<a href="https://til.simonwillison.net/hugo/basic">The <strong>most basic</strong> possible <strong>Hugo site</strong></a>.
+It&rsquo;s based on this <a href="https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28">Gist</a>.</p>
 <h3 id="an-undesired-leaf-bundle-example">An undesired leaf bundle example</h3>
 <p><code>content/en/leaf_bundle_wrong</code> file tree is:</p>
 <pre tabindex="0"><code>leaf_bundle_wrong/

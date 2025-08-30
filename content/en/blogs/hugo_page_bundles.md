@@ -6,7 +6,7 @@ keywords: ["Hugo", "page bundles", "branch bundles", "headless bundle", "hugo li
 
 Table of contents:
 
-* [Theory](#theory)
+* [Introduction](#introduction)
 * [Branch bundles](#branch-bundles)
   * [Practical example](#practical-example)
   * [Hugo Scroll dedicated pages](#hugo-scroll-dedicated-pages)
@@ -29,19 +29,46 @@ We cover:
   - The Hugo Scroll [dedicated pages](#hugo-scroll-dedicated-pages)
   - A branch bundle [practical example](#practical-example)
 
-## Theory
+
+## Introduction
 
 Although the terminology is narrow, understanding it is essential to follow this guide.
 As we advance, few more new concepts will be introduced.
 
 For now, let's focus on the following distinctions:
 
-- [Leaf bundles](https://gohugo.io/content-management/page-bundles/#leaf-bundles):
-> A *leaf bundle* is a directory that contains an `index.md` file and zero or more resources. It has no descendants.
-- [Branch bundles](https://gohugo.io/content-management/page-bundles/#branch-bundles):
-> A *branch bundle* is a directory that contains an `_index.md` file and zero or more resources.
-- [Sections](https://gohugo.io/content-management/sections/)
-> A *section* is a top-level content directory or any content directory containing an `_index.md` file.
+- A [**leaf bundle**](https://gohugo.io/content-management/page-bundles/#leaf-bundles)
+is a directory that contains an `index.md` file and zero or more resources. It has no descendants.
+
+- A [**branch bundle**](https://gohugo.io/content-management/page-bundles/#branch-bundles)
+is a directory that contains an `_index.md` file and zero or more resources.
+
+- A [**section**](https://gohugo.io/content-management/sections/)
+is a top-level content directory or any content directory containing an `_index.md` file.
+
+- A [**list page**](https://gohugo.io/quick-reference/glossary/#list-page)
+is a type of page (a `Page` object) that is defined by its purpose: it receives and is designed to display a collection of other pages.
+Its [context](https://gohugo.io/templates/introduction/#context) includes a collection of pages (e.g., `.Pages`, `.RegularPages`) that it is meant to list.
+
+- An [**index-page**](https://gohugo.io/content-management/organization/#index-pages-_indexmd)(`_index.md`)
+is a content file that serves as the source content for certain types of **list pages**, namely sections and the home page.
+
+- [**Single pages**](https://gohugo.io/content-management/organization/#single-pages-in-sections)
+are single content files in each of your sections.
+
+Next 15+ minutes video is a bit old, but it'll help you get more familiar with the last three terms.
+
+{{< youtube id=0GZxidrlaRM loading="lazy" >}}
+
+If 15 minutes feels too long, this 2-minute read is for you:
+[A Hugo Survival Guide – Hugo's Processing Model](https://gist.github.com/janert/4e22671044ffb06ee970b04709dd7d81#hugos-processing-model).
+
+We conclude this preamble with a 
+5-minute hands-on tutorial building
+[The **most basic** possible **Hugo site**](https://til.simonwillison.net/hugo/basic).
+If it doesn't work for you or you don't fully understand every step, that's OK.
+Once you've finished reading the current article, this little project will be easy as pie.
+
 
 ## Branch bundles
 
@@ -54,10 +81,18 @@ mkfile() { mkdir -p "$(dirname "$1")" && touch "$1"; }
 mkfile content/en/leaf_bundle_to_branch_bundle/index.md
 ```
 
+Or more academic way via [`hugo new content [path] [flags]`](https://gohugo.io/commands/hugo_new_content/):
+
+```bash
+hugo new content leaf_bundle_to_branch_bundle/index.md
+# Content "[...]/content/en/leaf_bundle_to_branch_bundle/index.md" created
+```
+
 Note: the URL (permalink) for an `index` page is `<baseURL>/leaf_bundle_to_branch_bundle/`, for example, `https://example.org/leaf_bundle_to_branch_bundle/`.
 Read [Organization of Content Source](https://gohugo.io/content-management/organization/#organization-of-content-source) docs.
 
 2. Create a new `post_1.md` in `content/en/leaf_bundle_to_branch_bundle/`
+with [`hugo new`](https://gohugo.io/commands/hugo_new/)` leaf_bundle_to_branch_bundle/post_1.md`
 3. In `index.md` content add a link (`<a>`) to it siblings page `post_1.md`
 4. Build the site with `hugo server --disableFastRender`
 
@@ -399,6 +434,10 @@ This is defined in [`layouts/_default/index.html`](https://github.com/zjedi/hugo
 since its first line `{{ define "main" }}` is closed by a `{{- end }}` line at EOF.
 
 The footer integration is later explained in this [section](#hugo-template-inheritance-how-baseofhtml-integrates-footerhtml-content).
+
+If you need to consolidate the Hugo's content knowledges we have introduced, just follow this 5 minutes tutorial building
+[The **most basic** possible **Hugo site**](https://til.simonwillison.net/hugo/basic).
+It's based on this [Gist](https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28).
 
 
 ### An undesired leaf bundle example
