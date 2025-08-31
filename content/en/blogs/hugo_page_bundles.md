@@ -142,8 +142,10 @@ Notice that `post_1.md` is not found.
 Create `_index.md` converting the `leaf_bundle_to_branch_bundle` directory, a *leaf bundle*, into a *branch bundle*.
 
 5. Run `touch content/en/leaf_bundle_to_branch_bundle/_index.md`
-6. Remove the rendered files `rm -rf public/leaf_bundle_to_branch_bundle/`
-6. Run `hugo server --disableFastRender`
+6. Remove the rendered files `rm -rf public/leaf_bundle_to_branch_bundle/`.
+Or use the [`cleanDestinationDir`](https://gohugo.io/commands/hugo/#:~:text=%2D%2D-,cleanDestinationDir,-remove%20files%20from) in next step:
+`hugo server --disableFastRender --gc --cleanDestinationDir`
+7. Run `hugo server --disableFastRender`
 
 The [`post_1.md`](/leaf_bundle_to_branch_bundle/post_1) link will work.
 
@@ -197,6 +199,13 @@ Read [Hugo Scroll dedicated pages](#hugo-scroll-dedicated-pages) section.
 Then, no surprise that Hugo Scroll
 [`layouts/_default/list.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html)
 is empty.
+As overview examples, from simpler to complexer, check:
+- [Hugo XMin](https://github.com/yihui/hugo-xmin)'s
+[`list.html`](https://github.com/yihui/hugo-xmin/blob/master/layouts/list.html)
+- [Hugo Coder](https://github.com/luizdepra/hugo-coder)'s
+[`list.html`](https://github.com/luizdepra/hugo-coder/blob/main/layouts/list.html).
+- [Hugo PaperMod](https://github.com/adityatelange/hugo-PaperMod)'s
+[one](https://github.com/adityatelange/hugo-PaperMod/blob/master/layouts/_default/list.html),
 
 
 And what about the `index` page?
@@ -215,9 +224,7 @@ file: "[...]/content/en/leaf_bundle_to_branch_bundle/_index.md"
 file: "[...]/content/en/leaf_bundle_to_branch_bundle/index.md"
 ```
 
-Thus,
-1. Create another individual page, e.g. `content/en/leaf_bundle_to_branch_bundle/post_2.md`.
-2. Copy the content of `index.md` into `post_2.md`.
+Thus, run `cd en/content/en/leaf_bundle_to_branch_bundle && mv index.md post_2.md`.
 
 Why not simply rename `index.md` to `_index.md`? Because as I mentioned before this script is not rendered for our Hugo theme.
 Though you are right, normally this would be the recommended approach.
@@ -236,7 +243,7 @@ aliases:
 - Alternative set the [url](https://gohugo.io/content-management/urls/#url) front matter `url: leaf_bundle_to_branch_bundle`.
 But now `<baseURL>/leaf_bundle_to_branch_bundle/post_2/` will be inaccessible.
 
-So, in summary, `index` scripts are rendered if they are located where they should, that means in a *leaf bundle*.
+So, in summary, `index.md` scripts are rendered if they are located where they should, that means in a singlepage *leaf bundle*.
 
 
 Note. For a deep dive of the `hugo list all` command check the [bonus section](#the-hugo-list-all-command).
@@ -277,7 +284,7 @@ In summary,
 - Or, like `content/posts/my-post` below, it can contain one or more page resources.
 This leaf bundle contains:
 
-  - An index file, two resources of  `page`
+  - An index file
   - content-1, content-2.
     These are resources of [resource type](https://gohugo.io/quick-reference/glossary/#resource-type) `page`, accessible via the [`Resources`] method on the `Page` object. Hugo will not render these as individual pages.
   - image-1 and image-2 are resources of resource type `image`, accessible via the `Resources` method on the `Page` object
@@ -320,19 +327,27 @@ creates the *leaf bundle* [`content/en/homepage/`](https://github.com/zjedi/hugo
 
 ##### The headless bundle creation
 
-A *leaf bundle* can be made *headless* by adding in the `index.md`'s front matter `headless = true`.
+A *headless bundle* directory structure contains, as any *leaf bundle*:
+- `index.md`, here called *headless page*
+- Resource files (other Markdown files, images, etc.)
+
+A *leaf bundle* is made *headless* by adding in the `index.md`'s front matter `headless = true`.
 [#4311](https://github.com/gohugoio/hugo/issues/4311) proposed this feature.
 
-A *headless bundle* is called in the latest documentation a **headless page**.
-Check its [docs](https://gohugo.io/content-management/build-options/#example--headless-page)
-and [#6412](https://github.com/gohugoio/hugo/issues/6412#issuecomment-621170881).
-A combination of other front matters will also work, like `headless = true`.
+A specific combination of settings within the
+[cascade](https://gohugo.io/content-management/front-matter/#cascade-1).[build](https://gohugo.io/content-management/front-matter/#build)
+front matter map is functionally equivalent to `headless = true`.
+This approach offers more granular control and is the modern method for achieving the headless behavior.
+Read:
+- [Example – headless section](https://gohugo.io/content-management/build-options/#example--headless-section) from the docs
+- And [this](https://discourse.gohugo.io/t/list-of-content-on-homepage-with-resources-headless/38133/2) a little bit more specific scenario
+- [#6412](https://github.com/gohugoio/hugo/issues/6412#issuecomment-573446730)
 
 A [headless bundle](https://gohugo.io/content-management/page-bundles/#headless-bundles) has two main effects:
 1. The `index.md` is **not rendered on its own**, same applies to rest of the bundle pages.
 It will **not** go through the standard template **lookup order** to find a template (like `single.html`) to render itself into an HTML file.
 This is the "headless" part.
-2. Its page resources (here `opener.md`, `about-me.md`, etc.) are of course as in any leaf bundle **not** published individually.
+2. Its page resources (here `opener.md`, `about-me.md`, etc.) are of course as in any leaf bundle **not** published individually (`publishResources = false` build option).
 Their sole purpose is to exist as `Page` objects in Hugo's internal memory, to be available to be fetched by a layout template via `.GetPage` or `.Resources`.
 
 
@@ -422,7 +437,7 @@ Read the [Hugo’s page collections explicit sorting](https://gohugo.io/quick-re
 into their respective sections of the Hugo Scroll [demo mainsite](https://zjedi.github.io/hugo-scroll/).
 
 An important note. If the returned list of resource were not pages but for example images,
-like `{{ $sections := $headless.Resources.ByType "`**`image`**`" }}` then this slice would not be pre-sorted.
+like `{{ $sections := $headless.Resources.ByType`**`"image"`**`}}` then this slice would not be pre-sorted.
 
 If `$section` was not default sorted, then the `range` loop would not sort it.
 Hugo's `render` only pre-sorts maps, [link](https://gohugo.io/functions/go-template/range/#maps) 
@@ -481,8 +496,18 @@ It's based on this [Gist](https://gist.github.com/simonw/6f7b6a40713b36749da8450
 
 Finally, if you mastered everything till now, then try to understand further
 [headless page](https://gohugo.io/content-management/build-options/#example--headless-page) examples,
-not just the Hugo Scroll mainsite,
-like this [gallery items](https://discourse.gohugo.io/t/how-to-iterate-over-headless-pages/12536/24).
+not just the Hugo Scroll mainsite. For example:
+- A simple [headless page](https://discourse.gohugo.io/t/using-headless-pages-in-section-lists-in-hugo/15275/4)
+- Another simple [headless page](https://discourse.gohugo.io/t/list-of-content-on-homepage-with-resources-headless/38133/2)
+- Headless bundles and content structure, [link](https://discourse.gohugo.io/t/headless-bundles-and-content-structure/16234/4)
+
+In other scenarios a headless bundle it's not the right or simpler approach:
+- *Listing headless bundles (as opposed to just retrieving a single one) is a right pain*. Links
+[1](https://greenash.net.au/thoughts/2021/02/on-hugo/#:~:text=listing%20headless%20bundles%20(as%20opposed%20to%20just%20retrieving%20a%20single%20one)%20is%20a%20right%20pain),
+[2](https://discourse.gohugo.io/t/how-to-iterate-over-headless-pages/12536/21),
+[3](https://discourse.gohugo.io/t/how-to-iterate-over-headless-pages/12536/24),
+[4](https://greenash.net.au/thoughts/topics/hugo/)
+.
 
 
 ### An undesired leaf bundle example
@@ -569,7 +594,7 @@ leaf_bundle_to_layout/
 ```
 
 
-1. In `content/en/leaf_bundle_to_layout/index.md` override the front matter [type](https://gohugo.io/content-management/front-matter/#type) with: `type: "leaf_bundle_to_layout"`.
+1. In `content/en/leaf_bundle_to_layout/index.md` override the [type](https://gohugo.io/content-management/front-matter/#type) front matter with: `type: "leaf_bundle_to_layout"`.
 2. Run `mkdir -p layouts/leaf_bundle_to_layout`
 3. Edit `layouts/leaf_bundle_to_layout/single.html` as next. This template enlarges [`layouts/_default/single.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html).
 Pay particular attention to the highlighted lines.
@@ -738,13 +763,13 @@ In the process, we will also learn how the footer menu links are edited.
 ### External links
 
 [`layouts/_default/index.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html) code starts
-creating the `$sections` collection with all the `page` resources from the `homepage` bundle.
+declaring `$sections`, a [pre-sorted by `weight` front matter] collection of page resources.
 This was explained in the headless bundle section 
 [above](#how-the-layout-template-operates).
 
 ```go
 {{ $headless := .GetPage "./homepage" }} {{/* Fetch the headless bundle */}}
-{{ $sections := $headless.Resources.ByType "page" }}  {{/* Get all its Markdown page resources */}}
+{{ $sections := $headless.Resources.ByType "page" }}  {{/* Get pre-sorted all its Markdown page resources */}}
 ```
 
 `.Site.BuildDrafts` checks if Hugo is building with drafts enabled:
@@ -809,6 +834,23 @@ It's the one on the far right:
 Just copy this markdown script and adapt the `title`, `weight` and `external` front matter values to your needs to
 create a new header menu link in your Hugo Scroll mainsite.
 Repeat as needed.
+
+
+Finally, what about the **order** of these header menu **buttons**?
+In the headless bundle section [above](#how-the-layout-template-operates)
+we demonstrated that
+the page resources contained in the `$sections` slice are **pre-sorted** by the `weight` front matter (of each of the page resources).
+Therefore, `{{ range where $sections ".Params.header_menu" "eq" true }}`
+iterates a `$sections`-list already sorted by `weight`.
+Example:
+- On the far left is the button pointing to the
+[`content/en/homepage/services.md`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/content/en/homepage/services.md?plain=1#L5)
+section content.
+This is because its `weight` front matter value of `5` is the lowest among the `$sections`.
+- The button furthest to the right belongs to the external Github because
+[`content/en/homepage/external.md`](https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/content/en/homepage/external.md)
+has the highest `weight` front matter value of `99`.
+- We can infer that the remaining buttons correspond to Markdown files with weights ranging from 5 to 99.
 
 
 ### `detailed_page_homepage_content: false`
