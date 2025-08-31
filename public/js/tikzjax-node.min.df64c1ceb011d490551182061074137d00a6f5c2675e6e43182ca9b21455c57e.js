@@ -1,1 +1,0 @@
-console.log("tikzjax-node.js loaded")

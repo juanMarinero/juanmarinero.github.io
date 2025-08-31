@@ -1,1 +1,0 @@
-for(let e=0;e<5;e++)console.log("%ctikzjax-node.js loaded","font-weight: bold;")
