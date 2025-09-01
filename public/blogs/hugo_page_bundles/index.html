@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="5201">
+  <meta itemprop="wordCount" content="5207">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -598,7 +598,8 @@ in <code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> r
 of the given media type
 (which content might be later fetched as sections of the unique rendered page).</li>
 <li>Finally <code>{{ $content := where (where $sections &quot;Params.external&quot; &quot;==&quot; nil) &quot;Params.detailed_page_homepage_content&quot; &quot;ne&quot; false }}</code>
-has a <code>where</code> that filters the collection based on conditions (e.g., removing drafts, excluding external links)</li>
+has a <a href="https://gohugo.io/functions/collections/where/"><code>where</code></a>
+that filters the collection based on conditions (e.g., removing drafts, excluding external links)</li>
 </ul>
 <p>The final single-page site is assembled by this layout based on:</p>
 <ul>
@@ -610,7 +611,8 @@ has a <code>where</code> that filters the collection based on conditions (e.g., 
 <p>Note the <code>$content</code> collection page have a <strong>default order</strong>:</p>
 <ol>
 <li>The <a href="https://gohugo.io/quick-reference/glossary/#default-sort-order">default sort order</a>
-for page collections, used when no other criteria are set, follows this priority: weight, date, [&hellip;]</li>
+for page collections, used when no other criteria are set, follows this priority: weight, date, [&hellip;].
+This order criteria is fixed, <a href="https://discourse.gohugo.io/t/custom-sort-order-of-pages/31260/2">link</a>.</li>
 <li>Where, a <a href="https://gohugo.io/quick-reference/glossary/#page-collection">page collections</a>
 is a slice of Page objects.</li>
 <li>Since

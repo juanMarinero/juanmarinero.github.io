@@ -408,7 +408,8 @@ in `{{ $sections := $headless.Resources.ByType "page" }}` returns a collection o
 of the given media type
 (which content might be later fetched as sections of the unique rendered page).
 - Finally `{{ $content := where (where $sections "Params.external" "==" nil) "Params.detailed_page_homepage_content" "ne" false }}`
-has a `where` that filters the collection based on conditions (e.g., removing drafts, excluding external links)
+has a [`where`](https://gohugo.io/functions/collections/where/)
+that filters the collection based on conditions (e.g., removing drafts, excluding external links)
 
 The final single-page site is assembled by this layout based on:
 - The **content** of each resource file.
@@ -419,7 +420,8 @@ The final single-page site is assembled by this layout based on:
 
 Note the `$content` collection page have a **default order**:
 1. The [default sort order](https://gohugo.io/quick-reference/glossary/#default-sort-order)
-for page collections, used when no other criteria are set, follows this priority: weight, date, [...]
+for page collections, used when no other criteria are set, follows this priority: weight, date, [...].
+This order criteria is fixed, [link](https://discourse.gohugo.io/t/custom-sort-order-of-pages/31260/2).
 2. Where, a [page collections](https://gohugo.io/quick-reference/glossary/#page-collection)
 is a slice of Page objects.
 3. Since 
