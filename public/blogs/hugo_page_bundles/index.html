@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="5207">
+  <meta itemprop="wordCount" content="5249">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -551,12 +551,17 @@ Read:</p>
 </ul>
 <p>A <a href="https://gohugo.io/content-management/page-bundles/#headless-bundles">headless bundle</a> has two main effects:</p>
 <ol>
-<li>The <code>index.md</code> is <strong>not rendered on its own</strong>, same applies to rest of the bundle pages.
+<li>The <code>index.md</code> is <strong>not rendered on its own</strong>.
 It will <strong>not</strong> go through the standard template <strong>lookup order</strong> to find a template (like <code>single.html</code>) to render itself into an HTML file.
 This is the &ldquo;headless&rdquo; part.</li>
 <li>Its page resources (here <code>opener.md</code>, <code>about-me.md</code>, etc.) are of course as in any leaf bundle <strong>not</strong> published individually (<code>publishResources = false</code> build option).
 Their sole purpose is to exist as <code>Page</code> objects in Hugo&rsquo;s internal memory, to be available to be fetched by a layout template via <code>.GetPage</code> or <code>.Resources</code>.</li>
 </ol>
+<p>Wrapping up, no markdown in <code>content/en/homepage</code> is directly rendered,
+for e.g. <code>public/homepage/index.html</code> is not created, nor <code>public/homepage/about-me/index.html</code>, etc.
+Instead of a <em>directly</em> render, what&rsquo;s rendered is <code>public/index.html</code> thanks both the <code>content/en/_index.md</code>
+and a clever layout code that get the page resources of the pagesless bundle <code>content/en/homepage/</code>.
+Details in next sections.</p>
 <h5 id="lookup-order-the-template-hierarchy">Lookup order, the template hierarchy</h5>
 <p>The file that defines the homepage for a language is <code>content/&lt;language&gt;/_index.md</code> since
 <a href="https://github.com/zjedi/hugo-scroll/blob/master/exampleSite/hugo.toml"><code>hugo.toml</code></a> sets:</p>
@@ -589,7 +594,7 @@ Their sole purpose is to exist as <code>Page</code> objects in Hugo&rsquo;s inte
 <h5 id="how-the-layout-template-operates">How the layout template operates</h5>
 <p>The theme&rsquo;s <strong>homepage layout</strong>
 <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>
-is programmed to fetch the resources from this specific headless bundle.
+is programmed to <strong>fetch</strong> the <strong>resources</strong> from the <code>content/en/homepage/</code> <strong>headless bundle</strong>.
 It uses:</p>
 <ul>
 <li><code>{{ $headless := .GetPage &quot;./homepage&quot; }}</code> to access the bundle</li>
@@ -604,7 +609,7 @@ that filters the collection based on conditions (e.g., removing drafts, excludin
 <p>The final single-page site is assembled by this layout based on:</p>
 <ul>
 <li>The <strong>content</strong> of each resource file.</li>
-<li>The <strong>order</strong> of the page resource in the collection <code>$content</code>.
+<li>The <strong>order</strong> of the page resource in the <code>$content</code> collection.
 <code>{{ range $index_val, $elem_val := $content }}</code> line of
 <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144"><code>index.html</code></a>.</li>
 </ul>
@@ -613,7 +618,7 @@ that filters the collection based on conditions (e.g., removing drafts, excludin
 <li>The <a href="https://gohugo.io/quick-reference/glossary/#default-sort-order">default sort order</a>
 for page collections, used when no other criteria are set, follows this priority: weight, date, [&hellip;].
 This order criteria is fixed, <a href="https://discourse.gohugo.io/t/custom-sort-order-of-pages/31260/2">link</a>.</li>
-<li>Where, a <a href="https://gohugo.io/quick-reference/glossary/#page-collection">page collections</a>
+<li>Where, a <a href="https://gohugo.io/quick-reference/glossary/#page-collection">page collection</a>
 is a slice of Page objects.</li>
 <li>Since
 <code>{{ $sections := $headless.Resources.ByType &quot;page&quot; }}</code> returns a collection of <a href="https://gohugo.io/methods/page/resources/">page resources</a>
@@ -621,11 +626,12 @@ that later is filtered into <code>$content</code>.</li>
 <li>And a <a href="https://gohugo.io/quick-reference/glossary/#page-resource">page resource</a>
 is a file within a page bundle.</li>
 <li>Then, <code>$sections</code>, and consequently <code>$content</code>, is a slice of Pages objects, precisely of Pages of objects of subtype &ldquo;page resources&rdquo;</li>
-<li>The documentation does not states that a &ldquo;page resource&rdquo; cannot be part of a Page object.</li>
+<li>The documentation does not specify that a &ldquo;page resource&rdquo; cannot be part of a Page object.</li>
 </ol>
 <p>The observation ratifies the pre-sorting, since:</p>
 <ul>
-<li><code>index.html</code> has no <code>.ByWeight()</code> to sort by a different criteria than the default sorting.
+<li><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html"><code>layouts/_default/index.html</code></a>
+has no <code>.ByWeight()</code> to sort by a different criteria than the default sorting.
 Read the <a href="https://gohugo.io/quick-reference/page-collections/#sort">Hugo’s page collections explicit sorting</a>.</li>
 <li>And at the same time we observe services, contact,&hellip; appear sorted, by their <code>weight</code> front matter,
 into their respective sections of the Hugo Scroll <a href="https://zjedi.github.io/hugo-scroll/">demo mainsite</a>.</li>
@@ -657,7 +663,7 @@ then <code>render</code> will not pre-sort it.
         Previous layout locations might change in future because recent <a href="https://gohugo.io/templates/new-templatesystem-overview/#changes-to-the-layouts-folder">changes to the <code>layouts</code> folder</a>:
       
     </p>
-    <p>Move all files in <code>layouts/_default</code> up to the layouts/ root.</p>
+    <p>Move all files in <code>layouts/_default</code> up to the <code>layouts/</code> root.</p>
   </blockquote>
 
 <h5 id="hugo-template-inheritance-how-baseofhtml-integrates-indexhtml-main-block">Hugo Template Inheritance: How baseof.html integrates index.html &lsquo;main&rsquo; block</h5>
@@ -855,7 +861,7 @@ the <code>type</code> front matter in <code>index.md</code> does <strong>not cha
 <ol>
 <li>
 <p>It <strong>forces the <em>Page&rsquo;s</em> type</strong>.
-The <code>Page</code> object returned by the <code>index.md</code> file (the leaf bundle itself) contains a mandatory <code>.Type</code> method, the <code>&quot;leaf_bundle_to_layout&quot;</code>
+The <code>Page</code> object returned by the <code>index.md</code> file (the leaf bundle page) contains a mandatory <code>.Type</code> method, the <code>&quot;leaf_bundle_to_layout&quot;</code>
 instead of its default value.
 But anyhow the <code>PAGE.Type</code> is the same as the default value it would have had,
 which is derived (as stayed in the <a href="https://gohugo.io/content-management/front-matter/#type">type front matter doc</a>)

@@ -344,11 +344,17 @@ Read:
 - [#6412](https://github.com/gohugoio/hugo/issues/6412#issuecomment-573446730)
 
 A [headless bundle](https://gohugo.io/content-management/page-bundles/#headless-bundles) has two main effects:
-1. The `index.md` is **not rendered on its own**, same applies to rest of the bundle pages.
+1. The `index.md` is **not rendered on its own**.
 It will **not** go through the standard template **lookup order** to find a template (like `single.html`) to render itself into an HTML file.
 This is the "headless" part.
 2. Its page resources (here `opener.md`, `about-me.md`, etc.) are of course as in any leaf bundle **not** published individually (`publishResources = false` build option).
 Their sole purpose is to exist as `Page` objects in Hugo's internal memory, to be available to be fetched by a layout template via `.GetPage` or `.Resources`.
+
+Wrapping up, no markdown in `content/en/homepage` is directly rendered,
+for e.g. `public/homepage/index.html` is not created, nor `public/homepage/about-me/index.html`, etc.
+Instead of a *directly* render, what's rendered is `public/index.html` thanks both the `content/en/_index.md`
+and a clever layout code that get the page resources of the pagesless bundle `content/en/homepage/`.
+Details in next sections.
 
 
 ##### Lookup order, the template hierarchy
@@ -400,7 +406,7 @@ Challenge! Investigate the complete layout hierarchy followed, not just the fina
 
 The theme's **homepage layout**
 [`layouts/_default/index.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html)
-is programmed to fetch the resources from this specific headless bundle.
+is programmed to **fetch** the **resources** from the `content/en/homepage/` **headless bundle**.
 It uses:
 - `{{ $headless := .GetPage "./homepage" }}` to access the bundle
 - The [`ByType`](https://gohugo.io/methods/page/resources/#bytype)
@@ -413,7 +419,7 @@ that filters the collection based on conditions (e.g., removing drafts, excludin
 
 The final single-page site is assembled by this layout based on:
 - The **content** of each resource file.
-- The **order** of the page resource in the collection `$content`.
+- The **order** of the page resource in the `$content` collection.
 `{{ range $index_val, $elem_val := $content }}` line of
 [`index.html`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/layouts/_default/index.html#L144).
 
@@ -422,7 +428,7 @@ Note the `$content` collection page have a **default order**:
 1. The [default sort order](https://gohugo.io/quick-reference/glossary/#default-sort-order)
 for page collections, used when no other criteria are set, follows this priority: weight, date, [...].
 This order criteria is fixed, [link](https://discourse.gohugo.io/t/custom-sort-order-of-pages/31260/2).
-2. Where, a [page collections](https://gohugo.io/quick-reference/glossary/#page-collection)
+2. Where, a [page collection](https://gohugo.io/quick-reference/glossary/#page-collection)
 is a slice of Page objects.
 3. Since 
 `{{ $sections := $headless.Resources.ByType "page" }}` returns a collection of [page resources](https://gohugo.io/methods/page/resources/)
@@ -430,10 +436,11 @@ that later is filtered into `$content`.
 4. And a [page resource](https://gohugo.io/quick-reference/glossary/#page-resource)
 is a file within a page bundle.
 5. Then, `$sections`, and consequently `$content`, is a slice of Pages objects, precisely of Pages of objects of subtype "page resources"
-6. The documentation does not states that a "page resource" cannot be part of a Page object.
+6. The documentation does not specify that a "page resource" cannot be part of a Page object.
 
 The observation ratifies the pre-sorting, since:
-- `index.html` has no `.ByWeight()` to sort by a different criteria than the default sorting.
+- [`layouts/_default/index.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/index.html)
+has no `.ByWeight()` to sort by a different criteria than the default sorting.
 Read the [Hugo’s page collections explicit sorting](https://gohugo.io/quick-reference/page-collections/#sort).
 - And at the same time we observe services, contact,... appear sorted, by their `weight` front matter,
 into their respective sections of the Hugo Scroll [demo mainsite](https://zjedi.github.io/hugo-scroll/).
@@ -456,7 +463,7 @@ then `render` will not pre-sort it.
 A deeper analysis of code lines of layouts templates is to come in next sections.
 
 > [!warning] Previous layout locations might change in future because recent [changes to the `layouts` folder](https://gohugo.io/templates/new-templatesystem-overview/#changes-to-the-layouts-folder):
-> Move all files in `layouts/_default` up to the layouts/ root.
+> Move all files in `layouts/_default` up to the `layouts/` root.
 
 
 ##### Hugo Template Inheritance: How baseof.html integrates index.html 'main' block
@@ -679,7 +686,7 @@ the `type` front matter in `index.md` does **not change** the fundamental **natu
 ##### What `type: "leaf_bundle_to_layout"` in `index.md` actually does
 
 1.  It **forces the *Page's* type**.
-The `Page` object returned by the `index.md` file (the leaf bundle itself) contains a mandatory `.Type` method, the `"leaf_bundle_to_layout"`
+The `Page` object returned by the `index.md` file (the leaf bundle page) contains a mandatory `.Type` method, the `"leaf_bundle_to_layout"`
 instead of its default value.
 But anyhow the `PAGE.Type` is the same as the default value it would have had,
 which is derived (as stayed in the [type front matter doc](https://gohugo.io/content-management/front-matter/#type))
