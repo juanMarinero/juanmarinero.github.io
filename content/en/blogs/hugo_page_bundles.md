@@ -591,7 +591,7 @@ used for the [dedicated pages](#hugo-scroll-dedicated-pages) of this Hugo theme.
 We want a new custom layout for our *leaf bundle*.
 This layout should render in the `index.md` file...
 - First its content exactly as constructed till now.
-- Then the content of its sibling `post_1.md`, rendering its `title` front matter as `<h2>`. I emphasize, this is **not** rendered as an **individual page**.
+- Then the content of its sibling `content-1.md`, rendering its `title` front matter as `<h2>`. I emphasize, this is **not** rendered as an **individual page**.
 
 To apply the new layout we must start creating a new *leaf bundle* directory.
 `content/en/leaf_bundle_to_layout/` shall have the same tree file structure as `content/en/leaf_bundle_wrong/`:
@@ -599,13 +599,15 @@ To apply the new layout we must start creating a new *leaf bundle* directory.
 ```
 leaf_bundle_to_layout/
 ├── index.md
-└── post_1.md
+└── content-1.md
 ```
 
 
 1. In `content/en/leaf_bundle_to_layout/index.md` override the [type](https://gohugo.io/content-management/front-matter/#type) front matter with: `type: "leaf_bundle_to_layout"`.
 2. Run `mkdir -p layouts/leaf_bundle_to_layout`
-3. Edit `layouts/leaf_bundle_to_layout/single.html` as next. This template enlarges [`layouts/_default/single.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html).
+3. Edit `layouts/leaf_bundle_to_layout/single.html` as next.
+[This template](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/layouts/leaf_bundle_to_layout/single.html)
+enlarges [`layouts/_default/single.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html).
 Pay particular attention to the highlighted lines.
 
 ```go {lineNos=inline hl_lines="28-33 42-45" style=monokai}
@@ -637,7 +639,7 @@ Pay particular attention to the highlighted lines.
     </article>
 
     {{/* Render the resource's content directly */}}
-    {{ $subpage := .Resources.Get "post_1.md" }}
+    {{ $subpage := .Resources.Get "content-1.md" }}
     {{ if $subpage }}
       <article class="post page">
          <h2>{{ $subpage.Title }}</h2>
@@ -652,22 +654,22 @@ Pay particular attention to the highlighted lines.
          {{ end }}
       </article>
     {{ else }}
-      <p>Debug: Resource 'post_1.md' not found.</p>
+      <p>Debug: Resource 'content-1.md' not found.</p>
     {{ end }}
 
   </main>
 {{ end }}
 ```
 
-4. Build with `hugo server --disableFastRender` and check the result in [`content/en/leaf_bundle_to_layout/`](/leaf_bundle_to_layout).
-Observe how the sibling's `post_1.md` title and content is rendered as a section after the `index.md` content.
+4. Build with `hugo server --disableFastRender` and check the result in [`public/leaf_bundle_to_layout/index.html`](/leaf_bundle_to_layout).
+Observe how the sibling's `content-1.md` title and content is rendered as a section after the `index.md` content.
 
 These steps are a quick example of how to **target a specific template** by leveraging Hugo's
 [template lookup rules](https://gohugo.io/templates/lookup-order/).
 Read the docs for deeper understanding and customizations.
 
-Challenge: edit the layout code to make it render all `page` resources inside the bundle, not just `index.md` and `post_1.md`,
-but also `post_2.md`, `post_3.md`, `post_4.md`, etc.
+Challenge: edit the layout code to make it render all `page` resources inside the bundle, not just `index.md` and `content-1.md`,
+but also `content-2.md`, `content-3.md`, etc.
 
 
 #### `type` front matter on `index.md`
@@ -676,7 +678,7 @@ The first step we did was
 1. In `content/en/leaf_bundle_to_layout/index.md` override the front matter [type](https://gohugo.io/content-management/front-matter/#type) with: `type: "leaf_bundle_to_layout"`.
 
 One could think that the quoted statmenet could be adapted for our case scenario as:
-These ~~[`content-1.md`, `content-2`]~~ `post_1.md` [, `post_2.md`, `post_3.md`, `post_4.md`, etc.] are resources of type ~~`page`~~ `leaf_bundle_to_layout`,
+These `content-1.md`, `content-2.md`[, etc.] are resources of type ~~`page`~~ `leaf_bundle_to_layout`,
 accessible via the [`Resources`] method on the `Page` object.
 
 This would be **wrong** because 
@@ -703,13 +705,13 @@ The [PAGE.Type documentation](https://gohugo.io/methods/page/type/) briefly poin
 ##### What it does **NOT** do
 
 - It does **not** change the `.ResourceType` (see [resource type](https://gohugo.io/quick-reference/glossary/#resource-type) glossary)
-of the files inside the bundle (like `post_1.md`).
+of the files inside the bundle (like `content-1.md`).
 
 The next chunks of the previously shown `layouts/leaf_bundle_to_layout/single.html` demonstrate it.
 - The first block outputs `page` as the resource type of `index.md`.
-- The second displays the same for the `post_1.md` resource type.
+- The second displays the same for the `content-1.md` resource type.
 - The `Page.Type` displayed for the bundle's index page is `leaf_bundle_to_layout`.
-The resource `post_1.md` is also associated with this type within the context of the bundle.
+The resource `content-1.md` is also associated with this type within the context of the bundle.
 
 ```html {lineNos=inline style=monokai linenostart=18}
 {{/* Check if `type` front matter changed the resource type */}}
@@ -733,7 +735,7 @@ The resource `post_1.md` is also associated with this type within the context of
 {{ end }}
 ```
 
-Check the results in the rendered [`content/en/leaf_bundle_to_layout/`](/leaf_bundle_to_layout) website.
+Check the results in the rendered [`public/leaf_bundle_to_layout/index.html`](/leaf_bundle_to_layout) website.
 
 This demonstrates that the `type` front matter affects template selection and page metadata (`Page.Type`)
 but does not alter the fundamental **resource type** of the files within the bundle.
@@ -757,11 +759,11 @@ This can be a `page`, `image`, `video`, etc.
 
 Therefore, the most precise description is:
 
-**`post_1.md` is a resource of resource type `page`**,
+**`content-1.md` is a resource of resource type `page`**,
 accessible via the [`Resources`] method on the `Page` object.
 The `Page` object for the bundle has its `Type` set to `"leaf_bundle_to_layout"` via front matter,
 which dictates the template used to render the entire bundle.
-Hugo will not render `post_1.md` as an individual page because it is located inside a leaf bundle folder.
+Hugo will not render `content-1.md` as an individual page because it is located inside a leaf bundle folder.
 
 
 ## Hugo Scroll: header menus to any page

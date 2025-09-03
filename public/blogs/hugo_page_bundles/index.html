@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="5249">
+  <meta itemprop="wordCount" content="5243">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -777,17 +777,19 @@ used for the <a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">ded
 This layout should render in the <code>index.md</code> file&hellip;</p>
 <ul>
 <li>First its content exactly as constructed till now.</li>
-<li>Then the content of its sibling <code>post_1.md</code>, rendering its <code>title</code> front matter as <code>&lt;h2&gt;</code>. I emphasize, this is <strong>not</strong> rendered as an <strong>individual page</strong>.</li>
+<li>Then the content of its sibling <code>content-1.md</code>, rendering its <code>title</code> front matter as <code>&lt;h2&gt;</code>. I emphasize, this is <strong>not</strong> rendered as an <strong>individual page</strong>.</li>
 </ul>
 <p>To apply the new layout we must start creating a new <em>leaf bundle</em> directory.
 <code>content/en/leaf_bundle_to_layout/</code> shall have the same tree file structure as <code>content/en/leaf_bundle_wrong/</code>:</p>
 <pre tabindex="0"><code>leaf_bundle_to_layout/
 ├── index.md
-└── post_1.md
+└── content-1.md
 </code></pre><ol>
 <li>In <code>content/en/leaf_bundle_to_layout/index.md</code> override the <a href="https://gohugo.io/content-management/front-matter/#type">type</a> front matter with: <code>type: &quot;leaf_bundle_to_layout&quot;</code>.</li>
 <li>Run <code>mkdir -p layouts/leaf_bundle_to_layout</code></li>
-<li>Edit <code>layouts/leaf_bundle_to_layout/single.html</code> as next. This template enlarges <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html"><code>layouts/_default/single.html</code></a>.
+<li>Edit <code>layouts/leaf_bundle_to_layout/single.html</code> as next.
+<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/layouts/leaf_bundle_to_layout/single.html">This template</a>
+enlarges <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/single.html"><code>layouts/_default/single.html</code></a>.
 Pay particular attention to the highlighted lines.</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-go" data-lang="go"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>{{ <span style="color:#a6e22e">define</span> <span style="color:#e6db74">&#34;main&#34;</span> }}
@@ -818,7 +820,7 @@ Pay particular attention to the highlighted lines.</li>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span>    &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">article</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span><span>
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span>    {{<span style="color:#75715e">/* Render the resource&#39;s content directly */</span>}}
-</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>    {{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span> <span style="color:#f92672">:=</span> .<span style="color:#a6e22e">Resources</span>.<span style="color:#a6e22e">Get</span> <span style="color:#e6db74">&#34;post_1.md&#34;</span> }}
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span><span>    {{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span> <span style="color:#f92672">:=</span> .<span style="color:#a6e22e">Resources</span>.<span style="color:#a6e22e">Get</span> <span style="color:#e6db74">&#34;content-1.md&#34;</span> }}
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span><span>    {{ <span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span> }}
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span>      &lt;<span style="color:#a6e22e">article</span> <span style="color:#a6e22e">class</span>=<span style="color:#e6db74">&#34;post page&#34;</span>&gt;
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32</span><span>         &lt;<span style="color:#a6e22e">h2</span>&gt;{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">subpage</span>.<span style="color:#a6e22e">Title</span> }}&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">h2</span>&gt;
@@ -833,27 +835,27 @@ Pay particular attention to the highlighted lines.</li>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41</span><span>         {{ <span style="color:#a6e22e">end</span> }}
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42</span><span>      &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">article</span>&gt;
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43</span><span>    {{ <span style="color:#66d9ef">else</span> }}
-</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44</span><span>      &lt;<span style="color:#a6e22e">p</span>&gt;<span style="color:#a6e22e">Debug</span>: <span style="color:#a6e22e">Resource</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">post_1</span>.<span style="color:#a6e22e">md</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">found</span>.&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">p</span>&gt;
+</span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44</span><span>      &lt;<span style="color:#a6e22e">p</span>&gt;<span style="color:#a6e22e">Debug</span>: <span style="color:#a6e22e">Resource</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#a6e22e">content</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1.</span><span style="color:#a6e22e">md</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">found</span>.&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">p</span>&gt;
 </span></span><span style="display:flex; background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45</span><span>    {{ <span style="color:#a6e22e">end</span> }}
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46</span><span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47</span><span>  &lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">main</span>&gt;
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48</span><span>{{ <span style="color:#a6e22e">end</span> }}
 </span></span></code></pre></div><ol start="4">
-<li>Build with <code>hugo server --disableFastRender</code> and check the result in <a href="/leaf_bundle_to_layout/"><code>content/en/leaf_bundle_to_layout/</code></a>.
-Observe how the sibling&rsquo;s <code>post_1.md</code> title and content is rendered as a section after the <code>index.md</code> content.</li>
+<li>Build with <code>hugo server --disableFastRender</code> and check the result in <a href="/leaf_bundle_to_layout/"><code>public/leaf_bundle_to_layout/index.html</code></a>.
+Observe how the sibling&rsquo;s <code>content-1.md</code> title and content is rendered as a section after the <code>index.md</code> content.</li>
 </ol>
 <p>These steps are a quick example of how to <strong>target a specific template</strong> by leveraging Hugo&rsquo;s
 <a href="https://gohugo.io/templates/lookup-order/">template lookup rules</a>.
 Read the docs for deeper understanding and customizations.</p>
-<p>Challenge: edit the layout code to make it render all <code>page</code> resources inside the bundle, not just <code>index.md</code> and <code>post_1.md</code>,
-but also <code>post_2.md</code>, <code>post_3.md</code>, <code>post_4.md</code>, etc.</p>
+<p>Challenge: edit the layout code to make it render all <code>page</code> resources inside the bundle, not just <code>index.md</code> and <code>content-1.md</code>,
+but also <code>content-2.md</code>, <code>content-3.md</code>, etc.</p>
 <h4 id="type-front-matter-on-indexmd"><code>type</code> front matter on <code>index.md</code></h4>
 <p>The first step we did was</p>
 <ol>
 <li>In <code>content/en/leaf_bundle_to_layout/index.md</code> override the front matter <a href="https://gohugo.io/content-management/front-matter/#type">type</a> with: <code>type: &quot;leaf_bundle_to_layout&quot;</code>.</li>
 </ol>
 <p>One could think that the quoted statmenet could be adapted for our case scenario as:
-These <del>[<code>content-1.md</code>, <code>content-2</code>]</del> <code>post_1.md</code> [, <code>post_2.md</code>, <code>post_3.md</code>, <code>post_4.md</code>, etc.] are resources of type <del><code>page</code></del> <code>leaf_bundle_to_layout</code>,
+These <code>content-1.md</code>, <code>content-2.md</code>[, etc.] are resources of type <del><code>page</code></del> <code>leaf_bundle_to_layout</code>,
 accessible via the [<code>Resources</code>] method on the <code>Page</code> object.</p>
 <p>This would be <strong>wrong</strong> because
 the <code>type</code> front matter in <code>index.md</code> does <strong>not change</strong> the fundamental <strong>nature</strong> of the <strong>resources inside the bundle</strong>.</p>
@@ -885,14 +887,14 @@ The <a href="https://gohugo.io/methods/page/type/">PAGE.Type documentation</a> b
 <h5 id="what-it-does-not-do">What it does <strong>NOT</strong> do</h5>
 <ul>
 <li>It does <strong>not</strong> change the <code>.ResourceType</code> (see <a href="https://gohugo.io/quick-reference/glossary/#resource-type">resource type</a> glossary)
-of the files inside the bundle (like <code>post_1.md</code>).</li>
+of the files inside the bundle (like <code>content-1.md</code>).</li>
 </ul>
 <p>The next chunks of the previously shown <code>layouts/leaf_bundle_to_layout/single.html</code> demonstrate it.</p>
 <ul>
 <li>The first block outputs <code>page</code> as the resource type of <code>index.md</code>.</li>
-<li>The second displays the same for the <code>post_1.md</code> resource type.</li>
+<li>The second displays the same for the <code>content-1.md</code> resource type.</li>
 <li>The <code>Page.Type</code> displayed for the bundle&rsquo;s index page is <code>leaf_bundle_to_layout</code>.
-The resource <code>post_1.md</code> is also associated with this type within the context of the bundle.</li>
+The resource <code>content-1.md</code> is also associated with this type within the context of the bundle.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span>{{/* Check if `type` front matter changed the resource type */}}
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span><span>{{ with .ResourceType }}
@@ -910,7 +912,7 @@ The resource <code>post_1.md</code> is also associated with this type within the
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39</span><span>{{ with $subpage.Page.Type }}
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40</span><span>  &lt;<span style="color:#f92672">div</span>&gt;Page type: {{ . }} &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- leaf_bundle_to_layout --&gt;</span>
 </span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41</span><span>{{ end }}
-</span></span></code></pre></div><p>Check the results in the rendered <a href="/leaf_bundle_to_layout/"><code>content/en/leaf_bundle_to_layout/</code></a> website.</p>
+</span></span></code></pre></div><p>Check the results in the rendered <a href="/leaf_bundle_to_layout/"><code>public/leaf_bundle_to_layout/index.html</code></a> website.</p>
 <p>This demonstrates that the <code>type</code> front matter affects template selection and page metadata (<code>Page.Type</code>)
 but does not alter the fundamental <strong>resource type</strong> of the files within the bundle.</p>
 <h5 id="the-key-distinction-pagetype-vs-resourceresourcetype">The key distinction: <code>Page.Type</code> vs. <code>Resource.ResourceType</code></h5>
@@ -926,11 +928,11 @@ This property is a low-level technical classification of the file&rsquo;s format
 This can be a <code>page</code>, <code>image</code>, <code>video</code>, etc.</p>
 <h5 id="the-accurate-description-of-our-scenario">The accurate description of our scenario</h5>
 <p>Therefore, the most precise description is:</p>
-<p><strong><code>post_1.md</code> is a resource of resource type <code>page</code></strong>,
+<p><strong><code>content-1.md</code> is a resource of resource type <code>page</code></strong>,
 accessible via the [<code>Resources</code>] method on the <code>Page</code> object.
 The <code>Page</code> object for the bundle has its <code>Type</code> set to <code>&quot;leaf_bundle_to_layout&quot;</code> via front matter,
 which dictates the template used to render the entire bundle.
-Hugo will not render <code>post_1.md</code> as an individual page because it is located inside a leaf bundle folder.</p>
+Hugo will not render <code>content-1.md</code> as an individual page because it is located inside a leaf bundle folder.</p>
 <h2 id="hugo-scroll-header-menus-to-any-page">Hugo Scroll: header menus to any page</h2>
 <p>We add items to the header menu in the Hugo Scroll theme.
 In the process, we will also learn how the footer menu links are edited.</p>

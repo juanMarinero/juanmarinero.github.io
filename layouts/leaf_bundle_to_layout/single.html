@@ -26,7 +26,7 @@
     </article>
 
     {{/* Render the resource's content directly */}}
-    {{ $subpage := .Resources.Get "post_1.md" }}
+    {{ $subpage := .Resources.Get "content-1.md" }}
     {{ if $subpage }}
       <article class="post page">
          <h2>{{ $subpage.Title }}</h2>
@@ -41,7 +41,7 @@
          {{ end }}
       </article>
     {{ else }}
-      <p>Debug: Resource 'post_1.md' not found.</p>
+      <p>Debug: Resource 'content-1.md' not found.</p>
     {{ end }}
 
   </main>
