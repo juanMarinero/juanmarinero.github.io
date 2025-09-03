@@ -487,6 +487,11 @@ If you need to consolidate the Hugo's content knowledges we have introduced, jus
 [The **most basic** possible **Hugo site**](https://til.simonwillison.net/hugo/basic).
 It's based on this [Gist](https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28).
 
+I recommend to the following 40+ minutes video by [Berkay Çubuk](https://www.youtube.com/@berkaycubuk) too.
+
+{{< youtube id=aSd_Ha5nDkM loading="lazy" >}}
+
+
 Finally, if you mastered everything till now, then try to understand further
 [headless page](https://gohugo.io/content-management/build-options/#example--headless-page) examples,
 not just the Hugo Scroll mainsite. For example:
