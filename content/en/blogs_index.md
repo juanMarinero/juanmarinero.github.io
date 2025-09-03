@@ -33,11 +33,8 @@ type: "section"
 
 ### Hugo
 
-
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
 <div class="blogs_index">
-
   <a href="/blogs/create_hugo_website/" class="no-underline-except-hover">
   How to <strong>create</strong> a <strong>Hugo-scroll web</strong>site
   </a>
@@ -59,17 +56,14 @@ type: "section"
   <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:
   <strong>system</strong>-wide setup <strong>& Hugo</strong> integration
   </a>
-
 </div>
 {{< /rawhtml >}}
 
 
 ### </> Web dev
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
 <div class="blogs_index">
-
   <a href="/blogs/color_picker/" class="no-underline-except-hover">
   🎨 <strong>Color picker</strong> enhanced
   </a>
@@ -81,28 +75,37 @@ type: "section"
 {{< /rawhtml >}}
 
 
+<!--
+   - ### 🐧GNU - Linux
+   - 
+   - {{< rawhtml >}}
+   - <div class="blogs_index">
+   -   <a href="/blogs/watcher_tree_files/" class="no-underline-except-hover">
+   -   A simple watcher for <strong>tree files</strong>
+   -   </a>
+   - </div>
+   - {{< /rawhtml >}}
+   -->
+
+
 ### 📚 Books
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
 <div class="blogs_index">
-
   <a href="/blogs/tolkien/" class="no-underline-except-hover">
   <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 2.3rem;">Tolkien</span>:
   books, podcasts and much more!
   </a>
-
 </div>
 {{< /rawhtml >}}
 
 ### 🖼️ Image editing
 
-<!-- Read layouts/shortcodes/rawhtml.html to insert raw HTML -->
 {{< rawhtml >}}
 <div class="blogs_index">
-
   <a href="/blogs/instagram_mosaic/" class="no-underline-except-hover">
-  Create an <strong>Instagram mosaic</strong> on the terminal</a>
+  Create an <strong>Instagram mosaic</strong> on the terminal
+  </a>
   <br>
 </div>
 {{< /rawhtml >}}
