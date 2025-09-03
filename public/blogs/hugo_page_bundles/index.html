@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="5243">
+  <meta itemprop="wordCount" content="6212">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -268,6 +268,9 @@ window.MathJax = {
 </ul>
 </li>
 <li><a href="/blogs/hugo_page_bundles/#hugo-scroll-header-menus-to-any-page">Hugo Scroll: header menus to any page</a></li>
+<li><a href="/blogs/hugo_page_bundles/#list-pages-not-rendered">List pages not rendered</a></li>
+<li><a href="/blogs/hugo_page_bundles/#the-hugo-list-all-command">The <code>hugo list all</code> command</a></li>
+<li><a href="/blogs/hugo_page_bundles/#further-recommended-content">Further recommended content</a></li>
 </ul>
 <p>In this post, we&rsquo;ll take a closer look at how Hugo really works and explore the ins and outs of page bundles.</p>
 <p>We cover:</p>
@@ -381,7 +384,7 @@ Notice that <code>post_1.md</code> is not found.</p>
 <li>Run <code>touch content/en/leaf_bundle_to_branch_bundle/_index.md</code></li>
 <li>Remove the rendered files <code>rm -rf public/leaf_bundle_to_branch_bundle/</code>.
 Or use the <a href="https://gohugo.io/commands/hugo/#:~:text=%2D%2D-,cleanDestinationDir,-remove%20files%20from"><code>cleanDestinationDir</code></a> in next step:
-<code>hugo server --disableFastRender --gc --cleanDestinationDir</code></li>
+<code>hugo server --disableFastRender --gc --cleanDestinationDir --ignoreCache</code></li>
 <li>Run <code>hugo server --disableFastRender</code></li>
 </ol>
 <p>The <a href="/leaf_bundle_to_branch_bundle/post_1/"><code>post_1.md</code></a> link will work.</p>
@@ -409,39 +412,12 @@ Or use the <a href="https://gohugo.io/commands/hugo/#:~:text=%2D%2D-,cleanDestin
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The <code>post_1</code> now does yes appear in the JSON because it&rsquo;s become a regular page (<code>kind</code> field is <code>page</code>) within the branch bundle.
 It&rsquo;s rendered to <code>public/leaf_bundle_to_branch_bundle/post_1/index.html</code>.</p>
-<p>An image is worth a thousand words, this <a href="https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/">post</a> gives a quick visual explanation.</p>
-<img src="https://tangenttechnologies.ca/media/1420/hugo-branch-bundle.png" alt="_index.md and branch bundles" style="width:50%;"><p>The same <a href="https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/">post</a> states that</p>
-
-
-
-  <blockquote>
-    <p>An <code>index.html</code> file is also generated in the <em>posts</em> folder, but it&rsquo;s html content is generated using the <code>list.html</code> template in the theme.</p>
-  </blockquote>
-
-<p>This statement does not apply to the Hugo Scroll theme, which is a Single-Page Application (SPA) theme.
-<code>_index.md</code> is <strong>not rendered</strong> in <strong>Hugo Scroll</strong>.
-This theme is not designed to render traditional Hugo sections or pages in the standard way,
-it&rsquo;s meant to:</p>
-<ul>
-<li>Render the homepage from the homepage <em>headless bundle</em>.
-Explained later in <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a>.
-Here the <code>_index</code> scripts is yes <strong>rendered</strong>.
-We already show this in the CSV output above for <code>content/en/_index.md</code>.</li>
-<li>Render everything else using the <code>single.html</code> template.
-Read <a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">Hugo Scroll dedicated pages</a> section.</li>
-</ul>
-<p>Then, no surprise that Hugo Scroll
-<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html"><code>layouts/_default/list.html</code></a>
-is empty.
-As overview examples, from simpler to complexer, check:</p>
-<ul>
-<li><a href="https://github.com/yihui/hugo-xmin">Hugo XMin</a>&rsquo;s
-<a href="https://github.com/yihui/hugo-xmin/blob/master/layouts/list.html"><code>list.html</code></a></li>
-<li><a href="https://github.com/luizdepra/hugo-coder">Hugo Coder</a>&rsquo;s
-<a href="https://github.com/luizdepra/hugo-coder/blob/main/layouts/list.html"><code>list.html</code></a>.</li>
-<li><a href="https://github.com/adityatelange/hugo-PaperMod">Hugo PaperMod</a>&rsquo;s
-<a href="https://github.com/adityatelange/hugo-PaperMod/blob/master/layouts/_default/list.html">one</a>,</li>
-</ul>
+<p>But <code>content/en/leaf_bundle_to_branch_bundle/_index.md</code> is not rendered (to <code>public/leaf_bundle_to_branch_bundle/index.html</code>)
+because <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4"><code>hugo.toml</code></a>
+disable <code>section</code> pages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#586e75"># This is a &#34;one page&#34;-website, so we do not need these kinds of pages...</span>
+</span></span><span style="display:flex;"><span>disableKinds = [<span style="color:#2aa198">&#34;section&#34;</span>, <span style="color:#2aa198">&#34;taxonomy&#34;</span>, <span style="color:#2aa198">&#34;term&#34;</span>, <span style="color:#2aa198">&#34;RSS&#34;</span>, <span style="color:#2aa198">&#34;robotsTXT&#34;</span>]
+</span></span></code></pre></div><p>We deal with this sceneario in the unit <a href="/blogs/hugo_page_bundles/#list-pages-not-rendered">List pages not rendered</a>.</p>
 <p>And what about the <code>index</code> page?
 Well, in the first place,
 can you have both <code>index.md</code> and <code>_index.md</code> <strong>in the same directory?</strong> Long story short, <strong>no</strong>
@@ -1049,6 +1025,173 @@ Therefore, the footer menu link points to this later page (and not to a external
 <a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/baseof.html"><code>layouts/_default/baseof.html</code></a>
 (shown <a href="/blogs/hugo_page_bundles/#hugo-template-inheritance-how-baseofhtml-integrates-indexhtml-main-block">here</a>)
 executes this code and injects the resulting footer menu into the page.</p>
+<h2 id="list-pages-not-rendered">List pages not rendered</h2>
+<h3 id="render-lists-vs-sap">Render lists vs SAP</h3>
+<p>The rendering of next branch bundle <code>content/posts/</code> (left side of next tree file representations) is:</p>
+<ul>
+<li>The next <strong>left</strong> image if the Hugo&rsquo;s <code>hugo.toml</code>-<code>disableKinds</code> does <strong>not</strong> include <code>&quot;section&quot;</code>. This is the standard.</li>
+<li>The next <strong>right</strong> image if the Hugo&rsquo;s <code>hugo.toml</code>-<code>disableKinds</code> does <strong>yes</strong> include <code>&quot;section&quot;</code>.
+For example in the Hugo Scroll <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4">demo</a>.</li>
+</ul>
+
+
+  <table class="data-table">
+    <tr>
+      <td class="data-cell">
+        <img
+          src="/images/blogs/hugo_page_bundles/hugo_branch_standar_render.png"
+          alt="SAP. _index.md and branch bundles if layouts/_default/index.html if hugo.toml disableKinds does not include 'section'-s"
+          class="table-image">
+      </td>
+      <td class="data-cell">
+        <img
+          src="/images/blogs/hugo_page_bundles/hugo_branch_SAP.png"
+          alt="_index.md and branch bundles if layouts/_default/index.html hugo.toml disableKinds does yes include 'section'-s"
+          class="table-image">
+      </td>
+    </tr>
+  </table>
+
+
+<h3 id="hugo-scroll-is-a-sap">Hugo Scroll is a SAP</h3>
+<p>The Hugo Scroll theme is coded to be a Single-Page Application (SPA)
+because <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4"><code>exampleSite/hugo.toml</code></a>
+sets <code>disableKinds = [&quot;section&quot;, [...]]</code>.</p>
+<p>In summary, it&rsquo;s meant to:</p>
+<ul>
+<li>Render the homepage from the homepage <em>headless bundle</em>.
+Explained in the <a href="/blogs/hugo_page_bundles/#hugo-scroll-mainsite">Hugo Scroll mainsite</a> section.
+Here the <code>_index</code> scripts is yes <strong>rendered</strong>.
+We already show this in the CSV output above for <code>content/en/_index.md</code>.</li>
+<li>Render everything else using the <code>single.html</code> template.
+Read <a href="/blogs/hugo_page_bundles/#hugo-scroll-dedicated-pages">Hugo Scroll dedicated pages</a> paragraph.</li>
+</ul>
+<p>Then, no surprise that Hugo Scroll
+<a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html"><code>layouts/_default/list.html</code></a>
+is empty.</p>
+<h4 id="how-to-reverse-this">How to reverse this</h4>
+<ol>
+<li>Edit your <code>hugo.toml</code>-<code>disableKinds</code> line: remove the chars <code>&quot;section&quot; </code>.</li>
+<li>Edit your <code>layouts/_default/list.html</code> to next.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ define <span style="color:#2aa198">&#34;main&#34;</span> }}
+</span></span><span style="display:flex;"><span>&lt;div class=<span style="color:#2aa198">&#34;container&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;h1&gt;{{ .Title }}&lt;<span style="color:#719e07">/</span>h1&gt;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  &lt;ul&gt;
+</span></span><span style="display:flex;"><span>    {{ <span style="color:#719e07">range</span> .Pages }}
+</span></span><span style="display:flex;"><span>      &lt;li&gt;
+</span></span><span style="display:flex;"><span>        &lt;a href=<span style="color:#2aa198">&#34;{{ .RelPermalink }}&#34;</span>&gt;{{ .Title }}&lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#719e07">/</span>li&gt;
+</span></span><span style="display:flex;"><span>    {{ end }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>ul&gt;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  {{ .Content }}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#719e07">/</span>div&gt;
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><ol start="3">
+<li>Build. Run <code>hugo server --disableFastRender</code>.</li>
+<li>Check <code>public/posts/_index.html</code> is rendered, view it in the browser via <a href="http://localhost:1313/posts/">http://localhost:1313/posts/</a>.</li>
+</ol>
+<p>The previous <code>list.html</code> is basic. Read other template alternatives, for example next ones are sorted by complexity.</p>
+<ul>
+<li><a href="https://github.com/yihui/hugo-xmin">Hugo XMin</a>&rsquo;s
+<a href="https://github.com/yihui/hugo-xmin/blob/master/layouts/list.html"><code>list.html</code></a></li>
+<li><a href="https://github.com/luizdepra/hugo-coder">Hugo Coder</a>&rsquo;s
+<a href="https://github.com/luizdepra/hugo-coder/blob/main/layouts/list.html"><code>list.html</code></a>.</li>
+<li><a href="https://github.com/adityatelange/hugo-PaperMod">Hugo PaperMod</a>&rsquo;s
+<a href="https://github.com/adityatelange/hugo-PaperMod/blob/master/layouts/_default/list.html"><code>list.html</code></a>,</li>
+</ul>
+<h4 id="workaround-in-sap-projects">Workaround in SAP projects</h4>
+<p>This very website you are reading is thanks to the branch bundle <a href="https://github.com/juanMarinero/juanmarinero.github.io/tree/main/content/en/blogs"><code>content/en/blogs/</code></a>.</p>
+<p>In this Hugo project
+<code>hugo.toml</code>-<code>disableKinds</code> contains <code>&quot;section&quot;</code>.
+Thus, each <code>_index.md</code> <strong>branch page</strong>, for example the one in the <code>content/en/blogs/</code> branch bundle, is <strong>not rendered</strong>.
+I.e. <code>public/blogs/index.html</code> is not generated, and therefore <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> should show 404 (which is not the case because it&rsquo;s aliased as I clarify below).</p>
+<p>This could be easily fixed following the steps of previous section, but:</p>
+<ul>
+<li>I am not sure what <code>list.html</code> layout would suit me. Or the one I need is too complex as I explain below.</li>
+<li>I want to manually edit the markdown that lists my posts.
+These posts are the markdowns contained in the folder <code>content/en/blogs/</code>.
+Sidenote, it&rsquo;s <code>blogs/</code> and not <code>posts/</code> because I write about different thematics like coding, books and travel;
+I consider every topic a blog (which contains posts).</li>
+</ul>
+<p>To manually edit my list of posts I just use the dedicated page
+<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/content/en/blogs_index.md"><code>content/en/blogs_index.md</code></a>,
+whose layout renderer is <code>single.html</code>.</p>
+<p>The proccess is, as I said, manual. I write the blogs—topic— headers and their respectives links to the proper posts.
+For example, for my blog about books the header and first post link are coded in my list of posts (<code>blogs_index.md</code>) with:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">### 📚 Books
+
+{{&lt; rawhtml &gt;}}
+&lt;div class=&#34;blogs_index&#34;&gt;
+  &lt;a href=&#34;/blogs/tolkien/&#34; class=&#34;no-underline-except-hover&#34;&gt;
+  &lt;span style=&#34;font-family: &#39;MiddleEarth JoannaVu&#39;, cursive; font-size: 2.3rem;&#34;&gt;Tolkien&lt;/span&gt;:
+  books, podcasts and much more!
+  &lt;/a&gt;
+&lt;/div&gt;
+{{&lt; /rawhtml &gt;}}
+</code></pre><p>Finally in <code>content/en/blogs_index.md</code> front matter, one can either:</p>
+<ul>
+<li>Add next array of <a href="https://gohugo.io/content-management/front-matter/#aliases"><code>aliases</code></a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>aliases: 
+</span></span><span style="display:flex;"><span>- blogs
+</span></span></code></pre></div><ul>
+<li>Or set the <a href="https://gohugo.io/content-management/front-matter/#url"><code>url</code></a> front matter to <code>&quot;blogs/&quot;</code>.</li>
+</ul>
+<p>The first option redirects <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (which is no longer a 404) to <a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a>.
+So, both links are accesibles.</p>
+<p>The later approach just enables <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (<a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a> would show a 404).
+Now, the
+<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html"><code>public/blogs_index/index.html</code></a> is still generated.
+But also <code>public/blogs/index.html</code> is created as a client-side redirect!
+Its <code>&lt;head&gt;</code> tag redirects to the <code>blogs_index/</code> URL:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">html</span> lang<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">title</span>&gt;http://localhost:1313/blogs_index/&lt;/<span style="color:#268bd2">title</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;canonical&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;http://localhost:1313/blogs_index/&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">meta</span> name<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;robots&#34;</span> content<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;noindex&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">meta</span> charset<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;utf-8&#34;</span>&gt;
+</span></span><span style="display:flex; background-color:#19404a"><span>    &lt;<span style="color:#268bd2">meta</span> http-equiv<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;refresh&#34;</span> content<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0; url=http://localhost:1313/blogs_index/&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">html</span>&gt;
+</span></span></code></pre></div><p>Note. <code>&lt;link rel=&quot;canonical&quot; href=&quot;http://localhost:1313/blogs_index/&quot;&gt;</code>
+does <strong>not redirects</strong>.
+Instead, it is a signal to search engines saying: <em>This URL is the preferred (canonical) version of this page.</em>
+It helps avoid duplicate content issues by telling search engines which URL to index and display in search results.</p>
+<p>I choose the first option. Because the <em>shock</em> that produces me that:</p>
+<ul>
+<li>A post&rsquo;s URL ends in <code>/blogs/&lt;post-name&gt;</code></li>
+<li>Meanwhile, the URL shown in the browser for the list of posts ends in <code>/blogs_index/</code> (for both links because of the alias redirection).
+This <em>surprises</em> me because the natural URL of the list, in a non SAP website, would simply end in <code>/blogs/</code> —and I must have a minor obsession with order, hehe.</li>
+</ul>
+<p>I kind of like this <em>shock</em> because it servers as an efficient reminder that the list of posts
+is not generated automatically via a <code>list.html</code> layout.
+It&rsquo;s my duty to keep it up to date,
+which I happily do because so I customize the order of these links as I write more posts.</p>
+<p>To give you an idea, suppose I have just three posts in the &ldquo;books&rdquo; blog.
+I wrote a post about Tolkien,
+then another about a different author (e.g. Shakespeare),
+and then again other concering Middle Earth.
+Now I want the first link followed by the third (boths of same sub-topic) in the list of posts,
+and not chronologically sorted obtained if
+these posts had same <code>weight</code> front matter and my <code>list.html</code> layout just uses the collection of pages pre-sort
+(more about this default pre-sort <a href="/blogs/hugo_page_bundles/#how-the-layout-template-operates">here</a>).</p>
+<p>Of course,
+I could code a <code>list.html</code> layout that checks a non-official <code>topic</code> front matter (set it in previous three posts to &ldquo;books&rdquo;),
+then add another <code>sub-topic</code> front matter (e.g. previous posts would have here &ldquo;Tolkien&rdquo;, &ldquo;Shakespeare&rdquo; and &ldquo;Tokien&rdquo; respectively).
+And finally, if same topic and same sub-topic, then sort by the <code>weigth</code> front matter (and/or by <code>date</code>).
+Though the <code>topic</code> can be skipped if I reorder every post markdown into a folder of its topic, which is not the case since I am not sure,
+e.g. the blog about web-dev might in future be splitted into NodeJS and Deno and I don&rsquo;t want (for now) to have to reorder the script locations,
+nor the links to these posts coded in other pages (like when a post invites to read another post).
+In conclusion, this proposed layout would be quite complex, and for now my manual strategy is enough.</p>
+<p>Notice, though, that this whole proccess —manual updating of a list of posts— would be too tedious if I had hundreds of posts or if I wrote many every day.
+I could even lose track of a no-<a href="https://gohugo.io/methods/page/draft/">draft</a> post and fortget to add it to the list.
+It can also happen that I forget to comment out links to posts that shouldn&rsquo;t be visible in the list, for example the drafts.
+Thus, in this high production of posts scenario, copying/populating the <code>list.html</code> layout that automatically lists the posts would be more convenient and efficient.
+Work smart, not hard.</p>
 <h2 id="the-hugo-list-all-command">The <code>hugo list all</code> command</h2>
 <p><a href="https://gohugo.io/commands/hugo_list_all/"><code>hugo list all</code></a> displays, in CSV format, values related to Hugo&rsquo;s internal <a href="https://gohugo.io/methods/page/"><code>Page</code></a> object:</p>
 <ul>

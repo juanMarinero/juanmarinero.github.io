@@ -1,5 +1,7 @@
 ---
 title: "JM - Blogs"
+aliases:
+- blogs
 
 # I want this to be a dedicated website, e.g. like https://zjedi.github.io/hugo-scroll/services/ which renders content/en/services.md
 # And not a section of the main-website, e.g. like https://zjedi.github.io/hugo-scroll/#contact  which renders content/en/homepage/contact.md

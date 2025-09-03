@@ -95,7 +95,7 @@ The local preview and [Instagram](https://www.instagram.com/juanmarinerotarazona
 {{< rawhtml >}}
   <table class="data-table">
     <tr>
-      <td class="data-cell image-cell">
+      <td class="data-cell">
         <img src="/images/blogs/instagram_mosaic/screenshot_preview_final_imgs_01.png" alt="screenshot_preview_final_imgs_01.PNG" class="table-image">
       </td>
       <td class="data-cell">

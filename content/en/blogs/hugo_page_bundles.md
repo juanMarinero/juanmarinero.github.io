@@ -16,6 +16,9 @@ Table of contents:
   * [The `type` front matter bypassing](#the-type-front-matter-bypassing)
   * [Custom layouts for a leaf bundle](#custom-layouts-for-a-leaf-bundle)
 * [Hugo Scroll: header menus to any page](#hugo-scroll-header-menus-to-any-page)
+* [List pages not rendered](#list-pages-not-rendered)
+* [The `hugo list all` command](#the-hugo-list-all-command)
+* [Further recommended content](#further-recommended-content)
 
 
 In this post, we'll take a closer look at how Hugo really works and explore the ins and outs of page bundles.
@@ -144,7 +147,7 @@ Create `_index.md` converting the `leaf_bundle_to_branch_bundle` directory, a *l
 5. Run `touch content/en/leaf_bundle_to_branch_bundle/_index.md`
 6. Remove the rendered files `rm -rf public/leaf_bundle_to_branch_bundle/`.
 Or use the [`cleanDestinationDir`](https://gohugo.io/commands/hugo/#:~:text=%2D%2D-,cleanDestinationDir,-remove%20files%20from) in next step:
-`hugo server --disableFastRender --gc --cleanDestinationDir`
+`hugo server --disableFastRender --gc --cleanDestinationDir --ignoreCache`
 7. Run `hugo server --disableFastRender`
 
 The [`post_1.md`](/leaf_bundle_to_branch_bundle/post_1) link will work.
@@ -177,35 +180,16 @@ Run the previous `hugo list all` command again (the one with `jq`).
 The `post_1` now does yes appear in the JSON because it's become a regular page (`kind` field is `page`) within the branch bundle.
 It's rendered to `public/leaf_bundle_to_branch_bundle/post_1/index.html`.
 
-An image is worth a thousand words, this [post](https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/) gives a quick visual explanation.
+But `content/en/leaf_bundle_to_branch_bundle/_index.md` is not rendered (to `public/leaf_bundle_to_branch_bundle/index.html`)
+because [`hugo.toml`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4)
+disable `section` pages:
 
-![_index.md and branch bundles](https://tangenttechnologies.ca/media/1420/hugo-branch-bundle.png)
-{style="width:50%;"}
+```toml
+# This is a "one page"-website, so we do not need these kinds of pages...
+disableKinds = ["section", "taxonomy", "term", "RSS", "robotsTXT"]
+```
 
-The same [post](https://tangenttechnologies.ca/blog/hugo-indexmd-vs-_indexmd/) states that
-> An `index.html` file is also generated in the *posts* folder, but it's html content is generated using the `list.html` template in the theme.
-
-This statement does not apply to the Hugo Scroll theme, which is a Single-Page Application (SPA) theme.
-`_index.md` is **not rendered** in **Hugo Scroll**.
-This theme is not designed to render traditional Hugo sections or pages in the standard way,
-it's meant to:
-- Render the homepage from the homepage *headless bundle*.
-Explained later in [Hugo Scroll mainsite](#hugo-scroll-mainsite).
-Here the `_index` scripts is yes **rendered**.
-We already show this in the CSV output above for `content/en/_index.md`.
-- Render everything else using the `single.html` template.
-Read [Hugo Scroll dedicated pages](#hugo-scroll-dedicated-pages) section.
-
-Then, no surprise that Hugo Scroll
-[`layouts/_default/list.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html)
-is empty.
-As overview examples, from simpler to complexer, check:
-- [Hugo XMin](https://github.com/yihui/hugo-xmin)'s
-[`list.html`](https://github.com/yihui/hugo-xmin/blob/master/layouts/list.html)
-- [Hugo Coder](https://github.com/luizdepra/hugo-coder)'s
-[`list.html`](https://github.com/luizdepra/hugo-coder/blob/main/layouts/list.html).
-- [Hugo PaperMod](https://github.com/adityatelange/hugo-PaperMod)'s
-[one](https://github.com/adityatelange/hugo-PaperMod/blob/master/layouts/_default/list.html),
+We deal with this sceneario in the unit [List pages not rendered](#list-pages-not-rendered).
 
 
 And what about the `index` page?
@@ -934,6 +918,194 @@ Finally, the `{{- partial "footer.html" . -}}` call in
 [`layouts/_default/baseof.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/baseof.html)
 (shown [here](#hugo-template-inheritance-how-baseofhtml-integrates-indexhtml-main-block))
 executes this code and injects the resulting footer menu into the page.
+
+
+## List pages not rendered
+
+### Render lists vs SAP
+
+The rendering of next branch bundle `content/posts/` (left side of next tree file representations) is:
+- The next **left** image if the Hugo's `hugo.toml`-`disableKinds` does **not** include `"section"`. This is the standard.
+- The next **right** image if the Hugo's `hugo.toml`-`disableKinds` does **yes** include `"section"`.
+For example in the Hugo Scroll [demo](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4).
+
+{{< rawhtml >}}
+  <table class="data-table">
+    <tr>
+      <td class="data-cell">
+        <img
+          src="/images/blogs/hugo_page_bundles/hugo_branch_standar_render.png"
+          alt="SAP. _index.md and branch bundles if layouts/_default/index.html if hugo.toml disableKinds does not include 'section'-s"
+          class="table-image">
+      </td>
+      <td class="data-cell">
+        <img
+          src="/images/blogs/hugo_page_bundles/hugo_branch_SAP.png"
+          alt="_index.md and branch bundles if layouts/_default/index.html hugo.toml disableKinds does yes include 'section'-s"
+          class="table-image">
+      </td>
+    </tr>
+  </table>
+{{< /rawhtml >}}
+
+### Hugo Scroll is a SAP
+
+The Hugo Scroll theme is coded to be a Single-Page Application (SPA)
+because [`exampleSite/hugo.toml`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/exampleSite/hugo.toml#L4)
+sets `disableKinds = ["section", [...]]`.
+
+In summary, it's meant to:
+- Render the homepage from the homepage *headless bundle*.
+Explained in the [Hugo Scroll mainsite](#hugo-scroll-mainsite) section.
+Here the `_index` scripts is yes **rendered**.
+We already show this in the CSV output above for `content/en/_index.md`.
+- Render everything else using the `single.html` template.
+Read [Hugo Scroll dedicated pages](#hugo-scroll-dedicated-pages) paragraph.
+
+Then, no surprise that Hugo Scroll
+[`layouts/_default/list.html`](https://github.com/zjedi/hugo-scroll/blob/master/layouts/_default/list.html)
+is empty.
+
+
+#### How to reverse this
+
+1. Edit your `hugo.toml`-`disableKinds` line: remove the chars `"section" `.
+2. Edit your `layouts/_default/list.html` to next.
+
+```go
+{{ define "main" }}
+<div class="container">
+  <h1>{{ .Title }}</h1>
+  
+  <ul>
+    {{ range .Pages }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+  
+  {{ .Content }}
+</div>
+{{ end }}
+```
+
+3. Build. Run `hugo server --disableFastRender`.
+4. Check `public/posts/_index.html` is rendered, view it in the browser via [http://localhost:1313/posts/](http://localhost:1313/posts/).
+
+The previous `list.html` is basic. Read other template alternatives, for example next ones are sorted by complexity.
+- [Hugo XMin](https://github.com/yihui/hugo-xmin)'s
+[`list.html`](https://github.com/yihui/hugo-xmin/blob/master/layouts/list.html)
+- [Hugo Coder](https://github.com/luizdepra/hugo-coder)'s
+[`list.html`](https://github.com/luizdepra/hugo-coder/blob/main/layouts/list.html).
+- [Hugo PaperMod](https://github.com/adityatelange/hugo-PaperMod)'s
+[`list.html`](https://github.com/adityatelange/hugo-PaperMod/blob/master/layouts/_default/list.html),
+
+#### Workaround in SAP projects
+
+This very website you are reading is thanks to the branch bundle [`content/en/blogs/`](https://github.com/juanMarinero/juanmarinero.github.io/tree/main/content/en/blogs).
+
+In this Hugo project
+`hugo.toml`-`disableKinds` contains `"section"`.
+Thus, each `_index.md` **branch page**, for example the one in the `content/en/blogs/` branch bundle, is **not rendered**.
+I.e. `public/blogs/index.html` is not generated, and therefore https://juanmarinero.github.io/blogs/ should show 404 (which is not the case because it's aliased as I clarify below).
+
+This could be easily fixed following the steps of previous section, but:
+- I am not sure what `list.html` layout would suit me. Or the one I need is too complex as I explain below.
+- I want to manually edit the markdown that lists my posts.
+These posts are the markdowns contained in the folder `content/en/blogs/`.
+Sidenote, it's `blogs/` and not `posts/` because I write about different thematics like coding, books and travel;
+I consider every topic a blog (which contains posts). 
+
+To manually edit my list of posts I just use the dedicated page
+[`content/en/blogs_index.md`](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/content/en/blogs_index.md),
+whose layout renderer is `single.html`.
+
+The proccess is, as I said, manual. I write the blogs—topic— headers and their respectives links to the proper posts.
+For example, for my blog about books the header and first post link are coded in my list of posts (`blogs_index.md`) with:
+
+```texts
+### 📚 Books
+
+{{</* rawhtml */>}}
+<div class="blogs_index">
+  <a href="/blogs/tolkien/" class="no-underline-except-hover">
+  <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 2.3rem;">Tolkien</span>:
+  books, podcasts and much more!
+  </a>
+</div>
+{{</* /rawhtml */>}}
+```
+
+Finally in `content/en/blogs_index.md` front matter, one can either:
+- Add next array of [`aliases`](https://gohugo.io/content-management/front-matter/#aliases)
+```toml
+aliases: 
+- blogs
+```
+- Or set the [`url`](https://gohugo.io/content-management/front-matter/#url) front matter to `"blogs/"`.
+
+The first option redirects https://juanmarinero.github.io/blogs/ (which is no longer a 404) to https://juanmarinero.github.io/blogs_index/.
+So, both links are accesibles.
+
+The later approach just enables https://juanmarinero.github.io/blogs/ (https://juanmarinero.github.io/blogs_index/ would show a 404).
+Now, the
+[`public/blogs_index/index.html`](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html) is still generated.
+But also `public/blogs/index.html` is created as a client-side redirect!
+Its `<head>` tag redirects to the `blogs_index/` URL:
+
+
+```html {hl_lines="8"}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>http://localhost:1313/blogs_index/</title>
+    <link rel="canonical" href="http://localhost:1313/blogs_index/">
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=http://localhost:1313/blogs_index/">
+  </head>
+</html>
+```
+
+Note. `<link rel="canonical" href="http://localhost:1313/blogs_index/">`
+does **not redirects**.
+Instead, it is a signal to search engines saying: *This URL is the preferred (canonical) version of this page.*
+It helps avoid duplicate content issues by telling search engines which URL to index and display in search results.
+
+I choose the first option. Because the *shock* that produces me that:
+- A post's URL ends in `/blogs/<post-name>`
+- Meanwhile, the URL shown in the browser for the list of posts ends in `/blogs_index/` (for both links because of the alias redirection).
+This *surprises* me because the natural URL of the list, in a non SAP website, would simply end in `/blogs/` —and I must have a minor obsession with order, hehe.
+
+I kind of like this *shock* because it servers as an efficient reminder that the list of posts
+is not generated automatically via a `list.html` layout.
+It's my duty to keep it up to date,
+which I happily do because so I customize the order of these links as I write more posts.
+
+To give you an idea, suppose I have just three posts in the "books" blog.
+I wrote a post about Tolkien,
+then another about a different author (e.g. Shakespeare),
+and then again other concering Middle Earth.
+Now I want the first link followed by the third (boths of same sub-topic) in the list of posts,
+and not chronologically sorted obtained if
+these posts had same `weight` front matter and my `list.html` layout just uses the collection of pages pre-sort
+(more about this default pre-sort [here](#how-the-layout-template-operates)).
+
+Of course,
+I could code a `list.html` layout that checks a non-official `topic` front matter (set it in previous three posts to "books"),
+then add another `sub-topic` front matter (e.g. previous posts would have here "Tolkien", "Shakespeare" and "Tokien" respectively).
+And finally, if same topic and same sub-topic, then sort by the `weigth` front matter (and/or by `date`).
+Though the `topic` can be skipped if I reorder every post markdown into a folder of its topic, which is not the case since I am not sure,
+e.g. the blog about web-dev might in future be splitted into NodeJS and Deno and I don't want (for now) to have to reorder the script locations,
+nor the links to these posts coded in other pages (like when a post invites to read another post).
+In conclusion, this proposed layout would be quite complex, and for now my manual strategy is enough.
+
+Notice, though, that this whole proccess —manual updating of a list of posts— would be too tedious if I had hundreds of posts or if I wrote many every day.
+I could even lose track of a no-[draft](https://gohugo.io/methods/page/draft/) post and fortget to add it to the list.
+It can also happen that I forget to comment out links to posts that shouldn't be visible in the list, for example the drafts.
+Thus, in this high production of posts scenario, copying/populating the `list.html` layout that automatically lists the posts would be more convenient and efficient.
+Work smart, not hard.
 
 
 ## The `hugo list all` command
