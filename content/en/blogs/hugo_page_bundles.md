@@ -1045,14 +1045,16 @@ aliases:
 ```
 - Or set the [`url`](https://gohugo.io/content-management/front-matter/#url) front matter to `"blogs/"`.
 
-The first option redirects https://juanmarinero.github.io/blogs/ (which is no longer a 404) to https://juanmarinero.github.io/blogs_index/.
-So, both links are accesibles.
-
 The later approach just enables https://juanmarinero.github.io/blogs/ (https://juanmarinero.github.io/blogs_index/ would show a 404).
-Now, the
-[`public/blogs_index/index.html`](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html) is still generated.
-But also `public/blogs/index.html` is created as a client-side redirect!
-Its `<head>` tag redirects to the `blogs_index/` URL:
+
+The first option is the one I used.
+It redirects https://juanmarinero.github.io/blogs/ (which is no longer a 404) to https://juanmarinero.github.io/blogs_index/.
+So, both links are accesibles.
+And consequently, not only the
+[`public/blogs_index/index.html`](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html) is still generated,
+but also 
+[`public/blogs/index.html`](https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs/index.html)
+is created as a client-side redirection to the `blogs_index` website:
 
 
 ```html {hl_lines="8"}

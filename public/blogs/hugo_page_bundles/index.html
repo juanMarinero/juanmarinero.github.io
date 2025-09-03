@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="6212">
+  <meta itemprop="wordCount" content="6217">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -1140,13 +1140,15 @@ For example, for my blog about books the header and first post link are coded in
 </span></span></code></pre></div><ul>
 <li>Or set the <a href="https://gohugo.io/content-management/front-matter/#url"><code>url</code></a> front matter to <code>&quot;blogs/&quot;</code>.</li>
 </ul>
-<p>The first option redirects <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (which is no longer a 404) to <a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a>.
-So, both links are accesibles.</p>
-<p>The later approach just enables <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (<a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a> would show a 404).
-Now, the
-<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html"><code>public/blogs_index/index.html</code></a> is still generated.
-But also <code>public/blogs/index.html</code> is created as a client-side redirect!
-Its <code>&lt;head&gt;</code> tag redirects to the <code>blogs_index/</code> URL:</p>
+<p>The later approach just enables <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (<a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a> would show a 404).</p>
+<p>The first option is the one I used.
+It redirects <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (which is no longer a 404) to <a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a>.
+So, both links are accesibles.
+And consequently, not only the
+<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs_index/index.html"><code>public/blogs_index/index.html</code></a> is still generated,
+but also
+<a href="https://github.com/juanMarinero/juanmarinero.github.io/blob/main/public/blogs/index.html"><code>public/blogs/index.html</code></a>
+is created as a client-side redirection to the <code>blogs_index</code> website:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">html</span> lang<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;en&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">head</span>&gt;
