@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="6229">
+  <meta itemprop="wordCount" content="7234">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -671,11 +671,13 @@ since its first line <code>{{ define &quot;main&quot; }}</code> is closed by a <
 <p>If you need to consolidate the Hugo&rsquo;s content knowledges we have introduced, just follow this 5 minutes tutorial building
 <a href="https://til.simonwillison.net/hugo/basic">The <strong>most basic</strong> possible <strong>Hugo site</strong></a>.
 It&rsquo;s based on this <a href="https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28">Gist</a>.</p>
-<p>I recommend to the following 40+ minutes video by <a href="https://www.youtube.com/@berkaycubuk">Berkay Çubuk</a> too.</p>
+<p>I recommend the following 40+ minutes video by <a href="https://www.youtube.com/@berkaycubuk">Berkay Çubuk</a> too.</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aSd_Ha5nDkM?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
     </div>
 
+<p>Giraffe Academy <a href="https://www.giraffeacademy.com/static-site-generators/hugo/block-templates/">Block Templates</a> 7 minutes video and post is good too.
+Complete it with his <a href="https://www.giraffeacademy.com/static-site-generators/hugo/partial-templates/">Partial Templates</a> post.</p>
 <p>Finally, if you mastered everything till now, then try to understand further
 <a href="https://gohugo.io/content-management/build-options/#example--headless-page">headless page</a> examples,
 not just the Hugo Scroll mainsite. For example:</p>
@@ -740,6 +742,19 @@ The <em>content types</em> definition already pointed a frequent use of the <cod
 change the <strong>template lookup order</strong> for a page.
 This is what we apply next.</p>
 <h3 id="custom-layouts-for-a-leaf-bundle">Custom layouts for a leaf bundle</h3>
+<p><a href="https://gohugo.io/templates/types/">https://gohugo.io/templates/types/</a></p>
+
+
+
+  <blockquote>
+    <p>A <em>section</em> template renders a list of pages within a <a href="https://gohugo.io/quick-reference/glossary/#section"><em>section</em></a>.</p>
+  </blockquote>
+
+<p>The idea is basically apply next 3 minutes video proccess in <em>leaf bundle</em>s.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/jrMClsB3VsY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
 <p>Remember next case scenario:</p>
 
 
@@ -1193,12 +1208,183 @@ And finally, if same topic and same sub-topic, then sort by the <code>weigth</co
 Though the <code>topic</code> can be skipped if I reorder every post markdown into a folder of its topic, which is not the case since I am not sure,
 e.g. the blog about web-dev might in future be splitted into NodeJS and Deno and I don&rsquo;t want (for now) to have to reorder the script locations,
 nor the links to these posts coded in other pages (like when a post invites to read another post).
+To group content together even if that content isn&rsquo;t in the same directory in the content folder,
+one can use <a href="https://www.giraffeacademy.com/static-site-generators/hugo/taxonomies/">taxonomies</a> (<code>hugo.toml</code>-<code>disableKinds</code> must not hindern us).
 In conclusion, this proposed layout would be quite complex, and for now my manual strategy is enough.</p>
 <p>Notice, though, that this whole proccess —manual updating of a list of posts— would be too tedious if I had hundreds of posts or if I wrote many every day.
 I could even lose track of a no-<a href="https://gohugo.io/methods/page/draft/">draft</a> post and fortget to add it to the list.
 It can also happen that I forget to comment out links to posts that shouldn&rsquo;t be visible in the list, for example the drafts.
 Thus, in this high production of posts scenario, copying/populating the <code>list.html</code> layout that automatically lists the posts would be more convenient and efficient.
 Work smart, not hard.</p>
+<h3 id="understanding-list-pages-and-its-template-hierarchy">Understanding list pages and its template hierarchy</h3>
+<p>In the <a href="/blogs/hugo_page_bundles/#introduction">introduction</a> we studied that:</p>
+<ul>
+<li>
+<p>A <a href="https://gohugo.io/content-management/sections/"><strong>section</strong></a>
+is a top-level content directory or any content directory containing an <code>_index.md</code> file.</p>
+</li>
+<li>
+<p>A <a href="https://gohugo.io/quick-reference/glossary/#list-page"><strong>list page</strong></a>
+is a type of page (a <code>Page</code> object) that is defined by its purpose: it receives and is designed to display a collection of other pages.
+Its <a href="https://gohugo.io/templates/introduction/#context">context</a> includes a collection of pages (e.g., <code>.Pages</code>, <code>.RegularPages</code>) that it is meant to list.</p>
+</li>
+</ul>
+<p>The <a href="https://gohugo.io/templates/types/#list">docs</a> also specify that a <em>list</em> template is a <strong>fallback</strong> for
+<a href="https://gohugo.io/templates/types/#home">home</a>,
+<a href="https://gohugo.io/templates/types/#section">section</a>,
+<a href="https://gohugo.io/templates/types/#taxonomy">taxonomy</a>, and
+<a href="https://gohugo.io/templates/types/#term">term</a> templates.
+If one of these template types does not exist, Hugo will look for a <em>list</em> template [<code>list.html</code>] instead.</p>
+<p>Why? Read <a href="https://gohugo.io/templates/lookup-order/">template lookup order</a>.</p>
+<p>This <em>list</em> template precedence hierarchy can be summarized as follows: <code>home &gt; section &gt; taxonomy &gt; term &gt; list</code>.</p>
+<p>We shall not confuse what&rsquo;s a <em>section</em> with what&rsquo;s a <em>list page</em> [rendered by <code>list.html</code>, <code>section.html</code> or another layout].</p>
+<p>So, a <em>list template</em> is a <em>sections</em>-index renderer.
+It can be <code>list.html</code>, <code>section.html</code> or another layout.
+Accusse me of repetitive, but I want to be clear as water: your <em>list template</em> might <strong>not</strong> be <code>list.html</code>.</p>
+<h4 id="practical-demonstration-template-lookup-order-in-action">Practical demonstration: template lookup order in action</h4>
+<p>Let&rsquo;s code a Minimal Working Example continuing the previous one that populated the <code>list.html</code> layout.</p>
+<p>We&rsquo;ll have a <code>list.html</code> layout and a <code>section.html</code> layout, but no <code>home.html</code> nor <code>taxonomy.html</code> nor <code>term.html</code>.
+Therefore, the <em>list</em> template that renders all <em>sections</em>-indexes is <code>section.html</code>.
+We already know it, but we are gona check it.</p>
+<p>First edit your <code>hugo.toml</code>-<code>disableKinds</code> line: remove the chars <code>&quot;section&quot; </code>.</p>
+<p>Then, if not already done, populate the <code>list.html</code> layout as explained in this <a href="/blogs/hugo_page_bundles/#how-to-reverse-this">previous paragraph</a>.</p>
+<p>We can just use a copy of <code>list.html</code> and rename it to <code>section.html</code>.
+Then modify it to display a new <code>&lt;h1&gt;</code> so we know which layout rendered each list page.
+This&rsquo;s coded in the second line because <code>{{ define &quot;main&quot; }}</code> (first line of layout) and its <code>{{ end }}</code> (at EOF) must wrap all.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> layouts/_default <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> cp list.html section.html <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> sed -i <span style="color:#2aa198">&#39;1a &lt;h1&gt;Rendered by section.html&lt;/h1&gt;&#39;</span> section.html <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> head section.html <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">cd</span> -
+</span></span></code></pre></div><p>Create the <code>articles/</code> directory and scripts:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># content/en/ not needed in path</span>
+</span></span><span style="display:flex;"><span>hugo new articles/article-one.md
+</span></span><span style="display:flex;"><span>hugo new articles/article-two.md
+</span></span></code></pre></div><p>Let&rsquo;s inspect them with <code>cat</code> or <a href="https://github.com/sharkdp/bat"><code>bat</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>bat content/en/articles/*
+</span></span></code></pre></div><p>Echo:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">───────┬─────────────────────────────────────────
+       │ File: content/en/articles/article-one.md
+───────┼─────────────────────────────────────────
+   1   │ ---
+   2   │ title: &#39;Article One&#39;
+   3   │ ---
+   4   │ 
+   5   │ This is a page about »Article One«.
+───────┴─────────────────────────────────────────
+───────┬─────────────────────────────────────────
+       │ File: content/en/articles/article-two.md
+───────┼─────────────────────────────────────────
+   1   │ ---
+   2   │ title: &#39;Article Two&#39;
+   3   │ ---
+   4   │ 
+   5   │ This is a page about »Article Two«.
+───────┴────────────────────────────────────────
+</code></pre><p>The <code>archetypes/default.md</code> layout is responsable for this front matter and content.
+It&rsquo;s:</p>
+<pre tabindex="0"><code class="language-texts" data-lang="texts">---
+title: &#39;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#39;
+---
+
+This is a page about »{{ replace .Name &#34;-&#34; &#34; &#34; | title }}«.
+</code></pre><p>Create the <code>projects/</code> directory and scripts:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo new projects/project-alpha.md
+</span></span><span style="display:flex;"><span>hugo new projects/project-beta.md
+</span></span><span style="display:flex;"><span>hugo new projects/_index.md
+</span></span><span style="display:flex;"><span>bat content/en/projects/* <span style="color:#586e75"># inspect</span>
+</span></span></code></pre></div><p>We are ready to build the site with <code>hugo server --disableFastRender</code>.</p>
+<p>Verify that:</p>
+<ul>
+<li><code>public/articles/_index.html</code> is rendered by <code>section.html</code>, view it in the browser via <a href="http://localhost:1313/articles/">http://localhost:1313/articles/</a>.</li>
+<li><code>public/projects/_index.html</code> is rendered by <code>section.html</code> too, browse it with <a href="http://localhost:1313/projects/">http://localhost:1313/projects/</a>.</li>
+</ul>
+<p>Let&rsquo;s summarize our findings.</p>
+<p><code>layouts/_default/</code> holds both <code>section.html</code> and <code>list.html</code>. The first has priority over the second to render a <em>list</em> page.</p>
+<p>Our testing project has a <code>projects/</code> section with <code>_index.md</code> (a branch bundle)
+and <code>articles/</code> as a section without <code>_index.md</code> (a leaf bundle).
+Run <code>tree public/articles public/projects</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>content/en/
+</span></span><span style="display:flex;"><span>├── _index.md            # 🏠 Homepage
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── projects/            # 🌿 A section directory
+</span></span><span style="display:flex;"><span>│   ├── _index.md        # Projects section page
+</span></span><span style="display:flex;"><span>│   ├── project-alpha.md # ...uses section.html
+</span></span><span style="display:flex;"><span>│   └── project-beta.md
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── articles/            # 🍃 Leaf bundle
+</span></span><span style="display:flex;"><span>    │                    # Projects section page
+</span></span><span style="display:flex;"><span>    ├── article-one.md   # ...uses section.html
+</span></span><span style="display:flex;"><span>    └── article-two.md
+</span></span></code></pre></div><p>Hugo builds:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>public/
+</span></span><span style="display:flex;"><span>├── index.html         # 🏠 Homepage by index.html
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── projects/          # 🌿
+</span></span><span style="display:flex;"><span>│   ├── index.html     # Rendered by section.html ❗
+</span></span><span style="display:flex;"><span>│   ├── project-alpha/
+</span></span><span style="display:flex;"><span>│   │   └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>│   └── project-beta/
+</span></span><span style="display:flex;"><span>│       └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── articles/          # 🍃
+</span></span><span style="display:flex;"><span>    ├── index.html     # Rendered by section.html ❗
+</span></span><span style="display:flex;"><span>    ├── article-one/
+</span></span><span style="display:flex;"><span>    │   └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>    └── article-two/
+</span></span><span style="display:flex;"><span>        └── index.html # Single page by single.html
+</span></span></code></pre></div><h4 id="overriding-template-selection-with-front-matter">Overriding template selection with front matter</h4>
+<p>We already saw how to use a <a href="/blogs/hugo_page_bundles/#custom-layouts-for-a-leaf-bundle">Custom layouts for a leaf bundle</a>.</p>
+<p>Now the scenario is not quite the same:</p>
+<ul>
+<li>It&rsquo;s a branch bundle.</li>
+<li>And we solve the requirement with an standard template (located in <code>layouts/_default/</code>).</li>
+</ul>
+<p>For our case it&rsquo;s enough to add <code>layout: &quot;list&quot;</code> to the front matter of <code>content/en/projects/_index.md</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sed -i <span style="color:#2aa198">&#39;2a layout: &#34;list&#34;&#39;</span> content/en/projects/_index.md
+</span></span></code></pre></div><p><code>cat content/en/projects/_index.md</code> prints the script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#39;Projects&#39;
+</span></span><span style="display:flex;"><span>layout: &#34;list&#34;
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This is a page about »Projects«.
+</span></span></code></pre></div><p>Re-build the site with <code>hugo server --disableFastRender</code>. Audit that:</p>
+<ul>
+<li><code>public/articles/_index.html</code> is still rendered by <code>section.html</code>, <a href="http://localhost:1313/articles/">http://localhost:1313/articles/</a>.</li>
+<li><code>public/projects/_index.html</code> is now rendered by <code>list.html</code>, <a href="http://localhost:1313/projects/">http://localhost:1313/projects/</a>.</li>
+</ul>
+<p>Therefore, the same file structure is rendered differently.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>content/
+</span></span><span style="display:flex;"><span>├── _index.md            # 🏠 
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── projects/            # 🌿
+</span></span><span style="display:flex;"><span>│   ├── _index.md        # layout front matter
+</span></span><span style="display:flex;"><span>│   ├── project-alpha.md # ...set to &#34;list&#34;
+</span></span><span style="display:flex;"><span>│   └── project-beta.md
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── articles/            # 🍃
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    ├── article-one.md
+</span></span><span style="display:flex;"><span>    └── article-two.md
+</span></span></code></pre></div><p>Notice the exclamation marks emojis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>public/
+</span></span><span style="display:flex;"><span>├── index.html         # 🏠 Homepage by index.html
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── projects/          # 🌿
+</span></span><span style="display:flex;"><span>│   ├── index.html     # Rendered by list.html ‼️
+</span></span><span style="display:flex;"><span>│   ├── project-alpha/
+</span></span><span style="display:flex;"><span>│   │   └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>│   └── project-beta/
+</span></span><span style="display:flex;"><span>│       └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└── articles/          # 🍃
+</span></span><span style="display:flex;"><span>    ├── index.html     # Rendered by section.html ❗
+</span></span><span style="display:flex;"><span>    ├── article-one/
+</span></span><span style="display:flex;"><span>    │   └── index.html # Single page by single.html
+</span></span><span style="display:flex;"><span>    └── article-two/
+</span></span><span style="display:flex;"><span>        └── index.html # Single page by single.html
+</span></span></code></pre></div><p>Challenge! Without removing <code>list.html</code> generate <code>public/articles/_index.html</code> with <code>section.html</code>.</p>
 <h2 id="the-hugo-list-all-command">The <code>hugo list all</code> command</h2>
 <p><a href="https://gohugo.io/commands/hugo_list_all/"><code>hugo list all</code></a> displays, in CSV format, values related to Hugo&rsquo;s internal <a href="https://gohugo.io/methods/page/"><code>Page</code></a> object:</p>
 <ul>

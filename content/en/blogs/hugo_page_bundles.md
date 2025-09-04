@@ -487,9 +487,12 @@ If you need to consolidate the Hugo's content knowledges we have introduced, jus
 [The **most basic** possible **Hugo site**](https://til.simonwillison.net/hugo/basic).
 It's based on this [Gist](https://gist.github.com/simonw/6f7b6a40713b36749da845065985bb28).
 
-I recommend to the following 40+ minutes video by [Berkay Çubuk](https://www.youtube.com/@berkaycubuk) too.
+I recommend the following 40+ minutes video by [Berkay Çubuk](https://www.youtube.com/@berkaycubuk) too.
 
 {{< youtube id=aSd_Ha5nDkM loading="lazy" >}}
+
+Giraffe Academy [Block Templates](https://www.giraffeacademy.com/static-site-generators/hugo/block-templates/) 7 minutes video and post is good too.
+Complete it with his [Partial Templates](https://www.giraffeacademy.com/static-site-generators/hugo/partial-templates/) post.
 
 
 Finally, if you mastered everything till now, then try to understand further
@@ -566,6 +569,13 @@ This is what we apply next.
 
 
 ### Custom layouts for a leaf bundle
+
+https://gohugo.io/templates/types/
+> A *section* template renders a list of pages within a [*section*](https://gohugo.io/quick-reference/glossary/#section).
+
+The idea is basically apply next 3 minutes video proccess in *leaf bundle*s.
+
+{{< youtube id=jrMClsB3VsY loading="lazy" >}}
 
 Remember next case scenario:
 > These [`content-1.md`, `content-2`] are resources of resource type `page`, accessible via the [`Resources`] method on the `Page` object.
@@ -1106,6 +1116,8 @@ And finally, if same topic and same sub-topic, then sort by the `weigth` front m
 Though the `topic` can be skipped if I reorder every post markdown into a folder of its topic, which is not the case since I am not sure,
 e.g. the blog about web-dev might in future be splitted into NodeJS and Deno and I don't want (for now) to have to reorder the script locations,
 nor the links to these posts coded in other pages (like when a post invites to read another post).
+To group content together even if that content isn't in the same directory in the content folder,
+one can use [taxonomies](https://www.giraffeacademy.com/static-site-generators/hugo/taxonomies/) (`hugo.toml`-`disableKinds` must not hindern us).
 In conclusion, this proposed layout would be quite complex, and for now my manual strategy is enough.
 
 Notice, though, that this whole proccess —manual updating of a list of posts— would be too tedious if I had hundreds of posts or if I wrote many every day.
@@ -1113,6 +1125,236 @@ I could even lose track of a no-[draft](https://gohugo.io/methods/page/draft/) p
 It can also happen that I forget to comment out links to posts that shouldn't be visible in the list, for example the drafts.
 Thus, in this high production of posts scenario, copying/populating the `list.html` layout that automatically lists the posts would be more convenient and efficient.
 Work smart, not hard.
+
+
+### Understanding list pages and its template hierarchy
+
+In the [introduction](#introduction) we studied that:
+
+- A [**section**](https://gohugo.io/content-management/sections/)
+is a top-level content directory or any content directory containing an `_index.md` file.
+
+- A [**list page**](https://gohugo.io/quick-reference/glossary/#list-page)
+is a type of page (a `Page` object) that is defined by its purpose: it receives and is designed to display a collection of other pages.
+Its [context](https://gohugo.io/templates/introduction/#context) includes a collection of pages (e.g., `.Pages`, `.RegularPages`) that it is meant to list.
+
+The [docs](https://gohugo.io/templates/types/#list) also specify that a *list* template is a **fallback** for
+[home](https://gohugo.io/templates/types/#home),
+[section](https://gohugo.io/templates/types/#section),
+[taxonomy](https://gohugo.io/templates/types/#taxonomy), and
+[term](https://gohugo.io/templates/types/#term) templates.
+If one of these template types does not exist, Hugo will look for a *list* template [`list.html`] instead.
+
+Why? Read [template lookup order](https://gohugo.io/templates/lookup-order/).
+
+This *list* template precedence hierarchy can be summarized as follows: `home > section > taxonomy > term > list`.
+
+We shall not confuse what's a *section* with what's a *list page* [rendered by `list.html`, `section.html` or another layout].
+
+So, a *list template* is a *sections*-index renderer.
+It can be `list.html`, `section.html` or another layout.
+Accusse me of repetitive, but I want to be clear as water: your *list template* might **not** be `list.html`.
+
+
+#### Practical demonstration: template lookup order in action
+
+Let's code a Minimal Working Example continuing the previous one that populated the `list.html` layout.
+
+We'll have a `list.html` layout and a `section.html` layout, but no `home.html` nor `taxonomy.html` nor `term.html`.
+Therefore, the *list* template that renders all *sections*-indexes is `section.html`. 
+We already know it, but we are gona check it.
+
+First edit your `hugo.toml`-`disableKinds` line: remove the chars `"section" `.
+
+Then, if not already done, populate the `list.html` layout as explained in this [previous paragraph](#how-to-reverse-this).
+
+We can just use a copy of `list.html` and rename it to `section.html`.
+Then modify it to display a new `<h1>` so we know which layout rendered each list page.
+This's coded in the second line because `{{ define "main" }}` (first line of layout) and its `{{ end }}` (at EOF) must wrap all.
+
+
+```sh
+cd layouts/_default \
+  && cp list.html section.html \
+  && sed -i '1a <h1>Rendered by section.html</h1>' section.html \
+  && head section.html \
+  && cd -
+```
+
+Create the `articles/` directory and scripts:
+
+```sh
+# content/en/ not needed in path
+hugo new articles/article-one.md
+hugo new articles/article-two.md
+```
+
+Let's inspect them with `cat` or [`bat`](https://github.com/sharkdp/bat):
+```sh
+bat content/en/articles/*
+```
+
+Echo:
+
+```texts
+───────┬─────────────────────────────────────────
+       │ File: content/en/articles/article-one.md
+───────┼─────────────────────────────────────────
+   1   │ ---
+   2   │ title: 'Article One'
+   3   │ ---
+   4   │ 
+   5   │ This is a page about »Article One«.
+───────┴─────────────────────────────────────────
+───────┬─────────────────────────────────────────
+       │ File: content/en/articles/article-two.md
+───────┼─────────────────────────────────────────
+   1   │ ---
+   2   │ title: 'Article Two'
+   3   │ ---
+   4   │ 
+   5   │ This is a page about »Article Two«.
+───────┴────────────────────────────────────────
+```
+
+The `archetypes/default.md` layout is responsable for this front matter and content.
+It's:
+
+
+```texts
+---
+title: '{{ replace .Name "-" " " | title }}'
+---
+
+This is a page about »{{ replace .Name "-" " " | title }}«.
+```
+
+Create the `projects/` directory and scripts:
+
+```sh
+hugo new projects/project-alpha.md
+hugo new projects/project-beta.md
+hugo new projects/_index.md
+bat content/en/projects/* # inspect
+```
+
+We are ready to build the site with `hugo server --disableFastRender`.
+
+Verify that:
+- `public/articles/_index.html` is rendered by `section.html`, view it in the browser via [http://localhost:1313/articles/](http://localhost:1313/articles/).
+- `public/projects/_index.html` is rendered by `section.html` too, browse it with [http://localhost:1313/projects/](http://localhost:1313/projects/).
+
+Let's summarize our findings.
+
+`layouts/_default/` holds both `section.html` and `list.html`. The first has priority over the second to render a *list* page.
+
+Our testing project has a `projects/` section with `_index.md` (a branch bundle)
+and `articles/` as a section without `_index.md` (a leaf bundle).
+Run `tree public/articles public/projects`:
+```text
+content/en/
+├── _index.md            # 🏠 Homepage
+│
+├── projects/            # 🌿 A section directory
+│   ├── _index.md        # Projects section page
+│   ├── project-alpha.md # ...uses section.html
+│   └── project-beta.md
+│
+└── articles/            # 🍃 Leaf bundle
+    │                    # Projects section page
+    ├── article-one.md   # ...uses section.html
+    └── article-two.md
+```
+
+Hugo builds:
+```text
+public/
+├── index.html         # 🏠 Homepage by index.html
+│
+├── projects/          # 🌿
+│   ├── index.html     # Rendered by section.html ❗
+│   ├── project-alpha/
+│   │   └── index.html # Single page by single.html
+│   └── project-beta/
+│       └── index.html # Single page by single.html
+│
+└── articles/          # 🍃
+    ├── index.html     # Rendered by section.html ❗
+    ├── article-one/
+    │   └── index.html # Single page by single.html
+    └── article-two/
+        └── index.html # Single page by single.html
+```
+
+
+#### Overriding template selection with front matter
+
+We already saw how to use a [Custom layouts for a leaf bundle](#custom-layouts-for-a-leaf-bundle).
+
+Now the scenario is not quite the same:
+- It's a branch bundle.
+- And we solve the requirement with an standard template (located in `layouts/_default/`).
+
+For our case it's enough to add `layout: "list"` to the front matter of `content/en/projects/_index.md`:
+
+```sh
+sed -i '2a layout: "list"' content/en/projects/_index.md
+```
+
+`cat content/en/projects/_index.md` prints the script:
+
+```text
+---
+title: 'Projects'
+layout: "list"
+---
+
+This is a page about »Projects«.
+```
+
+
+Re-build the site with `hugo server --disableFastRender`. Audit that:
+- `public/articles/_index.html` is still rendered by `section.html`, [http://localhost:1313/articles/](http://localhost:1313/articles/).
+- `public/projects/_index.html` is now rendered by `list.html`, [http://localhost:1313/projects/](http://localhost:1313/projects/).
+
+Therefore, the same file structure is rendered differently.
+
+```text
+content/
+├── _index.md            # 🏠 
+│
+├── projects/            # 🌿
+│   ├── _index.md        # layout front matter
+│   ├── project-alpha.md # ...set to "list"
+│   └── project-beta.md
+│
+└── articles/            # 🍃
+    │
+    ├── article-one.md
+    └── article-two.md
+```
+
+Notice the exclamation marks emojis.
+```text
+public/
+├── index.html         # 🏠 Homepage by index.html
+│
+├── projects/          # 🌿
+│   ├── index.html     # Rendered by list.html ‼️
+│   ├── project-alpha/
+│   │   └── index.html # Single page by single.html
+│   └── project-beta/
+│       └── index.html # Single page by single.html
+│
+└── articles/          # 🍃
+    ├── index.html     # Rendered by section.html ❗
+    ├── article-one/
+    │   └── index.html # Single page by single.html
+    └── article-two/
+        └── index.html # Single page by single.html
+```
+
+Challenge! Without removing `list.html` generate `public/articles/_index.html` with `section.html`.
 
 
 ## The `hugo list all` command
