@@ -541,9 +541,20 @@ In the language directory, for example `public/en/` edit the `sitemap.xml` file.
 
 ### CSS
 
+Previously we copied the content of `content/`, `assets/` and `hugo.toml` from the Hugo Scroll example site.
+Let's now copy next HTML file to customize it.
+
+```sh
+hugo_scroll_exampleSite="themes/hugo-scroll/exampleSite"
+custom_head_dir="layouts/partials"
+mkdir -p "$custom_head_dir"
+cp -v "$hugo_scroll_exampleSite"/"$custom_head_dir"/custom_head.html "$custom_head_dir"/
+```
+
+
 `layouts/partials/custom_head.html` shows how to add CSS code:
-- directly in that file, just below comment line `Custom CSS via inline styles` add an `style` tag not commented (not wrapped inside `<!--` - `-->`) for example `<style>fontsize=1.2</style>` to increase every text size a 20%
-- and/or via a *css* file, read commentes in the file
+- Directly in that file, just below comment line `Custom CSS via inline styles` add an `style` tag not commented (not wrapped inside `<!--` - `-->`) for example `<style>fontsize=1.2</style>` to increase every text size a 20%
+- And/or via a *css* file, read commentes in the file
 
 Check original CSS style in `themes/hugo-scroll/assets/css/`.
 For example to change background colors of odd sections edit `themes/hugo-scroll/assets/css/variables.scss`, its `--section-dark-bg-color`.

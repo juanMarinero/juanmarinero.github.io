@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
   <meta itemprop="description" content="A step-by-step beginner’s guide on how to build websites with Hugo, covering installation, theme selection, writing Markdown content, and free deployment.">
-  <meta itemprop="wordCount" content="3897">
+  <meta itemprop="wordCount" content="3931">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,static site generator,build a website,Jamstack,web development,GitHub Pages,markdown,Go templates,open source,fast websites,content management,front matter,themes,deployment,command line,git,web design,tutorial,step-by-step guide,blogging,developer tools,responsive design,HTML,CSS,Go programming language">
 
@@ -740,10 +740,16 @@ header_use_video: false
 
 <p>In the language directory, for example <code>public/en/</code> edit the <code>sitemap.xml</code> file.</p>
 <h3 id="css">CSS</h3>
-<p><code>layouts/partials/custom_head.html</code> shows how to add CSS code:</p>
+<p>Previously we copied the content of <code>content/</code>, <code>assets/</code> and <code>hugo.toml</code> from the Hugo Scroll example site.
+Let&rsquo;s now copy next HTML file to customize it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#268bd2">hugo_scroll_exampleSite</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;themes/hugo-scroll/exampleSite&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">custom_head_dir</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;layouts/partials&#34;</span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$custom_head_dir</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>cp -v <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/<span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$custom_head_dir</span><span style="color:#2aa198">&#34;</span>/custom_head.html <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$custom_head_dir</span><span style="color:#2aa198">&#34;</span>/
+</span></span></code></pre></div><p><code>layouts/partials/custom_head.html</code> shows how to add CSS code:</p>
 <ul>
-<li>directly in that file, just below comment line <code>Custom CSS via inline styles</code> add an <code>style</code> tag not commented (not wrapped inside <code>&lt;!--</code> - <code>--&gt;</code>) for example <code>&lt;style&gt;fontsize=1.2&lt;/style&gt;</code> to increase every text size a 20%</li>
-<li>and/or via a <em>css</em> file, read commentes in the file</li>
+<li>Directly in that file, just below comment line <code>Custom CSS via inline styles</code> add an <code>style</code> tag not commented (not wrapped inside <code>&lt;!--</code> - <code>--&gt;</code>) for example <code>&lt;style&gt;fontsize=1.2&lt;/style&gt;</code> to increase every text size a 20%</li>
+<li>And/or via a <em>css</em> file, read commentes in the file</li>
 </ul>
 <p>Check original CSS style in <code>themes/hugo-scroll/assets/css/</code>.
 For example to change background colors of odd sections edit <code>themes/hugo-scroll/assets/css/variables.scss</code>, its <code>--section-dark-bg-color</code>.
