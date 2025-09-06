@@ -16,7 +16,6 @@ keywords: ["Hugo", "static site generator", "build a website", "Jamstack", "web 
 2. [Create a Hugo site with the hugo-scroll theme](#create-a-hugo-site-with-the-hugo-scroll-theme)
 3. [Get the zjedi/hugo-scroll website](#get-the-zjedihugo-scroll-website)
 4. [Customize](#customize)
-   * [Remove git dirs](#remove-git-dirs)
    * [Order of markdowns](#order-of-markdowns)
    * [hugo.toml](#hugotoml)
    * [Favicons, header-logo and cover-image](#favicons-header-logo-and-cover-image)
@@ -301,13 +300,13 @@ https://github.com/zjedi/hugo-scroll#-installation says:
 
 ```sh
 cd ~/Downloads/quickstart
-hugo_scroll_dir=$HOME/Downloads/hugo-scroll
-git clone --depth 1 https://github.com/zjedi/hugo-scroll.git "$hugo_scroll_dir"
-cp -r "$hugo_scroll_dir"/exampleSite/* .
-hugo server
+hugo_scroll_exampleSite=themes/hugo-scroll/exampleSite
+cp -rv "$hugo_scroll_exampleSite"/content/* content/
+cp -rv "$hugo_scroll_exampleSite"/assets/* assets/
+cp -v "$hugo_scroll_exampleSite"/hugo.toml .
 ```
 
-This should output like
+Run `hugo server --disableFastRender`.
 
 ```
 Watching for changes in <path>/quickstart/{archetypes,assets,content,data,i18n,layouts,static,themes}
@@ -329,25 +328,13 @@ hugo v0.148.0-c0d9bebacc6bf42a91a74d8bb0de7bc775c8e573+extended linux/amd64 Buil
 Built in 4793 ms
 Environment: "development"
 Serving pages from disk
-Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) 
-Press Ctrl+C to stop
 ```
 
-And the local website [http://localhost:1313/](http://localhost:1313/) should be like [this](https://zjedi.github.io/hugo-scroll/).
+Now we succeeded! Our local website [http://localhost:1313/](http://localhost:1313/) it's like the Hugo Scroll [demo site](https://zjedi.github.io/hugo-scroll/)!
 
 
 ## Customize
-
-### Remove git dirs
-
-The easiest way is to edit little by little the content of the [zjedi/hugo-scroll](https://github.com/zjedi/hugo-scroll) repo to your needs.
-```sh
-rm -rf .git .github exampleSite images CHANGELOG.md contributing.md LICENSE package.json package-lock.json README.md .prettierignore .prettierrc.json theme.toml netlify.toml
-git init
-```
-
-And check that `hugo server` still works.
 
 
 ### Order of markdowns

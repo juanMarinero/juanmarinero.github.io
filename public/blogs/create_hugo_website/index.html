@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
   <meta itemprop="description" content="A step-by-step beginner’s guide on how to build websites with Hugo, covering installation, theme selection, writing Markdown content, and free deployment.">
-  <meta itemprop="wordCount" content="3958">
+  <meta itemprop="wordCount" content="3897">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,static site generator,build a website,Jamstack,web development,GitHub Pages,markdown,Go templates,open source,fast websites,content management,front matter,themes,deployment,command line,git,web design,tutorial,step-by-step guide,blogging,developer tools,responsive design,HTML,CSS,Go programming language">
 
@@ -269,7 +269,6 @@ window.MathJax = {
 <li><a href="/blogs/create_hugo_website/#get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</a></li>
 <li><a href="/blogs/create_hugo_website/#customize">Customize</a>
 <ul>
-<li><a href="/blogs/create_hugo_website/#remove-git-dirs">Remove git dirs</a></li>
 <li><a href="/blogs/create_hugo_website/#order-of-markdowns">Order of markdowns</a></li>
 <li><a href="/blogs/create_hugo_website/#hugotoml">hugo.toml</a></li>
 <li><a href="/blogs/create_hugo_website/#favicons-header-logo-and-cover-image">Favicons, header-logo and cover-image</a></li>
@@ -507,11 +506,11 @@ Press Ctrl+C to stop
   </blockquote>
 
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> ~/Downloads/quickstart
-</span></span><span style="display:flex;"><span><span style="color:#268bd2">hugo_scroll_dir</span><span style="color:#719e07">=</span><span style="color:#268bd2">$HOME</span>/Downloads/hugo-scroll
-</span></span><span style="display:flex;"><span>git clone --depth <span style="color:#2aa198">1</span> https://github.com/zjedi/hugo-scroll.git <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_dir</span><span style="color:#2aa198">&#34;</span>
-</span></span><span style="display:flex;"><span>cp -r <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_dir</span><span style="color:#2aa198">&#34;</span>/exampleSite/* .
-</span></span><span style="display:flex;"><span>hugo server
-</span></span></code></pre></div><p>This should output like</p>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">hugo_scroll_exampleSite</span><span style="color:#719e07">=</span>themes/hugo-scroll/exampleSite
+</span></span><span style="display:flex;"><span>cp -rv <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/content/* content/
+</span></span><span style="display:flex;"><span>cp -rv <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/assets/* assets/
+</span></span><span style="display:flex;"><span>cp -v <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/hugo.toml .
+</span></span></code></pre></div><p>Run <code>hugo server --disableFastRender</code>.</p>
 <pre tabindex="0"><code>Watching for changes in &lt;path&gt;/quickstart/{archetypes,assets,content,data,i18n,layouts,static,themes}
 Watching for config changes in &lt;path&gt;/quickstart/hugo.toml
 Start building sites … 
@@ -531,16 +530,9 @@ hugo v0.148.0-c0d9bebacc6bf42a91a74d8bb0de7bc775c8e573+extended linux/amd64 Buil
 Built in 4793 ms
 Environment: &#34;development&#34;
 Serving pages from disk
-Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) 
-Press Ctrl+C to stop
-</code></pre><p>And the local website <a href="http://localhost:1313/">http://localhost:1313/</a> should be like <a href="https://zjedi.github.io/hugo-scroll/">this</a>.</p>
+</code></pre><p>Now we succeeded! Our local website <a href="http://localhost:1313/">http://localhost:1313/</a> it&rsquo;s like the Hugo Scroll <a href="https://zjedi.github.io/hugo-scroll/">demo site</a>!</p>
 <h2 id="customize">Customize</h2>
-<h3 id="remove-git-dirs">Remove git dirs</h3>
-<p>The easiest way is to edit little by little the content of the <a href="https://github.com/zjedi/hugo-scroll">zjedi/hugo-scroll</a> repo to your needs.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rm -rf .git .github exampleSite images CHANGELOG.md contributing.md LICENSE package.json package-lock.json README.md .prettierignore .prettierrc.json theme.toml netlify.toml
-</span></span><span style="display:flex;"><span>git init
-</span></span></code></pre></div><p>And check that <code>hugo server</code> still works.</p>
 <h3 id="order-of-markdowns">Order of markdowns</h3>
 <p>The website sections are sorted by the <code>weigtht</code> metadata.
 Details in my post concerning <a href="/blogs/hugo_page_bundles/#how-the-layout-template-operates">Hugo bundle pages</a>.</p>
