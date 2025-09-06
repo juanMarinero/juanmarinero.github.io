@@ -43,8 +43,10 @@ For now, let's focus on the following distinctions:
 - A [**leaf bundle**](https://gohugo.io/content-management/page-bundles/#leaf-bundles)
 is a directory that contains an `index.md` file and zero or more resources. It has no descendants.
 
-- A [**branch bundle**](https://gohugo.io/content-management/page-bundles/#branch-bundles)
-is a directory that contains an `_index.md` file and zero or more resources.
+- A [**branch bundle**](https://gohugo.io/content-management/page-bundles/#branch-bundles):
+  - It's a directory that contains an `_index.md` file and zero or more resources.
+  - Analogous to a physical branch, a branch bundle may have descendants including *leaf bundles* and other *branch bundles*.
+  - Top-level directories with or without `_index.md` files are also *branch bundles*. This includes the home page.
 
 - A [**section**](https://gohugo.io/content-management/sections/)
 is a top-level content directory or any content directory containing an `_index.md` file.
@@ -1144,25 +1146,33 @@ The [docs](https://gohugo.io/templates/types/#list) also specify that a *list* t
 [taxonomy](https://gohugo.io/templates/types/#taxonomy), and
 [term](https://gohugo.io/templates/types/#term) templates.
 If one of these template types does not exist, Hugo will look for a *list* template [`list.html`] instead.
+The *list* template precedence hierarchy can be summarized as follows: `home > section > taxonomy > term > list`.
 
 Why? Read [template lookup order](https://gohugo.io/templates/lookup-order/).
 
-This *list* template precedence hierarchy can be summarized as follows: `home > section > taxonomy > term > list`.
+So, a *list template* is a layout template (`list.html`, `section.html`,...) used to render index pages for collections of content.
+While these collections are often **sections**, a *list template* also renders other types of index pages that are *not* sections.
 
-We shall not confuse what's a *section* with what's a *list page* [rendered by `list.html`, `section.html` or another layout].
+A collection of content can be a *branch bundle*.
+Remember from the [introduction](#introduction) that a [**branch bundle**](https://gohugo.io/content-management/page-bundles/#branch-bundles)
+might be a top-level directories with or without `_index.md` files. This includes the home page.
 
-So, a *list template* is a *sections*-index renderer.
-It can be `list.html`, `section.html` or another layout.
-Accusse me of repetitive, but I want to be clear as water: your *list template* might **not** be `list.html`.
+Therefore, if without a `_index.md` file, this mentioned top-level folder is **not a section**.
+
+Sidenote. The *home page* is a special *list page* that's rendered, if possible, by `layouts/index.html` or `layouts/_default/index.html`,
+following the same principle of template specificity (`home > section > ...`).
 
 
 #### Practical demonstration: template lookup order in action
 
 Let's code a Minimal Working Example continuing the previous one that populated the `list.html` layout.
+Thus, we'll have both `list.html` and a `section.html` layout templates.
 
-We'll have a `list.html` layout and a `section.html` layout, but no `home.html` nor `taxonomy.html` nor `term.html`.
-Therefore, the *list* template that renders all *sections*-indexes is `section.html`. 
-We already know it, but we are gona check it.
+For any content directory (branch bundle) that generates a list page,
+Hugo will use the most specific available template according to its lookup order.
+Since we have a `section.html` template and no more specific templates, it will be used for both:
+1. True sections (directories with `_index.md`)
+2. Branch bundles that are not sections (directories without `_index.md`)
 
 First edit your `hugo.toml`-`disableKinds` line: remove the chars `"section" `.
 
@@ -1189,12 +1199,13 @@ hugo new articles/article-one.md
 hugo new articles/article-two.md
 ```
 
-Let's inspect them with `cat` or [`bat`](https://github.com/sharkdp/bat):
+Note that `content/en/articles/` is a *branch bundle* it's a top-level directories [with or] without `_index.md` file and it also lacks `index.md` (to be a *leaf bundle*).
+But not a *section* because it doesn't have an `_index.md` file.
+
+Let's inspect the markdowns with `cat` or [`bat`](https://github.com/sharkdp/bat):
 ```sh
 bat content/en/articles/*
 ```
-
-Echo:
 
 ```texts
 ───────┬─────────────────────────────────────────
@@ -1217,7 +1228,7 @@ Echo:
 ───────┴────────────────────────────────────────
 ```
 
-The `archetypes/default.md` layout is responsable for this front matter and content.
+The `archetypes/default.md` layout is responsible for the front matter and content.
 It's:
 
 
@@ -1238,6 +1249,8 @@ hugo new projects/_index.md
 bat content/en/projects/* # inspect
 ```
 
+This is obviously a *branch bundle*.
+
 We are ready to build the site with `hugo server --disableFastRender`.
 
 Verify that:
@@ -1248,9 +1261,18 @@ Let's summarize our findings.
 
 `layouts/_default/` holds both `section.html` and `list.html`. The first has priority over the second to render a *list* page.
 
-Our testing project has a `projects/` section with `_index.md` (a branch bundle)
-and `articles/` as a section without `_index.md` (a leaf bundle).
+Our testing project has:
+- A `projects/` section with `_index.md` (a branch bundle and section)
+- And `articles/` as a ~~section~~ content folder without `_index.md` (a branch bundle and **no** section).
+
+Although `articles/` is not a section (no `_index.md`),
+it is still rendered by `section.html` because Hugo treats any content directory as a potential list page,
+and since we have `section.html`, it is used for such directories due to the template lookup order.
+However, strictly speaking, only directories with `_index.md` are *sections*.
+Without `_index.md`, it is a branch bundle but not a section, but it still generates a list page that uses the section template if available.
+
 Run `tree public/articles public/projects`:
+
 ```text
 content/en/
 ├── _index.md            # 🏠 Homepage
@@ -1260,13 +1282,14 @@ content/en/
 │   ├── project-alpha.md # ...uses section.html
 │   └── project-beta.md
 │
-└── articles/            # 🍃 Leaf bundle
+└── articles/            # 🌿 Branch bundle but no section
     │                    # Projects section page
     ├── article-one.md   # ...uses section.html
     └── article-two.md
 ```
 
 Hugo builds:
+
 ```text
 public/
 ├── index.html         # 🏠 Homepage by index.html
@@ -1278,13 +1301,14 @@ public/
 │   └── project-beta/
 │       └── index.html # Single page by single.html
 │
-└── articles/          # 🍃
+└── articles/          # 🌿
     ├── index.html     # Rendered by section.html ❗
     ├── article-one/
     │   └── index.html # Single page by single.html
     └── article-two/
         └── index.html # Single page by single.html
 ```
+
 
 
 #### Overriding template selection with front matter
@@ -1328,7 +1352,7 @@ content/
 │   ├── project-alpha.md # ...set to "list"
 │   └── project-beta.md
 │
-└── articles/            # 🍃
+└── articles/            # 🌿
     │
     ├── article-one.md
     └── article-two.md
@@ -1346,7 +1370,7 @@ public/
 │   └── project-beta/
 │       └── index.html # Single page by single.html
 │
-└── articles/          # 🍃
+└── articles/          # 🌿
     ├── index.html     # Rendered by section.html ❗
     ├── article-one/
     │   └── index.html # Single page by single.html
@@ -1354,7 +1378,7 @@ public/
         └── index.html # Single page by single.html
 ```
 
-Challenge! Without removing `list.html` generate `public/articles/_index.html` with `section.html`.
+Challenge! Without removing `section.html` generate `public/articles/_index.html` with `list.html`.
 
 
 ## The `hugo list all` command

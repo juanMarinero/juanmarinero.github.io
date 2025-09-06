@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="7234">
+  <meta itemprop="wordCount" content="7486">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -183,7 +183,7 @@ blockquote.alert-caution *:not(p:first-of-type) {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/greatvibes/v20/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
 }
 </style>
 
@@ -299,8 +299,12 @@ As we advance, few more new concepts will be introduced.</p>
 is a directory that contains an <code>index.md</code> file and zero or more resources. It has no descendants.</p>
 </li>
 <li>
-<p>A <a href="https://gohugo.io/content-management/page-bundles/#branch-bundles"><strong>branch bundle</strong></a>
-is a directory that contains an <code>_index.md</code> file and zero or more resources.</p>
+<p>A <a href="https://gohugo.io/content-management/page-bundles/#branch-bundles"><strong>branch bundle</strong></a>:</p>
+<ul>
+<li>It&rsquo;s a directory that contains an <code>_index.md</code> file and zero or more resources.</li>
+<li>Analogous to a physical branch, a branch bundle may have descendants including <em>leaf bundles</em> and other <em>branch bundles</em>.</li>
+<li>Top-level directories with or without <code>_index.md</code> files are also <em>branch bundles</em>. This includes the home page.</li>
+</ul>
 </li>
 <li>
 <p>A <a href="https://gohugo.io/content-management/sections/"><strong>section</strong></a>
@@ -1234,18 +1238,27 @@ Its <a href="https://gohugo.io/templates/introduction/#context">context</a> incl
 <a href="https://gohugo.io/templates/types/#section">section</a>,
 <a href="https://gohugo.io/templates/types/#taxonomy">taxonomy</a>, and
 <a href="https://gohugo.io/templates/types/#term">term</a> templates.
-If one of these template types does not exist, Hugo will look for a <em>list</em> template [<code>list.html</code>] instead.</p>
+If one of these template types does not exist, Hugo will look for a <em>list</em> template [<code>list.html</code>] instead.
+The <em>list</em> template precedence hierarchy can be summarized as follows: <code>home &gt; section &gt; taxonomy &gt; term &gt; list</code>.</p>
 <p>Why? Read <a href="https://gohugo.io/templates/lookup-order/">template lookup order</a>.</p>
-<p>This <em>list</em> template precedence hierarchy can be summarized as follows: <code>home &gt; section &gt; taxonomy &gt; term &gt; list</code>.</p>
-<p>We shall not confuse what&rsquo;s a <em>section</em> with what&rsquo;s a <em>list page</em> [rendered by <code>list.html</code>, <code>section.html</code> or another layout].</p>
-<p>So, a <em>list template</em> is a <em>sections</em>-index renderer.
-It can be <code>list.html</code>, <code>section.html</code> or another layout.
-Accusse me of repetitive, but I want to be clear as water: your <em>list template</em> might <strong>not</strong> be <code>list.html</code>.</p>
+<p>So, a <em>list template</em> is a layout template (<code>list.html</code>, <code>section.html</code>,&hellip;) used to render index pages for collections of content.
+While these collections are often <strong>sections</strong>, a <em>list template</em> also renders other types of index pages that are <em>not</em> sections.</p>
+<p>A collection of content can be a <em>branch bundle</em>.
+Remember from the <a href="/blogs/hugo_page_bundles/#introduction">introduction</a> that a <a href="https://gohugo.io/content-management/page-bundles/#branch-bundles"><strong>branch bundle</strong></a>
+might be a top-level directories with or without <code>_index.md</code> files. This includes the home page.</p>
+<p>Therefore, if without a <code>_index.md</code> file, this mentioned top-level folder is <strong>not a section</strong>.</p>
+<p>Sidenote. The <em>home page</em> is a special <em>list page</em> that&rsquo;s rendered, if possible, by <code>layouts/index.html</code> or <code>layouts/_default/index.html</code>,
+following the same principle of template specificity (<code>home &gt; section &gt; ...</code>).</p>
 <h4 id="practical-demonstration-template-lookup-order-in-action">Practical demonstration: template lookup order in action</h4>
-<p>Let&rsquo;s code a Minimal Working Example continuing the previous one that populated the <code>list.html</code> layout.</p>
-<p>We&rsquo;ll have a <code>list.html</code> layout and a <code>section.html</code> layout, but no <code>home.html</code> nor <code>taxonomy.html</code> nor <code>term.html</code>.
-Therefore, the <em>list</em> template that renders all <em>sections</em>-indexes is <code>section.html</code>.
-We already know it, but we are gona check it.</p>
+<p>Let&rsquo;s code a Minimal Working Example continuing the previous one that populated the <code>list.html</code> layout.
+Thus, we&rsquo;ll have both <code>list.html</code> and a <code>section.html</code> layout templates.</p>
+<p>For any content directory (branch bundle) that generates a list page,
+Hugo will use the most specific available template according to its lookup order.
+Since we have a <code>section.html</code> template and no more specific templates, it will be used for both:</p>
+<ol>
+<li>True sections (directories with <code>_index.md</code>)</li>
+<li>Branch bundles that are not sections (directories without <code>_index.md</code>)</li>
+</ol>
 <p>First edit your <code>hugo.toml</code>-<code>disableKinds</code> line: remove the chars <code>&quot;section&quot; </code>.</p>
 <p>Then, if not already done, populate the <code>list.html</code> layout as explained in this <a href="/blogs/hugo_page_bundles/#how-to-reverse-this">previous paragraph</a>.</p>
 <p>We can just use a copy of <code>list.html</code> and rename it to <code>section.html</code>.
@@ -1260,10 +1273,11 @@ This&rsquo;s coded in the second line because <code>{{ define &quot;main&quot; }
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># content/en/ not needed in path</span>
 </span></span><span style="display:flex;"><span>hugo new articles/article-one.md
 </span></span><span style="display:flex;"><span>hugo new articles/article-two.md
-</span></span></code></pre></div><p>Let&rsquo;s inspect them with <code>cat</code> or <a href="https://github.com/sharkdp/bat"><code>bat</code></a>:</p>
+</span></span></code></pre></div><p>Note that <code>content/en/articles/</code> is a <em>branch bundle</em> it&rsquo;s a top-level directories [with or] without <code>_index.md</code> file and it also lacks <code>index.md</code> (to be a <em>leaf bundle</em>).
+But not a <em>section</em> because it doesn&rsquo;t have an <code>_index.md</code> file.</p>
+<p>Let&rsquo;s inspect the markdowns with <code>cat</code> or <a href="https://github.com/sharkdp/bat"><code>bat</code></a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>bat content/en/articles/*
-</span></span></code></pre></div><p>Echo:</p>
-<pre tabindex="0"><code class="language-texts" data-lang="texts">───────┬─────────────────────────────────────────
+</span></span></code></pre></div><pre tabindex="0"><code class="language-texts" data-lang="texts">───────┬─────────────────────────────────────────
        │ File: content/en/articles/article-one.md
 ───────┼─────────────────────────────────────────
    1   │ ---
@@ -1281,7 +1295,7 @@ This&rsquo;s coded in the second line because <code>{{ define &quot;main&quot; }
    4   │ 
    5   │ This is a page about »Article Two«.
 ───────┴────────────────────────────────────────
-</code></pre><p>The <code>archetypes/default.md</code> layout is responsable for this front matter and content.
+</code></pre><p>The <code>archetypes/default.md</code> layout is responsible for the front matter and content.
 It&rsquo;s:</p>
 <pre tabindex="0"><code class="language-texts" data-lang="texts">---
 title: &#39;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#39;
@@ -1293,7 +1307,8 @@ This is a page about »{{ replace .Name &#34;-&#34; &#34; &#34; | title }}«.
 </span></span><span style="display:flex;"><span>hugo new projects/project-beta.md
 </span></span><span style="display:flex;"><span>hugo new projects/_index.md
 </span></span><span style="display:flex;"><span>bat content/en/projects/* <span style="color:#586e75"># inspect</span>
-</span></span></code></pre></div><p>We are ready to build the site with <code>hugo server --disableFastRender</code>.</p>
+</span></span></code></pre></div><p>This is obviously a <em>branch bundle</em>.</p>
+<p>We are ready to build the site with <code>hugo server --disableFastRender</code>.</p>
 <p>Verify that:</p>
 <ul>
 <li><code>public/articles/_index.html</code> is rendered by <code>section.html</code>, view it in the browser via <a href="http://localhost:1313/articles/">http://localhost:1313/articles/</a>.</li>
@@ -1301,9 +1316,17 @@ This is a page about »{{ replace .Name &#34;-&#34; &#34; &#34; | title }}«.
 </ul>
 <p>Let&rsquo;s summarize our findings.</p>
 <p><code>layouts/_default/</code> holds both <code>section.html</code> and <code>list.html</code>. The first has priority over the second to render a <em>list</em> page.</p>
-<p>Our testing project has a <code>projects/</code> section with <code>_index.md</code> (a branch bundle)
-and <code>articles/</code> as a section without <code>_index.md</code> (a leaf bundle).
-Run <code>tree public/articles public/projects</code>:</p>
+<p>Our testing project has:</p>
+<ul>
+<li>A <code>projects/</code> section with <code>_index.md</code> (a branch bundle and section)</li>
+<li>And <code>articles/</code> as a <del>section</del> content folder without <code>_index.md</code> (a branch bundle and <strong>no</strong> section).</li>
+</ul>
+<p>Although <code>articles/</code> is not a section (no <code>_index.md</code>),
+it is still rendered by <code>section.html</code> because Hugo treats any content directory as a potential list page,
+and since we have <code>section.html</code>, it is used for such directories due to the template lookup order.
+However, strictly speaking, only directories with <code>_index.md</code> are <em>sections</em>.
+Without <code>_index.md</code>, it is a branch bundle but not a section, but it still generates a list page that uses the section template if available.</p>
+<p>Run <code>tree public/articles public/projects</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>content/en/
 </span></span><span style="display:flex;"><span>├── _index.md            # 🏠 Homepage
 </span></span><span style="display:flex;"><span>│
@@ -1312,7 +1335,7 @@ Run <code>tree public/articles public/projects</code>:</p>
 </span></span><span style="display:flex;"><span>│   ├── project-alpha.md # ...uses section.html
 </span></span><span style="display:flex;"><span>│   └── project-beta.md
 </span></span><span style="display:flex;"><span>│
-</span></span><span style="display:flex;"><span>└── articles/            # 🍃 Leaf bundle
+</span></span><span style="display:flex;"><span>└── articles/            # 🌿 Branch bundle but no section
 </span></span><span style="display:flex;"><span>    │                    # Projects section page
 </span></span><span style="display:flex;"><span>    ├── article-one.md   # ...uses section.html
 </span></span><span style="display:flex;"><span>    └── article-two.md
@@ -1327,7 +1350,7 @@ Run <code>tree public/articles public/projects</code>:</p>
 </span></span><span style="display:flex;"><span>│   └── project-beta/
 </span></span><span style="display:flex;"><span>│       └── index.html # Single page by single.html
 </span></span><span style="display:flex;"><span>│
-</span></span><span style="display:flex;"><span>└── articles/          # 🍃
+</span></span><span style="display:flex;"><span>└── articles/          # 🌿
 </span></span><span style="display:flex;"><span>    ├── index.html     # Rendered by section.html ❗
 </span></span><span style="display:flex;"><span>    ├── article-one/
 </span></span><span style="display:flex;"><span>    │   └── index.html # Single page by single.html
@@ -1363,7 +1386,7 @@ Run <code>tree public/articles public/projects</code>:</p>
 </span></span><span style="display:flex;"><span>│   ├── project-alpha.md # ...set to &#34;list&#34;
 </span></span><span style="display:flex;"><span>│   └── project-beta.md
 </span></span><span style="display:flex;"><span>│
-</span></span><span style="display:flex;"><span>└── articles/            # 🍃
+</span></span><span style="display:flex;"><span>└── articles/            # 🌿
 </span></span><span style="display:flex;"><span>    │
 </span></span><span style="display:flex;"><span>    ├── article-one.md
 </span></span><span style="display:flex;"><span>    └── article-two.md
@@ -1378,13 +1401,13 @@ Run <code>tree public/articles public/projects</code>:</p>
 </span></span><span style="display:flex;"><span>│   └── project-beta/
 </span></span><span style="display:flex;"><span>│       └── index.html # Single page by single.html
 </span></span><span style="display:flex;"><span>│
-</span></span><span style="display:flex;"><span>└── articles/          # 🍃
+</span></span><span style="display:flex;"><span>└── articles/          # 🌿
 </span></span><span style="display:flex;"><span>    ├── index.html     # Rendered by section.html ❗
 </span></span><span style="display:flex;"><span>    ├── article-one/
 </span></span><span style="display:flex;"><span>    │   └── index.html # Single page by single.html
 </span></span><span style="display:flex;"><span>    └── article-two/
 </span></span><span style="display:flex;"><span>        └── index.html # Single page by single.html
-</span></span></code></pre></div><p>Challenge! Without removing <code>list.html</code> generate <code>public/articles/_index.html</code> with <code>section.html</code>.</p>
+</span></span></code></pre></div><p>Challenge! Without removing <code>section.html</code> generate <code>public/articles/_index.html</code> with <code>list.html</code>.</p>
 <h2 id="the-hugo-list-all-command">The <code>hugo list all</code> command</h2>
 <p><a href="https://gohugo.io/commands/hugo_list_all/"><code>hugo list all</code></a> displays, in CSV format, values related to Hugo&rsquo;s internal <a href="https://gohugo.io/methods/page/"><code>Page</code></a> object:</p>
 <ul>
