@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
   <meta itemprop="description" content="A step-by-step beginner’s guide on how to build websites with Hugo, covering installation, theme selection, writing Markdown content, and free deployment.">
-  <meta itemprop="wordCount" content="3931">
+  <meta itemprop="wordCount" content="3940">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,static site generator,build a website,Jamstack,web development,GitHub Pages,markdown,Go templates,open source,fast websites,content management,front matter,themes,deployment,command line,git,web design,tutorial,step-by-step guide,blogging,developer tools,responsive design,HTML,CSS,Go programming language">
 
@@ -510,6 +510,7 @@ Press Ctrl+C to stop
 </span></span><span style="display:flex;"><span>cp -rv <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/content/* content/
 </span></span><span style="display:flex;"><span>cp -rv <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/assets/* assets/
 </span></span><span style="display:flex;"><span>cp -v <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$hugo_scroll_exampleSite</span><span style="color:#2aa198">&#34;</span>/hugo.toml .
+</span></span><span style="display:flex;"><span>rm -v archetypes/* <span style="color:#586e75"># to use the hugo-scroll ones</span>
 </span></span></code></pre></div><p>Run <code>hugo server --disableFastRender</code>.</p>
 <pre tabindex="0"><code>Watching for changes in &lt;path&gt;/quickstart/{archetypes,assets,content,data,i18n,layouts,static,themes}
 Watching for config changes in &lt;path&gt;/quickstart/hugo.toml

@@ -304,6 +304,7 @@ hugo_scroll_exampleSite=themes/hugo-scroll/exampleSite
 cp -rv "$hugo_scroll_exampleSite"/content/* content/
 cp -rv "$hugo_scroll_exampleSite"/assets/* assets/
 cp -v "$hugo_scroll_exampleSite"/hugo.toml .
+rm -v archetypes/* # to use the hugo-scroll ones
 ```
 
 Run `hugo server --disableFastRender`.
