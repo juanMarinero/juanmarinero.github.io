@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo shortcodes: step by step">
   <meta itemprop="description" content="Step-by-step guide to use built-in Hugo shortcodes for tweets, Instagram, YouTube, code highlights, QR, figures,... and create your own custom shortcodes.">
-  <meta itemprop="wordCount" content="8252">
+  <meta itemprop="wordCount" content="8272">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo shortcodes,Hugo templates,static site generator,custom shortcodes,built-in shortcodes,content creation,Markdown extensions,Go HTML templates,Hugo partials,dynamic content,figure shortcode,gist shortcode,highlight shortcode,tweet shortcode,YouTube embed,Hugo functions,layout components,DRY principles,web development,content management,Hugo documentation,code examples,responsive embeds,customizable content,Hugo power features">
 
@@ -2139,7 +2139,9 @@ which is already briefly described when
 </span></span><span style="display:flex;"><span>├── icon.html
 </span></span><span style="display:flex;"><span>├── phone.html
 </span></span><span style="display:flex;"><span>└── rawhtml.html
-</span></span></code></pre></div><h3 id="raw-html">Raw HTML</h3>
+</span></span></code></pre></div><p>We will not modify any of them, thus locally we can find them under <code>themes/hugo-scroll/layouts/shortcodes/</code>.
+For details read this <a href="/blogs/hugo_page_bundles/#attention">explanation</a>.</p>
+<h3 id="raw-html">Raw HTML</h3>
 <p><a href="https://github.com/zjedi/hugo-scroll/blob/master/layouts/shortcodes/rawhtml.html"><code>rawhtml.html</code></a> is defined as</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#586e75">&lt;!-- raw html --&gt;</span>
 </span></span><span style="display:flex;"><span>{{.Inner}}

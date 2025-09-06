@@ -1643,6 +1643,9 @@ layouts/shortcodes
 └── rawhtml.html
 ```
 
+We will not modify any of them, thus locally we can find them under `themes/hugo-scroll/layouts/shortcodes/`.
+For details read this [explanation](/blogs/hugo_page_bundles/#attention).
+
 
 ### Raw HTML
 
