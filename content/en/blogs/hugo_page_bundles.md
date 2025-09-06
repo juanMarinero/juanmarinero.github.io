@@ -33,6 +33,27 @@ We cover:
   - A branch bundle [practical example](#practical-example)
 
 
+##### Attention!
+
+- The following sections are organized sequentially to build upon concepts progressively.
+For the best learning experience, a **sequential read order** is recommended.
+
+- In this guide, we will reference the `layouts/` directory as if we had copied the entire layout structure from the Hugo Scroll theme into our project root.
+This is purely for brevity and to simplify path references.
+In reality, any reference to `layouts/` pertains to `themes/hugo-scroll/layouts`, unless we explicitly create or modify a layout template within our project's own `layouts/` directory.
+
+- In practice, you should **not** copy the entire `layouts/` directory from a theme.
+Only copy specific layout files you intend to customize.
+This approach ensures you leverage the theme's structure without unnecessary duplication, keeping your project clean and maintainable.
+
+- For a detailed, step-by-step guide on how to set this up properly, read [How to **create** a **Hugo-scroll web**site](/blogs/create_hugo_website/).
+In summary, start your project by copying only these essential directories and files from the example site:
+  - `assets/`
+  - `content/`
+  - `config.toml`
+  - `layouts/partials/custom_head.html`
+
+
 ## Introduction
 
 Although the terminology is narrow, understanding it is essential to follow this guide.
