@@ -58,6 +58,12 @@ type: "section"
   <span style="font-family: 'Great Vibes', cursive; font-size: 3.1rem;">custom fonts</span>:
   <strong>system</strong>-wide setup <strong>& Hugo</strong> integration
   </a>
+
+  <!--
+     - <a href="/blogs/hugo_shortcode_CSV_to_table/" class="no-underline-except-hover">
+     - <strong>Hugo</strong>'s <strong>shortcodes</strong>: CSV to table
+     - </a>
+     -->
 </div>
 {{< /rawhtml >}}
 
