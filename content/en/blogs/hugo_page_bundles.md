@@ -1401,8 +1401,15 @@ public/
         └── index.html # Single page by single.html
 ```
 
-Challenge! Without removing `section.html` generate `public/articles/_index.html` with `list.html`.
+Challenge! Without removing `section.html` generate `public/articles/index.html` with `list.html`.
 
+{{< details summary="**Solution** - Click to expand" >}}
+Just replicate the `_index.md` of `projects/`. Run:
+```sh
+hugo new articles/_index.md
+sed -i '2a layout: "list"' content/en/articles/_index.md
+```
+{{< /details >}}
 
 ## The `hugo list all` command
 

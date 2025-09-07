@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="7661">
+  <meta itemprop="wordCount" content="7682">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -1436,7 +1436,15 @@ Without <code>_index.md</code>, it is a branch bundle but not a section, but it 
 </span></span><span style="display:flex;"><span>    │   └── index.html # Single page by single.html
 </span></span><span style="display:flex;"><span>    └── article-two/
 </span></span><span style="display:flex;"><span>        └── index.html # Single page by single.html
-</span></span></code></pre></div><p>Challenge! Without removing <code>section.html</code> generate <code>public/articles/_index.html</code> with <code>list.html</code>.</p>
+</span></span></code></pre></div><p>Challenge! Without removing <code>section.html</code> generate <code>public/articles/index.html</code> with <code>list.html</code>.</p>
+
+<details>
+  <summary><strong>Solution</strong> - Click to expand</summary>
+  <p>Just replicate the <code>_index.md</code> of <code>projects/</code>. Run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo new articles/_index.md
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#2aa198">&#39;2a layout: &#34;list&#34;&#39;</span> content/en/articles/_index.md
+</span></span></code></pre></div></details>
+
 <h2 id="the-hugo-list-all-command">The <code>hugo list all</code> command</h2>
 <p><a href="https://gohugo.io/commands/hugo_list_all/"><code>hugo list all</code></a> displays, in CSV format, values related to Hugo&rsquo;s internal <a href="https://gohugo.io/methods/page/"><code>Page</code></a> object:</p>
 <ul>
