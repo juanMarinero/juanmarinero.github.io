@@ -6,7 +6,7 @@ disableKinds = ["section", "taxonomy", "term", "RSS", "robotsTXT"]
 defaultContentLanguage = "en"
 
 # The name of this wonderful theme ;-).
-theme = "hugo-scroll"
+# Read [[module.imports]]
 
 # The browser tab name
 title = "J. Marinero - Data Scientist & AI Engineer"
@@ -170,3 +170,12 @@ enableEmoji = true
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)'], ['$', '$']]
+
+[module]
+  proxy = "direct"
+  [module.hugoVersion]
+    extended = true
+    min = "0.132.0"
+  [[module.imports]]
+    path = "github.com/zjedi/hugo-scroll"
+    disable = false
