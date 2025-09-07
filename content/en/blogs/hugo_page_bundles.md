@@ -40,9 +40,16 @@ For the best learning experience, a **sequential read order** is recommended.
 
 - In this guide, we will reference the `layouts/` directory as if we had copied the entire layout structure from the Hugo Scroll theme into our project root.
 This is purely for brevity and to simplify path references.
-In reality, any reference to `layouts/` pertains to `themes/hugo-scroll/layouts`, unless we explicitly create or modify a layout template within our project's own `layouts/` directory.
+In reality, any reference to `layouts/` points to the [Hugo Scroll `layouts/` directory](https://github.com/zjedi/hugo-scroll/tree/master/layouts)
+ unless we explicitly create or modify a layout template within our project's own `layouts/` directory.
 
-- In practice, you should **not** copy the entire `layouts/` directory from a theme.
+- This theme layout folder might be located in our local `themes/hugo-scroll/layouts/` directory if we added this theme as a submodule to our project.
+Although, the recommended approach is to add themes as Hugo modules,
+where optionally we can replicate the `layouts/` directory in `_vendor/github.com/zjedi/hugo-scroll/layouts` via `hugo mod vendor`.
+I explored this issue in detail in this [previous post](/blogs/create_hugo_website/#from-git-submodule-to-hugo-module).
+
+- Independent of how you imported the theme (via Git submodule or Hugo module),
+you should **not** copy the entire `layouts/` directory from a theme into your project's `layouts/` directory.
 Only copy specific layout files you intend to customize.
 This approach ensures you leverage the theme's structure without unnecessary duplication, keeping your project clean and maintainable.
 

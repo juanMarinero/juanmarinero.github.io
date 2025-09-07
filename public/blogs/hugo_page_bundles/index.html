@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="7692">
+  <meta itemprop="wordCount" content="7770">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -298,10 +298,18 @@ For the best learning experience, a <strong>sequential read order</strong> is re
 <li>
 <p>In this guide, we will reference the <code>layouts/</code> directory as if we had copied the entire layout structure from the Hugo Scroll theme into our project root.
 This is purely for brevity and to simplify path references.
-In reality, any reference to <code>layouts/</code> pertains to <code>themes/hugo-scroll/layouts</code>, unless we explicitly create or modify a layout template within our project&rsquo;s own <code>layouts/</code> directory.</p>
+In reality, any reference to <code>layouts/</code> points to the <a href="https://github.com/zjedi/hugo-scroll/tree/master/layouts">Hugo Scroll <code>layouts/</code> directory</a>
+unless we explicitly create or modify a layout template within our project&rsquo;s own <code>layouts/</code> directory.</p>
 </li>
 <li>
-<p>In practice, you should <strong>not</strong> copy the entire <code>layouts/</code> directory from a theme.
+<p>This theme layout folder might be located in our local <code>themes/hugo-scroll/layouts/</code> directory if we added this theme as a submodule to our project.
+Although, the recommended approach is to add themes as Hugo modules,
+where optionally we can replicate the <code>layouts/</code> directory in <code>_vendor/github.com/zjedi/hugo-scroll/layouts</code> via <code>hugo mod vendor</code>.
+I explored this issue in detail in this <a href="/blogs/create_hugo_website/#from-git-submodule-to-hugo-module">previous post</a>.</p>
+</li>
+<li>
+<p>Independent of how you imported the theme (via Git submodule or Hugo module),
+you should <strong>not</strong> copy the entire <code>layouts/</code> directory from a theme into your project&rsquo;s <code>layouts/</code> directory.
 Only copy specific layout files you intend to customize.
 This approach ensures you leverage the theme&rsquo;s structure without unnecessary duplication, keeping your project clean and maintainable.</p>
 </li>
