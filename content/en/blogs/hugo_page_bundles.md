@@ -249,6 +249,7 @@ aliases:
 ```
 - Alternative set the [url](https://gohugo.io/content-management/urls/#url) front matter `url: leaf_bundle_to_branch_bundle`.
 But now `<baseURL>/leaf_bundle_to_branch_bundle/post_2/` will be inaccessible.
+Analogous with the [slug](https://gohugo.io/content-management/urls/#slug) front matter.
 
 So, in summary, `index.md` scripts are rendered if they are located where they should, that means in a singlepage *leaf bundle*.
 
@@ -1082,6 +1083,7 @@ aliases:
 - blogs
 ```
 - Or set the [`url`](https://gohugo.io/content-management/front-matter/#url) front matter to `"blogs/"`.
+Analogous with the [slug](https://gohugo.io/content-management/urls/#slug) front matter.
 
 The later approach just enables https://juanmarinero.github.io/blogs/ (https://juanmarinero.github.io/blogs_index/ would show a 404).
 

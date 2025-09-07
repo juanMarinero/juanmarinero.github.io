@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo&#39;s page bundles: the basics">
   <meta itemprop="description" content="Learn how to structure content in Hugo using page and branch bundles. A guide to creating, managing, and troubleshooting your site architecture.">
-  <meta itemprop="wordCount" content="7649">
+  <meta itemprop="wordCount" content="7661">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,page bundles,branch bundles,headless bundle,hugo list command,content organization,Hugo templates,template lookup order,leaf bundle,hugo debug,gohugo,static site generator">
 
@@ -475,7 +475,8 @@ will redirect to <code>&lt;baseURL&gt;/leaf_bundle_to_branch_bundle/post_2/</cod
 </span></span><span style="display:flex;"><span>- /leaf_bundle_to_branch_bundle
 </span></span></code></pre></div><ul>
 <li>Alternative set the <a href="https://gohugo.io/content-management/urls/#url">url</a> front matter <code>url: leaf_bundle_to_branch_bundle</code>.
-But now <code>&lt;baseURL&gt;/leaf_bundle_to_branch_bundle/post_2/</code> will be inaccessible.</li>
+But now <code>&lt;baseURL&gt;/leaf_bundle_to_branch_bundle/post_2/</code> will be inaccessible.
+Analogous with the <a href="https://gohugo.io/content-management/urls/#slug">slug</a> front matter.</li>
 </ul>
 <p>So, in summary, <code>index.md</code> scripts are rendered if they are located where they should, that means in a singlepage <em>leaf bundle</em>.</p>
 <p>Note. For a deep dive of the <code>hugo list all</code> command check the <a href="/blogs/hugo_page_bundles/#the-hugo-list-all-command">bonus section</a>.</p>
@@ -1189,7 +1190,8 @@ For example, for my blog about books the header and first post link are coded in
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>aliases: 
 </span></span><span style="display:flex;"><span>- blogs
 </span></span></code></pre></div><ul>
-<li>Or set the <a href="https://gohugo.io/content-management/front-matter/#url"><code>url</code></a> front matter to <code>&quot;blogs/&quot;</code>.</li>
+<li>Or set the <a href="https://gohugo.io/content-management/front-matter/#url"><code>url</code></a> front matter to <code>&quot;blogs/&quot;</code>.
+Analogous with the <a href="https://gohugo.io/content-management/urls/#slug">slug</a> front matter.</li>
 </ul>
 <p>The later approach just enables <a href="https://juanmarinero.github.io/blogs/">https://juanmarinero.github.io/blogs/</a> (<a href="https://juanmarinero.github.io/blogs_index/">https://juanmarinero.github.io/blogs_index/</a> would show a 404).</p>
 <p>The first option is the one I used.
