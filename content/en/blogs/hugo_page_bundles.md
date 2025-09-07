@@ -1482,9 +1482,10 @@ func newListCommand() *listCommand {
 
 ## Further recommended content
 
-- [Better together with page bundles](https://hugo-in-action.foofun.cn/docs/part1/chapter4/3/)
-from the ebook [Hugo in Action](https://hugo-in-action.foofun.cn/)
+- From the ebook [Hugo in Action](https://hugo-in-action.foofun.cn/)
 by [Atishay Jain](https://atishay.me/)
+  - [Better together with page bundles](https://hugo-in-action.foofun.cn/docs/part1/chapter4/3/)
+  - [Using content types, base templates, and blocks to structure templates](https://hugo-in-action.foofun.cn/docs/part1/chapter6/1/)
 - [Introduction to Hugo Bundles](https://www.ii.com/hugo-bundles/) by [Infinite Ink](https://www.ii.com/)
 - [Hugo: Leaf and Branch Bundles](https://scripter.co/hugo-leaf-and-branch-bundles/)
 by [Kaushal Modi](https://github.com/kaushalmodi/).
