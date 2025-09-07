@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Create your own Hugo-scroll website">
   <meta itemprop="description" content="A step-by-step beginner’s guide on how to build websites with Hugo, covering installation, theme selection, writing Markdown content, and free deployment.">
-  <meta itemprop="wordCount" content="3940">
+  <meta itemprop="wordCount" content="4990">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo,static site generator,build a website,Jamstack,web development,GitHub Pages,markdown,Go templates,open source,fast websites,content management,front matter,themes,deployment,command line,git,web design,tutorial,step-by-step guide,blogging,developer tools,responsive design,HTML,CSS,Go programming language">
 
@@ -266,7 +266,11 @@ window.MathJax = {
 </ul>
 </li>
 <li><a href="/blogs/create_hugo_website/#create-a-hugo-site-with-the-hugo-scroll-theme">Create a Hugo site with the hugo-scroll theme</a></li>
-<li><a href="/blogs/create_hugo_website/#get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</a></li>
+<li><a href="/blogs/create_hugo_website/#get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</a>
+<ul>
+<li><a href="/blogs/create_hugo_website/#from-git-submodule-to-hugo-module">From Git submodule to Hugo module</a></li>
+</ul>
+</li>
 <li><a href="/blogs/create_hugo_website/#customize">Customize</a>
 <ul>
 <li><a href="/blogs/create_hugo_website/#order-of-markdowns">Order of markdowns</a></li>
@@ -457,7 +461,7 @@ Press Ctrl+C to stop
 Current date: Monday, July 14, 2025, 11:50 AM CEST
 </code></pre><p>Open in browser <a href="http://localhost:1313/">http://localhost:1313/</a></p>
 <p>In future just run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#b58900">cd </span><span style="color:#268bd2">$HOME</span>/Downloads/juanmarinero.github.io
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> <span style="color:#268bd2">$HOME</span>/Downloads/juanmarinero.github.io
 </span></span><span style="display:flex;"><span>hugo server
 </span></span></code></pre></div><h2 id="create-a-hugo-site-with-the-hugo-scroll-theme">Create a Hugo site with the hugo-scroll theme</h2>
 <p>Follow <a href="https://gohugo.io/getting-started/quick-start/#commands">quickstart - commands</a>
@@ -495,8 +499,12 @@ Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
 </code></pre><p>Now, open in browser <a href="http://localhost:1313/">http://localhost:1313/</a></p>
 <p>Notice the browser tab name <em>My New Hugo Site</em> but the site is empty.</p>
-<p>Let&rsquo;s stop the server <code>Ctrl+C</code> and add some content.</p>
-<h2 id="get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</h2>
+<p>Let&rsquo;s stop the server with <code>Ctrl+C</code> and add some content.</p>
+<p>We can commit the changes to the repository.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;.hugo_build.lock&#34;</span> &gt;&gt; .gitignore
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;add hugo-scroll theme as git submodule&#34;</span>
+</span></span></code></pre></div><h2 id="get-the-zjedihugo-scroll-website">Get the zjedi/hugo-scroll website</h2>
 <p><a href="https://github.com/zjedi/hugo-scroll#-installation">https://github.com/zjedi/hugo-scroll#-installation</a> says:</p>
 
 
@@ -533,7 +541,204 @@ Environment: &#34;development&#34;
 Serving pages from disk
 Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) 
 </code></pre><p>Now we succeeded! Our local website <a href="http://localhost:1313/">http://localhost:1313/</a> it&rsquo;s like the Hugo Scroll <a href="https://zjedi.github.io/hugo-scroll/">demo site</a>!</p>
-<h2 id="customize">Customize</h2>
+<p>Commit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;build hugo-scroll demo site&#34;</span>
+</span></span></code></pre></div><h3 id="from-git-submodule-to-hugo-module">From Git submodule to Hugo module</h3>
+<p>Previously we included the theme as a Git submodule cloning the Hugo Scroll theme into the <code>themes/hugo-scroll</code> directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git submodule add https://github.com/zjedi/hugo-scroll.git themes/hugo-scroll
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;theme = &#39;hugo-scroll&#39;&#34;</span> &gt;&gt; hugo.toml
+</span></span></code></pre></div><p>And in previous section we copied from that folder <code>content/</code>, <code>assets/</code> and the Hugo config file into our project&rsquo;s root.</p>
+<p>Well, this proccedure is not recommended any longer.
+Unit <a href="https://hugo-in-action.foofun.cn/docs/part1/chapter8/2/#82-themes-as-hugo-modules">8.2 Themes as Hugo Modules</a>
+of the ebook <a href="https://hugo-in-action.foofun.cn/">Hugo in Action</a> says next:</p>
+
+
+
+  <blockquote>
+    <p>In section 2.2, where we introduced the concept of themes, we discussed three ways to integrate themes into a website:</p>
+<ul>
+<li>download and copy (which we have used so far),</li>
+<li>Git submodules (not recommended anymore),</li>
+<li>and Hugo Modules (which we did not use because download and copy is easier for beginners).</li>
+</ul>
+  </blockquote>
+
+<p>Next we follow the instructions provided in the documentation of a very well up-to-date documented Hugo theme called <em>Docsy</em>.
+In particular the section titled <a href="https://www.docsy.dev/docs/updating/convert-site-to-module/">Migrating to Hugo Modules</a>.</p>
+<h5 id="turn-your-existing-site-into-a-hugo-module">Turn your existing site into a Hugo Module</h5>
+<p>Run <code>hugo mod init github.com/me/my-existing-site</code>.
+In my case it&rsquo;s <code>hugo mod init github.com/juanMarinero/juanmarinero.github.io</code>.</p>
+<p>This will create the <code>go.mod</code> file in the root of the project.
+While <code>hugo mod get</code> will generate <code>go.sum</code>.</p>
+<ul>
+<li><code>go.mod</code> for the module definitions.</li>
+<li><code>go.sum</code> contains checksums for module verification.</li>
+</ul>
+<h5 id="get-the-hugo-scroll-theme-as-a-hugo-module">Get the Hugo Scroll theme as a Hugo Module</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo mod get github.com/zjedi/hugo-scroll@latest
+</span></span></code></pre></div><p>If needed read <a href="https://hugo-in-action.foofun.cn/docs/part1/chapter8/5/">Getting a specific version of a theme</a>.</p>
+<h5 id="edit-the-hugotoml-file-to-substitute-the-theme--hugo-scroll-or-alike-line-with-a-comment">Edit the <code>hugo.toml</code> file to substitute the <code>theme = &quot;hugo-scroll&quot;</code> (or alike) line with a comment</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sed -i <span style="color:#2aa198">&#39;s/^theme =.*/# Read [[module.imports]]/&#39;</span> hugo.toml
+</span></span></code></pre></div><p>Check that replacement and surrounding with
+<code>grep -C 3 '# Read \[\[module.imports\]\]' hugo.toml</code>.
+It will echo for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>defaultContentLanguage = &#34;en&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># The name of this wonderful theme ;-).
+</span></span><span style="display:flex; background-color:#19404a"><span># Read [[module.imports]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># The browser tab name
+</span></span><span style="display:flex;"><span>title = &#34;Jane Doe - Nutrition Coach &amp; Chef Consultant&#34;
+</span></span></code></pre></div><p>Or just remove the config line with:
+<code>sed -i '/^theme =.*/d' hugo.toml</code>.</p>
+<p>Now append next configuration, where:</p>
+<ul>
+<li>The Hugo version is copied from Hugo Scroll&rsquo;s <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/theme.toml#L26"><code>theme.toml</code></a></li>
+<li>The Hugo extended version is required for the <em>SCSS</em> scripts to work.
+It&rsquo;s stated in the theme&rsquo;s <a href="https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/README.md?plain=1#L30"><code>README.md</code></a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat &gt;&gt; hugo.toml <span style="color:#2aa198">&lt;&lt;EOL
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">[module]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  proxy = &#34;direct&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  [module.hugoVersion]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    extended = true
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    min = &#34;0.132.0&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  [[module.imports]]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    path = &#34;github.com/zjedi/hugo-scroll&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    disable = false
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">EOL</span>
+</span></span><span style="display:flex;"><span>tail hugo.toml <span style="color:#586e75"># inspect</span>
+</span></span></code></pre></div><p>Alternative to this whole step (remove/comment the <code>theme =</code> line and append the later configs) we could simply replace the <code>theme =</code> line with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sed -i <span style="color:#2aa198">&#39;s/^theme =.*/theme = &#34;github.com/zjedi/hugo-scroll&#34;/&#39;</span> hugo.toml
+</span></span></code></pre></div><p>Though this alternative is not so explicit about getting the theme as a module.</p>
+<h5 id="build-and-commit">Build and commit</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo server --disableFastRender
+</span></span></code></pre></div><p>Stop with <code>Ctrl+C</code> and commit the changes</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;add hugo-scroll as a Hugo Module&#34;</span>
+</span></span></code></pre></div><h5 id="remove-the-git-submodule">Remove the Git submodule</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git rm -rf themes/hugo-scroll
+</span></span></code></pre></div><h5 id="build-and-commit-1">Build and commit</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo server --disableFastRender
+</span></span></code></pre></div><p>Stop with <code>Ctrl+C</code> and commit the changes</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;remove themes/hugo-scroll/&#34;</span>
+</span></span></code></pre></div><h5 id="optional-vendor-dependencies">(Optional) Vendor dependencies</h5>
+<p><a href="https://hugo-in-action.foofun.cn/docs/part1/chapter8/6/">Viewing the dependencies source code</a>:</p>
+
+
+
+  <blockquote>
+    <p>Run <code>hugo mod vendor</code>.
+Hugo creates a folder called <code>_vendor</code> with the source code of all the dependencies.
+Not only that, if this folder is present and contains the dependencies, Hugo does not go to the internet to build our website.</p>
+  </blockquote>
+
+<p>To create a local copy of dependencies run <code>hugo mod vendor</code>.</p>
+<p>Check the <code>_vendor</code> folder with <code>tree -L 4 _vendor</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>_vendor
+</span></span><span style="display:flex;"><span>├── github.com
+</span></span><span style="display:flex;"><span>│   └── zjedi
+</span></span><span style="display:flex;"><span>│       └── hugo-scroll
+</span></span><span style="display:flex;"><span>│           ├── archetypes
+</span></span><span style="display:flex;"><span>│           ├── assets
+</span></span><span style="display:flex;"><span>│           ├── i18n
+</span></span><span style="display:flex;"><span>│           ├── layouts
+</span></span><span style="display:flex;"><span>│           ├── package.json
+</span></span><span style="display:flex;"><span>│           ├── static
+</span></span><span style="display:flex;"><span>│           └── theme.toml
+</span></span><span style="display:flex;"><span>└── modules.txt
+</span></span></code></pre></div><p>If you don&rsquo;t want to commit vendored files run <code>echo &quot;_vendor/&quot; &gt;&gt; .gitignore</code>.</p>
+<h5 id="build-and-commit-2">Build and commit</h5>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo server --disableFastRender
+</span></span></code></pre></div><p>Stop with <code>Ctrl+C</code> and commit the changes</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;add _vendor/hugo-scroll/&#34;</span>
+</span></span></code></pre></div><h5 id="commonly-used-hugo-modules-apis">Commonly used Hugo Modules APIs</h5>
+<p><a href="https://hugo-in-action.foofun.cn/docs/part1/chapter8/12/">Hugo In Action</a> ebook explains next commands.
+The <a href="https://gohugo.io/commands/">Hugo documentation</a> is the right place to study them deeper.</p>
+<ul>
+<li><code>hugo mod tidy</code>  removes unused entries from the <code>go.sum</code> and <code>go.mod</code></li>
+<li><code>hug mod clean</code> clears the module cache to pick up newer changes (if done locally). Sometimes, the local store may get corrupt, giving us incorrect data.</li>
+<li><code>hugo mod graph</code> list the dependencies of the current website.</li>
+<li><code>hugo mod get -u</code> updates all modules.</li>
+<li><code>{hugo mod get -u ./…}</code> updates all modules and their dependencies.</li>
+<li><code>hugo mod get @</code> gets a specific version of a module.</li>
+</ul>
+<h5 id="work-smart-not-hard">Work smart, not hard</h5>
+<p>Finally, it&rsquo;s awesome that you followed these non trivial instructions all the way.</p>
+<p>But no need to repeat this tedious procedure next time. Instead you can use the repo where I pushed all the previous steps.</p>
+<ol>
+<li>
+<p>Clone it: <code>git clone https://github.com/juanMarinero/hugo-scroll-MWE</code></p>
+</li>
+<li>
+<p>Build with <code>hugo server</code> (optional).
+Open <a href="http://localhost:1313">http://localhost:1313</a> in the browser.
+The local website is the same as the <a href="https://zjedi.github.io/hugo-scroll/">Hugo Scroll demo</a>.</p>
+</li>
+<li>
+<p><a href="/blogs/create_hugo_website/#customize">Customize</a> it.</p>
+</li>
+</ol>
+<p>But wait! This is <strong>not the smart way</strong> to do it.
+A migration is no need if you never existed!
+Keep reading!</p>
+<h4 id="create-the-hugo-scroll-demo-from-scratch">Create the Hugo Scroll demo from scratch</h4>
+<p>Create a new Hugo site, initialize it as a Hugo Module, and add the Hugo Scroll theme as a submodule.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo new site quickstart
+</span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> quickstart
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hugo mod init github.com/me/my-existing-site <span style="color:#586e75"># edit!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hugo mod get github.com/zjedi/hugo-scroll@latest <span style="color:#586e75"># ⏳ wait few seconds</span>
+</span></span></code></pre></div><p>Now clone the Hugo Scroll repo in other directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> .. <span style="color:#586e75"># out of quickstart</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/zjedi/hugo-scroll.git
+</span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> hugo-scroll
+</span></span></code></pre></div><p>And copy what we need from it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#268bd2">my_repo</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;../quickstart&#34;</span>
+</span></span><span style="display:flex;"><span>cp -rv exampleSite/content/* <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$my_repo</span><span style="color:#2aa198">&#34;</span>/content/
+</span></span><span style="display:flex;"><span>cp -rv exampleSite/assets/* <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$my_repo</span><span style="color:#2aa198">&#34;</span>/assets/
+</span></span><span style="display:flex;"><span>cp -v exampleSite/hugo.toml <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$my_repo</span><span style="color:#2aa198">&#34;</span>/
+</span></span><span style="display:flex;"><span>rm -v <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$my_repo</span><span style="color:#2aa198">&#34;</span>/archetypes/* <span style="color:#586e75"># to use the hugo-scroll ones</span>
+</span></span></code></pre></div><p>And do not forget to edit the <code>hugo.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$my_repo</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>sed -i <span style="color:#2aa198">&#39;s/^theme =.*/# Read [[module.imports]]/&#39;</span> hugo.toml
+</span></span><span style="display:flex;"><span>cat &gt;&gt; hugo.toml <span style="color:#2aa198">&lt;&lt;EOL
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">[module]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  proxy = &#34;direct&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  [module.hugoVersion]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    extended = true
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    min = &#34;0.132.0&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  [[module.imports]]
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    path = &#34;github.com/zjedi/hugo-scroll&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    disable = false
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">EOL</span>
+</span></span></code></pre></div><p>Get the <code>_vendor</code> populated:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo mod vendor
+</span></span></code></pre></div><p>Build and commit</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p>Stop with <code>Ctrl+C</code> and commit the changes</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;.hugo_build.lock&#34;</span> &gt; .gitignore
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;_vendor/&#34;</span> &gt;&gt; .gitignore <span style="color:#586e75"># optional</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;Initial commit
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">- Hugo Scroll theme as Hugo Module
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">- From Hugo Scroll exampleSite copied:
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  - content/
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  - assets/
+</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">  - hugo.toml (adapted for module)&#34;</span>
+</span></span></code></pre></div><p>&hellip;or just clone a repo that already ran all the previous steps:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone https://github.com/juanMarinero/hugo-scroll-MWE-revised
+</span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> hugo-scroll-MWE-revised
+</span></span></code></pre></div><h2 id="customize">Customize</h2>
 <h3 id="order-of-markdowns">Order of markdowns</h3>
 <p>The website sections are sorted by the <code>weigtht</code> metadata.
 Details in my post concerning <a href="/blogs/hugo_page_bundles/#how-the-layout-template-operates">Hugo bundle pages</a>.</p>

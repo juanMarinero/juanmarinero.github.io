@@ -15,6 +15,7 @@ keywords: ["Hugo", "static site generator", "build a website", "Jamstack", "web 
      * [Test a Hugo repo](#test-a-hugo-repo)
 2. [Create a Hugo site with the hugo-scroll theme](#create-a-hugo-site-with-the-hugo-scroll-theme)
 3. [Get the zjedi/hugo-scroll website](#get-the-zjedihugo-scroll-website)
+   * [From Git submodule to Hugo module](#from-git-submodule-to-hugo-module)
 4. [Customize](#customize)
    * [Order of markdowns](#order-of-markdowns)
    * [hugo.toml](#hugotoml)
@@ -235,7 +236,7 @@ Open in browser [http://localhost:1313/](http://localhost:1313/)
 
 In future just run:
 
-```powershell
+```sh
 cd $HOME/Downloads/juanmarinero.github.io
 hugo server
 ```
@@ -288,8 +289,14 @@ Now, open in browser [http://localhost:1313/](http://localhost:1313/)
 
 Notice the browser tab name *My New Hugo Site* but the site is empty.
 
-Let's stop the server `Ctrl+C` and add some content.
+Let's stop the server with `Ctrl+C` and add some content.
 
+We can commit the changes to the repository.
+```sh
+echo ".hugo_build.lock" >> .gitignore
+git add .
+git commit -m "add hugo-scroll theme as git submodule"
+```
 
 ## Get the zjedi/hugo-scroll website
 
@@ -333,6 +340,302 @@ Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 ```
 
 Now we succeeded! Our local website [http://localhost:1313/](http://localhost:1313/) it's like the Hugo Scroll [demo site](https://zjedi.github.io/hugo-scroll/)!
+
+Commit.
+```sh
+git add .
+git commit -m "build hugo-scroll demo site"
+```
+
+
+### From Git submodule to Hugo module
+
+Previously we included the theme as a Git submodule cloning the Hugo Scroll theme into the `themes/hugo-scroll` directory.
+
+```sh
+git submodule add https://github.com/zjedi/hugo-scroll.git themes/hugo-scroll
+echo "theme = 'hugo-scroll'" >> hugo.toml
+```
+
+
+And in previous section we copied from that folder `content/`, `assets/` and the Hugo config file into our project's root.
+
+Well, this proccedure is not recommended any longer.
+Unit [8.2 Themes as Hugo Modules](https://hugo-in-action.foofun.cn/docs/part1/chapter8/2/#82-themes-as-hugo-modules)
+of the ebook [Hugo in Action](https://hugo-in-action.foofun.cn/) says next:
+> In section 2.2, where we introduced the concept of themes, we discussed three ways to integrate themes into a website:
+> - download and copy (which we have used so far),
+> - Git submodules (not recommended anymore),
+> - and Hugo Modules (which we did not use because download and copy is easier for beginners).
+
+
+Next we follow the instructions provided in the documentation of a very well up-to-date documented Hugo theme called *Docsy*.
+In particular the section titled [Migrating to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
+
+
+##### Turn your existing site into a Hugo Module
+
+Run `hugo mod init github.com/me/my-existing-site`.
+In my case it's `hugo mod init github.com/juanMarinero/juanmarinero.github.io`.
+
+This will create the `go.mod` file in the root of the project.
+While `hugo mod get` will generate `go.sum`.
+- `go.mod` for the module definitions.
+- `go.sum` contains checksums for module verification.
+
+
+##### Get the Hugo Scroll theme as a Hugo Module
+
+```sh
+hugo mod get github.com/zjedi/hugo-scroll@latest
+```
+
+If needed read [Getting a specific version of a theme](https://hugo-in-action.foofun.cn/docs/part1/chapter8/5/).
+
+
+##### Edit the `hugo.toml` file to substitute the `theme = "hugo-scroll"` (or alike) line with a comment
+```sh
+sed -i 's/^theme =.*/# Read [[module.imports]]/' hugo.toml
+```
+
+Check that replacement and surrounding with
+`grep -C 3 '# Read \[\[module.imports\]\]' hugo.toml`.
+It will echo for example:
+
+```text {hl_lines="4"}
+defaultContentLanguage = "en"
+
+# The name of this wonderful theme ;-).
+# Read [[module.imports]]
+
+# The browser tab name
+title = "Jane Doe - Nutrition Coach & Chef Consultant"
+```
+
+Or just remove the config line with:
+`sed -i '/^theme =.*/d' hugo.toml`.
+
+Now append next configuration, where:
+- The Hugo version is copied from Hugo Scroll's [`theme.toml`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/theme.toml#L26)
+- The Hugo extended version is required for the *SCSS* scripts to work.
+It's stated in the theme's [`README.md`](https://github.com/zjedi/hugo-scroll/blob/54f7b8543f18d6ae54490f5bb11ea1905bfeffd7/README.md?plain=1#L30)
+
+```sh
+cat >> hugo.toml <<EOL
+
+[module]
+  proxy = "direct"
+  [module.hugoVersion]
+    extended = true
+    min = "0.132.0"
+  [[module.imports]]
+    path = "github.com/zjedi/hugo-scroll"
+    disable = false
+EOL
+tail hugo.toml # inspect
+```
+
+Alternative to this whole step (remove/comment the `theme =` line and append the later configs) we could simply replace the `theme =` line with:
+
+```sh
+sed -i 's/^theme =.*/theme = "github.com/zjedi/hugo-scroll"/' hugo.toml
+```
+
+Though this alternative is not so explicit about getting the theme as a module.
+
+##### Build and commit
+
+```sh
+hugo server --disableFastRender
+```
+
+Stop with `Ctrl+C` and commit the changes
+
+```sh
+git add .
+git commit -m "add hugo-scroll as a Hugo Module"
+```
+
+
+##### Remove the Git submodule 
+
+```sh
+git rm -rf themes/hugo-scroll
+```
+
+##### Build and commit
+
+```sh
+hugo server --disableFastRender
+```
+
+Stop with `Ctrl+C` and commit the changes
+
+```sh
+git add .
+git commit -m "remove themes/hugo-scroll/"
+```
+
+
+##### (Optional) Vendor dependencies
+
+[Viewing the dependencies source code](https://hugo-in-action.foofun.cn/docs/part1/chapter8/6/):
+> Run `hugo mod vendor`.
+> Hugo creates a folder called `_vendor` with the source code of all the dependencies.
+> Not only that, if this folder is present and contains the dependencies, Hugo does not go to the internet to build our website. 
+
+
+To create a local copy of dependencies run `hugo mod vendor`.
+
+Check the `_vendor` folder with `tree -L 4 _vendor`:
+
+```text
+_vendor
+├── github.com
+│   └── zjedi
+│       └── hugo-scroll
+│           ├── archetypes
+│           ├── assets
+│           ├── i18n
+│           ├── layouts
+│           ├── package.json
+│           ├── static
+│           └── theme.toml
+└── modules.txt
+```
+
+If you don't want to commit vendored files run `echo "_vendor/" >> .gitignore`.
+
+
+##### Build and commit
+
+```sh
+hugo server --disableFastRender
+```
+
+Stop with `Ctrl+C` and commit the changes
+
+```sh
+git add .
+git commit -m "add _vendor/hugo-scroll/"
+```
+
+
+##### Commonly used Hugo Modules APIs
+
+[Hugo In Action](https://hugo-in-action.foofun.cn/docs/part1/chapter8/12/) ebook explains next commands.
+The [Hugo documentation](https://gohugo.io/commands/) is the right place to study them deeper.
+- `hugo mod tidy`  removes unused entries from the `go.sum` and `go.mod`
+- `hug mod clean` clears the module cache to pick up newer changes (if done locally). Sometimes, the local store may get corrupt, giving us incorrect data.
+- `hugo mod graph` list the dependencies of the current website.
+- `hugo mod get -u` updates all modules.
+- `{hugo mod get -u ./…}` updates all modules and their dependencies.
+- `hugo mod get @` gets a specific version of a module.
+
+
+##### Work smart, not hard
+
+Finally, it's awesome that you followed these non trivial instructions all the way.
+
+But no need to repeat this tedious procedure next time. Instead you can use the repo where I pushed all the previous steps.
+
+1. Clone it: `git clone https://github.com/juanMarinero/hugo-scroll-MWE`
+
+2. Build with `hugo server` (optional).
+Open [http://localhost:1313](http://localhost:1313) in the browser.
+The local website is the same as the [Hugo Scroll demo](https://zjedi.github.io/hugo-scroll/).
+
+3. [Customize](#customize) it.
+
+But wait! This is **not the smart way** to do it.
+A migration is no need if you never existed!
+Keep reading!
+
+#### Create the Hugo Scroll demo from scratch
+
+Create a new Hugo site, initialize it as a Hugo Module, and add the Hugo Scroll theme as a submodule.
+
+```sh
+hugo new site quickstart
+cd quickstart
+
+hugo mod init github.com/me/my-existing-site # edit!
+
+hugo mod get github.com/zjedi/hugo-scroll@latest # ⏳ wait few seconds
+```
+
+Now clone the Hugo Scroll repo in other directory.
+
+```sh
+cd .. # out of quickstart
+
+git clone https://github.com/zjedi/hugo-scroll.git
+cd hugo-scroll
+```
+
+And copy what we need from it:
+
+```sh
+my_repo="../quickstart"
+cp -rv exampleSite/content/* "$my_repo"/content/
+cp -rv exampleSite/assets/* "$my_repo"/assets/
+cp -v exampleSite/hugo.toml "$my_repo"/
+rm -v "$my_repo"/archetypes/* # to use the hugo-scroll ones
+```
+
+And do not forget to edit the `hugo.toml`:
+
+```sh
+cd "$my_repo"
+sed -i 's/^theme =.*/# Read [[module.imports]]/' hugo.toml
+cat >> hugo.toml <<EOL
+
+[module]
+  proxy = "direct"
+  [module.hugoVersion]
+    extended = true
+    min = "0.132.0"
+  [[module.imports]]
+    path = "github.com/zjedi/hugo-scroll"
+    disable = false
+EOL
+```
+
+Get the `_vendor` populated:
+
+```sh
+hugo mod vendor
+```
+
+
+Build and commit
+
+```sh
+hugo server
+```
+
+Stop with `Ctrl+C` and commit the changes
+
+```sh
+git init
+echo ".hugo_build.lock" > .gitignore
+echo "_vendor/" >> .gitignore # optional
+git add .
+git commit -m "Initial commit
+
+- Hugo Scroll theme as Hugo Module
+- From Hugo Scroll exampleSite copied:
+  - content/
+  - assets/
+  - hugo.toml (adapted for module)"
+```
+
+...or just clone a repo that already ran all the previous steps:
+
+```sh
+git clone https://github.com/juanMarinero/hugo-scroll-MWE-revised
+cd hugo-scroll-MWE-revised
+```
 
 
 ## Customize
