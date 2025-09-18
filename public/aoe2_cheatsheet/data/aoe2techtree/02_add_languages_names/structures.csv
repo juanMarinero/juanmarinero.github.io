@@ -1,0 +1,40 @@
+id,internal_name,language_name_id,language_name
+101,STBL,5171,Stable
+1021,FEITO,5159,Feitoria
+103,BLAC,5131,Blacksmith
+104,CRCH,5138,Monastery
+109,RTWC,5164,Town Center
+117,WALL2,5203,Stone Wall
+1189,HARBOR,5249,Harbor
+1251,KREPOST,5349,Krepost
+12,Barracks Age1,5135,Barracks
+155,WALL3,5204,Fortified Wall
+1665,DONJON,5544,Donjon
+1734,FOLWARK1,5581,Folwark
+1754,CARAVANSERAI,5440,Caravanserai
+1806,FORTCRCH,5038,Fortified Church
+1808,MULECART,5045,Mule Cart
+1889,PASTURE_BUILD,5895,Pasture
+199,FTRAP,5495,Fish Trap
+209,UNIV,5176,University
+234,WCTW2,5154,Guard Tower
+235,WCTW3,5155,Keep
+236,WCTW4,5156,Bombard Tower
+276,WNDR,5182,Wonder
+45,DOCK,5144,Dock
+487,GTAX2,5185,Gate
+49,SIWS,5169,Siege Workshop
+50,FARM,5149,Farm
+562,SMIL,5464,Lumber Camp
+584,MINE,5487,Mining Camp
+598,WCTWX,5504,Outpost
+621,RTWC1X,5164,Town Center
+68,MILL,5157,Mill
+70,HOUS,5344,House
+71,RTWC2,5164,Town Center
+72,WALL,5202,Palisade Wall
+792,PGTAX,5186,Palisade Gate
+79,WCTW,5178,Watch Tower
+82,CSTL,5142,Castle
+84,MRKT,5161,Market
+87,ARRG,5128,Archery Range

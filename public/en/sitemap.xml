@@ -20,9 +20,13 @@
   </url><url>
     <loc>http://localhost:1313/blogs/color_picker/</loc>
   </url><url>
+    <loc>http://localhost:1313/aoe2_cheatsheet/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs/instagram_mosaic/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/create_hugo_website/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blogs/hugo_shortcode_csv_to_table/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/nerd_fonts_and_more/</loc>
   </url><url>

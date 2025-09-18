@@ -59,11 +59,9 @@ type: "section"
   <strong>system</strong>-wide setup <strong>& Hugo</strong> integration
   </a>
 
-  <!--
-     - <a href="/blogs/hugo_shortcode_CSV_to_table/" class="no-underline-except-hover">
-     - <strong>Hugo</strong>'s <strong>shortcodes</strong>: CSV to table
-     - </a>
-     -->
+  <a href="/blogs/hugo_shortcode_csv_to_table/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>shortcodes</strong>: CSV to table
+  </a>
 </div>
 {{< /rawhtml >}}
 

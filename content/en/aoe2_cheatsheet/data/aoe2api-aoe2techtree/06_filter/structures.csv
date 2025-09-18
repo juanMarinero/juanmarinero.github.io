@@ -1,0 +1,25 @@
+id,hotkey1,hotkey2,cost,build_time,hit_points,line_of_sight,armor,range,special
+70,Q,Q," {""🪵"": 30}",25,900,1, 0/7,,Supports 5 👥
+68,Q,W," {""🪵"": 100}",35,1000,5, 0/7,,Max 40 farms queued
+584,Q,E," {""🪵"": 100}",35,1000,5, 0/7,,
+562,Q,R," {""🪵"": 100}",35,1000,5, 0/7,,
+45,Q,T," {""🪵"": 150}",35,1800,5,0/7,,Garrison: 10 created 👥
+50,Q,A," {""🪵"": 60}",15,480,0, 0/0,,Standard = 175 🌾;Horse Collar = 250 🌾;Heavy Plow = 375 🌾;Crop Rotation = 550 🌾
+103,Q,S," {""🪵"": 150}",40,2100,5, 1/8,,
+84,Q,D," {""🪵"": 175}",60,2100,4, 1/8,,
+104,Q,F," {""🪵"": 175}",40,2100,5, 2/9,,Garrison: 10 created 👥
+209,Q,G," {""🪵"": 200}",60,2100,4, 2/9,,
+109,Q,Z," {""🪵"": 275;""🪨"": 100}",150,2400,7, 3/5,6,15 👥 (supports 5 👥);max 10 arrows;+5 vs all buildings;+5 vs ships/camels
+276,Q,X," {""🪵"": 1000; ""🪨"": 1000; ""🪙"": 1000}",3503,4800,6, 3/10,,
+12,W,Q," {""🪵"": 175}",50,1200,5,0/7,,Garrison: 10 created 👥
+87,W,W," {""🪵"": 175}",50,1500,5, 1/8,,Garrison: 10 created 👥
+101,W,E," {""🪵"": 175}",50,1500,5, 1/8,,Garrison: 10 created 👥
+49,W,R," {""🪵"": 200}",40,2100,4, 2/9,,Garrison: 10 created 👥
+598,W,A," {""🪵"": 25; ""🪨"": 10}",15,500,6, 0/0,,+2 Line of sight per age
+72,W,S," {""🪵"": 2}",5,250,2, 2/5,,
+155,W,D," {""🪨"": 5}",8,3000,2, 12/12,,
+235,W,F,"  {""🪵"": 25; ""🪨"": 125}",80,2250,10, 3/9,1-8,Garrison 5 👥;+2 vs spearmen line;+10 damage vs ships/camels;Max 5 arrows
+236,W,G," {""🪵"": 25; ""🪨"": 125}",80,2220,10, 3/9,1-8,Garrison 5 👥;+40 damage vs ships/camels;Pierce attack
+487,W,Z,"  {""🪨"": 30}",70,2750,6, 6/6,,+1250 HP with Fortified Wall (Gates parallel to the bottom right edge have 0:30 bt)
+792,W,X,"  {""🪨"": 30}",70,2750,6, 6/6,,+1250 HP with Fortified Wall (Gates parallel to the bottom right edge have 0:30 bt)
+82,W,C," {""🪨"": 650}",200,4800,10, 8/11,1-8,20 👥 (support 20 👥);max 21 arrows;1st arrow +2 against spearmen;From 2nd arrow +11 damage vs ships/camels;+11 vs stone defense

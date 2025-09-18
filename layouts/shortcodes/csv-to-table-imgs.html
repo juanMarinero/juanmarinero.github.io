@@ -1,0 +1,129 @@
+{{- /* csv-to-table-imgs.html */ -}}
+{{- /* Converts a CSV file to an HTML table with images */ -}}
+
+{{- $path := .Get "path" -}}
+{{- $img_path := .Get "img_path" -}}
+{{- $img_field := .Get "img_field" -}}
+{{- $img_format := .Get "img_format" | default "png" -}}
+{{- $img_field_raw := .Get "img_field_raw" | default "true" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $delimiter := .Get "delimiter" | default "," -}}
+{{- $hasHeaderRow := .Get "hasHeaderRow" | default true -}}
+{{- $id := .Get "id" | default (printf "csv-table-%d" .Ordinal) -}}
+
+{{- /* Get the CSV resource from the page bundle */ -}}
+{{- $resource := .Page.Resources.GetMatch $path -}}
+
+{{- if not $resource -}}
+  <div class="error">
+    <p>CSV resource not found: {{ $path }}</p>
+    <p>Available resources in this bundle:</p>
+    <ul>
+      {{- range .Page.Resources -}}
+        <li>{{ .Name }} ({{ .MediaType }})</li>
+      {{- else -}}
+        <li>No resources found in this page bundle</li>
+      {{- end -}}
+    </ul>
+  </div>
+{{- else -}}
+  {{- /* Parse the CSV content */ -}}
+  {{- $csvData := $resource.Content | transform.Unmarshal (dict "delimiter" $delimiter) -}}
+  
+  {{- /* Find the image column index if img_field is specified */ -}}
+  {{- $imgColIndex := -1 -}}
+  {{- if and $img_field $hasHeaderRow -}}
+    {{- $headerRow := index $csvData 0 -}}
+    {{- range $index, $value := $headerRow -}}
+      {{- if eq $value $img_field -}}
+        {{- $imgColIndex = $index -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Create the table */ -}}
+  <table {{ with $id }}id="{{ . }}"{{ end }} {{ with $class }}class="{{ . }}"{{ end }}>
+    {{- with $caption -}}
+      <caption>{{ . }}</caption>
+    {{- end -}}
+    
+    {{- if $hasHeaderRow -}}
+      {{- $headerRow := index $csvData 0 -}}
+
+      {{- /* Remove the img_field from header if img_field_raw is false */ -}}
+      {{- if and (eq $img_field_raw "false") $img_field (ne $imgColIndex -1) -}}
+        {{- $newHeaderRow := slice -}}
+        {{- range $index, $value := $headerRow -}}
+          {{- if ne $index $imgColIndex -}}
+            {{- $newHeaderRow = $newHeaderRow | append $value -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $headerRow = $newHeaderRow -}}
+      {{- end -}}
+
+      {{- $rows := after 1 $csvData -}}
+      
+      {{- /* Add image column to header */ -}}
+      {{- if $img_field -}}
+        {{- $headerRow = (slice (printf "%s-img-rendered" $img_field)) | append $headerRow -}}
+      {{- end -}}
+      
+      <thead>
+        <tr>
+          {{- range $headerRow -}}
+            <th>{{ . | markdownify }}</th>
+          {{- end -}}
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $rows -}}
+          <tr>
+            {{- /* Add image column first */ -}}
+            {{- if and $img_field (ne $imgColIndex -1) -}}
+              <td>
+                {{- $imgName := index . $imgColIndex -}}
+                {{- $imgSrc := printf "%s/%s.%s" (strings.TrimSuffix "/" $img_path) $imgName $img_format -}}
+                <img src="{{ $imgSrc }}" alt="{{ $imgName }}" loading="lazy">
+              </td>
+            {{- end -}}
+            
+            {{- /* Add all other columns */ -}}
+            {{- range $index, $value := . -}}
+              {{- if or (eq $img_field_raw "true") (ne $index $imgColIndex) -}}
+                <td>
+                  {{- if and (eq $index $imgColIndex) $img_path -}}
+                    {{- /* Show the original value */ -}}
+                    {{- $value | markdownify -}}
+                  {{- else -}}
+                    {{- $value | markdownify -}}
+                  {{- end -}}
+                </td>
+              {{- end -}}
+            {{- end -}}
+          </tr>
+        {{- end -}}
+      </tbody>
+    {{- else -}}
+      <tbody>
+        {{- range $csvData -}}
+          <tr>
+            {{- /* Add image column first if img_field is specified */ -}}
+            {{- if and $img_field (ne $imgColIndex -1) -}}
+              <td>
+                {{- $imgName := index . $imgColIndex -}}
+                {{- $imgSrc := printf "%s/%s.%s" (strings.TrimSuffix "/" $img_path) $imgName $img_format -}}
+                <img src="{{ $imgSrc }}" alt="{{ $imgName }}" loading="lazy">
+              </td>
+            {{- end -}}
+            
+            {{- /* Add all other columns */ -}}
+            {{- range . -}}
+              <td>{{ . | markdownify }}</td>
+            {{- end -}}
+          </tr>
+        {{- end -}}
+      </tbody>
+    {{- end -}}
+  </table>
+{{- end -}}

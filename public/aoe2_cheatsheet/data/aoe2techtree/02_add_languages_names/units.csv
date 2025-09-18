@@ -1,0 +1,221 @@
+id,internal_name,language_name_id,language_name
+1001,ORGAN,5129,Organ Gun
+1003,EORGAN,5130,Elite Organ Gun
+1004,CARAV,5132,Caravel
+1006,CARAV,5133,Elite Caravel
+1007,CAMAR,5134,Camel Archer
+1009,ECAMAR,5136,Elite Camel Archer
+1010,GENITO,5137,Genitour
+1012,EGENITO,5139,Elite Genitour
+1013,GBETO,5140,Gbeto
+1015,EGBETO,5141,Elite Gbeto
+1016,SHOTEL,5143,Shotel Warrior
+1018,ESHOTEL,5145,Elite Shotel Warrior
+1103,SFRGAL,5160,Fire Galley
+1104,SDGAL,5162,Demolition Raft
+1105,SIEGTWR,5445,Siege Tower
+1120,ELEBALI,5146,Ballista Elephant
+1122,EELEBALI,5147,Elite Ballista Elephant
+1123,KARAM,5148,Karambit Warrior
+1125,EKARAM,5150,Elite Karambit Warrior
+1126,ARAMBAI,5151,Arambai
+1128,EARAMBAI,5152,Elite Arambai
+1129,RATAN,5165,Rattan Archer
+1131,ERATAN,5166,Elite Rattan Archer
+1132,BATELE,5167,Battle Elephant
+1134,EBATELE,5168,Elite Battle Elephant
+1155,IHXBOW,5190,Imperial Skirmisher
+11,MOSUN,5108,Mangudai
+1225,KONNIK,5288,Konnik
+1227,EKONNIK,5290,Elite Konnik
+1228,KESHIK,5313,Keshik
+1230,EKESHIK,5314,Elite Keshik
+1231,KIPCHAK,5315,Kipchak
+1233,EKIPCHAK,5327,Elite Kipchak
+1234,LEITIS,5328,Leitis
+1236,ELEITIS,5329,Elite Leitis
+1252,KONNIK_INF,21057,Konnik (Dismounted)
+1253,EKONNIK_INF,21058,Elite Konnik (Dismounted)
+1254,KONNIK,5288,Konnik
+1255,EKONNIK,5290,Elite Konnik
+1258,BTRAM,5094,Battering Ram
+125,MONKX,5099,Monk
+1263,FCAMEL,5375,Flaming Camel
+128,TCART,19052,Trade Cart
+1302,DRAGS,5739,Dragon Ship
+1370,SLANCER,5009,Steppe Lancer
+1372,ESLANCER,5010,Elite Steppe Lancer
+13,FSHSP,5090,Fishing Ship
+1570,AZTRAIDER,5040,Xolotl Warrior
+1655,COUSTILLIER,5534,Coustillier
+1657,ECOUSTILLIER,5536,Elite Coustillier
+1658,SERJEANT,5538,Serjeant
+1659,ESERJEANT,5540,Elite Serjeant
+1660,DSERJEANT,5538,Serjeant
+1661,EDSERJEANT,5540,Elite Serjeant
+1699,FLEMISHPIKEMAN2,5542,Flemish Militia
+1701,OBUCH,5558,Obuch
+1703,EOBUCH,5559,Elite Obuch
+1704,HUSSITEWAGON,5561,Hussite Wagon
+1706,EHUSSITEWAGON,5563,Elite Hussite Wagon
+1707,WINGEDHUSSAR,5577,Winged Hussar
+1709,HOUFNICE,5579,Houfnice
+1735,URUMI,5403,Urumi Swordsman
+1737,EURUMI,5413,Elite Urumi Swordsman
+1738,RATHA,21096,Ratha (Melee)
+1740,ERATHA,21097,Elite Ratha (Melee)
+1741,CHAKRAM,5421,Chakram Thrower
+1743,ECHAKRAM,5427,Elite Chakram Thrower
+1744,ARELE,5428,Armored Elephant
+1746,EARELE,5430,Siege Elephant
+1747,GHULAM,5431,Ghulam
+1749,EGHULAM,5432,Elite Ghulam
+1750,THIRISADAI,5435,Thirisadai
+1751,SHRIVAMSHA,5437,Shrivamsha Rider
+1753,ESHRIVAMSHA,5438,Elite Shrivamsha Rider
+1755,CAMELSC,5441,Camel Scout
+1759,RATHA2,21104,Ratha
+1761,ERATHA2,21105,Elite Ratha
+1786,DPKEMN,5078,Spearman
+1787,DISPKM,5408,Pikeman
+1788,DHLBDM,5409,Halberdier
+1790,CENTURION,5052,Centurion
+1792,ECENTURION,5053,Elite Centurion
+1793,LEGIONARY,5054,Legionary
+1795,DROMON,5055,Dromon
+17,COGXX,5089,Trade Cog
+1800,COMPBOW,5033,Composite Bowman
+1802,ECOMPBOW,5034,Elite Composite Bowman
+1803,MONASPA,5035,Monaspa
+1805,EMONASPA,5036,Elite Monaspa
+1811,WARRIORPRIEST,5037,Warrior Priest
+1813,SAVAR,5703,Savar
+185,SLINGR,5690,Slinger
+1901,FLNCER,5066,Fire Lancer
+1903,EFLNCER,5717,Elite Fire Lancer
+1904,RCKTCRT,5064,Rocket Cart
+1907,HRCKTCRT,5065,Heavy Rocket Cart
+1908,IRONPAG,5594,Iron Pagoda
+1910,EIRONPAG,5595,Elite Iron Pagoda
+1911,GRNADR,5596,Grenadier
+1920,LIAODAO,5692,Liao Dao
+1922,ELIAODAO,5696,Elite Liao Dao
+1923,SIEGECAMEL,5698,Mounted Trebuchet
+1942,TRTREB,5598,Traction Trebuchet
+1944,HKUCAV,5599,Hei Guang Cavalry
+1946,HHKUCAV,5600,Heavy Hei Guang Cavalry
+1948,LOUCHUAN,5601,Lou Chuan
+1949,TIGERCAV,5074,Tiger Cavalry
+1951,ETIGERCAV,5153,Elite Tiger Cavalry
+1952,XIANBEI,5286,Xianbei Raider
+1954,CAOCAO,5323,Cao Cao
+1959,WHTFTHRG,5362,White Feather Guard
+1961,EWHTFTHRG,5363,Elite White Feather Guard
+1962,WARCHAR,5364,War Chariot (Focus Fire)
+1966,LIUBEI,5365,Liu Bei
+1968,FIREARCHER,5366,Fire Archer
+1970,EFIREARCHER,5367,Elite Fire Archer
+1974,JIANSWDS,5368,Jian Swordsman
+1978,SUNJIAN,5370,Sun Jian
+1980,WARCHAR,21198,War Chariot (Barrage)
+207,SHCLRY,5419,Imperial Camel Rider
+21,GALLY,5091,War Galley
+232,WBRSK,5113,Woad Raider
+239,MPCAV,5109,War Elephant
+24,CARCH,5084,Crossbowman
+250,LNGBT,5106,Longboat
+25,TKNIT,5112,Teutonic Knight
+279,SCBAL,5096,Scorpion
+280,MANGO,5095,Mangonel
+281,TAXEM,5111,Throwing Axeman
+282,DERVI,5103,Mameluke
+283,PALDN,5070,Cavalier
+291,SMURI,5110,Samurai
+329,CVLRY,5416,Camel Rider
+330,HCLRY,5417,Heavy Camel Rider
+331,PTREB,5097,Trebuchet
+358,ISPKM,5408,Pikeman
+359,HLBDM,5409,Halberdier
+36,BCANN,5093,Bombard Cannon
+38,KNGHT,5068,Knight
+39,CVRCH,5085,Cavalry Archer
+40,CATAP,5101,Cataphract
+41,GBRSK,5104,Huskarl
+420,CANGA,5287,Cannon Galleon
+422,CBATR,5289,Capped Ram
+42,TREBU,5097,Trebuchet
+440,PETARD,5660,Petard
+441,HUSSAR,5661,Hussar
+442,WARGA,5309,Galleon
+448,SCOUT,5326,Scout Cavalry
+46,JANNI,5105,Janissary
+473,HTHSW,5411,Two-Handed Swordsman
+474,HCVAR,5412,Heavy Cavalry Archer
+492,ACOAR,5418,Arbalester
+4,ARCHR,5083,Archer
+527,RMSHP,5424,Demolition Ship
+528,CRMSH,5425,Heavy Demolition Ship
+529,FRGAL,5426,Fire Ship
+530,ULGBW,5456,Elite Longbowman
+531,UTAXE,5461,Elite Throwing Axeman
+532,HFGAL,5429,Fast Fire Ship
+533,ULNGB,5457,Elite Longboat
+534,UWBRS,5463,Elite Woad Raider
+539,SGALY,5436,Galley
+542,HWBAL,5439,Heavy Scorpion
+545,XPORT,5443,Transport Ship
+546,LTCAV,5444,Light Cavalry
+548,SGRAM,5446,Siege Ram
+550,ONAGR,5448,Onager
+553,UCATA,5451,Elite Cataphract
+554,UTKNI,5462,Elite Teutonic Knight
+555,UGBRS,5454,Elite Huskarl
+556,UDERV,5453,Elite Mameluke
+557,UJANI,5455,Elite Janissary
+558,UMPCAV,5459,Elite War Elephant
+559,UCHUK,5452,Elite Chu Ko Nu
+560,USMUR,5460,Elite Samurai
+561,UMOSU,5458,Elite Mangudai
+567,HEROI,5469,Champion
+569,HEROC,5471,Paladin
+588,SNAGR,5493,Siege Onager
+5,HCANR,5086,Hand Cannoneer
+691,CNGAU,5573,Elite Cannon Galleon
+692,VBRSK,5574,Berserk
+694,UVBRK,5576,Elite Berserk
+6,HXBOW,5087,Elite Skirmisher
+725,JAGUAR,5667,Jaguar Warrior
+726,JAGUARX,5669,Elite Jaguar Warrior
+73,CHUKN,5102,Chu Ko Nu
+74,SPRMN,5079,Militia
+751,EAGLE,5672,Eagle Scout
+752,EAGLEX,5673,Elite Eagle Warrior
+753,EAGLEH,5671,Eagle Warrior
+755,TARKAN,5675,Tarkan
+757,UTARK,5677,Elite Tarkan
+75,SWDMN,5080,Man-at-Arms
+763,PLUME,5683,Plumed Archer
+765,UPLUM,5685,Elite Plumed Archer
+771,CONQI,5687,Conquistador
+773,UCONQ,5689,Elite Conquistador
+775,MONKY,5691,Missionary
+77,THSWD,5081,Long Swordsman
+7,XBOWM,5088,Skirmisher
+827,WAGON,5727,War Wagon
+829,UWAGO,5729,Elite War Wagon
+831,TURTL,5731,Turtle Ship
+832,UTURT,5732,Elite Turtle Ship
+83,VMBAS,5606,Villager
+866,GENOE,5723,Genoese Crossbowman
+868,GENOE_E,5725,Elite Genoese Crossbowman
+869,UMAGYX,5728,Magyar Huszar
+871,UMAGYX,5730,Elite Magyar Huszar
+873,ELEAR,5682,Elephant Archer
+875,UELEA,5684,Elite Elephant Archer
+876,BOYAR,5447,Boyar
+878,EBOYA,5449,Elite Boyar
+879,KAMAY,5686,Kamayuk
+881,EKAMA,5688,Elite Kamayuk
+882,CONDO,5114,Condottiero
+8,LNGBW,5107,Longbowman
+93,PKEMN,5078,Spearman

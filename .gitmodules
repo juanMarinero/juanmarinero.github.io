@@ -1,3 +1,12 @@
 [submodule "themes/hugo-scroll"]
 	path = themes/hugo-scroll
 	url = https://github.com/zjedi/hugo-scroll.git
+[submodule "data/age-of-empires-II-api"]
+	path = data/age-of-empires-II-api
+	url = https://github.com/aalises/age-of-empires-II-api/
+[submodule "data/aoe2techtree"]
+	path = data/aoe2techtree
+	url = https://github.com/SiegeEngineers/aoe2techtree/
+[submodule "static/images/aoe2techtree"]
+	path = static/images/aoe2techtree
+	url = https://github.com/SiegeEngineers/aoe2techtree/

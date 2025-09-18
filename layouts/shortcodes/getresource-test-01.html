@@ -1,0 +1,30 @@
+{{ $path := .Get "path" }}
+{{ $resource := .Page.Resources.GetMatch $path }}
+
+{{ if $resource }}
+  <div class="resource-content">
+    <h4>Resource: {{ $resource.Name }}</h4>
+    {{ if eq $resource.MediaType.SubType "csv" }}
+      <pre>{{ $resource.Content }}</pre>
+    {{ else if eq $resource.MediaType.SubType "svg" }}
+      <div class="svg-container">{{ $resource.Content | safeHTML }}</div>
+    {{ else if eq $resource.MediaType.Type "image" }}
+      <img src="{{ $resource.RelPermalink }}" alt="{{ $resource.Name }}" loading="lazy">
+    {{ else }}
+      <pre>{{ $resource.Content }}</pre>
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="error">
+    <p>Resource not found in page bundle: {{ $path }}</p>
+    <p>Current page directory: {{ .Page.File.Dir }}</p>
+    <p>Available resources in this bundle:</p>
+    <ul>
+      {{ range .Page.Resources }}
+        <li>{{ .Name }} ({{ .MediaType }})</li>
+      {{ else }}
+        <li>No resources found in this page bundle</li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

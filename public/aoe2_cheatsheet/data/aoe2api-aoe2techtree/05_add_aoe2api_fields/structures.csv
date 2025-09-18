@@ -1,0 +1,40 @@
+id,ID_aoe2api,hotkey1,hotkey2,select,name, expansion, age, cost, build_time, hit_points, line_of_sight, armor, range, reload_time, attack, special
+101,19.0,W,E,,Stable, Age of Kings, Feudal," {""Wood"": 175}",50.0,1500.0,5.0, 1/8,,,,Garrison: 10 created units
+1021,,Q,C,,,,,,,,,,,,,
+103,12.0,Q,S,,Blacksmith, Age of Kings, Feudal," {""Wood"": 150}",40.0,2100.0,5.0, 1/8,,,,
+104,31.0,Q,F,,Monastery, Age of Kings, Castle," {""Wood"": 175}",40.0,2100.0,5.0, 2/9,,,,Garrison: 10 created units
+109,9.0,Q,Z,,Town Center, Age of Kings, Dark," {""Wood"": 275;""Stone"": 100}",150.0,2400.0,7.0, 3/5,6,2.0,5.0,15 units (supports 5 population);max 10 arrows;+5 vs all buildings;+5 vs ships/camels
+117,54.0,W,D,,Stone Wall, Age of Kings, Feudal,"  {""Stone"": 5}",8.0,1800.0,2.0,  8/10,,,,
+1189,,Q,T,,,,,,,,,,,,,
+1251,,W,T,,,,,,,,,,,,,
+12,1.0,W,Q,,Barracks, Age of Kings, Dark," {""Wood"": 175}",50.0,1200.0,5.0,0/7,,,,Garrison: 10 created units
+155,56.0,W,D,,Fortified Wall, Age of Kings, Castle," {""Stone"": 5}",8.0,3000.0,2.0, 12/12,,,,
+1665,,W,T,,,,,,,,,,,,,
+1734,,W,I,,,,,,,,,,,,,
+1754,,W,C,,,,,,,,,,,,,
+1806,,W,F,,,,,,,,,,,,,
+1808,,Q,R,Market,,,,,,,,,,,,
+1889,,,,,,,,,,,,,,,,
+199,4.0,Q,Q,Fishing-ship,Fish Trap, Age of Kings, Dark," {""Wood"": 100}",53.0,50.0,1.0, 0/0,,,,Gives 715 Food
+209,35.0,Q,G,,University, Age of Kings, Castle," {""Wood"": 200}",60.0,2100.0,4.0, 2/9,,,,
+234,57.0,W,F,,Guard Tower, Age of Kings, Castle," {""Wood"": 25; ""Stone"": 125}",80.0,1500.0,10.0, 2/8,1-8,2.0,6.0,Garrison 5 units;+2 vs spearmen line;+9 damage vs ships/camels;Max 5 arrows
+235,59.0,W,F,,Keep, Age of Kings, Imperial,"  {""Wood"": 25; ""Stone"": 125}",80.0,2250.0,10.0, 3/9,1-8,2.0,7.0,Garrison 5 units;+2 vs spearmen line;+10 damage vs ships/camels;Max 5 arrows
+236,58.0,W,G,,Bombard Tower, Age of Kings, Imperial," {""Wood"": 25; ""Stone"": 125}",80.0,2220.0,10.0, 3/9,1-8,6.0,120.0,Garrison 5 units;+40 damage vs ships/camels;Pierce attack
+276,50.0,Q,X,,Wonder, Age of Kings, Imperial," {""Wood"": 1000; ""Stone"": 1000; ""Gold"": 1000}",3503.0,4800.0,6.0, 3/10,,,,
+45,2.0,Q,T,,Dock, Age of Kings, Dark," {""Wood"": 150}",35.0,1800.0,5.0,0/7,,,,Garrison: 10 created units
+487,53.0,W,Z,,Gate, Age of Kings, Feudal,"  {""Stone"": 30}",70.0,2750.0,6.0, 6/6,,,,+1250 HP with Fortified Wall (Gates parallel to the bottom right edge have 0:30 bt)
+49,32.0,W,R,,Siege Workshop, Age of Kings, Castle," {""Wood"": 200}",40.0,2100.0,4.0, 2/9,,,,Garrison: 10 created units
+50,3.0,Q,A,,Farm, Age of Kings, Dark," {""Wood"": 60}",15.0,480.0,0.0, 0/0,,,,Standard = 175 Food;Horse Collar = 250 Food;Heavy Plow = 375 Food;Crop Rotation = 550 Food
+562,6.0,Q,R,,Lumber Camp, Age of Kings, Dark," {""Wood"": 100}",35.0,1000.0,5.0, 0/7,,,,
+584,8.0,Q,E,,Mining Camp, Age of Kings, Dark," {""Wood"": 100}",35.0,1000.0,5.0, 0/7,,,,
+598,51.0,W,A,,Outpost, Age of Kings, Dark," {""Wood"": 25; ""Stone"": 10}",15.0,500.0,6.0, 0/0,,,,+2 Line of sight per age
+621,9.0,Q,Z,,Town Center, Age of Kings, Dark," {""Wood"": 275;""Stone"": 100}",150.0,2400.0,7.0, 3/5,6,2.0,5.0,15 units (supports 5 population);max 10 arrows;+5 vs all buildings;+5 vs ships/camels
+68,7.0,Q,W,,Mill, Age of Kings, Dark," {""Wood"": 100}",35.0,1000.0,5.0, 0/7,,,,Max 40 farms queued
+70,5.0,Q,Q,,House, Age of Kings, Dark," {""Wood"": 30}",25.0,900.0,1.0, 0/7,,,,Supports 5 population
+71,9.0,Q,Z,,Town Center, Age of Kings, Dark," {""Wood"": 275;""Stone"": 100}",150.0,2400.0,7.0, 3/5,6,2.0,5.0,15 units (supports 5 population);max 10 arrows;+5 vs all buildings;+5 vs ships/camels
+72,52.0,W,S,,Palisade Wall, Age of Kings, Dark," {""Wood"": 2}",5.0,250.0,2.0, 2/5,,,,
+792,53.0,W,X,,Gate, Age of Kings, Feudal,"  {""Stone"": 30}",70.0,2750.0,6.0, 6/6,,,,+1250 HP with Fortified Wall (Gates parallel to the bottom right edge have 0:30 bt)
+79,55.0,W,F,,Watch Tower, Age of Kings, Feudal,"  {""Wood"": 25; ""Stone"": 125}",80.0,1020.0,10.0, 1/7,1-8,2.0,5.0,Garrison 5 units;+2 vs spearmen line;+7 damage vs ships/camels;Max 5 arrows
+82,24.0,W,C,,Castle, Age of Kings, Castle," {""Stone"": 650}",200.0,4800.0,10.0, 8/11,1-8,2.0,11.0,20 units (support 20 population);max 21 arrows;1st arrow +2 against spearmen;From 2nd arrow +11 damage vs ships/camels;+11 vs stone defense
+84,16.0,Q,D,,Market, Age of Kings, Feudal," {""Wood"": 175}",60.0,2100.0,4.0, 1/8,,,,
+87,10.0,W,W,,Archery Range, Age of Kings, Feudal," {""Wood"": 175}",50.0,1500.0,5.0, 1/8,,,,Garrison: 10 created units
