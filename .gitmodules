@@ -7,6 +7,3 @@
 [submodule "data/aoe2techtree"]
 	path = data/aoe2techtree
 	url = https://github.com/SiegeEngineers/aoe2techtree/
-[submodule "static/images/aoe2techtree"]
-	path = static/images/aoe2techtree
-	url = https://github.com/SiegeEngineers/aoe2techtree/
