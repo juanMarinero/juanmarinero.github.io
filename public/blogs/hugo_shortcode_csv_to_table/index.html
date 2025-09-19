@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Custom Hugo shortcode to render tables with images">
   <meta itemprop="description" content="Step-by-step Hugo guide to render CSV tables with images using Age of Empires II Dataset Mining">
-  <meta itemprop="wordCount" content="7624">
+  <meta itemprop="wordCount" content="7651">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo shortcodes,Hugo templates,static site generator,custom shortcodes,built-in shortcodes,content creation,Markdown extensions,Go HTML templates,Hugo partials,dynamic content,Hugo functions,layout components,DRY principles,web development,content management,Hugo documentation,code examples,responsive embeds,customizable content,Hugo power features,Age of empires,Age of empires II,Age of empires 2,AOE2,AOE2API,AOE2TechTree,Cheatsheet">
 
@@ -967,23 +967,26 @@ Hugo can resize images, bundle and minify JavaScript files, and convert SCSS to 
 and <a href="https://github.com/SiegeEngineers/aoe2techtree/tree/master/img/Buildings"><code>img/Buildings/</code></a> only.
 Well, the resource icons (food, stone,&hellip;) might be handy too.
 &hellip;Actually the <code>img/</code> folder is about 2 MB, the project can handle it easily.</p>
-<p>I choose global consumption in <code>static/images/</code>. Execute:</p>
+<p>I choose global consumption in <code>static/images/</code>.</p>
+<p>But do <strong>not</strong> execute next, we already have a Git submodule to that repository.</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Navigate to project root</span>
 </span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> &lt;project_root&gt;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#586e75"># Call</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Do NOT run next</span>
 </span></span><span style="display:flex;"><span>add_sparse_submodule <span style="color:#cb4b16">\
-</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;https://github.com/SiegeEngineers/aoe2techtree/&#34;</span> <span style="color:#cb4b16">\
-</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;static/images/aoe2techtree&#34;</span> <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;https://github.com/SiegeEngineers/aoe2techtree/&#34;</span> <span style="color:#cb4b16">\ </span><span style="color:#586e75"># !!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;static/images/aoe2techtree&#34;</span> <span style="color:#cb4b16">\
 </span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;img/Units/*.png&#34;</span> <span style="color:#cb4b16">\
 </span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;img/Buildings/*.png&#34;</span> <span style="color:#cb4b16">\
 </span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>    <span style="color:#2aa198">&#34;img/*.png&#34;</span>
-</span></span></code></pre></div><p>It prints:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Submodule path &#39;static/images/aoe2techtree&#39;: checked out &#39;b265c39ce331d354f5eeda3ffe2929925cd37bb1&#39;
-</span></span><span style="display:flex;"><span>HEAD detached at b265c39
-</span></span><span style="display:flex;"><span>You are in a sparse checkout with 40% of tracked files present.
+</span></span></code></pre></div><p><strong>Instead</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir -p static/images/
+</span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> static/images/
+</span></span><span style="display:flex;"><span>git clone https://github.com/SiegeEngineers/aoe2techtree.git
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>nothing to commit, working tree clean
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Remove all files and dirs except for the &#34;img&#34; folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">cd</span> aoe2techtree <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> find . -mindepth <span style="color:#2aa198">1</span> -not -path <span style="color:#2aa198">&#39;./img&#39;</span> -not -path <span style="color:#2aa198">&#39;./img/*&#39;</span> -exec rm -rf <span style="color:#719e07">{}</span> +
 </span></span></code></pre></div><p>Let&rsquo;s check we can render images under <code>static</code>.</p>
 <p><code>![Building-45](/images/aoe2techtree/img/Buildings/45.png)</code> shows:</p>
 <img src="/images/aoe2techtree/img/Buildings/45.png" alt="Building-45"><h4 id="study-the-structured-data">Study the structured data</h4>

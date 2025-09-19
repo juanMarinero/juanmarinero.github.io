@@ -802,29 +802,33 @@ and [`img/Buildings/`](https://github.com/SiegeEngineers/aoe2techtree/tree/maste
 Well, the resource icons (food, stone,...) might be handy too.
 ...Actually the `img/` folder is about 2 MB, the project can handle it easily.
 
-I choose global consumption in `static/images/`. Execute:
+I choose global consumption in `static/images/`.
+
+But do **not** execute next, we already have a Git submodule to that repository.
 
 ```sh
 # Navigate to project root
 cd <project_root>
 
-# Call
+# Do NOT run next
 add_sparse_submodule \
-    "https://github.com/SiegeEngineers/aoe2techtree/" \
+    "https://github.com/SiegeEngineers/aoe2techtree/" \ # !!
     "static/images/aoe2techtree" \
     "img/Units/*.png" \
     "img/Buildings/*.png" \
     "img/*.png"
 ```
 
-It prints:
+**Instead**
 
-```text
-Submodule path 'static/images/aoe2techtree': checked out 'b265c39ce331d354f5eeda3ffe2929925cd37bb1'
-HEAD detached at b265c39
-You are in a sparse checkout with 40% of tracked files present.
+```sh
+mkdir -p static/images/
+cd static/images/
+git clone https://github.com/SiegeEngineers/aoe2techtree.git
 
-nothing to commit, working tree clean
+# Remove all files and dirs except for the "img" folder
+cd aoe2techtree \
+  && find . -mindepth 1 -not -path './img' -not -path './img/*' -exec rm -rf {} +
 ```
 
 Let's check we can render images under `static`.
