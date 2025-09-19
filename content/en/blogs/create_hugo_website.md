@@ -460,7 +460,24 @@ git commit -m "add hugo-scroll as a Hugo Module"
 ##### Remove the Git submodule 
 
 ```sh
-git rm -rf themes/hugo-scroll
+# Remove the themes/hugo-scroll submodule from .gitmodules
+git config --file .gitmodules --remove-section submodule.themes/hugo-scroll
+
+# Remove the submodule directory from Git's index (if it still exists)
+git rm --cached themes/hugo-scroll 2>/dev/null || true
+
+# Remove any leftover configuration
+git config --remove-section submodule.themes/hugo-scroll 2>/dev/null || true
+
+# Remove the module directory
+rm -rf .git/modules/themes/hugo-scroll 2>/dev/null || true
+
+# Commit the changes
+git add .gitmodules
+git commit -m "Remove themes/hugo-scroll submodule (migrated to Hugo Modules)"
+
+# Verify .gitmodules now only contains your data submodules
+cat .gitmodules
 ```
 
 ##### Build and commit
