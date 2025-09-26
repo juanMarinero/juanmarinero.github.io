@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+
+<title>Watcher Tree Files</title>
+
+
+
+
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+
+
+  <meta name="description" content="Monitor Hugo projects with Linux&#39;s inotify tools. Learn to track file changes, build directory monitors, and integrate with Git for automated workflows."
+/>
+
+  <meta name="keywords" content="inotifywait, inotifywatch, file system monitoring, Linux commands, Hugo development, directory monitor, shell scripting, inotify-tools, automate workflow, file change detection, Git integration, systemd daemon, infinite loop, tree command, real-time monitoring, project monitoring, development tools, bash scripting, file events, Hugo project"
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.5225559b588c6dd9e2575685da1d0d3c6d059652c9b6dae2b54d59a14ad811ce.css" type="text/css" integrity="sha256-UiVVm1iMbdniV1aF2h0NPG0FllLJttritU1ZoUrYEc4=" />
+
+<meta property="og:url" content="http://localhost:1313/blogs/watcher_tree_files/">
+  <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
+  <meta property="og:title" content="Watcher Tree Files">
+  <meta property="og:description" content="Monitor Hugo projects with Linux&#39;s inotify tools. Learn to track file changes, build directory monitors, and integrate with Git for automated workflows.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta name="twitter:title" content="Watcher Tree Files">
+  <meta name="twitter:description" content="Monitor Hugo projects with Linux&#39;s inotify tools. Learn to track file changes, build directory monitors, and integrate with Git for automated workflows.">
+
+
+  <meta itemprop="name" content="Watcher Tree Files">
+  <meta itemprop="description" content="Monitor Hugo projects with Linux&#39;s inotify tools. Learn to track file changes, build directory monitors, and integrate with Git for automated workflows.">
+  <meta itemprop="wordCount" content="3261">
+  <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
+  <meta itemprop="keywords" content="inotifywait,inotifywatch,file system monitoring,Linux commands,Hugo development,directory monitor,shell scripting,inotify-tools,automate workflow,file change detection,Git integration,systemd daemon,infinite loop,tree command,real-time monitoring,project monitoring,development tools,bash scripting,file events,Hugo project">
+
+
+
+
+
+
+<style>
+:root {
+    --cover-text-color: #246B9F;
+    --highlight: #80A4BE;
+    --cover-title-and-description-guard-bg-color: rgba(159, 208, 103, 0.7);
+    --cover-title-text-shadow: white 0px 0px 12px;
+    --sticky-menu-text-color: #246B9F;
+    --section-dark-bg-color: #246B9F;
+}
+ 
+.post-holder.dark a:hover {
+    color: rgba(159, 208, 103, 0.7) !important;
+    text-decoration: underline;
+}
+ 
+.data-table {
+  width: 100%; 
+  border-collapse: collapse;
+}
+.data-cell {
+  background-color: #6D9DBF;
+  padding: 5%;
+  vertical-align: middle;
+}
+.header-cell {
+  background-color: #6D9DBF;
+  width: 95%;
+  text-align: center;
+}
+.image-cell {
+  width: 45%;
+}
+.table-image {
+  width: 100%; 
+  display: block;
+}
+ 
+.circular-bg {
+  background-color: #6D9DBF;
+  clip-path: circle(50% at 50% 50%);  
+  aspect-ratio: 1;  
+  display: block;  
+  margin: 0 auto;  
+}
+
+ 
+ 
+ 
+.no-underline-except-hover {
+  text-decoration: none;     
+  line-height: 1.5em;  
+  display: block;  
+  margin-bottom: 1.1em;  
+}
+.no-underline-except-hover:hover {
+  text-decoration: underline;   
+}
+
+ 
+.blogs_index {
+  margin-top: 1.5em;
+  margin-bottom: 2.5em;
+}
+
+
+ 
+.great-vibes {
+  font-family: "Great Vibes", cursive;
+}
+h1 {
+  font-family: "Great Vibes", "Open Sans", sans-serif;
+  font-size: 5.5rem;
+}
+.font-middle-earth-joanna-vu {
+  font-family: "MiddleEarth JoannaVu", "Great Vibes", "Open Sans", sans-serif
+}
+
+ 
+ 
+.tikzjax {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+}
+
+ 
+details.table-of-contents-all-bold-but-summary > :not(summary) {
+  font-weight: bold;
+}
+
+
+ 
+ 
+blockquote.alert-caution *:not(p:first-of-type) {
+  color: red;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+
+
+
+
+
+
+  <style>@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XC.ttf) format('truetype');
+}
+</style>
+
+
+
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    packages: {'[+]': ['ams', 'boldsymbol']}  
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore|tikz-container'
+  },
+  loader: {
+    load: ['[tex]/ams', '[tex]/boldsymbol']
+  },
+  startup: {
+    ready() {
+      console.log('MathJax is initializing...');
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        console.log('MathJax typesetting complete');
+      }).catch((err) => {
+        console.error('MathJax failed:', err);
+      });
+    }
+  }
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+
+
+<script src="/js/tikzjax-node.min.679617c0048325b476a16f95d017ba0858e995ffdc938c4fa7f8b994e1e9d2a0.js" integrity="sha256-Z5YXwASDJbR2oW&#43;V0Be6CFjplf/ck4xPp/i5lOHp0qA=" defer></script>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+</head>
+  <body>
+  <main class="content page-template page-">
+    <article class="post page">
+      <header class="post-header">
+        
+          
+        <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> J. Marinero - Data Scientist &amp; AI Engineer</a>
+          
+        
+      </header>
+      <h1 class="post-title">Watcher Tree Files</h1>
+      <section class="post-content">
+        <p>Keeping track of file system changes is crucial for many development workflows,
+for example when working with static site generators like Hugo.</p>
+<p>What if you could not only see that a file changed but also get immediate, contextual information about its state?
+This guide dives deep into using Linux&rsquo;s powerful <code>inotify</code> tools—<code>inotifywatch</code> and <code>inotifywait</code>—to monitor your project directory.</p>
+<p>We&rsquo;ll start with basic usage examples for tracking new and modified files and then progress to building a little more sophisticated monitoring script that integrates with Git.</p>
+
+<details>
+  <summary><strong>Index</strong> - Click to expand 📜</summary>
+  <ul>
+<li><a href="/blogs/watcher_tree_files/#inotifywatch">inotifywatch</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#create-a-new-post">Create a new post</a></li>
+<li><a href="/blogs/watcher_tree_files/#render-a-new-post">Render a new post</a></li>
+<li><a href="/blogs/watcher_tree_files/#documentation">Documentation</a></li>
+</ul>
+</li>
+<li><a href="/blogs/watcher_tree_files/#inotifywait">inotifywait</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#create-the-script">Create the script</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#pitfall">Pitfall</a></li>
+<li><a href="/blogs/watcher_tree_files/#fixed-script">Fixed script</a></li>
+</ul>
+</li>
+<li><a href="/blogs/watcher_tree_files/#documentation">Documentation</a></li>
+</ul>
+</li>
+<li><a href="/blogs/watcher_tree_files/#inotifywait-daemon-mode">inotifywait daemon mode</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#-d-flag">-d flag</a></li>
+</ul>
+</li>
+<li><a href="/blogs/watcher_tree_files/#complement-inotify">Complement inotify</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#install">Install</a></li>
+<li><a href="/blogs/watcher_tree_files/#test-project">Test project</a>
+<ul>
+<li><a href="/blogs/watcher_tree_files/#file-birth-git-untracked">File birth Git untracked</a></li>
+<li><a href="/blogs/watcher_tree_files/#modify-a-git-tracked-file">Modify a git tracked file</a></li>
+<li><a href="/blogs/watcher_tree_files/#commit-a-git-tracked-file">Commit a Git tracked file</a></li>
+<li><a href="/blogs/watcher_tree_files/#remove-and-commit-a-git-tracked-file">Remove and commit a Git tracked file</a></li>
+<li><a href="/blogs/watcher_tree_files/#rename-a-file">Rename a file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+
+
+
+<div class="html-content">
+<br>
+</div>
+
+
+<h2 id="inotifywatch">inotifywatch</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<p>Terminal 1:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> &lt;project_root&gt; <span style="color:#586e75"># edit!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>inotifywatch -v -e modify -e create -t <span style="color:#2aa198">60</span> -r ./
+</span></span></code></pre></div><p>This command watches <code>-v</code>erbosely for <code>e</code>vents on files/dirs of type <code>modify</code> or <code>creat</code>ion in the current directory (<code>./</code>) and its subdirectories (<code>-r</code>ecursive).
+It listens for an amount of <code>-t</code>ime of 60 seconds.</p>
+<p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; hugo new postNew/index.md
+</span></span><span style="display:flex;"><span>Content <span style="color:#2aa198">&#34;[...]/content/en/postNew/index.md&#34;</span> created
+</span></span></code></pre></div><p>When the 60 seconds are done then the terminal 1 shows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Establishing watches...
+</span></span><span style="display:flex;"><span>Setting up watch(es) on ./
+</span></span><span style="display:flex;"><span>OK, ./ is now being watched.
+</span></span><span style="display:flex;"><span>Total of 451 watches.
+</span></span><span style="display:flex;"><span>Finished establishing watches, now collecting statistics.
+</span></span><span style="display:flex;"><span>Will listen for events for 60 seconds.
+</span></span><span style="display:flex;"><span>total  modify  create  filename
+</span></span><span style="display:flex;"><span>2      2       0       ./content/en/postNew/
+</span></span><span style="display:flex;"><span>1      0       1       ./content/en/
+</span></span></code></pre></div><h3 id="render-a-new-post">Render a new post</h3>
+<p>Terminal 1 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>inotifywatch -v -e modify -e create -t <span style="color:#2aa198">60</span> -r ./
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>hugo server --disableFastRender
+</span></span></code></pre></div><p>And browse <a href="http://localhost:1313/postnew/">http://localhost:1313/postnew/</a> to make sure the new post is rendered.</p>
+<p>When the 60 seconds are done then the terminal 1 shows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Establishing watches...
+</span></span><span style="display:flex;"><span>Setting up watch(es) on ./
+</span></span><span style="display:flex;"><span>OK, ./ is now being watched.
+</span></span><span style="display:flex;"><span>Total of 453 watches.
+</span></span><span style="display:flex;"><span>Finished establishing watches, now collecting statistics.
+</span></span><span style="display:flex;"><span>Will listen for events for 60 seconds.
+</span></span><span style="display:flex;"><span>total  modify  filename
+</span></span><span style="display:flex;"><span>2      2       ./public/postnew/
+</span></span><span style="display:flex;"><span>[...]
+</span></span></code></pre></div><h3 id="documentation">Documentation</h3>
+<ul>
+<li><code>inotifywatch --help</code></li>
+<li><a href="https://github.com/inotify-tools/inotify-tools/blob/master/man/inotifywatch.1.in">inotify-tools/man/inotifywatch.1.in</a></li>
+<li><a href="https://atareao-es.translate.goog/software/utilidades/inotify-tools-o-automatizar-tu-sistema-de-archivos/?_x_tr_sl=en&amp;_x_tr_tl=es&amp;_x_tr_hl=es&amp;_x_tr_pto=wapp#inotifywatch">atareao</a>
+(Original version in Spanish)</li>
+</ul>
+<h2 id="inotifywait">inotifywait</h2>
+<h3 id="create-the-script">Create the script</h3>
+<h4 id="pitfall">Pitfall</h4>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> &lt;project_root&gt; <span style="color:#586e75"># edit!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">$EDITOR</span> tree-monitor.sh
+</span></span></code></pre></div><p>Paste next content to create a directory tree monitor</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#719e07">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>inotifywait -m -r -e create,delete,move,modify ./ | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> path action file; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">timestamp</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>date +%y%m%d-%H%M%S<span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>  tree ./ &gt; <span style="color:#2aa198">&#34;tree_</span><span style="color:#2aa198">${</span><span style="color:#268bd2">timestamp</span><span style="color:#2aa198">}</span><span style="color:#2aa198">.txt&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;[</span><span style="color:#719e07">$(</span>date<span style="color:#719e07">)</span><span style="color:#2aa198">] Tree updated due to </span><span style="color:#268bd2">$action</span><span style="color:#2aa198"> in </span><span style="color:#268bd2">$path</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span>
+</span></span></code></pre></div><p>The flag <code>-m</code> is for monitoring mode:</p>
+
+
+
+  <blockquote>
+    <p>Keep listening for events forever or until &ndash;timeout expires.
+Without this option, inotifywait will exit after one event is received.</p>
+  </blockquote>
+
+<p>And make it executable</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x tree-monitor.sh
+</span></span></code></pre></div><h5 id="test-it">Test it</h5>
+<p>Terminal 1:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> &lt;project_root&gt; <span style="color:#586e75"># edit!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Remove previous new post</span>
+</span></span><span style="display:flex;"><span>rm -rf  postNew/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Run the script</span>
+</span></span><span style="display:flex;"><span>./tree-monitor.sh
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; hugo new postNew/index.md
+</span></span><span style="display:flex;"><span>Content <span style="color:#2aa198">&#34;[...]/content/en/postNew/index.md&#34;</span> created
+</span></span></code></pre></div><p>And now <strong>STOP</strong> the terminal 1 script (Ctrl+C) because it felt in an endless loop.</p>
+<p>The terminal 1 outputs next. Note:</p>
+<ul>
+<li><code>[...]</code> symbolizes previous output line repeated multiple times.</li>
+<li>While the diagonal dots mean that after last shown output is echoed several times,
+then the next printed line is echoed also multiple times in a row,
+and so on till the script is stopped.</li>
+<li><code>dayD</code> and <code>yearY</code> represent the day and the year of the outputs. Shorted for brevity.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ./tree-monitor.sh
+</span></span><span style="display:flex;"><span>Setting up watches.  Beware: since -r was given, this may take a while!
+</span></span><span style="display:flex;"><span>Watches established.
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to CREATE,ISDIR in ./content/en/
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to CREATE in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./content/en/postNew/
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./content/en/postNew/
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[dayD 06:17:19 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[...]
+</span></span><span style="display:flex;"><span>[dayD 06:17:20 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[...]
+</span></span><span style="display:flex;"><span>[dayD 06:17:21 yearY] Tree updated due to MODIFY in ./
+</span></span><span style="display:flex;"><span>[.
+</span></span><span style="display:flex;"><span>  .
+</span></span><span style="display:flex;"><span>   .]
+</span></span></code></pre></div><p>Just compare the two oldest <code>tree-*.txt</code> files in the directory. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vim -d tree_250925-181719.txt <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>       tree_250925-181720.txt
+</span></span></code></pre></div><p>It shows that</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>├── tree_250925-181719.txt | ├── tree_250925-181719.txt
+</span></span><span style="display:flex;"><span>---------------------------| ├── tree_250925-181720.txt
+</span></span><span style="display:flex;"><span>├── tree-monitor.sh        | ├── tree-monitor.sh
+</span></span><span style="display:flex;"><span>└── _vendor                | └── _vendor
+</span></span></code></pre></div><p>So <code>tree-monitor.sh</code> listens for events, among others it&rsquo;s triggered when the event <code>create</code> (new file/dir) happens.
+The events order was:</p>
+<ol>
+<li>The script is run manually (<code>./tree-monitor.sh</code>)</li>
+<li>A new file is created manually (<code>hugo new postNew/index.md</code>)</li>
+<li>The <code>inotifywait</code> command is run automatically (<code>inotifywait -m -r -e create,delete,move,modify ./</code>)
+And executes the command <code>tree ./ &gt; &quot;tree_${timestamp}.txt&quot;</code></li>
+<li>This new tree file is created in the current directory (<code>./</code>), thus the <code>inotifywait</code> listens for this creation and is run again.</li>
+<li>Which generates a new tree file again.</li>
+<li>And so on.</li>
+</ol>
+<p><strong>TL;DR</strong> The <code>inotifywait</code> command should (normally) not run a command that triggers itself. Otherwise it creates an infinite loop.</p>
+<h4 id="fixed-script">Fixed script</h4>
+<p>Just modify the script to save the tree files to another directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#719e07">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Set default values</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">WATCH_DIR</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#719e07">:-</span>./<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">SAVE_DIR</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">2</span><span style="color:#719e07">:-</span><span style="color:#268bd2">$HOME</span>/Downloads/tree-monitor<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">RUN_ONCE</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">3</span><span style="color:#719e07">:-</span><span style="color:#268bd2">false</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Create save directory if it doesn&#39;t exist</span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Function to generate tree snapshot</span>
+</span></span><span style="display:flex;"><span>generate_tree_snapshot<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">path</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">action</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$2</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">file</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$3</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">timestamp</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>date +%y%m%d-%H%M%S<span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">local</span> <span style="color:#268bd2">tree_file</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;tree_</span><span style="color:#2aa198">${</span><span style="color:#268bd2">timestamp</span><span style="color:#2aa198">}</span><span style="color:#2aa198">.txt&#34;</span>
+</span></span><span style="display:flex;"><span>  tree <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> &gt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">/</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;[</span><span style="color:#719e07">$(</span>date<span style="color:#719e07">)</span><span style="color:#2aa198">] Tree updated due to </span><span style="color:#268bd2">$action</span><span style="color:#2aa198"> in </span><span style="color:#268bd2">$path</span><span style="color:#2aa198"> (saved to </span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">/</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># If third argument is &#34;true&#34;, generate one snapshot and exit</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$RUN_ONCE</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">==</span> <span style="color:#2aa198">&#34;true&#34;</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Generating single tree snapshot...&#34;</span>
+</span></span><span style="display:flex;"><span>  generate_tree_snapshot <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;manual&#34;</span> <span style="color:#2aa198">&#34;triggered&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">exit</span> <span style="color:#2aa198">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">else</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Monitoring directory: </span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Saving tree files to: </span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  inotifywait -m -r -e create,delete,move,modify <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> path action file; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    generate_tree_snapshot <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$path</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$action</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">fi</span>
+</span></span></code></pre></div><p>You can move this script to any directory you want, e.g. <code>~/tree-monitor.sh</code>. But remember to pass the directory to watch as the first argument:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>~/tree-monitor.sh /path/to/watch
+</span></span></code></pre></div><p>And the path to save the tree files as the second argument (defaults to <code>~/Downloads/tree-monitor</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>~/tree-monitor.sh /path/to/watch /path/for/tree/files
+</span></span></code></pre></div><p>For example</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>~/tree-monitor.sh <span style="color:#719e07">[</span>...<span style="color:#719e07">]</span>/Hugo_project ~/Downloads/tree-monitor
+</span></span></code></pre></div><h5 id="test-it-1">Test it</h5>
+<p>Terminal 1:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> &lt;project_root&gt; <span style="color:#586e75"># edit!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Remove previous new post</span>
+</span></span><span style="display:flex;"><span>rm -rf  postNew/
+</span></span></code></pre></div><p>Run the script once with third argument <code>true</code> to generate a single tree snapshot.
+Modify the script path (<code>./</code>) and the path to liston to, first argument (<code>./</code>), if needed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ./tree-monitor.sh ./ ~/Downloads/tree-monitor &#34;true&#34;
+</span></span><span style="display:flex;"><span>Generating single tree snapshot...
+</span></span><span style="display:flex;"><span>[Thu Sep 25 06:41:54 PM CEST 2025] Tree updated due to manual in ./ (saved to ~/Downloads/tree-monitor/tree_250925-184154.txt)
+</span></span></code></pre></div><p>In same terminal lets make the watcher listen for events:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Run the script (adapt path if needed)</span>
+</span></span><span style="display:flex;"><span>./tree-monitor.sh
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>&gt; hugo new postNew/index.md
+</span></span><span style="display:flex;"><span>Content <span style="color:#2aa198">&#34;[...]/content/en/postNew/index.md&#34;</span> created
+</span></span></code></pre></div><p>And now <strong>STOP</strong> the terminal 1 script (Ctrl+C) because we no longer need it running.
+It outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ./tree-monitor.sh
+</span></span><span style="display:flex;"><span>Monitoring directory: ./
+</span></span><span style="display:flex;"><span>Saving tree files to: ~/Downloads/tree-monitor
+</span></span><span style="display:flex;"><span>Setting up watches.  Beware: since -r was given, this may take a while!
+</span></span><span style="display:flex;"><span>Watches established.
+</span></span><span style="display:flex;"><span>[Thu Sep 25 06:45:07 PM CEST 2025] Tree updated due to CREATE,ISDIR in ./content/en/ (saved to ~/Downloads/tree-monitor/tree_250925-184507.txt)
+</span></span><span style="display:flex;"><span>[Thu Sep 25 06:45:07 PM CEST 2025] Tree updated due to MODIFY in ./content/en/postNew/ (saved to ~/Downloads/tree-monitor/tree_250925-184507.txt)
+</span></span><span style="display:flex;"><span>[Thu Sep 25 06:45:07 PM CEST 2025] Tree updated due to MODIFY in ./content/en/postNew/ (saved to ~/Downloads/tree-monitor/tree_250925-184507.txt)
+</span></span></code></pre></div><p>Just compare the only two <code>tree-*.txt</code> files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vim -d ~/Downloads/tree-monitor/*.txt
+</span></span></code></pre></div><p>It shows that the only difference is in the dir <code>content/en/postNew/</code> and its <code>index.md</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>│       └── license.md         |│       ├── license.md
+</span></span><span style="display:flex;"><span>-------------------------------|│       └── postNew
+</span></span><span style="display:flex;"><span>-------------------------------|│           └── index.md
+</span></span><span style="display:flex;"><span>├── data                       |├── data
+</span></span></code></pre></div><h3 id="documentation-1">Documentation</h3>
+<ul>
+<li><code>inotifywait --help</code></li>
+<li><a href="https://github.com/inotify-tools/inotify-tools/blob/master/man/inotifywait.1.in">inotify-tools/man/inotifywait.1.in</a></li>
+<li><a href="https://atareao-es.translate.goog/software/utilidades/inotify-tools-o-automatizar-tu-sistema-de-archivos/?_x_tr_sl=en&amp;_x_tr_tl=es&amp;_x_tr_hl=es&amp;_x_tr_pto=wapp#inotifywait">atareao</a>
+(original version in Spanish)</li>
+</ul>
+<h2 id="inotifywait-daemon-mode">inotifywait daemon mode</h2>
+<p>In previous section we:</p>
+<ul>
+<li>Created a <code>inotifywait</code> process to listen for events</li>
+<li>We activated that script</li>
+<li>We triggered an event to test it, and we read the logs (directory tree snapshots in our case)</li>
+<li>Finally we stopped the <code>inotifywait</code> process</li>
+</ul>
+<p>We can automate the previous steps by daemonizing the <code>inotifywait</code> process (enabling and starting a <strong><code>systemd</code></strong> unit).
+This way the process runs on startup in the background and we don&rsquo;t have to stop it manually.</p>
+<p><a href="https://www-iespai-com.translate.goog/2025/06/12/%F0%9F%9B%A1%EF%B8%8F-como-usar-inotifywait-con-systemd-para-vigilar-directorios-en-linux/?_x_tr_sl=es&amp;_x_tr_tl=en&amp;_x_tr_hl=es&amp;_x_tr_pto=wapp">Iespai</a>
+explains how
+(original version in Spanish).</p>
+<p>Problems with daemonizing <code>inotifywait</code>:</p>
+<ol>
+<li>File descriptor issues - <code>inotify</code> watches can get lost when processes <em>daemonize</em></li>
+<li>Signal handling problems - <code>daemon</code>s might not handle signals properly</li>
+<li>Resource leaks - <code>inotify</code> instances might not get cleaned up correctly</li>
+<li>Buffer overruns - in background mode, output can get lost</li>
+</ol>
+<p>Alternatives:</p>
+<ul>
+<li><a href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>tmux</li>
+<li><a href="https://www.geeksforgeeks.org/linux-unix/screen-command-in-linux-with-examples/">screen</a></li>
+<li>Simple background process with proper logging like:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Start with output logging</span>
+</span></span><span style="display:flex;"><span>nohup inotifywait -m -r -e create,delete,move,modify ./ 2&gt;&amp;<span style="color:#2aa198">1</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> path action file; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">timestamp</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>date +%y%m%d-%H%M%S<span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>    tree ./ &gt; <span style="color:#2aa198">&#34;tree_</span><span style="color:#2aa198">${</span><span style="color:#268bd2">timestamp</span><span style="color:#2aa198">}</span><span style="color:#2aa198">.txt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;[</span><span style="color:#719e07">$(</span>date<span style="color:#719e07">)</span><span style="color:#2aa198">] Tree updated due to </span><span style="color:#268bd2">$action</span><span style="color:#2aa198"> in </span><span style="color:#268bd2">$path</span><span style="color:#2aa198">&#34;</span> &gt;&gt; tree-monitor.log
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span> &gt; tree-monitor.out 2&gt;&amp;<span style="color:#2aa198">1</span> &amp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Save the PID</span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#268bd2">$!</span> &gt; tree-monitor.pid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Check if running</span>
+</span></span><span style="display:flex;"><span>ps -p <span style="color:#719e07">$(</span>cat tree-monitor.pid 2&gt;/dev/null<span style="color:#719e07">)</span> &gt;/dev/null 2&gt;&amp;<span style="color:#2aa198">1</span> <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Running&#34;</span> <span style="color:#719e07">||</span> <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Stopped&#34;</span>
+</span></span></code></pre></div><h3 id="-d-flag">-d flag</h3>
+<p>The <code>-d</code> or <code>--daemon</code> flags are used, to run the <code>inotifywait</code> process in daemon mode.
+The <a href="https://github.com/inotify-tools/inotify-tools/blob/a8f024da45b8cc2c4c040a7165841f06841a00ad/man/inotifywait.1.in#L105C1-L107C59">man pages</a> states:</p>
+
+
+
+  <blockquote>
+    <p>Same as --monitor, except run in the background logging events to a file
+that must be specified by --outfile. Implies --syslog.</p>
+  </blockquote>
+
+<p>Further details in <a href="https://github.com/inotify-tools/inotify-tools/issues/144">#144</a>.</p>
+<p>Official practical examples:</p>
+<ul>
+<li><a href="https://github.com/inotify-tools/inotify-tools/blob/master/t/inotifywait-daemon-logs-chown.t">inotify-tools/t/inotifywait-daemon-logs-chown.t</a></li>
+<li><a href="https://github.com/inotify-tools/inotify-tools/blob/master/t/inotifywait-daemon-logs-to-relative-paths.t">inotify-tools/t/inotifywait-daemon-logs-to-relative-paths.t</a></li>
+</ul>
+<h2 id="complement-inotify">Complement inotify</h2>
+<p>The <code>inotify</code> events are a bit limited.
+We can&rsquo;t watch for:</p>
+<ul>
+<li>New git-ignored files (just for new files)</li>
+<li>New git-tracked files (just for new files)</li>
+<li>Removed git-tracked files (just for removed files)</li>
+<li>Etc.</li>
+</ul>
+<p>Lets create a monitoring script that integrates <code>inotify</code> with Git.</p>
+<h3 id="install">Install</h3>
+<p>We are gonna install a easy program that will listen for events when <code>inotify</code> triggers it.</p>
+<p>Find last file modified/added/removed/&hellip;.</p>
+<ul>
+<li>What&rsquo;s its status: modified, commited, ignored, untracked,&hellip;</li>
+<li>If tracked and had a commit then show &ldquo;git log&rdquo; oneline of the last commit that this file participed</li>
+</ul>
+<p>Follow the <strong>simple install</strong> steps of my <a href="https://github.com/juanMarinero/watcher_tree_files#installation">event file watcher</a> repository.</p>
+<h3 id="test-project">Test project</h3>
+<p>To make sure we are in the same scenario, lets download the <a href="https://zjedi.github.io/hugo-scroll/">Hugo Scroll demo</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> ~/Downloads
+</span></span><span style="display:flex;"><span>git clone https://github.com/zjedi/hugo-scroll
+</span></span></code></pre></div><p>And make our CWD the <code>exampleSite</code> directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> hugo-scroll/exampleSite
+</span></span></code></pre></div><h4 id="file-birth-git-untracked">File birth Git untracked</h4>
+<p>We are going create a new Git-ignored file (<code>.lock</code>), but any file would work.</p>
+<p>Inspect with <a href="https://github.com/juanMarinero/watcher_tree_files/blob/main/src/git_find_recent_events.sh"><code>watcher_tree_files/src/git_find_recent_events.sh</code></a>
+in debug mode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>touch new_file_gitignored.lock
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>watcher_tree_files --cmd find_recent_events --debug
+</span></span></code></pre></div><p>This shows that the birth and modify events are at same epoch time.
+That&rsquo;s why our code uses a <code>BIRTH_GAP</code> constant to avoid that, the modify event must happend at least <code>BIRTH_GAP</code> mili-seconds after the birth event.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Newest file by event:
+</span></span><span style="display:flex;"><span>&#34;birth,file&#34; -&gt; ./new_file_gitignored.lock
+</span></span><span style="display:flex;"><span>&#34;birth,time&#34; -&gt; 1758889657
+</span></span><span style="display:flex;"><span>&#34;mod,file&#34; -&gt; ./new_file_gitignored.lock
+</span></span><span style="display:flex;"><span>&#34;mod,time&#34; -&gt; 1758889657
+</span></span><span style="display:flex;"><span>&#34;rename_uncommited,file&#34; -&gt; fix__rename_uncommited_func
+</span></span><span style="display:flex;"><span>&#34;rename_uncommited,time&#34; -&gt; 0
+</span></span><span style="display:flex;"><span>&#34;rm,file&#34; -&gt; 
+</span></span><span style="display:flex;"><span>&#34;rm,time&#34; -&gt; 
+</span></span><span style="display:flex;"><span>&#34;rm_uncommited,file&#34; -&gt; fix__rm_uncommited_func
+</span></span><span style="display:flex;"><span>&#34;rm_uncommited,time&#34; -&gt; 0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Highest time: 2025-09-26 14:29:16 1758889657
+</span></span><span style="display:flex;"><span>Event:    birth
+</span></span><span style="display:flex;"><span>For file: ./new_file_gitignored.lock
+</span></span></code></pre></div><p>The <a href="https://github.com/juanMarinero/watcher_tree_files/blob/main/src/git_info_lastfile.sh"><code>watcher_tree_files/src/git_info_lastfile.sh</code></a>
+depends on the <em>last file</em> found in previous logic.
+Now we just show the last commit involved (if any).</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>watcher_tree_files --cmd git_info_lastfile
+</span></span></code></pre></div><p>Prints that is is not a Git tracked file. Which is value information <em>per se</em>, by itself.</p>
+<pre tabindex="0"><code>Log file: ~/Downloads/tree-monitor/1758889657_-_birth_-_new_file_gitignored.lock.txt
+Last event is:    birth
+On file:          ./new_file_gitignored.lock
+Time since epoch: 1758889657
+----------------------------------------
+🆕 Untracked
+🚫 Not tracked by Git
+----------------------------------------
+File info: -rw-rw-r-- 1 USER USER 0 Sep 26 14:27 ./new_file_gitignored.lock
+./new_file_gitignored.lock birth 1758889657
+</code></pre><h5 id="combine-with-inotifywait">Combine with <code>inotifywait</code></h5>
+<p>Create <code>~/Downloads/hugo-scroll/exampleSite/tree_monitor.sh</code> with next code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#719e07">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Set default values</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">WATCH_DIR</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#719e07">:-</span>./<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">SAVE_DIR</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">2</span><span style="color:#719e07">:-</span><span style="color:#268bd2">$HOME</span>/Downloads/tree-monitor<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">RUN_ONCE</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">3</span><span style="color:#719e07">:-</span><span style="color:#268bd2">false</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Create save directory if it doesn&#39;t exist</span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Function to generate tree snapshot</span>
+</span></span><span style="display:flex;"><span>generate_tree_snapshot<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">path</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$1</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">action</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$2</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">file</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$3</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">tree_file</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$4</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;path: </span><span style="color:#268bd2">$path</span><span style="color:#2aa198">, action: </span><span style="color:#268bd2">$action</span><span style="color:#2aa198">, file: </span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span> &gt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  tree <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> &gt;&gt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Tree updated due to </span><span style="color:#268bd2">$action</span><span style="color:#2aa198"> in </span><span style="color:#268bd2">$path</span><span style="color:#2aa198"> (saved to </span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># If third argument is &#34;true&#34;, generate one snapshot and exit</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$RUN_ONCE</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">==</span> <span style="color:#2aa198">&#34;true&#34;</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Generating single tree snapshot...&#34;</span>
+</span></span><span style="display:flex;"><span>  generate_tree_snapshot <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;manual&#34;</span> <span style="color:#2aa198">&#34;triggered&#34;</span> <span style="color:#268bd2">$SAVE_DIR</span>/000000-000000-tree.txt
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">exit</span> <span style="color:#2aa198">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">else</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Monitoring directory: </span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Saving tree files to: </span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  inotifywait -m -r -e create,delete,move,modify <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$WATCH_DIR</span><span style="color:#2aa198">&#34;</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> path action file; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75"># Get last file and event</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">results</span><span style="color:#719e07">=(</span><span style="color:#719e07">$(</span>watcher_tree_files --cmd git_info_lastfile --save-dir <span style="color:#268bd2">$SAVE_DIR</span><span style="color:#719e07">)</span><span style="color:#719e07">)</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">last_file</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">results</span>[0]<span style="color:#2aa198">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">event</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">results</span>[1]<span style="color:#2aa198">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">event_time</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">results</span>[2]<span style="color:#2aa198">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75"># Remove initial &#34;./&#34; and replace all &#34;/&#34; with &#34;__&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">filename</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$last_file</span><span style="color:#2aa198">&#34;</span> | sed <span style="color:#2aa198">&#39;s|^\./||&#39;</span> | sed <span style="color:#2aa198">&#39;s/\//__/g&#39;</span><span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75"># Add time and event in log file</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">tree_file</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$SAVE_DIR</span><span style="color:#2aa198">/</span><span style="color:#2aa198">${</span><span style="color:#268bd2">event_time</span><span style="color:#2aa198">}</span><span style="color:#2aa198">_-_</span><span style="color:#2aa198">${</span><span style="color:#268bd2">event</span><span style="color:#2aa198">}</span><span style="color:#2aa198">_-_</span><span style="color:#2aa198">${</span><span style="color:#268bd2">filename</span><span style="color:#2aa198">}</span><span style="color:#2aa198">_-_tree.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> <span style="color:#719e07">[</span> ! -s <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span> <span style="color:#719e07">]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#586e75"># File does not exist or is empty, so output to it</span>
+</span></span><span style="display:flex;"><span>      generate_tree_snapshot <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$path</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$action</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>      sleep 0.1
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">else</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;[</span><span style="color:#719e07">$(</span>date<span style="color:#719e07">)</span><span style="color:#2aa198">] Already exists the tree </span><span style="color:#268bd2">$tree_file</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">fi</span>
+</span></span></code></pre></div><p>Remove the previous file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rm new_file_gitignored.lock
+</span></span></code></pre></div><p>Generate a tree snapshot:</p>
+<pre tabindex="0"><code>&gt; ./tree-monitor.sh ./ ~/Downloads/tree-monitor &#34;true&#34;
+Generating single tree snapshot...
+Tree updated due to manual in ./ (saved to ~/Downloads/tree-monitor/000000-000000-tree.txt)
+</code></pre><p>In terminal 1 activate the watcher:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Run the script (adapt path if needed)</span>
+</span></span><span style="display:flex;"><span>./tree-monitor.sh
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>touch new_file_gitignored.lock
+</span></span></code></pre></div><p>And now <strong>STOP</strong> the terminal 1 script (Ctrl+C) because we no longer need it running.
+It outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ./tree-monitor.sh
+</span></span><span style="display:flex;"><span>Monitoring directory: ./
+</span></span><span style="display:flex;"><span>Saving tree files to: ~/Downloads/tree-monitor
+</span></span><span style="display:flex;"><span>Setting up watches.  Beware: since -r was given, this may take a while!
+</span></span><span style="display:flex;"><span>Watches established.
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Last event is:    birth
+</span></span><span style="display:flex;"><span>On file:          ./new_file_gitignored.lock
+</span></span><span style="display:flex;"><span>Time since epoch: 1758889657
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>🆕 Untracked
+</span></span><span style="display:flex;"><span>🚫 Not tracked by Git
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>File info:
+</span></span><span style="display:flex;"><span>-rw-rw-r-- 1 USER USER 0 Sep 26 14:27 ./new_file_gitignored.lock
+</span></span><span style="display:flex;"><span>Tree updated due to CREATE in ./ (saved to ~/Downloads/tree-monitor/1758889657_-_birth_-_new_file_gitignored.lock_-_tree.txt)
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[dayD 02:27:38 yearY] Already exists the tree ~/Downloads/tree-monitor/1758889657_-_birth_-_new_file_gitignored.lock_-_tree.txt
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[dayD 02:27:39 yearY] Already exists the tree ~/Downloads/tree-monitor/1758889657_-_birth_-_new_file_gitignored.lock_-_tree.txt
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[...]
+</span></span></code></pre></div><p>Just compare the only two <code>*tree.txt</code> files (the manual generated one and the one created by the watcher):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vim -d ~/Downloads/tree-monitor/*tree.txt
+</span></span></code></pre></div><p>It shows that the only difference is in the dir <code>content/en/postNew/</code> and its <code>index.md</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>├── LICENSE            | ├── LICENSE
+</span></span><span style="display:flex;"><span>-----------------------| ├── new_file_gitignored.lock
+</span></span><span style="display:flex;"><span>├── public             | ├── public
+</span></span><span style="display:flex;"><span>│   ├── 404.html       | │   ├── 404.html
+</span></span></code></pre></div><p>The file <code>1758889657_-_birth_-_new_file_gitignored.lock.txt</code> is also created (if we did previously removed it) with same content as seen before.</p>
+<p>In summary, the watcher created:</p>
+<ul>
+<li>A <code>epochTime_-_event_-_filepath_-_tree.txt</code> tree file</li>
+<li>A <code>epochTime_-_event_-_filepath.txt</code> file describing the Git event</li>
+</ul>
+<h4 id="modify-a-git-tracked-file">Modify a git tracked file</h4>
+<p>In terminal 1 activate the watcher:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Run the script (adapt path if needed)</span>
+</span></span><span style="display:flex;"><span>./tree-monitor.sh
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;# new line&#34;</span> &gt;&gt; hugo.toml
+</span></span></code></pre></div><p>And now <strong>STOP</strong> the terminal 1 script (Ctrl+C) because we no longer need it running.
+It outputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ./tree-monitor.sh
+</span></span><span style="display:flex;"><span>Monitoring directory: ./
+</span></span><span style="display:flex;"><span>Saving tree files to: ~/Downloads/tree-monitor
+</span></span><span style="display:flex;"><span>Setting up watches.  Beware: since -r was given, this may take a while!
+</span></span><span style="display:flex;"><span>Watches established.
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Last event is:    mod
+</span></span><span style="display:flex;"><span>On file:          ./hugo.toml
+</span></span><span style="display:flex;"><span>Time since epoch: 1758898130
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>📝 Modified (tracked but changed)
+</span></span><span style="display:flex;"><span>📋 Tracked by Git
+</span></span><span style="display:flex;"><span>📜 Last commit involving this file:
+</span></span><span style="display:flex;"><span>   2c765e4 Initial commit
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>File info: -rw-rw-r-- 1 USER USER 4347 Sep 26 16:48 ./hugo.toml
+</span></span><span style="display:flex;"><span>Tree updated due to MODIFY in ./ (saved to ~/Downloads/tree-monitor/1758898130_-_mod_-_hugo.toml_-_tree.txt)
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[Fri Sep 26 04:48:51 PM CEST 2025] Already exists the tree ~/Downloads/tree-monitor/1758898130_-_mod_-_hugo.toml_-_tree.txt
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[Fri Sep 26 04:48:51 PM CEST 2025] Already exists the tree ~/Downloads/tree-monitor/1758898130_-_mod_-_hugo.toml_-_tree.txt
+</span></span><span style="display:flex;"><span>Getting info about last file-event...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[...]
+</span></span></code></pre></div><p>Check the files in the logs directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; ls -l ~/Downloads/tree-monitor/
+</span></span><span style="display:flex;"><span>[...] 14:27 000000-000000-tree.txt
+</span></span><span style="display:flex;"><span>[...] 14:27 1758889657_-_birth_-_new_file_gitignored.lock_-_tree.txt
+</span></span><span style="display:flex;"><span>[...] 14:27 1758889657_-_birth_-_new_file_gitignored.lock.txt
+</span></span><span style="display:flex;"><span>[...] 16:48 1758898130_-_mod_-_hugo.toml_-_tree.txt
+</span></span><span style="display:flex;"><span>[...] 16:48 1758898130_-_mod_-_hugo.toml.txt
+</span></span></code></pre></div><p>Read the log file <code>1758898130_-_mod_-_hugo.toml.txt</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Last event is:    mod
+</span></span><span style="display:flex;"><span>On file:          ./hugo.toml
+</span></span><span style="display:flex;"><span>Time since epoch: 1758898130
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>📝 Modified (tracked but changed)
+</span></span><span style="display:flex;"><span>📋 Tracked by Git
+</span></span><span style="display:flex;"><span>📜 Last commit involving this file:
+</span></span><span style="display:flex;"><span>   2c765e4 Initial commit
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>File info: -rw-rw-r-- 1 USER USER 4347 Sep 26 16:48 ./hugo.toml
+</span></span></code></pre></div><p>Diff the newest trees. Define next auxiliar function and call it (<code>vimdiff_newest_trees</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>vimdiff_newest_trees<span style="color:#719e07">()</span> <span style="color:#719e07">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Find the two newest files matching the pattern</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">newest_files</span><span style="color:#719e07">=(</span> <span style="color:#719e07">$(</span><span style="color:#cb4b16">\l</span>s -t ~/Downloads/tree-monitor/*tree.txt 2&gt;/dev/null | head -n 2<span style="color:#719e07">)</span> <span style="color:#719e07">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Check if we got two files</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> <span style="color:#719e07">[</span> <span style="color:#2aa198">${#</span><span style="color:#268bd2">newest_files</span>[@]<span style="color:#2aa198">}</span> -lt <span style="color:#2aa198">2</span> <span style="color:#719e07">]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Less than two matching files found.&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75"># Compare their contents</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">if</span> cmp -s <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">newest_files</span>[0]<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">newest_files</span>[1]<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;The two newest files have identical content.&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">else</span>
+</span></span><span style="display:flex;"><span>    vim -d <span style="color:#268bd2">$newest_files</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">}</span>
+</span></span></code></pre></div><p>The project file structure is identical. Just the header differs:</p>
+<pre tabindex="0"><code>path: ./, action: MODIFY, file: hugo.toml | path: ./, action: CREATE, file: new_file_gitignored.lock
+</code></pre><h4 id="commit-a-git-tracked-file">Commit a Git tracked file</h4>
+<p>In terminal 1 activate the watcher:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#586e75"># Run the script (adapt path if needed)</span>
+</span></span><span style="display:flex;"><span>./tree-monitor.sh
+</span></span></code></pre></div><p>Terminal 2 (same CWD):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git add ./hugo.toml
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># But still do not commit</span>
+</span></span></code></pre></div><p>And now <strong>STOP</strong> the terminal 1 script (Ctrl+C) because we no longer need it running.
+It outputs nothing, so no listening event happens.
+<code>ls -l ~/Downloads/tree-monitor/</code> does neither change.</p>
+<p>Thus, no <code>inotifywait</code> event is triggered after staging a file.</p>
+<p>Though we can run <code>watcher_tree_files --cmd git_info_lastfile --debug</code> and the next log file is created:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; cat 1758901794_-_mod_-_hugo.toml.txt
+</span></span><span style="display:flex;"><span>Last event is:    mod
+</span></span><span style="display:flex;"><span>On file:          ./hugo.toml
+</span></span><span style="display:flex;"><span>Time since epoch: 1758901809
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>📝 Staged modified
+</span></span><span style="display:flex;"><span>📋 Tracked by Git
+</span></span><span style="display:flex;"><span>📜 Last commit involving this file:
+</span></span><span style="display:flex;"><span>   d326aa7 Use Font Awesome instead of Fork Awesome
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>File info: -rw-rw-r-- 1 USER USER 4347 Sep 26 17:50 ./hugo.toml
+</span></span></code></pre></div><p>We can manually trigger the creation of another tree.
+But it would be in vain since a stage does not remove nor create a file (except in the <code>.git/</code> directory).</p>
+<p>The commit would have same effects.</p>
+<ol>
+<li>Run <code>./tree-monitor.sh</code> again in a terminal.</li>
+<li>Then commit the file with <code>git commit -m &quot;mod hugo.toml&quot;</code></li>
+<li>Observe that the watcher is still running but no event is triggered. Stop it.</li>
+<li>Manually inspect the git status with <code>watcher_tree_files --cmd git_info_lastfile --debug</code>, it outputs:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Highest time: 2025-09-26 18:03:25 1758901809
+</span></span><span style="display:flex;"><span>Event:    mod
+</span></span><span style="display:flex;"><span>For file: ./hugo.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Log file: ~/Downloads/tree-monitor/1758901809_-_mod_-_hugo.toml.txt
+</span></span><span style="display:flex;"><span>Last event is:    mod
+</span></span><span style="display:flex;"><span>On file:          ./hugo.toml
+</span></span><span style="display:flex;"><span>Time since epoch: 1758901809
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>✅ Tracked and clean (no modifications)
+</span></span><span style="display:flex;"><span>📋 Tracked by Git
+</span></span><span style="display:flex;"><span>📜 Last commit involving this file:
+</span></span><span style="display:flex;"><span>   174e324 mod hugo.toml
+</span></span><span style="display:flex;"><span>----------------------------------------
+</span></span><span style="display:flex;"><span>File info: -rw-rw-r-- 1 USER USER 4347 Sep 26 17:50 ./hugo.toml
+</span></span><span style="display:flex;"><span>./hugo.toml mod 1758901809
+</span></span></code></pre></div><p>Notice the epoch time did not change, thus the record file was not modified (<code>watcher_tree_files</code> checks if the file is empty, if not it does not overwrite it).</p>
+<h4 id="remove-and-commit-a-git-tracked-file">Remove and commit a Git tracked file</h4>
+<p>In our Git repo, remove a tracked file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git rm assets/images/chef-hat.png
+</span></span></code></pre></div><p>If <code>./tree-monitor.sh</code> was listening our project then the event <code>delete</code> of <code>inotifywait -m -r -e create,delete,move,modify</code> should have make it trigger.</p>
+<p>But <code>watcher_tree_files/src/git_find_recent_events.sh</code> has no function for the <code>delete</code> event (<code>rm_uncommited_func</code> is a TODO).
+Therefore, other previous events will have more recent time of epoch.</p>
+<p>On the other hand, if we commit the staged delete with</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git commit -m <span style="color:#2aa198">&#34;remove chef-hat.png&#34;</span>
+</span></span></code></pre></div><p>Then:</p>
+<ul>
+<li><code>inotifywait</code> does not monitor that commit.</li>
+<li>But at least <code>watcher_tree_files/src/git_find_recent_events.sh</code> will find the git-<code>delete</code> event.</li>
+</ul>
+<p>Thus, run manually</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>watcher_tree_files --cmd git_info_lastfile --debug
+</span></span></code></pre></div><p>To obtain alike:</p>
+<pre tabindex="0"><code>Highest time: 2025-09-26 18:20:11 1758903596
+Event:    rm
+For file: exampleSite/assets/images/chef-hat.png
+
+Log file: ~/Downloads/tree-monitor/1758903596_-_rm_-_exampleSite__assets__images__chef-hat.png.txt
+Last event is:    rm
+On file:          exampleSite/assets/images/chef-hat.png
+Time since epoch: 1758903596
+----------------------------------------
+✅ Tracked and clean (no modifications)
+🚫 Not tracked by Git
+----------------------------------------
+exampleSite/assets/images/chef-hat.png rm 1758903596
+</code></pre><h4 id="rename-a-file">Rename a file</h4>
+<p>The <code>git mv</code> command to rename files present analogous inconsistencies.</p>
+<p><code>rename_func</code> is a <strong>TODO</strong> chunk of <a href="https://github.com/juanMarinero/watcher_tree_files/blob/main/src/git_info_lastfile.sh"><code>watcher_tree_files/src/git_info_lastfile.sh</code></a>.</p>
+<p>Example. It will not show <code>video_new_name.mp4</code> as modified/created.
+Because</p>
+<ul>
+<li>This new file is not tracked by Git [unless you set as <code>mv</code> destiny an already tracked file in Git].
+Git itself does not track or remember the creation time of untracked files or the first time it saw an untracked file.</li>
+<li>The <code>mv</code> command doesn&rsquo;t change the file&rsquo;s content or metadata timestamps - it just changes the directory entry pointing to the file.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#b58900">cd</span> assets/cover/ <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> mv pexels-pressmaster-3209239-960x540-25fps.mp4 video_new_name.mp4 <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>  <span style="color:#719e07">&amp;&amp;</span> <span style="color:#b58900">cd</span> -
+</span></span><span style="display:flex;"><span>watcher_tree_files --cmd git_info_lastfile --debug
+</span></span></code></pre></div><p>Try it yourself!</p>
+<h3 id="whats-next">What&rsquo;s next?</h3>
+<ul>
+<li>The <a href="https://github.com/juanMarinero/watcher_tree_files">source code</a> has several <strong>TODO</strong>s chunks to be completed. PR are very welcome.</li>
+<li><code>vimdiff_newest_trees</code> is very limited. Ideally a GUI could be created to compare every pair of trees.
+As well as display the record file associated to that same epoch time event.</li>
+</ul>
+
+
+  <br>
+  <br>
+  <a id="back-to-blogs-index" href="/blogs_index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Blogs</a> 
+  <br>
+  <a id="back-to-main-page" href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i>J. Marinero - Data Scientist & AI Engineer</a>
+  <br>
+
+
+
+      </section>
+    </article>
+  </main>
+
+
+
+
+<footer class="site-footer">
+  <div class="inner">
+    
+    <section class="links">
+      <ol>
+      
+        <li>
+          <a href="/license/">License</a>
+        </li>
+      
+      </ol>
+    </section>
+    <hr />
+    
+
+    
+      <section class="icons">
+        
+          <a href="tel:&#43;&#43;34%20616%2042%2036%2034" aria-label=''><i class="fa fa-phone"></i></a>
+        
+          <a href="mailto:juan.g.marinero@gmail.com" aria-label=''><i class="fa fa-envelope"></i></a>
+        
+          <a href="https://github.com/juanMarinero" aria-label=''><i class="fa-brands fa-github"></i></a>
+        
+          <a href="https://www.linkedin.com/in/juanmarinero/" aria-label=''><i class="fa-brands fa-linkedin"></i></a>
+        
+          <a href="https://juan-marinero.info/" aria-label=''><i class="fa fa-globe"></i></a>
+        
+      </section>
+    
+
+    
+      <section class="copyright">Juan Gabriel Marinero Tarazona</section>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+
+    
+
+    
+    
+    
+    
+
+    <script src="/js/script.min.e853a4dfd899ef0f5749c33d64e2388119f4f8f866221b83ae75f840abec921a.js" integrity="sha256-6FOk39iZ7w9XScM9ZOI4gRn0&#43;PhmIhuDrnX4QKvskho=" ></script>
+
+    
+    <script>cssVars();</script>
+
+    
+</body>
+</html>

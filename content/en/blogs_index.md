@@ -81,17 +81,15 @@ type: "section"
 {{< /rawhtml >}}
 
 
-<!--
-   - ### 🐧GNU - Linux
-   - 
-   - {{< rawhtml >}}
-   - <div class="blogs_index">
-   -   <a href="/blogs/watcher_tree_files/" class="no-underline-except-hover">
-   -   A simple watcher for <strong>tree files</strong>
-   -   </a>
-   - </div>
-   - {{< /rawhtml >}}
-   -->
+### 🐧GNU - Linux
+
+{{< rawhtml >}}
+<div class="blogs_index">
+  <a href="/blogs/watcher_tree_files/" class="no-underline-except-hover">
+  A simple watcher for <strong>tree files</strong>
+  </a>
+</div>
+{{< /rawhtml >}}
 
 
 ### 📚 Books

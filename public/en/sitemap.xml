@@ -45,5 +45,7 @@
     <loc>http://localhost:1313/license/</loc>
   </url><url>
     <loc>http://localhost:1313/leaf_bundle_to_branch_bundle/post_1/</loc>
+  </url><url>
+    <loc>http://localhost:1313/blogs/watcher_tree_files/</loc>
   </url>
 </urlset>
