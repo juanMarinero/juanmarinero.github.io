@@ -118,6 +118,15 @@ details.table-of-contents-all-bold-but-summary > :not(summary) {
 blockquote.alert-caution *:not(p:first-of-type) {
   color: red;
 }
+
+
+/** ======== Gallery slider ========= */
+.gallery-slider .swiper-button-next::after,
+.gallery-slider .swiper-button-prev::after {
+  color: #ffffff;
+  background-color: #246B9F;
+  border-radius: 100%;
+}
 </style>
 
 
@@ -197,3 +206,24 @@ window.MathJax = {
 <!-- Tachyons for CSS -->
 <!-- https://tachyons.io/ -->
 <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+
+<!-- https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider -->
+<!-- https://github.com/gethugothemes/hugo-modules/issues/16 -->
+{{ $swiperCSS := resources.Get "plugins/swiper/swiper-bundle.css" }}
+{{ $glightboxCSS := resources.Get "plugins/glightbox/glightbox.css" }}
+{{ $gallerySliderCSS := resources.Get "css/gallery-slider.css" }}
+{{ $swiperJS := resources.Get "plugins/swiper/swiper-bundle.js" }}
+{{ $glightboxJS := resources.Get "plugins/glightbox/glightbox.js" }}
+{{ $gallerySliderJS := resources.Get "js/gallery-slider.js" }}
+
+{{ if $swiperCSS }}<link rel="stylesheet" href="{{ $swiperCSS.RelPermalink }}">{{ end }}
+{{ if $glightboxCSS }}<link rel="stylesheet" href="{{ $glightboxCSS.RelPermalink }}">{{ end }}
+{{ if $gallerySliderCSS }}<link rel="stylesheet" href="{{ $gallerySliderCSS.RelPermalink }}">{{ end }}
+
+{{ if $swiperJS }}<script src="{{ $swiperJS.RelPermalink }}"></script>{{ end }}
+{{ if $glightboxJS }}<script src="{{ $glightboxJS.RelPermalink }}"></script>{{ end }}
+{{ if $gallerySliderJS }}<script src="{{ $gallerySliderJS.RelPermalink }}"></script>{{ end }}
+
+{{ $gallerySliderInitJS := resources.Get "js/gallery-slider-init.js" | minify | fingerprint }}
+<script src="{{ $gallerySliderInitJS.RelPermalink }}" defer></script>

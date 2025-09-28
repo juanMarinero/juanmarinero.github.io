@@ -62,6 +62,10 @@ type: "section"
   <a href="/blogs/hugo_shortcode_csv_to_table/" class="no-underline-except-hover">
   <strong>Hugo</strong>'s <strong>shortcodes</strong>: CSV to table
   </a>
+
+  <a href="/blogs/hugo_plugins/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>plugins</strong>: a gallery-slider shortcode
+  </a>
 </div>
 {{< /rawhtml >}}
 

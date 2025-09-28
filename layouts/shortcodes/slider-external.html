@@ -1,0 +1,37 @@
+{{ $loading := .Get "loading" | default "lazy" }}
+{{ $zoomable := .Get "zoomable" | default "true" }}
+
+<div class="swiper gallery-slider">
+  <div class="swiper-wrapper">
+    {{ range $index := seq 1 20 }}
+      {{ $imageParam := printf "image%d" $index }}
+      {{ $imageUrl := $.Get $imageParam }}
+      {{ if $imageUrl }}
+        {{ $altParam := printf "alt%d" $index }}
+        {{ $imageAlt := $.Get $altParam | default (printf "Image %d" $index) }}
+        
+        <div class="swiper-slide {{ if eq $zoomable `true` }}zoomable{{ end }}">
+          {{ if eq $zoomable `true` }}
+            <a href="{{ $imageUrl }}" class="glightbox" style="display: block;">
+              <img
+                loading="{{ $loading }}"
+                src="{{ $imageUrl }}"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="{{ $imageAlt }}" />
+            </a>
+          {{ else }}
+            <img
+              loading="{{ $loading }}"
+              src="{{ $imageUrl }}"
+              class="img"
+              style="margin: 0; width: 100%; height: auto;"
+              alt="{{ $imageAlt }}" />
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+  <span class="swiper-button-prev"></span>
+  <span class="swiper-button-next"></span>
+</div>

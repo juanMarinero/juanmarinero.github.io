@@ -58,7 +58,7 @@
 <meta property="og:url" content="http://localhost:1313/blogs_index/">
   <meta property="og:site_name" content="J. Marinero - Data Scientist & AI Engineer">
   <meta property="og:title" content="JM - Blogs">
-  <meta property="og:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta property="og:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table Hugo&#39;s plugins: a gallery-slider shortcode &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="og:image" content="http://localhost:1313/images/cover-image.jpg">
@@ -67,12 +67,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/cover-image.jpg">
   <meta name="twitter:title" content="JM - Blogs">
-  <meta name="twitter:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta name="twitter:description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table Hugo&#39;s plugins: a gallery-slider shortcode &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
 
 
   <meta itemprop="name" content="JM - Blogs">
-  <meta itemprop="description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
-  <meta itemprop="wordCount" content="76">
+  <meta itemprop="description" content="Hugo How to create a Hugo-scroll website Hugo&#39;s shortcodes: step by step Hugo&#39;s render hooks: a quick guide Hugo&#39;s page bundles: the basics Installing custom fonts: system-wide setup &amp; Hugo integration Hugo&#39;s shortcodes: CSV to table Hugo&#39;s plugins: a gallery-slider shortcode &lt;/&gt; Web dev 🎨 Color picker enhanced $\LaTeX$ and $\text{Ti}\textit{k}\text{Z}$ for web dev 🐧GNU - Linux A simple watcher for tree files 📚 Books Tolkien: books, podcasts and much more! 🖼️ Image editing Create an Instagram mosaic on the terminal">
+  <meta itemprop="wordCount" content="81">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
 
 
@@ -176,6 +176,15 @@ details.table-of-contents-all-bold-but-summary > :not(summary) {
 blockquote.alert-caution *:not(p:first-of-type) {
   color: red;
 }
+
+
+ 
+.gallery-slider .swiper-button-next::after,
+.gallery-slider .swiper-button-prev::after {
+  color: #ffffff;
+  background-color: #246B9F;
+  border-radius: 100%;
+}
 </style>
 
 
@@ -254,6 +263,27 @@ window.MathJax = {
 
 
 <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/plugins/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="/plugins/glightbox/glightbox.css">
+<link rel="stylesheet" href="/css/gallery-slider.css">
+
+<script src="/plugins/swiper/swiper-bundle.js"></script>
+<script src="/plugins/glightbox/glightbox.js"></script>
+<script src="/js/gallery-slider.js"></script>
+
+
+<script src="/js/gallery-slider-init.min.b1687bc15cebdf9f480efcd51af12d2a4598a78ee45e1d29fbbb025f719e8dc9.js" defer></script>
 </head>
   <body>
   <main class="content page-template page-">
@@ -301,6 +331,10 @@ window.MathJax = {
 
   <a href="/blogs/hugo_shortcode_csv_to_table/" class="no-underline-except-hover">
   <strong>Hugo</strong>'s <strong>shortcodes</strong>: CSV to table
+  </a>
+
+  <a href="/blogs/hugo_plugins/" class="no-underline-except-hover">
+  <strong>Hugo</strong>'s <strong>plugins</strong>: a gallery-slider shortcode
   </a>
 </div>
 

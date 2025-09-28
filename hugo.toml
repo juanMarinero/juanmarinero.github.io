@@ -131,6 +131,18 @@ enableEmoji = true
   # https://gohugo.io/content-management/mathematics/
   math = true
 
+  # https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider
+  [[params.plugins.css]]
+  link = "plugins/swiper/swiper-bundle.min.css"
+  [[params.plugins.css]]
+  link = "plugins/glightbox/glightbox.min.css"
+  [[params.plugins.js]]
+  link = "plugins/swiper/swiper-bundle.min.js"
+  [[params.plugins.js]]
+  link = "plugins/glightbox/glightbox.min.js"
+  [[params.plugins.js]]
+  link = "js/gallery-slider.js"
+
 # Define additional languages
 [languages]
   [languages.en]
@@ -178,4 +190,7 @@ enableEmoji = true
     min = "0.132.0"
   [[module.imports]]
     path = "github.com/zjedi/hugo-scroll"
+    disable = false
+  [[module.imports]]
+    path = "github.com/gethugothemes/hugo-modules/gallery-slider"
     disable = false
