@@ -104,6 +104,11 @@ type: "section"
   <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 2.3rem;">Tolkien</span>:
   books, podcasts and much more!
   </a>
+
+  <a href="/blogs/tolkien_illustrations/" class="no-underline-except-hover">
+  <span style="font-family: 'MiddleEarth JoannaVu', cursive; font-size: 2.3rem;">Tolkien</span>:
+  illustrations!
+  </a>
 </div>
 {{< /rawhtml >}}
 
