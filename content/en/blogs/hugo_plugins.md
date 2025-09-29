@@ -10,11 +10,14 @@ We will pick the **gallery-slider** from [gethugothemes/hugo-modules](https://gi
 
 This post is quite short. Index:
 
+
 * [Installation](#installation)
   * [Modules](#modules)
   * [Plugins](#plugins)
 * [Usage](#usage)
 * [Online images](#online-images)
+  * [List of links to pictures](#list-of-links-to-pictures)
+  * [JSON format](#json-format)
 
 ## Installation
 
@@ -267,6 +270,8 @@ In that same HTML file add in `<style>`:
 
 To use non-local images create a new shortcode.
 
+### List of links to pictures
+
 `$EDITOR layouts/shortcodes/slider-external.html` with code:
 
 ```go
@@ -289,7 +294,7 @@ To use non-local images create a new shortcode.
                 loading="{{ $loading }}"
                 src="{{ $imageUrl }}"
                 class="img"
-                style="margin: 0; width: 100%; height: auto;"
+                style="[...]"
                 alt="{{ $imageAlt }}" />
             </a>
           {{ else }}
@@ -297,7 +302,7 @@ To use non-local images create a new shortcode.
               loading="{{ $loading }}"
               src="{{ $imageUrl }}"
               class="img"
-              style="margin: 0; width: 100%; height: auto;"
+              style="[...]"
               alt="{{ $imageAlt }}" />
           {{ end }}
         </div>
@@ -325,9 +330,215 @@ Which renders to:
     image2="https://hugocodex.org/uploads/slider/image2.jpg"
     >}}
 
-
 Btw. This images are courtesy of https://hugocodex.org/add-ons/slider-carousel/,
 another alternative suggested in [#70](https://github.com/zjedi/hugo-scroll/issues/70).
+
+
+### JSON format
+
+Previous shortcode did not accept the link to redirect to, nor the `alt`-ernative text if the picture is not found.
+
+With `layouts/shortcodes/slider-external-json.html` we add those features.
+
+```go
+{{ $loading := .Get "loading" | default "lazy" }}
+{{ $zoomable := .Get "zoomable" | default "true" }}
+
+{{ $jsonData := .Inner | transform.Unmarshal }}
+{{ if $jsonData }}
+<div class="swiper gallery-slider">
+  <div class="swiper-wrapper">
+    {{ range $index, $item := $jsonData }}
+      {{ if $item.src }}
+        {{ $href := $item.href | default $item.src }}
+        {{ $alt := $item.alt | default $item.src }}
+        
+        <div class="swiper-slide {{ if eq $zoomable `true` }}zoomable{{ end }}">
+          {{ if eq $zoomable `true` }}
+            <a href="{{ $href }}" class="glightbox" style="display: block;">
+              <img
+                loading="{{ $loading }}"
+                src="{{ $item.src }}"
+                class="img"
+                style="[...]"
+                alt="{{ $alt }}" />
+            </a>
+          {{ else }}
+            <img
+              loading="{{ $loading }}"
+              src="{{ $item.src }}"
+              class="img"
+              style="[...]"
+              alt="{{ $alt }}" />
+          {{ end }}
+        </div>
+      {{ else }}
+        {{ errorf "Swiper gallery item %d is missing 'src' field" $index }}
+      {{ end }}
+    {{ end }}
+  </div>
+  <span class="swiper-button-prev"></span>
+  <span class="swiper-button-next"></span>
+</div>
+{{ else }}
+  {{ errorf "Invalid JSON in swiper_gallery shortcode: %s" .Inner }}
+{{ end }}
+```
+
+Example usage:
+- First and second image with all three fields explicitly set.
+- Third image lacks `alt` field. Thus, it defaults to `src` field-value.
+- Forth JSON object is missing `href` field. Therefore, it falls to `src`.
+- Fifth picture contains only `src`. So rest of fields are default to the `src` value.
+- The last image is called still with a valid JSON, it's like the previous picture but with a `src` not to be found (invalid URL) to test the `alt` display render directly (no need to inspect the HTML code rendered).
+
+```go
+{{</* slider-external-json loading="lazy" */>}}
+[
+  {
+    "src": "https://hugocodex.org/uploads/slider/image1.jpg",
+    "href": "https://hugocodex.org/add-ons/slider-carousel/",
+    "alt": "Hugo Codex Slider/Carousel image 1"
+  },
+  {
+    "src": "https://hugocodex.org/uploads/slider/image2.jpg",
+    "href": "https://hugocodex.org/add-ons/slider-carousel/",
+    "alt": "Hugo Codex Slider/Carousel image 2"
+  },
+  {
+    "src": "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg",
+    "href": "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/"
+  },
+  {
+    "src": "https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg",
+    "alt": "Closeup Photo of Brown and Black Dog Face"
+  },
+  {
+    "src": "https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+  },
+  {
+    "src": "URL_no_valid_for_testing"
+  }
+]
+{{</* /slider-external-json */>}}
+```
+
+Which renders to next HTML.
+Note the `data-swiper-slide-index` starts in 5, then 0 to 5, and ends in 0; do not overthink it, somehow this is how the slider JavaScript works.
+
+{{< highlight html "lineNos=inline" >}}
+<div class="swiper gallery-slider swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+  <div class="swiper-wrapper" [...]>
+    <div class="swiper-slide zoomable swiper-slide-duplicate swiper-slide-prev"
+         data-swiper-slide-index="5" [...]>
+      <a href="URL_no_valid_for_testing" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="URL_no_valid_for_testing"
+             alt="URL_no_valid_for_testing">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable swiper-slide-active"
+         data-swiper-slide-index="0" [...]>
+      <a href="https://hugocodex.org/add-ons/slider-carousel/" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://hugocodex.org/uploads/slider/image1.jpg"
+             alt="Hugo Codex Slider/Carousel image 1">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable swiper-slide-next"
+         data-swiper-slide-index="1" [...]>
+      <a href="https://hugocodex.org/add-ons/slider-carousel/" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://hugocodex.org/uploads/slider/image2.jpg"
+             alt="Hugo Codex Slider/Carousel image 2">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable"
+         data-swiper-slide-index="2" [...]>
+      <a href="https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg"
+             alt="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable"
+         data-swiper-slide-index="3" [...]>
+      <a href="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg"
+             alt="Closeup Photo of Brown and Black Dog Face">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable"
+         data-swiper-slide-index="4" [...]>
+      <a href="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+             alt="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable swiper-slide-duplicate-prev"
+         data-swiper-slide-index="5" [...]>
+      <a href="URL_no_valid_for_testing" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="URL_no_valid_for_testing"
+             alt="URL_no_valid_for_testing">
+      </a>
+    </div>
+    <div class="swiper-slide zoomable swiper-slide-duplicate swiper-slide-duplicate-active"
+         data-swiper-slide-index="0"[...]>
+      <a href="https://hugocodex.org/add-ons/slider-carousel/" [...]>
+        <img loading="lazy"
+             class="img" style="[...]"
+             src="https://hugocodex.org/uploads/slider/image1.jpg"
+             alt="Hugo Codex Slider/Carousel image 1">
+      </a>
+    </div>
+  </div>
+  <span class="swiper-button-prev" [...]></span>
+  <span class="swiper-button-next" [...]></span>
+  <span class="swiper-notification" [...]></span>
+</div>
+{{< /highlight >}}
+
+
+Test the `href`s and `alt`s directly in:
+
+{{< slider-external-json loading="lazy" >}}
+[
+  {
+    "src": "https://hugocodex.org/uploads/slider/image1.jpg",
+    "href": "https://hugocodex.org/add-ons/slider-carousel/",
+    "alt": "Hugo Codex Slider/Carousel image 1"
+  },
+  {
+    "src": "https://hugocodex.org/uploads/slider/image2.jpg",
+    "href": "https://hugocodex.org/add-ons/slider-carousel/",
+    "alt": "Hugo Codex Slider/Carousel image 2"
+  },
+  {
+    "src": "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg",
+    "href": "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/"
+  },
+  {
+    "src": "https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg",
+    "alt": "Closeup Photo of Brown and Black Dog Face"
+  },
+  {
+    "src": "https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+  },
+  {
+    "src": "URL_no_valid_for_testing"
+  }
+]
+{{< /slider-external-json >}}
 
 {{< rawhtml >}}
 <div class="html-content">

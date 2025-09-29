@@ -1,0 +1,71 @@
+{{/*
+  Usage:
+  {{< slider-external-json loading="lazy" zoomable="true">}}
+  [
+    {
+      "src": "https://hugocodex.org/uploads/slider/image1.jpg",
+      "href": "https://hugocodex.org/add-ons/slider-carousel/",
+      "alt": "Hugo Codex Slider/Carousel image 1"
+    },
+    {
+      "src": "https://hugocodex.org/uploads/slider/image2.jpg",
+      "href": "https://hugocodex.org/add-ons/slider-carousel/",
+      "alt": "Hugo Codex Slider/Carousel image 2"
+    },
+    {
+      "src": "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg",
+      "href": "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/"
+    },
+    {
+      "src": "https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg",
+      "alt": "Closeup Photo of Brown and Black Dog Face"
+    },
+    {
+      "src": "https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+    }
+  ]
+  {{< /slider-external-json >}}
+*/}}
+
+{{ $loading := .Get "loading" | default "lazy" }}
+{{ $zoomable := .Get "zoomable" | default "true" }}
+
+{{ $jsonData := .Inner | transform.Unmarshal }}
+{{ if $jsonData }}
+<div class="swiper gallery-slider">
+  <div class="swiper-wrapper">
+    {{ range $index, $item := $jsonData }}
+      {{ if $item.src }}
+        {{ $href := $item.href | default $item.src }}
+        {{ $alt := $item.alt | default $item.src }}
+        
+        <div class="swiper-slide {{ if eq $zoomable `true` }}zoomable{{ end }}">
+          {{ if eq $zoomable `true` }}
+            <a href="{{ $href }}" class="glightbox" style="display: block;">
+              <img
+                loading="{{ $loading }}"
+                src="{{ $item.src }}"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="{{ $alt }}" />
+            </a>
+          {{ else }}
+            <img
+              loading="{{ $loading }}"
+              src="{{ $item.src }}"
+              class="img"
+              style="margin: 0; width: 100%; height: auto;"
+              alt="{{ $alt }}" />
+          {{ end }}
+        </div>
+      {{ else }}
+        {{ errorf "Swiper gallery item %d is missing 'src' field" $index }}
+      {{ end }}
+    {{ end }}
+  </div>
+  <span class="swiper-button-prev"></span>
+  <span class="swiper-button-next"></span>
+</div>
+{{ else }}
+  {{ errorf "Invalid JSON in swiper_gallery shortcode: %s" .Inner }}
+{{ end }}

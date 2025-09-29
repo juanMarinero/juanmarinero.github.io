@@ -54,7 +54,7 @@
 
   <meta itemprop="name" content="Hugo Plugins">
   <meta itemprop="description" content="Step-by-step guide to add gallery slider functionality to Hugo for local and online images.">
-  <meta itemprop="wordCount" content="944">
+  <meta itemprop="wordCount" content="1574">
   <meta itemprop="image" content="http://localhost:1313/images/cover-image.jpg">
   <meta itemprop="keywords" content="Hugo Scroll theme,gallery slider,gethugothemes,Hugo modules,image slider,Swiper.js,GLightbox,Hugo shortcodes,static site,web development,theme customization,image galleries,Hugo plugins,Hugo add-ons,frontend assets,responsive design,Hugo tutorials,Jamstack,content management,web design,developer tools,step-by-step guide,blogging,open source">
 
@@ -292,7 +292,12 @@ We will pick the <strong>gallery-slider</strong> from <a href="https://github.co
 </ul>
 </li>
 <li><a href="/blogs/hugo_plugins/#usage">Usage</a></li>
-<li><a href="/blogs/hugo_plugins/#online-images">Online images</a></li>
+<li><a href="/blogs/hugo_plugins/#online-images">Online images</a>
+<ul>
+<li><a href="/blogs/hugo_plugins/#list-of-links-to-pictures">List of links to pictures</a></li>
+<li><a href="/blogs/hugo_plugins/#json-format">JSON format</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Follow the steps of <a href="https://github.com/gethugothemes/hugo-modules/blob/master/gallery-slider/README.md">gethugothemes/hugo-modules</a>.</p>
@@ -657,6 +662,7 @@ I.e. this SCSS is overridden by a more specific rule.</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="online-images">Online images</h2>
 <p>To use non-local images create a new shortcode.</p>
+<h3 id="list-of-links-to-pictures">List of links to pictures</h3>
 <p><code>$EDITOR layouts/shortcodes/slider-external.html</code> with code:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $loading <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;loading&#34;</span> | <span style="color:#719e07">default</span> <span style="color:#2aa198">&#34;lazy&#34;</span> }}
 </span></span><span style="display:flex;"><span>{{ $zoomable <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;zoomable&#34;</span> | <span style="color:#719e07">default</span> <span style="color:#2aa198">&#34;true&#34;</span> }}
@@ -677,7 +683,7 @@ I.e. this SCSS is overridden by a more specific rule.</p>
 </span></span><span style="display:flex;"><span>                loading=<span style="color:#2aa198">&#34;{{ $loading }}&#34;</span>
 </span></span><span style="display:flex;"><span>                src=<span style="color:#2aa198">&#34;{{ $imageUrl }}&#34;</span>
 </span></span><span style="display:flex;"><span>                class=<span style="color:#2aa198">&#34;img&#34;</span>
-</span></span><span style="display:flex;"><span>                style=<span style="color:#2aa198">&#34;margin: 0; width: 100%; height: auto;&#34;</span>
+</span></span><span style="display:flex;"><span>                style=<span style="color:#2aa198">&#34;[...]&#34;</span>
 </span></span><span style="display:flex;"><span>                alt=<span style="color:#2aa198">&#34;{{ $imageAlt }}&#34;</span> <span style="color:#719e07">/</span>&gt;
 </span></span><span style="display:flex;"><span>            &lt;<span style="color:#719e07">/</span>a&gt;
 </span></span><span style="display:flex;"><span>          {{ <span style="color:#719e07">else</span> }}
@@ -685,7 +691,7 @@ I.e. this SCSS is overridden by a more specific rule.</p>
 </span></span><span style="display:flex;"><span>              loading=<span style="color:#2aa198">&#34;{{ $loading }}&#34;</span>
 </span></span><span style="display:flex;"><span>              src=<span style="color:#2aa198">&#34;{{ $imageUrl }}&#34;</span>
 </span></span><span style="display:flex;"><span>              class=<span style="color:#2aa198">&#34;img&#34;</span>
-</span></span><span style="display:flex;"><span>              style=<span style="color:#2aa198">&#34;margin: 0; width: 100%; height: auto;&#34;</span>
+</span></span><span style="display:flex;"><span>              style=<span style="color:#2aa198">&#34;[...]&#34;</span>
 </span></span><span style="display:flex;"><span>              alt=<span style="color:#2aa198">&#34;{{ $imageAlt }}&#34;</span> <span style="color:#719e07">/</span>&gt;
 </span></span><span style="display:flex;"><span>          {{ end }}
 </span></span><span style="display:flex;"><span>        &lt;<span style="color:#719e07">/</span>div&gt;
@@ -826,6 +832,293 @@ I.e. this SCSS is overridden by a more specific rule.</p>
 
 <p>Btw. This images are courtesy of <a href="https://hugocodex.org/add-ons/slider-carousel/">https://hugocodex.org/add-ons/slider-carousel/</a>,
 another alternative suggested in <a href="https://github.com/zjedi/hugo-scroll/issues/70">#70</a>.</p>
+<h3 id="json-format">JSON format</h3>
+<p>Previous shortcode did not accept the link to redirect to, nor the <code>alt</code>-ernative text if the picture is not found.</p>
+<p>With <code>layouts/shortcodes/slider-external-json.html</code> we add those features.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{ $loading <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;loading&#34;</span> | <span style="color:#719e07">default</span> <span style="color:#2aa198">&#34;lazy&#34;</span> }}
+</span></span><span style="display:flex;"><span>{{ $zoomable <span style="color:#719e07">:=</span> .Get <span style="color:#2aa198">&#34;zoomable&#34;</span> | <span style="color:#719e07">default</span> <span style="color:#2aa198">&#34;true&#34;</span> }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{{ $jsonData <span style="color:#719e07">:=</span> .Inner | transform.Unmarshal }}
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">if</span> $jsonData }}
+</span></span><span style="display:flex;"><span>&lt;div class=<span style="color:#2aa198">&#34;swiper gallery-slider&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;div class=<span style="color:#2aa198">&#34;swiper-wrapper&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ <span style="color:#719e07">range</span> $index, $item <span style="color:#719e07">:=</span> $jsonData }}
+</span></span><span style="display:flex;"><span>      {{ <span style="color:#719e07">if</span> $item.src }}
+</span></span><span style="display:flex;"><span>        {{ $href <span style="color:#719e07">:=</span> $item.href | <span style="color:#719e07">default</span> $item.src }}
+</span></span><span style="display:flex;"><span>        {{ $alt <span style="color:#719e07">:=</span> $item.alt | <span style="color:#719e07">default</span> $item.src }}
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        &lt;div class=<span style="color:#2aa198">&#34;swiper-slide {{ if eq $zoomable `true` }}zoomable{{ end }}&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>          {{ <span style="color:#719e07">if</span> eq $zoomable <span style="color:#2aa198">`true`</span> }}
+</span></span><span style="display:flex;"><span>            &lt;a href=<span style="color:#2aa198">&#34;{{ $href }}&#34;</span> class=<span style="color:#2aa198">&#34;glightbox&#34;</span> style=<span style="color:#2aa198">&#34;display: block;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;img
+</span></span><span style="display:flex;"><span>                loading=<span style="color:#2aa198">&#34;{{ $loading }}&#34;</span>
+</span></span><span style="display:flex;"><span>                src=<span style="color:#2aa198">&#34;{{ $item.src }}&#34;</span>
+</span></span><span style="display:flex;"><span>                class=<span style="color:#2aa198">&#34;img&#34;</span>
+</span></span><span style="display:flex;"><span>                style=<span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span>                alt=<span style="color:#2aa198">&#34;{{ $alt }}&#34;</span> <span style="color:#719e07">/</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#719e07">/</span>a&gt;
+</span></span><span style="display:flex;"><span>          {{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>            &lt;img
+</span></span><span style="display:flex;"><span>              loading=<span style="color:#2aa198">&#34;{{ $loading }}&#34;</span>
+</span></span><span style="display:flex;"><span>              src=<span style="color:#2aa198">&#34;{{ $item.src }}&#34;</span>
+</span></span><span style="display:flex;"><span>              class=<span style="color:#2aa198">&#34;img&#34;</span>
+</span></span><span style="display:flex;"><span>              style=<span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span>              alt=<span style="color:#2aa198">&#34;{{ $alt }}&#34;</span> <span style="color:#719e07">/</span>&gt;
+</span></span><span style="display:flex;"><span>          {{ end }}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#719e07">/</span>div&gt;
+</span></span><span style="display:flex;"><span>      {{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>        {{ errorf <span style="color:#2aa198">&#34;Swiper gallery item %d is missing &#39;src&#39; field&#34;</span> $index }}
+</span></span><span style="display:flex;"><span>      {{ end }}
+</span></span><span style="display:flex;"><span>    {{ end }}
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#719e07">/</span>div&gt;
+</span></span><span style="display:flex;"><span>  &lt;span class=<span style="color:#2aa198">&#34;swiper-button-prev&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>span&gt;
+</span></span><span style="display:flex;"><span>  &lt;span class=<span style="color:#2aa198">&#34;swiper-button-next&#34;</span>&gt;&lt;<span style="color:#719e07">/</span>span&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#719e07">/</span>div&gt;
+</span></span><span style="display:flex;"><span>{{ <span style="color:#719e07">else</span> }}
+</span></span><span style="display:flex;"><span>  {{ errorf <span style="color:#2aa198">&#34;Invalid JSON in swiper_gallery shortcode: %s&#34;</span> .Inner }}
+</span></span><span style="display:flex;"><span>{{ end }}
+</span></span></code></pre></div><p>Example usage:</p>
+<ul>
+<li>First and second image with all three fields explicitly set.</li>
+<li>Third image lacks <code>alt</code> field. Thus, it defaults to <code>src</code> field-value.</li>
+<li>Forth JSON object is missing <code>href</code> field. Therefore, it falls to <code>src</code>.</li>
+<li>Fifth picture contains only <code>src</code>. So rest of fields are default to the <code>src</code> value.</li>
+<li>The last image is called still with a valid JSON, it&rsquo;s like the previous picture but with a <code>src</code> not to be found (invalid URL) to test the <code>alt</code> display render directly (no need to inspect the HTML code rendered).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>{{&lt; slider<span style="color:#719e07">-</span>external<span style="color:#719e07">-</span>json loading=<span style="color:#2aa198">&#34;lazy&#34;</span> &gt;}}
+</span></span><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;https://hugocodex.org/uploads/slider/image1.jpg&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;href&#34;</span>: <span style="color:#2aa198">&#34;https://hugocodex.org/add-ons/slider-carousel/&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;alt&#34;</span>: <span style="color:#2aa198">&#34;Hugo Codex Slider/Carousel image 1&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;https://hugocodex.org/uploads/slider/image2.jpg&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;href&#34;</span>: <span style="color:#2aa198">&#34;https://hugocodex.org/add-ons/slider-carousel/&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;alt&#34;</span>: <span style="color:#2aa198">&#34;Hugo Codex Slider/Carousel image 2&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;href&#34;</span>: <span style="color:#2aa198">&#34;https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;alt&#34;</span>: <span style="color:#2aa198">&#34;Closeup Photo of Brown and Black Dog Face&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#2aa198">&#34;src&#34;</span>: <span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>{{&lt; <span style="color:#719e07">/</span>slider<span style="color:#719e07">-</span>external<span style="color:#719e07">-</span>json &gt;}}
+</span></span></code></pre></div><p>Which renders to next HTML.
+Note the <code>data-swiper-slide-index</code> starts in 5, then 0 to 5, and ends in 0; do not overthink it, somehow this is how the slider JavaScript works.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span>&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper gallery-slider swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span>  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-wrapper&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable swiper-slide-duplicate swiper-slide-prev&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;5&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable swiper-slide-active&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/add-ons/slider-carousel/&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/uploads/slider/image1.jpg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Hugo Codex Slider/Carousel image 1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable swiper-slide-next&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;1&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/add-ons/slider-carousel/&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/uploads/slider/image2.jpg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Hugo Codex Slider/Carousel image 2&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;2&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">34</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">35</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">36</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">38</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">39</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">40</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;3&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">41</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">42</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">43</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">44</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">45</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Closeup Photo of Brown and Black Dog Face&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">46</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">47</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">48</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">49</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;4&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">50</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">51</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">52</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">53</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">54</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">55</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">56</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">57</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable swiper-slide-duplicate-prev&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">58</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;5&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">59</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">60</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">61</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">62</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">63</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;URL_no_valid_for_testing&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">64</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">65</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">66</span><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-slide zoomable swiper-slide-duplicate swiper-slide-duplicate-active&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">67</span><span>         data-swiper-slide-index<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;0&#34;</span>[...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">68</span><span>      &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/add-ons/slider-carousel/&#34;</span> [...]&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">69</span><span>        &lt;<span style="color:#268bd2">img</span> loading<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;lazy&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">70</span><span>             class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;[...]&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">71</span><span>             src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://hugocodex.org/uploads/slider/image1.jpg&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">72</span><span>             alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Hugo Codex Slider/Carousel image 1&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">73</span><span>      &lt;/<span style="color:#268bd2">a</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">74</span><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">75</span><span>  &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">76</span><span>  &lt;<span style="color:#268bd2">span</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-button-prev&#34;</span> [...]&gt;&lt;/<span style="color:#268bd2">span</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">77</span><span>  &lt;<span style="color:#268bd2">span</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-button-next&#34;</span> [...]&gt;&lt;/<span style="color:#268bd2">span</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">78</span><span>  &lt;<span style="color:#268bd2">span</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;swiper-notification&#34;</span> [...]&gt;&lt;/<span style="color:#268bd2">span</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">79</span><span>&lt;/<span style="color:#268bd2">div</span>&gt;</span></span></code></pre></div>
+<p>Test the <code>href</code>s and <code>alt</code>s directly in:</p>
+
+
+
+
+
+
+
+<div class="swiper gallery-slider">
+  <div class="swiper-wrapper">
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="https://hugocodex.org/add-ons/slider-carousel/" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="https://hugocodex.org/uploads/slider/image1.jpg"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="Hugo Codex Slider/Carousel image 1" />
+            </a>
+          
+        </div>
+      
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="https://hugocodex.org/add-ons/slider-carousel/" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="https://hugocodex.org/uploads/slider/image2.jpg"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="Hugo Codex Slider/Carousel image 2" />
+            </a>
+          
+        </div>
+      
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" />
+            </a>
+          
+        </div>
+      
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="Closeup Photo of Brown and Black Dog Face" />
+            </a>
+          
+        </div>
+      
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg" />
+            </a>
+          
+        </div>
+      
+    
+      
+        
+        
+        
+        <div class="swiper-slide zoomable">
+          
+            <a href="URL_no_valid_for_testing" class="glightbox" style="display: block;">
+              <img
+                loading="lazy"
+                src="URL_no_valid_for_testing"
+                class="img"
+                style="margin: 0; width: 100%; height: auto;"
+                alt="URL_no_valid_for_testing" />
+            </a>
+          
+        </div>
+      
+    
+  </div>
+  <span class="swiper-button-prev"></span>
+  <span class="swiper-button-next"></span>
+</div>
+
+
 
 
 <div class="html-content">
