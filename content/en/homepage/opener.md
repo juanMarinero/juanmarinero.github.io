@@ -12,18 +12,33 @@ PDF
 
 ### 💼 Jobs
 
-Since 12/22,  **IT** Support & **Fullstack**
+Since 8/24, 🇬🇧🇪🇸 **Freelance** in **Valladolid**
 
-7/20 - 3/21, **Fullstack** developer by *SensProtect GmbH.*, **Munich**
+3/25 - 6/25, 🇬🇧🇪🇸 **AI Process Automation Intern** by *ReÁnimaSoluciones*, **Remote**
 
-1/20 - 4/20, **Backend** developer by *Pionierkraft GmbH.*, **Munich**
+12/22 - 6/23, 🇪🇸 **IT Support & Fullstack** by *Federación CCJJ D. Bosco CyL*, **Valladolid**
+
+7/22 - 11/22, 🇩🇪🇬🇧🇪🇸 **3D Printing Remote Support** by *HP – Webhelp*, **Barcelona**
+
+1/22 - 7/22, 🇪🇸 **Vocational Teacher: Electrical & Automation Engineering** at *IES Astorga*, **León**
+
+7/20 - 3/21, 🇩🇪🇬🇧 **Fullstack** developer by *SensProtect GmbH.*, **Munich**
+
+1/20 - 4/20, 🇩🇪🇬🇧 **Backend** developer by *Pionierkraft GmbH.*, **Munich**
+
+5/19 - 12/19, 🇩🇪🇬🇧🇪🇸 **TPM Engineer** by *VARTA*, **Burgos**
+
+6/16 - 7/16, 🇪🇸 **Software Development & Customer Support Intern** by *Coop EnergEtica*, **Valladolid**
+
+9/14 - 10/14, 🇪🇸 **Extracurricular Intern** by *Renault S.A.*, **Valladolid**
 
 Electrical Engineer positions summarized [here](#-electrical-engineer).
 
 ### 🎓 Studies
 
-Since 11/25, **Artificial Intelligence** master
+**Artificial Intelligence** master
 - [Content](https://www-unir-net.translate.goog/ingenieria/master-inteligencia-artificial/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=es&_x_tr_pto=wapp)
+- [Transcript of Records](https://github.com/juanMarinero/CV/blob/master/UNIR_Academic_transcript.pdf), avg. mark **8.34**/10
 
 **Data Science** master
 - [Content](https://www-uoc-edu.translate.goog/es/estudios/masters/master-universitario-data-science?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=es&_x_tr_pto=wapp)

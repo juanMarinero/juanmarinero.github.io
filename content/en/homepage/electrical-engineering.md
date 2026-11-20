@@ -8,7 +8,9 @@ header_menu: false
 
 Summary:
 
-7/22 - 11/22, **3D Print**ing Remote Support **HP**, Barcelona
+2/24 - 7/24,  Vocational training teacher: electrotechnics and **Renewable Energy**
+
+7/22 - 11/22, **3D Print**ing Remote Support **HP** in German, English and Spanish -- Barcelona
 
 1/22 - 7/22 Vocational training teacher: electrotechnics and **PLCs**
 
