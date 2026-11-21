@@ -16,6 +16,8 @@ Since 8/24, 🇬🇧🇪🇸 **Freelance** in **Valladolid**
 
 3/25 - 6/25, 🇬🇧🇪🇸 **AI Process Automation Intern** by *ReÁnimaSoluciones*, **Remote**
 
+2/24 - 7/24, 🇪🇸 **Vocational Teacher: Renewable Energies** at *IES La Merced*, **Valladolid**
+
 12/22 - 6/23, 🇪🇸 **IT Support & Fullstack** by *Federación CCJJ D. Bosco CyL*, **Valladolid**
 
 7/22 - 11/22, 🇩🇪🇬🇧🇪🇸 **3D Printing Remote Support** by *HP – Webhelp*, **Barcelona**
